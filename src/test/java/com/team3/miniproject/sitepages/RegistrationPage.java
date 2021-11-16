@@ -47,6 +47,22 @@ public class RegistrationPage {
 	@FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']")
 	WebElement warningDiv;
 
+	// confirm password warning(when confirm password is not same as password)
+	@FindBy(xpath = "//*[@id='content']/form/fieldset[2]/div[2]/div/div")
+	WebElement confirmPasswordWarning;
+
+	// first name warning (appears when invalid input in first name field)
+	@FindBy(xpath = "//*[@id='account']/div[2]/div/div")
+	WebElement fNameWarning;
+
+	// first name warning (appears when invalid input in last name field)
+	@FindBy(xpath = "//*[@id='account']/div[3]/div/div")
+	WebElement lNameWarning;
+
+	// first name warning (appears when invalid input in telephone field)
+	@FindBy(xpath = "//*[@id='account']/div[5]/div/div")
+	WebElement telephoneWarning;
+
 	public RegistrationPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -100,26 +116,26 @@ public class RegistrationPage {
 	}
 
 	// method to verify warning visibility
-	public boolean verifyConfirmPasswordWarning() {
-		WebElement warningDiv = driver.findElement(By.xpath("//*[@id='content']/form/fieldset[2]/div[2]/div/div"));
-		return warningDiv.isDisplayed();
+	public String verifyConfirmPasswordWarning() {
+		String warningText = confirmPasswordWarning.getText();
+		return warningText;
 	}
 
 	// method to verify warning visibility
-	public boolean verifyFirstNameWarning() {
-		WebElement warningDiv = driver.findElement(By.xpath("//*[@id='account']/div[2]/div/div"));
-		return warningDiv.isDisplayed();
+	public String verifyFirstNameWarning() {
+		String warningText = fNameWarning.getText();
+		return warningText;
 	}
 
 	// method to verify warning visibility
-	public boolean verifyLastNameWarning() {
-		WebElement warningDiv = driver.findElement(By.xpath("//*[@id='account']/div[3]/div/div"));
-		return warningDiv.isDisplayed();
+	public String verifyLastNameWarning() {
+		String warningText = lNameWarning.getText();
+		return warningText;
 	}
 
 	// method to verify warning visibility
-	public boolean verifyTelephoneWarning() {
-		WebElement warningDiv = driver.findElement(By.xpath("//*[@id='account']/div[5]/div/div"));
-		return warningDiv.isDisplayed();
+	public String verifyTelephoneWarning() {
+		String warningText = telephoneWarning.getText();
+		return warningText;
 	}
 }
