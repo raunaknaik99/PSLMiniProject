@@ -1,8 +1,10 @@
 package com.team3.miniproject.testcases.footer;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,12 +12,15 @@ import org.testng.annotations.Test;
 import com.team3.miniproject.sitepages.Footer;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import screenshot.ScreenShotCapture;
 
 public class FooterTestSetup {
 	
 	WebDriver driver;
 	String baseUrl="http://localhost/opencartsite/";
 	Footer f_object;
+	ScreenShotCapture s;
+	
   @Test
   public void testCase001() {
 	  f_object=new Footer(driver);
@@ -82,8 +87,13 @@ public class FooterTestSetup {
 	  driver.manage().window().maximize();
   }
 
+  //addded ITestResult fo screenshot
   @AfterMethod
-  public void afterMethod() {
+  public void afterMethod(ITestResult testResult) throws IOException {
+	  if(!testResult.isSuccess()) {
+		  s=new ScreenShotCapture(driver);
+		  s.captureScreenshot(testResult.getName()+".png");
+	  }
 	  driver.quit();
   }
 

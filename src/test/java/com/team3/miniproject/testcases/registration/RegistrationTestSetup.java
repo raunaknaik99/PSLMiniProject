@@ -1,4 +1,5 @@
 package com.team3.miniproject.testcases.registration;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -7,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,6 +17,7 @@ import com.team3.miniproject.sitepages.RegistrationPage;
 import com.team3.miniproject.testcases.ddt.RegistrationData;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import screenshot.ScreenShotCapture;
 
 public class RegistrationTestSetup {
 	
@@ -22,7 +25,7 @@ public class RegistrationTestSetup {
 	WebDriver driver;
 	String baseUrl="http://localhost/opencartsite/index.php?route=account/register";
 	RegistrationData rd=new RegistrationData();			
-	 
+	ScreenShotCapture s; 
   
 	//Should Pass
 	@Test
@@ -196,7 +199,11 @@ public class RegistrationTestSetup {
   }
 
   @AfterMethod
-  public void afterMethod() {
+  public void afterMethod(ITestResult testResult) throws IOException {
+	  if(!testResult.isSuccess()) {
+		  s=new ScreenShotCapture(driver);
+		  s.captureScreenshot(testResult.getName()+".png");
+	  }
 	  driver.quit();
   }
 }
