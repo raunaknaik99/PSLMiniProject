@@ -32,8 +32,8 @@ public class Cart {
 	WebElement removeBtn;
 	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[3]/div[2]/a")
 	WebElement checkout;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[3]/div[1]/a")
-	WebElement addMoreItems;
+	@FindBy(linkText = "Continue Shopping")
+	public WebElement addMoreItems;
 	
 	
 	//coupons, estimate shipping and gift certificate dropdowns
@@ -68,38 +68,47 @@ public class Cart {
 	WebElement getQuote;
 	
 	public void searchItems(String itemName) {
+		js.executeScript("arguments[0].scrollIntoView();", searchBar);
 		searchBar.sendKeys(itemName);
 	}
 	
 	public void clickSearch() {
+		js.executeScript("arguments[0].scrollIntoView();", searchBtn);
 		searchBtn.click();
 	}
 	
 	public void clickCart() {
+		js.executeScript("arguments[0].scrollIntoView();", cartBtn);
 		cartBtn.click();
 	}
 	
 	public void continueShopping() {
+		js.executeScript("arguments[0].scrollIntoView();", continueBtn);
 		continueBtn.click();
 	}
 	
 	public void enterQuantity(String q) {
+		js.executeScript("arguments[0].scrollIntoView();", quantity);
 		quantity.clear();
 		quantity.sendKeys(q);
 	}
 	
 	public void updateQuantity() {
+		js.executeScript("arguments[0].scrollIntoView();", updateBtn);
 		updateBtn.click();
 	}
 	
 	public void removeProduct() {
+		js.executeScript("arguments[0].scrollIntoView();", removeBtn);
 		removeBtn.click();
 	}
 	
 	public void checkout() {
+		js.executeScript("arguments[0].scrollIntoView();", checkout);
 		checkout.click();
 	}
 	public void addMoreItemsToCart() {
+		js.executeScript("arguments[0].scrollIntoView();", addMoreItems);
 		addMoreItems.click();
 	}
 	
@@ -110,10 +119,12 @@ public class Cart {
 	}
 	
 	public void enterCouponCode(String code) {
+		js.executeScript("arguments[0].scrollIntoView();", couponCode);
 		couponCode.sendKeys(code);
 	}
 	
 	public void clickApplyCoupon() {
+		js.executeScript("arguments[0].scrollIntoView();", applyCoupon);
 		applyCoupon.click();
 	}
 	
@@ -133,20 +144,23 @@ public class Cart {
 		regionDropDown.click();
 	}
 	public void clickGetQuote() {
+		js.executeScript("arguments[0].scrollIntoView();", getQuote);
 		getQuote.click();
 	}
 	
 	//methods for the gift certificate tab
 	public void clickGiftCertificateDropdown() {
-		js.executeScript("arguments[0].scrollIntoView();", couponDropdown);
+		js.executeScript("arguments[0].scrollIntoView();", giftCertificateDropdown);
 		giftCertificateDropdown.click();
 	}
 	
 	public void enterGiftCertificateCode(String code) {
+		js.executeScript("arguments[0].scrollIntoView();", giftCode);
 		giftCode.sendKeys(code);
 	}
 	
 	public void clickApplyGiftCertificate() {
+		js.executeScript("arguments[0].scrollIntoView();", applyGiftCertificate);
 		applyGiftCertificate.click();
 	}
 }
