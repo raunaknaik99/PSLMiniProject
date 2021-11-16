@@ -101,98 +101,98 @@ public class CartFunctionality {
 	  Assert.assertTrue(AlertMessage.isDisplayed());
 	  
 }
-//  @Test // working
-//  public void Cart_TC004() throws InterruptedException {
-//	  objHomePage = new HomePage(driver);
-//	  objHeader = new Header(driver);
-//	  objHomePage.addMacbookToCart();
-//	  Thread.sleep(5000);
-//	  objHeader.clickViewCartOption(); 
-//	  Thread.sleep(5000);
-//	  objHeader.removeItemFromCart(0);
-//	  Thread.sleep(5000);	
-//} 
-//@Test
-//  public void cart_TC005() throws InterruptedException {
-//	 driver.manage().window().maximize();
-//	 driver.findElement(By.linkText("Desktops")).click();
-//	 Thread.sleep(1000);
-//	 driver.findElement(By.linkText("Mac (1)")).click();
-//	 
-//	 JavascriptExecutor js = (JavascriptExecutor) driver;
-//	 js.executeScript("window.scrollBy(0,250)", "");
-//	 Thread.sleep(2000);
-//	 
-//	 driver.findElement(By.linkText("iMac")).click();
-//	 js.executeScript("window.scrollBy(0,250)", "");
-//	 Thread.sleep(2000);
-//	 
-//	 WebElement qty = driver.findElement(By.id("input-quantity"));
-//	 qty.clear();
-//	 Thread.sleep(2000);
-//	 qty.sendKeys("0");
-//	 Thread.sleep(1000);
-//	 driver.findElement(By.id("button-cart")).click();
-//	 Thread.sleep(2000);
-//	 System.out.println("Success: You have added ");
-//  }
-//  @Test // working
-//  public void cart_TC006() throws InterruptedException, AWTException {
-//	  WebDriverWait wait = new WebDriverWait(driver, 10);
-//	  objHomePage = new HomePage(driver);
-//	  hpc_object = new AppleCinema(driver);
-//	  JavascriptExecutor js = (JavascriptExecutor) driver;
-//	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.addCinema);
-//	  objHomePage.addCinemaToCart();
-//	  
-//	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-//	  
-//	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='5']");
-//	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='8']");	  
-//	  hpc_object.enterInTextbox("test");
-//	  	  
-//	  hpc_object.clickDropdown("4");
-//	  
-//	  hpc_object.enterInTextArea("This is a test order");
-//	  
-//	  hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt");	
-//  	  Thread.sleep(2000);
-//	  hpc_object.enterQuantity("1");
-//	  hpc_object.clickAddToCart("button-cart"); 
-//	  Thread.sleep(2000);
-//	  hpc_object.checkSuccessAlert();
-//  }
-//   @Test
-//  public void cart_TC007() throws InterruptedException {
-//	 driver.manage().window().maximize();
-//	 driver.findElement(By.linkText("Phones & PDAs")).click();
-//	 Thread.sleep(1000);
-//	 
-//	 JavascriptExecutor js = (JavascriptExecutor) driver;
-//	 js.executeScript("window.scrollBy(0,300)", "");
-//	 Thread.sleep(3000);
-//	 
-//	 driver.findElement(By.linkText("HTC Touch HD")).click();
-//	 js.executeScript("window.scrollBy(0,250)", "");
-//	 Thread.sleep(2000);
-//	 
-//	 WebElement qty = driver.findElement(By.id("input-quantity"));
-//	 qty.clear();
-//	 Thread.sleep(2000);
-//	 driver.findElement(By.id("button-cart")).click();
-//	 Thread.sleep(2000);
-//	 System.out.println("Success: You have added ");
-//  }
-//  @Test //working
-//  public void TC_OC_CART_008() {
-//	  hpc_object=new AppleCinema(driver);
-//	  hpc_object.clickAppleCinemaCart("//button[@onclick=\"cart.add('42');\"]");
-//	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='6']");
-//	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='10']");
-//	  hpc_object.clickAddToCart("button-cart");
-//	  hpc_object.checkMandatoryFieldsWarning("//div[@class='text-danger']");
-//	  hpc_object.checkPageTitle("Apple Cinema 30");
-//  }
+  @Test // working
+  public void Cart_TC004() throws InterruptedException {
+	  objHomePage = new HomePage(driver);
+	  objHeader = new Header(driver);
+	  objHomePage.addMacbookToCart();
+	  Thread.sleep(5000);
+	  objHeader.clickViewCartOption(); 
+	  Thread.sleep(5000);
+	  objHeader.removeItemFromCart(0);
+	  Thread.sleep(5000);	
+} 
+@Test
+  public void cart_TC005() throws InterruptedException {
+	 driver.manage().window().maximize();
+	 driver.findElement(By.linkText("Desktops")).click();
+	 Thread.sleep(1000);
+	 driver.findElement(By.linkText("Mac (1)")).click();
+	 
+	 JavascriptExecutor js = (JavascriptExecutor) driver;
+	 js.executeScript("window.scrollBy(0,250)", "");
+	 Thread.sleep(2000);
+	 
+	 driver.findElement(By.linkText("iMac")).click();
+	 js.executeScript("window.scrollBy(0,250)", "");
+	 Thread.sleep(2000);
+	 
+	 WebElement qty = driver.findElement(By.id("input-quantity"));
+	 qty.clear();
+	 Thread.sleep(2000);
+	 qty.sendKeys("0");
+	 Thread.sleep(1000);
+	 driver.findElement(By.id("button-cart")).click();
+	 Thread.sleep(2000);
+	 System.out.println("Success: You have added ");
+  }
+  @Test // working
+  public void cart_TC006() throws InterruptedException, AWTException {
+	  WebDriverWait wait = new WebDriverWait(driver, 10);
+	  objHomePage = new HomePage(driver);
+	  hpc_object = new AppleCinema(driver);
+	  JavascriptExecutor js = (JavascriptExecutor) driver;
+	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.addCinema);
+	  objHomePage.addCinemaToCart();
+	  
+	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	  
+	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='5']");
+	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='8']");	  
+	  hpc_object.enterInTextbox("test");
+	  	  
+	  hpc_object.clickDropdown("4");
+	  
+	  hpc_object.enterInTextArea("This is a test order");
+	  
+	  hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt");	
+  	  Thread.sleep(2000);
+	  hpc_object.enterQuantity("1");
+	  hpc_object.clickAddToCart("button-cart"); 
+	  Thread.sleep(2000);
+	  hpc_object.checkSuccessAlert();
+  }
+   @Test
+  public void cart_TC007() throws InterruptedException {
+	 driver.manage().window().maximize();
+	 driver.findElement(By.linkText("Phones & PDAs")).click();
+	 Thread.sleep(1000);
+	 
+	 JavascriptExecutor js = (JavascriptExecutor) driver;
+	 js.executeScript("window.scrollBy(0,300)", "");
+	 Thread.sleep(3000);
+	 
+	 driver.findElement(By.linkText("HTC Touch HD")).click();
+	 js.executeScript("window.scrollBy(0,250)", "");
+	 Thread.sleep(2000);
+	 
+	 WebElement qty = driver.findElement(By.id("input-quantity"));
+	 qty.clear();
+	 Thread.sleep(2000);
+	 driver.findElement(By.id("button-cart")).click();
+	 Thread.sleep(2000);
+	 System.out.println("Success: You have added ");
+  }
+  @Test //working
+  public void TC_OC_CART_008() {
+	  hpc_object=new AppleCinema(driver);
+	  hpc_object.clickAppleCinemaCart("//button[@onclick=\"cart.add('42');\"]");
+	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='6']");
+	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='10']");
+	  hpc_object.clickAddToCart("button-cart");
+	  hpc_object.checkMandatoryFieldsWarning("//div[@class='text-danger']");
+	  hpc_object.checkPageTitle("Apple Cinema 30");
+  }
   @BeforeMethod
   public void beforeMethod() {
 	  WebDriverManager.chromedriver().setup();
