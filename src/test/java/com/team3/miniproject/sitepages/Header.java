@@ -41,6 +41,10 @@ public class Header {
 	@FindBy(xpath="//*[@id='top-links']/ul/li[5]/a")
 	WebElement checkoutLink;
 	
+	//HomeLink
+	@FindBy(xpath = "//*[@id=\"logo\"]/h1/a")
+	WebElement homepageLink;
+	
 	// Locators for search bar and shopping cart
 	
 	@FindBy(name="search")
@@ -137,6 +141,11 @@ public class Header {
 	
 	public void clickCheckoutLink() {
 		checkoutLink.click();
+	}
+	
+	//Enter HomePage Link
+	public void clickHomePageLink() {
+		homepageLink.click();
 	}
 	
 	// Actions for search bar and shopping cart
