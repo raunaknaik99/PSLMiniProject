@@ -187,15 +187,15 @@ public class SearchPage {
 		foundProductsImgLinks.get(index).click();
 	}
 
-	public void clickAddToCartBtn(int index) {
+	public void addToCart(int index) {
 		addToCartBtns.get(index).click();
 	}
 
-	public void clickAddToWishlistBtn(int index) {
+	public void addToWishlist(int index) {
 		addToWishlistBtns.get(index).click();
 	}
 
-	public void clickAddToCompareBtn(int index) {
+	public void addToCompare(int index) {
 		addToCompareBtns.get(index).click();
 	}
 }

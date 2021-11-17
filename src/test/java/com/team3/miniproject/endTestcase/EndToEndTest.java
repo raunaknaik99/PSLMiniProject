@@ -81,7 +81,7 @@ public class EndToEndTest {
 		js.executeScript("window.scrollBy(0, 600);");
 
 		Thread.sleep(3000);
-		objSearch.clickAddToWishlistBtn(0);
+		objSearch.addToWishlist(0);
 
 		Thread.sleep(2000);
 		// navigate to wishlist
