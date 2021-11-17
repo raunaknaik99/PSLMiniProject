@@ -10,13 +10,16 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginPage {
 	public WebDriver driver;
-	String baseUrl="http://localhost/miniproject/";
+	String baseUrl="http://localhost/opencartsite/index.php?route=account/login";
 	String expectedTitle="Account Login";
 	
+	public LoginPage(WebDriver driver) {
+		this.driver=driver;
+	}
 	
 	public void navigateToLogin() {
-		WebDriverManager.chromedriver().setup(); 
-		driver= new ChromeDriver();
+		//WebDriverManager.chromedriver().setup(); 
+		//driver= new ChromeDriver();
 		  driver.get(baseUrl);
 		  String actualTitle=driver.getTitle();
 		  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
