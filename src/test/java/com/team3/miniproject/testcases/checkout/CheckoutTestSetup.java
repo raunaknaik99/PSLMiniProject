@@ -166,6 +166,8 @@ public class CheckoutTestSetup {
 	 // login.logout();
   }
 	
+	
+	//TC_OC_CF_005
 	@Test(enabled=false)
 	public void testCase005() {
 		  login.login("demo4@example.com", "test1234");
@@ -188,6 +190,7 @@ public class CheckoutTestSetup {
 	}
 	
 	
+	//TC_OC_CF_006
 	@Test(enabled=false)
 	public void testCase006() {
 		  login.login("demo4@example.com", "test1234");
@@ -209,6 +212,7 @@ public class CheckoutTestSetup {
 	}
 	
 	
+	//TC_OC_CF_007
 	@Test
 	public void testCase007() {
 		login.login("demo4@example.com", "test1234");
