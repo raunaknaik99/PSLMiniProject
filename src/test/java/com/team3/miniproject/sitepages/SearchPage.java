@@ -48,7 +48,7 @@ public class SearchPage {
 	WebElement limitProductsDropDown;
 	
 	@FindBy(xpath="//*[@id='content']/div[3]/div")
-	List<WebElement> foundProducts;
+	public List<WebElement> foundProducts;
 	
 	@FindBy(xpath="//*[@id='content']/div[3]/div/div/div/a")
 	List<WebElement> foundProductsImgLinks;
@@ -60,7 +60,7 @@ public class SearchPage {
 	List<WebElement> foundProductsPrices;
 	
 	@FindBy(xpath="//*[@id='content']/div[3]/div/div/div[2]/div[2]/button[1]")
-	List<WebElement> addToCartBtns;
+	public List<WebElement> addToCartBtns;
 	
 	@FindBy(xpath="//*[@id='content']/div[3]/div/div/div[2]/div[2]/button[2]")
 	List<WebElement> addToWishlistBtns;

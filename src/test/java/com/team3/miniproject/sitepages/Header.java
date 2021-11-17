@@ -43,7 +43,7 @@ public class Header {
 	
 	//HomeLink
 	@FindBy(xpath = "//*[@id=\"logo\"]/h1/a")
-	WebElement homepageLink;
+	public WebElement homepageLink;
 	
 	// Locators for search bar and shopping cart
 	
