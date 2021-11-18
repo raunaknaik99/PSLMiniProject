@@ -23,17 +23,17 @@ public class Cart {
 	
 	@FindBy(name = "search")
 	WebElement searchBar;
-	@FindBy(xpath = "//*[@id=\\\"search\\\"]/span/button")
+	@FindBy(css = "#search > span > button")
 	WebElement searchBtn;
-	@FindBy(xpath = "//*[@id=\\\"cart\\\"]/button")
+	@FindBy(css = "#cart > button")
 	WebElement cartBtn;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div/div/a")
+	@FindBy(css = "#content > div > div > a")
 	WebElement continueBtn; //continue button when the cart is empty
-	@FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]/div/input")
+	@FindBy(css = "#content > form > div > table > tbody > tr > td:nth-child(4) > div > input")
 	WebElement quantity;
-	@FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]/div/span/button[1]")
+	@FindBy(css = "#content > form > div > table > tbody > tr > td:nth-child(4) > div > span > button.btn.btn-primary")
 	WebElement updateBtn;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/form/div/table/tbody/tr/td[4]/div/span/button[2]")
+	@FindBy(css = "#content > form > div > table > tbody > tr > td:nth-child(4) > div > span > button.btn.btn-danger")
 	WebElement removeBtn;
 	@FindBy(linkText = "Checkout")
 	WebElement checkoutBtn;
@@ -42,11 +42,11 @@ public class Cart {
 	
 	
 	//coupons, estimate shipping and gift certificate dropdowns
-	@FindBy(xpath = "//*[@id=\"accordion\"]/div[1]/div[1]/h4/a")
+	@FindBy(css = "#accordion > div:nth-child(1) > div.panel-heading > h4 > a")
 	WebElement couponDropdown;
-	@FindBy(xpath = "//*[@id=\"accordion\"]/div[2]/div[1]/h4/a")
+	@FindBy(xpath = "#accordion > div:nth-child(2) > div.panel-heading > h4 > a")
 	WebElement shippingDropdown;
-	@FindBy(xpath = "//*[@id=\"accordion\"]/div[3]/div[1]/h4/a")
+	@FindBy(xpath = "#accordion > div:nth-child(3) > div.panel-heading > h4 > a")
 	WebElement giftCertificateDropdown;
 	
 	//textfields and continue for coupons
@@ -75,14 +75,11 @@ public class Cart {
 	@FindBy(xpath = "//*[@id=\"content\"]/form/div/table")
 	public List<WebElement> cartItems;
 	
-	@FindAll(value = { @FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr") })
+	@FindAll(value = { @FindBy(css = "#content > form > div > table > tbody > tr:nth-child(1)") })
 	List<WebElement> tableRows;
 	
-	@FindAll(value = { @FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[2]") })
+	@FindAll(value = { @FindBy(css = "#content > form > div > table > tbody > tr:nth-child(1) > td:nth-child(2)") })
 	List<WebElement> prodCells;
-	
-//	@FindAll(value = { @FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]") })
-//	List<WebElement> QuantityCells;
 	
 	//xpath for product details cell in cart
 	String bfrXpath = "//*[@id=\"content\"]/form/div/table/tbody/tr[";

@@ -2,6 +2,8 @@ package com.team3.miniproject.testcases.cart;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -28,34 +30,34 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class CartTestSetup {
 	
 	WebDriver driver;
-	String baseUrl="http://localhost/opencartsite/";
+	String baseUrl="http://localhost";
 	AppleCinema hpc_object;
 	ExtentReports report;
 	ExtentTest test;
 	
-  //TC_OC_CART_008
-  @Test
-  public void testCase008() {
-	  test.log(LogStatus.INFO, "TC_OC_CART_008-Add product with customizable features to cart but leave some of the required fields in the features form blank ");
-	  hpc_object=new AppleCinema(driver); //create a new instance of AppleCinema Class
-	  //click on add to cart button on home page
-	  hpc_object.clickAppleCinemaCart("//button[@onclick=\"cart.add('42');\"]");
-	  //click on radio button
-	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='6']");
-	  //click on checkbox
-	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='10']");
-	  //click on add to cart button
-	  hpc_object.clickAddToCart("button-cart");
-	  //Assert if warning is visible
-	  hpc_object.checkMandatoryFieldsWarning("//div[@class='text-danger']");
-	  //Check if test Passed or failed
-	  if(hpc_object.checkPageTitle().equals("Apple Cinema 30")) {
-		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
-	  }else {
-		  test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-	  }
-  }
-  
+//  //TC_OC_CART_008
+//  @Test
+//  public void testCase008() {
+//	  test.log(LogStatus.INFO, "TC_OC_CART_008-Add product with customizable features to cart but leave some of the required fields in the features form blank ");
+//	  hpc_object=new AppleCinema(driver); //create a new instance of AppleCinema Class
+//	  //click on add to cart button on home page
+//	  hpc_object.clickAppleCinemaCart("//button[@onclick=\"cart.add('42');\"]");
+//	  //click on radio button
+//	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='6']");
+//	  //click on checkbox
+//	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='10']");
+//	  //click on add to cart button
+//	  hpc_object.clickAddToCart("button-cart");
+//	  //Assert if warning is visible
+//	  hpc_object.checkMandatoryFieldsWarning("//div[@class='text-danger']");
+//	  //Check if test Passed or failed
+//	  if(hpc_object.checkPageTitle().equals("Apple Cinema 30")) {
+//		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
+//	  }else {
+//		  test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
+//	  }
+//  }
+//  
   //TC_OC_CART_009
   @Test
   public void testCase009() throws InterruptedException, IOException {
@@ -111,7 +113,7 @@ public class CartTestSetup {
   }
   
   //TC_OC_CART_010
-  @Test(enabled=false)
+  @Test(enabled=true)
   public void testCase010() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_010-To verify that new window opens when user clicks the Tweet button");
 	  
@@ -166,8 +168,13 @@ public class CartTestSetup {
   
   @BeforeMethod
   public void beforeMethod(Method m) {
-	  report =new ExtentReports("ExtentReports\\AppleCinemaCart\\"+m.getName()+".html");
+	  
+	  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+	  report =new ExtentReports("ExtentReports\\AddToCart\\"+ m.getName() +"_"+ timeStamp + ".html");
 	  test=report.startTest(m.getName());
+	  
+	  
+	  
 	  WebDriverManager.chromedriver().setup();
 	  driver=new ChromeDriver();
 	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

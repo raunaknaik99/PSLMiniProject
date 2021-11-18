@@ -19,17 +19,20 @@ public class Tablets {
 		PageFactory.initElements(driver, this);
 	}
 
-	public By tabletDescription = By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/a/img");
-	@FindBy(xpath = "//*[@id=\"content\"]/div[2]/div/div/div[2]/div[2]/button[1]")
+	@FindBy(css = "#content > div:nth-child(3) > div > div > div.image > a > img" )
+	WebElement tabletDescription;
+	@FindBy(css = "#content > div:nth-child(3) > div > div > div:nth-child(2) > div.button-group > button:nth-child(1)")
 	public WebElement addTablet;
 	
-	public By wishlistTablet = By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[2]/div[2]/button[2]");
-	public By compareTablet = By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[2]/div[2]/button[3]");
-	@FindBy(xpath = "//*[@id=\"menu\"]/div[2]/ul/li[4]/a")
+	@FindBy(css = "#content > div:nth-child(3) > div > div > div:nth-child(2) > div.button-group > button:nth-child(2)")
+	WebElement wishlistTablet;
+	@FindBy(css = "")
+	WebElement compareTablet;
+	@FindBy(css = "#content > div:nth-child(3) > div > div > div:nth-child(2) > div.button-group > button:nth-child(3)")
 	public WebElement tabletTab;
 
 	public void viewTabletDetails() {
-		driver.findElement(tabletDescription).click();
+		tabletDescription.click();
 	}
 	
 	public void addTabletToCart() {
@@ -40,11 +43,11 @@ public class Tablets {
 	}
 	
 	public void addTabletToWishlist() {
-		driver.findElement(wishlistTablet).click();
+		wishlistTablet.click();
 	}
 	
 	public void addTabletToCompare() {
-		driver.findElement(compareTablet).click();
+		compareTablet.click();
 	}
 	
 }

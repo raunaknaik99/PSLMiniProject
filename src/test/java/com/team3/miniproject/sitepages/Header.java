@@ -56,7 +56,7 @@ public class Header {
 
 	// Cart Drop Down
 	@FindBy(id = "cart")
-	WebElement cartDropDown;
+	public WebElement cartDropDown;
 
 	@FindBy(xpath = "//*[@id='cart']/ul/li/p")
 	WebElement emptyCartText;
@@ -240,7 +240,7 @@ public class Header {
 	}
 
 	public void clickViewCartOption() {
-		viewCartOption.click();
+		shoppingCartLink.click();
 	}
 
 	public void clickCheckoutOption() {

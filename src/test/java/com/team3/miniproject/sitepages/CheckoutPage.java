@@ -22,12 +22,8 @@ import org.testng.Assert;
 
 public class CheckoutPage {
 	public WebDriver driver;
-<<<<<<< HEAD
-	String baseUrl="http://localhost/miniproject";
+	String baseUrl="http://localhost";
 	JavascriptExecutor js;
-=======
-	String baseUrl="http://localhost/opencartsite/";
->>>>>>> 1e113630f373a91cd28ea9b94bb31a5c65c72bdc
 	public CheckoutPage(WebDriver driver) {
 		this.driver=driver;
 		js = (JavascriptExecutor) this.driver;
