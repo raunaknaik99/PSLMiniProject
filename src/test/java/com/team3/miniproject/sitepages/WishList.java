@@ -118,11 +118,11 @@ import org.testng.annotations.Test;
 		}
 	//Email text box for login
 	public void  email(String id1) {
-		 email.sendKeys(id1);;
+		 email.sendKeys(id1);
 		}
 	//Password text box for login
 	public void passwordMethod(String id) {
-		password.sendKeys(id);;
+		password.sendKeys(id);
 		}
 	//Login Button after entering password and email
 

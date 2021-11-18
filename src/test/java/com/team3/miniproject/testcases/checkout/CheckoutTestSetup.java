@@ -27,9 +27,9 @@ public class CheckoutTestSetup {
 	CheckoutPage checkout;
 	LoginPage login;
 	
-	
+	//TC_OC_CE_001
   @Test(enabled=false)
-  public void TC_OC_CE_001() throws InterruptedException {
+  public void testCase1() throws InterruptedException {
 	  
 	  Thread.sleep(5000);
 	  login.login("tester1@gmail.com", "tester123");
@@ -40,13 +40,16 @@ public class CheckoutTestSetup {
 	  Assert.assertEquals(driver.getTitle(), "Shopping Cart");
 	  //Assert "Your shopping cart is empty" message is displayed 
 	  Assert.assertEquals(driver.findElement(By.cssSelector("#content > p")).getText(),"Your shopping cart is empty!");
-	  
+	  login.logout();
   }
+//TC_OC_CF_001
   @Test(enabled=false)
-  public void TC_OC_CF_001() throws InterruptedException {
+  public void testCase01() throws InterruptedException {
 	  
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+	  checkout.navigateToHomepage();
+	  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  //Assert user is redirected to checkout page
@@ -62,25 +65,33 @@ public class CheckoutTestSetup {
 	  checkout.enterState("Goa");
 	  checkout.clickContinue();
 	  //Assert Warning is displayed
-	  WebElement we= driver.findElement(By.className("text-danger"));
-	  Assert.assertEquals(we.getText(), "Last Name must be between 1 and 32 characters!","Warning Appears!");
+	  WebElement we1= driver.findElement(By.className("text-danger"));
+	  Assert.assertEquals(we1.getText(), "Last Name must be between 1 and 32 characters!","Warning Appears!");
 	    JavascriptExecutor js = (JavascriptExecutor)driver;
-      js.executeScript("arguments[0].scrollIntoView(true)", we);
+      js.executeScript("arguments[0].scrollIntoView(true)", we1);
+      Thread.sleep(3000);
+    //Assert following links are not clickable
+      WebElement we2= driver.findElement(By.xpath("//*[@id='accordion']/div[6]/div[1]"));
+      js.executeScript("arguments[0].scrollIntoView(true)", we2);
+      
+	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[3]/div[1]/h4/a")),false);
+	  Thread.sleep(2000);
+	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[4]/div[1]/h4/a")),false);
+	  Thread.sleep(2000);
+	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[5]/div[1]/h4/a")),false);
+	  Thread.sleep(2000);
+	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[6]/div[1]/h4/a")),false);
 	  Thread.sleep(5000);
-	      //Assert following links are not clickable
-//	  Assert.assertEquals(checkout.isClickable(checkout.driver.findElement(By.xpath("//*[@id='accordion']/div[3]/div[1]"))),false);
-//	  Thread.sleep(2000);
-//	  Assert.assertEquals(checkout.isClickable(checkout.driver.findElement(By.xpath("//*[@id='accordion']/div[4]/div[1]"))),false);
-//	  Thread.sleep(2000);
-//	  Assert.assertEquals(checkout.isClickable(checkout.driver.findElement(By.xpath("//*[@id='accordion']/div[5]/div[1]"))),false);
-//	  Thread.sleep(2000);
-//	  Assert.assertEquals(checkout.isClickable(checkout.driver.findElement(By.xpath("//*[@id='accordion']/div[6]/div[1]"))),false);
-	  //login.logout();
+	 
+	  login.logout();
   }
+//TC_OC_CF_002
    @Test(enabled=false)
-  public void TC_OC_CF_002() throws InterruptedException {
+  public void testCase002() throws InterruptedException {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+	  checkout.navigateToHomepage();
+	  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  //Assert user is redirected to checkout page
@@ -103,10 +114,13 @@ public class CheckoutTestSetup {
 	  //login.logout();
 	 
   }
+ //TC_OC_CF_003
 	@Test(enabled=false)
-    public void TC_OC_CF_003() throws InterruptedException {
+    public void testCase003() throws InterruptedException {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+	  checkout.navigateToHomepage();
+	  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  //Assert user is redirected to checkout page
@@ -130,14 +144,19 @@ public class CheckoutTestSetup {
 	 
 	  //login.logout();
   }
-	@Test(enabled=false)
-  public void TC_OC_CF_004() throws InterruptedException {
+	//TC_OC_CF_004
+	@Test(enabled=true)
+  public void testCase004() throws InterruptedException {
 		
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+	  checkout.navigateToHomepage();
+	  Thread.sleep(2000);
+	  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  //Assert user is redirected to checkout page
+	  Thread.sleep(2000);
 	  Assert.assertEquals(driver.getTitle(), "Checkout");
 	  checkout.enterNewBillingDetails();
 	  checkout.enterFirstName("Diffa");
@@ -170,7 +189,7 @@ public class CheckoutTestSetup {
 	//TC_OC_CF_005
 	@Test(enabled=false)
 	public void testCase005() {
-		  login.login("demo4@example.com", "test1234");
+		  login.login("tester234", "tester234");
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		  checkout.navigateToHomepage();
 		  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
@@ -193,7 +212,7 @@ public class CheckoutTestSetup {
 	//TC_OC_CF_006
 	@Test(enabled=false)
 	public void testCase006() {
-		  login.login("demo4@example.com", "test1234");
+		  login.login("tester234@gmail.com", "tester234");
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		  checkout.navigateToHomepage();
 		  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
@@ -213,9 +232,9 @@ public class CheckoutTestSetup {
 	
 	
 	//TC_OC_CF_007
-	@Test
+	@Test(enabled=false)
 	public void testCase007() {
-		login.login("demo4@example.com", "test1234");
+		login.login("tester234@gmail.com", "tester234");
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		  checkout.navigateToHomepage();
 		  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
