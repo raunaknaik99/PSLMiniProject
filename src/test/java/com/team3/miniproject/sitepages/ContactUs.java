@@ -85,4 +85,22 @@ public class ContactUs {
 		String warningText = enquiryWarning.getText();
 		return warningText;
 	}
+	
+/*-------------------------*/
+	public void loginForContactUs() {
+		//link text for My Account dropdown
+		  driver.findElement(By.linkText("My Account")).click();
+		  
+		  //link text for Login
+		  driver.findElement(By.linkText("Login")).click();
+		  
+		  //id of email field of login page
+		  driver.findElement(By.id("input-email")).sendKeys("deekshavishwakarma@yahoo.com");
+		  
+		  //id of password field
+		  driver.findElement(By.id("input-password")).sendKeys("deeksha");
+		  
+		  //css of login button
+		  driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
+	}
 }
