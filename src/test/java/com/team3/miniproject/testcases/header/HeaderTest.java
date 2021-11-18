@@ -43,13 +43,14 @@ public class HeaderTest {
 		driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div[2]/div/div[3]/button[1]")).click();
 		Thread.sleep(2000);
 		h_object.clickCartDropDown();
-		System.out.println(h_object.getCartTotal());
-		System.out.println(h_object.getCartSubTotal());
-//		Thread.sleep(2000);
+//		System.out.println(h_object.getCartTotal());
+//		System.out.println(h_object.getCartSubTotal());
+		Thread.sleep(2000);
 //		h_object.clickCartProductName(0);
-//		h_object.removeItemFromCart(1);
-//		Thread.sleep(2000);
-//		h_object.removeItemFromCart(0);
+		h_object.removeItemFromCart(1);
+		Thread.sleep(2000);
+		h_object.clickCartDropDown();
+		h_object.removeItemFromCart(0);
 //		Thread.sleep(2000);
 //		h_object.clickViewCartOption();
 	}

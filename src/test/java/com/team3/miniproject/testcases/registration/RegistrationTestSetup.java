@@ -145,8 +145,8 @@ public class RegistrationTestSetup {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
 			rg_object.verifyPageTitle("Register Account");
-			rg_object.fillRegistrationForm(myData.get(6).get(0), myData.get(6).get(1), myData.get(6).get(2),
-					myData.get(6).get(3), myData.get(6).get(4), myData.get(6).get(5));
+			rg_object.fillRegistrationForm(myData.get(5).get(0), myData.get(5).get(1), myData.get(5).get(2),
+					myData.get(5).get(3), myData.get(5).get(4), myData.get(5).get(5));
 			rg_object.checkPrivacyPolicy();
 			rg_object.clickContinueBtn();
 			rg_object.verifyPageTitle("Register Account");
@@ -164,8 +164,8 @@ public class RegistrationTestSetup {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
 			rg_object.verifyPageTitle("Register Account");
-			rg_object.fillRegistrationForm(myData.get(7).get(0), myData.get(7).get(1), myData.get(7).get(2),
-					myData.get(7).get(3), myData.get(7).get(4), myData.get(7).get(5));
+			rg_object.fillRegistrationForm(myData.get(6).get(0), myData.get(6).get(1), myData.get(6).get(2),
+					myData.get(6).get(3), myData.get(6).get(4), myData.get(6).get(5));
 			rg_object.checkPrivacyPolicy();
 			rg_object.clickContinueBtn();
 			rg_object.verifyPageTitle("Register Account");
@@ -182,8 +182,8 @@ public class RegistrationTestSetup {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
 			rg_object.verifyPageTitle("Register Account");
-			rg_object.fillRegistrationForm(myData.get(8).get(0), myData.get(8).get(1), myData.get(8).get(2),
-					myData.get(8).get(3), myData.get(8).get(4), myData.get(8).get(5));
+			rg_object.fillRegistrationForm(myData.get(7).get(0), myData.get(7).get(1), myData.get(7).get(2),
+					myData.get(7).get(3), myData.get(7).get(4), myData.get(7).get(5));
 			rg_object.checkPrivacyPolicy();
 			rg_object.clickContinueBtn();
 			rg_object.verifyPageTitle("Register Account");
@@ -200,12 +200,12 @@ public class RegistrationTestSetup {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
 			rg_object.verifyPageTitle("Register Account");
-			rg_object.fillRegistrationForm(myData.get(9).get(0), myData.get(9).get(1), myData.get(9).get(2),
-					myData.get(9).get(3), myData.get(9).get(4), myData.get(9).get(5));
+			rg_object.fillRegistrationForm(myData.get(8).get(0), myData.get(8).get(1), myData.get(8).get(2),
+					myData.get(8).get(3), myData.get(8).get(4), myData.get(8).get(5));
 			rg_object.checkPrivacyPolicy();
 			rg_object.clickContinueBtn();
 			rg_object.verifyPageTitle("Register Account");
-			Assert.assertEquals(rg_object.verifyLastNameWarning(), "Last Name must be between 1 and 32 characters!");
+			Assert.assertEquals(rg_object.verifyTelephoneWarning(), "Telephone must be between 3 and 32 characters!");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -218,8 +218,8 @@ public class RegistrationTestSetup {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
 			rg_object.verifyPageTitle("Register Account");
-			rg_object.fillRegistrationForm(myData.get(10).get(0), myData.get(10).get(1), myData.get(10).get(2),
-					myData.get(10).get(3), myData.get(10).get(4), myData.get(10).get(5));
+			rg_object.fillRegistrationForm(myData.get(9).get(0), myData.get(9).get(1), myData.get(9).get(2),
+					myData.get(9).get(3), myData.get(9).get(4), myData.get(9).get(5));
 			rg_object.checkPrivacyPolicy();
 			rg_object.clickContinueBtn();
 			rg_object.verifyPageTitle("Register Account");
@@ -237,8 +237,8 @@ public class RegistrationTestSetup {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
 			rg_object.verifyPageTitle("Register Account");
-			rg_object.fillRegistrationForm(myData.get(11).get(0), myData.get(11).get(1), myData.get(11).get(2),
-					myData.get(11).get(3), myData.get(11).get(4), myData.get(11).get(5));
+			rg_object.fillRegistrationForm(myData.get(10).get(0), myData.get(10).get(1), myData.get(10).get(2),
+					myData.get(10).get(3), myData.get(10).get(4), myData.get(10).get(5));
 			rg_object.checkPrivacyPolicy();
 			rg_object.clickContinueBtn();
 			rg_object.verifyPageTitle("Register Account");
@@ -255,8 +255,8 @@ public class RegistrationTestSetup {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
 			rg_object.verifyPageTitle("Register Account");
-			rg_object.fillRegistrationForm(myData.get(12).get(0), myData.get(12).get(1), myData.get(12).get(2),
-					myData.get(12).get(3), myData.get(12).get(4), myData.get(12).get(5));
+			rg_object.fillRegistrationForm(myData.get(11).get(0), myData.get(11).get(1), myData.get(11).get(2),
+					myData.get(11).get(3), myData.get(11).get(4), myData.get(11).get(5));
 			rg_object.checkPrivacyPolicy();
 			rg_object.clickContinueBtn();
 			rg_object.verifyPageTitle("Register Account");
