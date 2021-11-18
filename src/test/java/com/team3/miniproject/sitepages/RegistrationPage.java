@@ -62,6 +62,9 @@ public class RegistrationPage {
 	// first name warning (appears when invalid input in telephone field)
 	@FindBy(css="fieldset#account>div:nth-of-type(5)>div>div")
 	WebElement telephoneWarning;
+	
+	@FindBy(linkText = "login page")
+	WebElement loginLink;
 
 	public RegistrationPage(WebDriver driver) {
 		this.driver = driver;
@@ -89,30 +92,33 @@ public class RegistrationPage {
 		continueBtn.click();
 	}
 
-	// method to verify page title
-	public void verifyPageTitle(String title) {
-		try {
-			String registerPageTitle = driver.getTitle();
-			Assert.assertEquals(title, registerPageTitle);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+	// method to return page title
+	public String getPageTitle() {
+		return driver.getTitle();
+//		try {
+//			String registerPageTitle = driver.getTitle();
+//			Assert.assertEquals(title, registerPageTitle);
+//		} catch (Exception e) {
+//			System.out.println(e);
+//		}
 
 	}
 
 	// method to click login link
 	public void clickLoginLink() {
-		try {
-			WebElement loginLink = driver.findElement(By.linkText("login page"));
-			loginLink.click();
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+		loginLink.click();
+//		try {
+//			WebElement loginLink = driver.findElement(By.linkText("login page"));
+//			loginLink.click();
+//		} catch (Exception e) {
+//			System.out.println(e);
+//		}
 	}
 
 	// method verify warning visibility
-	public void verifyWarningVisibility() {
-		Assert.assertTrue(warningDiv.isDisplayed());
+	public Boolean verifyWarningVisibility() {
+		return warningDiv.isDisplayed();
+		//Assert.assertTrue(warningDiv.isDisplayed());
 	}
 
 	// method to verify confirm password warning visibility

@@ -419,6 +419,8 @@ public class CartFunctionality {
 
   @AfterMethod
   public void afterMethod() throws InterruptedException {
+	  report.endTest(test);
+	  report.flush();
 	  Thread.sleep(5000);
 	  driver.close();
   }
