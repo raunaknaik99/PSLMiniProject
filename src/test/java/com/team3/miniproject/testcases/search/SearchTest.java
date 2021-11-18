@@ -1,10 +1,9 @@
 package com.team3.miniproject.testcases.search;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -198,17 +197,37 @@ public class SearchTest {
 		Assert.assertEquals(sp_object.getPageTitle(), "iPhone");
 	}
 
+	@Test
+//	public void f() throws InterruptedException {
+//		sp_object = new SearchPage(driver);
+//		h_object = new Header(driver);
+//
+//		h_object.enterSearchQuery("mac");
+//		h_object.clickSearchBtn();
+//		sp_object.addToCart(0);
+//		sp_object.addToCart(1);
+//		sp_object.addToCart(2);
+//		sp_object.addToCart(3);
+//
+//		sp_object.addToWishlist(2);
+//		sp_object.addToCompare(0);
+//		sp_object.addToCompare(1);
+//
+//		sp_object.clickCompareLink();
+//	}
+
 	@BeforeMethod
 	public void beforeMethod() {
-		WebDriverManager.edgedriver().setup();
-		driver = new EdgeDriver();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
 	}
 
 	@AfterMethod
 	public void afterMethod() throws InterruptedException {
+		Thread.sleep(2000);
 		driver.quit();
 	}
 
