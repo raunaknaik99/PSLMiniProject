@@ -9,7 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchPage {
 	WebDriver driver;
@@ -48,31 +50,31 @@ public class SearchPage {
 	@FindBy(id = "input-limit")
 	WebElement limitProductsDropDown;
 
-	@FindBy(xpath = "//*[@id='content']/p[2]")
+	@FindBy(css = "#content > p:nth-child(7)")
 	WebElement noResultsText;
 
-	@FindBy(xpath = "//*[@id='content']/div[3]/div")
+	@FindBy(css = "#content > div:nth-child(8) > div")
 	public List<WebElement> foundProducts;
 
-	@FindBy(xpath = "//*[@id='content']/div[3]/div/div/div/a")
+	@FindBy(css = "#content > div:nth-child(8) > div > div > div.image > a")
 	List<WebElement> foundProductsImgLinks;
 
-	@FindBy(xpath = "//*[@id='content']/div[3]/div/div/div[2]/div[1]/h4/a")
+	@FindBy(css = "#content > div:nth-child(8) > div > div > div:nth-child(2) > div.caption > h4 > a")
 	List<WebElement> foundProductsNameLinks;
 
-	@FindBy(xpath = "//*[@id='content']/div[3]/div/div/div[2]/div[1]/p[1]")
+	@FindBy(css = "#content > div:nth-child(8) > div > div > div:nth-child(2) > div.caption > p:nth-child(2)")
 	List<WebElement> foundProductsDescriptions;
 
-	@FindBy(xpath = "//*[@id='content']/div[3]/div/div/div[2]/div[1]/p[2]")
+	@FindBy(css = "#content > div:nth-child(8) > div > div > div:nth-child(2) > div.caption > p.price")
 	List<WebElement> foundProductsPrices;
 
-	@FindBy(xpath = "//*[@id='content']/div[3]/div/div/div[2]/div[2]/button[1]")
+	@FindBy(css = "#content > div:nth-child(8) > div > div > div:nth-child(2) > div.button-group > button:nth-child(1)")
 	public List<WebElement> addToCartBtns;
 
-	@FindBy(xpath = "//*[@id='content']/div[3]/div/div/div[2]/div[2]/button[2]")
+	@FindBy(css = "#content > div:nth-child(8) > div > div > div:nth-child(2) > div.button-group > button:nth-child(2)")
 	List<WebElement> addToWishlistBtns;
 
-	@FindBy(xpath = "//*[@id='content']/div[3]/div/div/div[2]/div[2]/button[3]")
+	@FindBy(css = "#content > div:nth-child(8) > div > div > div:nth-child(2) > div.button-group > button:nth-child(3)")
 	List<WebElement> addToCompareBtns;
 
 	// Utility function
@@ -83,6 +85,10 @@ public class SearchPage {
 			text = text.replace(child.getText(), "").trim();
 		}
 		return text;
+	}
+
+	private void waitForClickability(WebElement element) throws Error {
+		new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(element));
 	}
 
 	// Constructor
@@ -196,6 +202,12 @@ public class SearchPage {
 	}
 
 	public void addToCompare(int index) {
-		addToCompareBtns.get(index).click();
+		WebElement button = addToCompareBtns.get(index);
+		waitForClickability(button);
+		button.click();
+//		Actions action = new Actions(driver);
+//		action.moveToElement(button).perform();
+//		WebDriverWait wait = new WebDriverWait(driver, 10);
+//		wait.until(ExpectedConditions.elementToBeClickable(button)).click();
 	}
 }
