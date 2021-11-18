@@ -66,8 +66,8 @@ public class CartFunctionality {
 	  
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  
-	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='5']");
-	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='8']");	  
+	  hpc_object.clickRadioButton();
+	  hpc_object.clickCheckbox();	  
 	  hpc_object.enterInTextbox("test");
 	  	  
 	  hpc_object.clickDropdown("4");
@@ -78,7 +78,7 @@ public class CartFunctionality {
 	  
 	  Thread.sleep(2000);
 	  hpc_object.enterQuantity("2");
-	  hpc_object.clickAddToCart("button-cart");
+	  hpc_object.clickAddToCart();
 	  Thread.sleep(2000);
 	  hpc_object.checkSuccessAlert();
 	  
@@ -147,8 +147,8 @@ public class CartFunctionality {
 	  
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  
-	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='5']");
-	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='8']");	  
+	  hpc_object.clickRadioButton();
+	  hpc_object.clickCheckbox();	  
 	  hpc_object.enterInTextbox("test");
 	  	  
 	  hpc_object.clickDropdown("4");
@@ -158,7 +158,7 @@ public class CartFunctionality {
 	  hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt");	
   	  Thread.sleep(2000);
 	  hpc_object.enterQuantity("1");
-	  hpc_object.clickAddToCart("button-cart"); 
+	  hpc_object.clickAddToCart(); 
 	  Thread.sleep(2000);
 	  hpc_object.checkSuccessAlert();
   }
@@ -186,11 +186,11 @@ public class CartFunctionality {
   @Test //working
   public void TC_OC_CART_008() {
 	  hpc_object=new AppleCinema(driver);
-	  hpc_object.clickAppleCinemaCart("//button[@onclick=\"cart.add('42');\"]");
-	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='6']");
-	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='10']");
-	  hpc_object.clickAddToCart("button-cart");
-	  hpc_object.checkMandatoryFieldsWarning("//div[@class='text-danger']");
+	  hpc_object.clickAppleCinemaCart();
+	  hpc_object.clickRadioButton();
+	  hpc_object.clickCheckbox();
+	  hpc_object.clickAddToCart();
+	  hpc_object.checkMandatoryFieldsWarning();
 	  Assert.assertEquals("Apple Cinema 30", hpc_object.checkPageTitle());
 	  
   }

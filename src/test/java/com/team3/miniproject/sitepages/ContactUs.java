@@ -68,19 +68,21 @@ public class ContactUs {
 		return pageTitle;
 	}
 
+	//method to get name warning message
 	public String getYourNameWarning() {
 		String warningText = yourNameWarning.getText();
 		return warningText;
 	}
 
+	//method to get email warning message
 	public String getEmailWarning() {
 		String warningText = emailWarning.getText();
 		return warningText;
 	}
 
+	//method to get enquiry warning message
 	public String getEnquiryWarning() {
 		String warningText = enquiryWarning.getText();
 		return warningText;
 	}
-
 }

@@ -34,20 +34,20 @@ public class CartTestSetup {
 	ExtentTest test;
 	
   //TC_OC_CART_008
-  @Test
+  @Test(enabled=false)
   public void testCase008() {
 	  test.log(LogStatus.INFO, "TC_OC_CART_008-Add product with customizable features to cart but leave some of the required fields in the features form blank ");
 	  hpc_object=new AppleCinema(driver); //create a new instance of AppleCinema Class
 	  //click on add to cart button on home page
-	  hpc_object.clickAppleCinemaCart("//button[@onclick=\"cart.add('42');\"]");
+	  hpc_object.clickAppleCinemaCart();
 	  //click on radio button
-	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='6']");
+	  hpc_object.clickRadioButton();
 	  //click on checkbox
-	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='10']");
+	  hpc_object.clickCheckbox();
 	  //click on add to cart button
-	  hpc_object.clickAddToCart("button-cart");
+	  hpc_object.clickAddToCart();
 	  //Assert if warning is visible
-	  hpc_object.checkMandatoryFieldsWarning("//div[@class='text-danger']");
+	  hpc_object.checkMandatoryFieldsWarning();
 	  //Check if test Passed or failed
 	  if(hpc_object.checkPageTitle().equals("Apple Cinema 30")) {
 		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
@@ -62,7 +62,7 @@ public class CartTestSetup {
 	  test.log(LogStatus.INFO, "TC_OC_CART_009-To verify that new window opens when user clicks the like button");
 	  hpc_object=new AppleCinema(driver); //create an instance of AppleCart class
 	  //click on cinema cart
-	  hpc_object.clickAppleCinemaCart("//button[@onclick=\"cart.add('42');\"]");
+	  hpc_object.clickAppleCinemaCart();
 	  //wait till title loads
 	  WebDriverWait w =new WebDriverWait(driver, 5);
 	  w.until(ExpectedConditions.titleIs("Apple Cinema 30"));
@@ -117,7 +117,7 @@ public class CartTestSetup {
 	  
 	  hpc_object=new AppleCinema(driver); //create new instance of AppleCinema class
 	  //click on cinema cart
-	  hpc_object.clickAppleCinemaCart("//button[@onclick=\"cart.add('42');\"]");
+	  hpc_object.clickAppleCinemaCart();
 	  //wait till title loads
 	  WebDriverWait w =new WebDriverWait(driver, 3);
 	  w.until(ExpectedConditions.titleIs("Apple Cinema 30"));

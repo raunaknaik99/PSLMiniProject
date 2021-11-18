@@ -1,5 +1,6 @@
 package com.team3.miniproject.testcases.contactus;
 
+import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -12,6 +13,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.sitepages.ContactUs;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -21,8 +25,34 @@ public class ContactUsTest {
 	WebDriver driver;
 	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
 	ContactUs cnct_object;
+	ExtentReports report;
+	ExtentTest test;
 
-	@Test(enabled = true)
+  @Test(enabled=false)
+  public void contactTC_001() throws InterruptedException {
+	  driver.findElement(By.linkText("My Account")).click();
+	  driver.findElement(By.linkText("Login")).click();
+	  
+	  WebElement email = driver.findElement(By.id("input-email"));
+	  email.sendKeys("deekshavishwakarma@yahoo.com");
+	  
+	  driver.findElement(By.id("input-password")).sendKeys("deeksha");
+	  driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[2]/div/form/input")).click();
+	  //Thread.sleep(4000);
+	  JavascriptExecutor js = (JavascriptExecutor) driver;
+	  js.executeScript("window.scrollBy(0,500)", "");
+	  
+	  Thread.sleep(3000);
+	  driver.findElement(By.linkText("Contact Us")).click();
+	  driver.findElement(By.id("input-enquiry")).sendKeys("This is the input for enquiry field");
+	  Thread.sleep(3000);
+	  driver.findElement(By.xpath("//*[@id=\"content\"]/form/div/div/input")).click();
+	  Thread.sleep(3000);
+	  System.out.println(driver.getTitle());
+	  driver.findElement(By.linkText("Continue"));
+  }
+	
+	@Test(enabled = false)
 	public void testCase003() {
 		cnct_object = new ContactUs(driver);
 		cnct_object.enterName("Tester");
@@ -32,7 +62,7 @@ public class ContactUsTest {
 		Assert.assertEquals(cnct_object.getEmailWarning(), "E-Mail Address does not appear to be valid!");
 	}
 
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase004() {
 		cnct_object = new ContactUs(driver);
 		cnct_object.enterName("Te");
@@ -42,7 +72,7 @@ public class ContactUsTest {
 		Assert.assertEquals(cnct_object.getYourNameWarning(), "Name must be between 3 and 32 characters!");
 	}
 
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase005() {
 		cnct_object = new ContactUs(driver);
 		cnct_object.enterName("Tester");
@@ -52,51 +82,100 @@ public class ContactUsTest {
 		Assert.assertEquals(cnct_object.getEnquiryWarning(), "Enquiry must be between 10 and 3000 characters!");
 	}
 
-	@Test(enabled = false)
+	//TC_OC_CU_006
+	@Test
 	public void testCase006() {
+		test.log(LogStatus.INFO, "TC_OC_CU_006-To test whether contact us form works even when user is not signed in");
+		try {
 		cnct_object = new ContactUs(driver);
+		//enter the details in the contact us form
 		cnct_object.enterName("Errol");
 		cnct_object.enterEmail("demo@email.com");
 		cnct_object.enterEnquiry("Testing if this field is working without");
 		cnct_object.clickSubmit();
+		String actualUrl="http://localhost/opencartsite/index.php?route=information/contact/success";
+		if(driver.getCurrentUrl().equals(actualUrl)) {
+			test.log(LogStatus.PASS, "Test Passed- User navigated to Success correct Url after submiting contact us form");
+		}
+		else {
+			test.log(LogStatus.FAIL, "Test Failed- user navigated to wrong URL");
+		}
+		}
+		catch(Exception e) {
+			test.log(LogStatus.INFO, e);
+		}
 	}
 
-	@Test(enabled = false)
+	//TC_OC_CU_007
+	@Test
 	public void testCase007() {
+		test.log(LogStatus.INFO, "TC_OC_CU_007-To check if labels for mandatory fields are present");
+		//to test the presence of astricks
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			String astricks1 = (String) js.executeScript(
 					"return window.getComputedStyle(document.querySelector(\"fieldset > div.required:nth-child(2) > label.control-label\"),':before').getPropertyValue('content')");
 			String char1 = Character.toString(astricks1.charAt(1));
-			Assert.assertEquals("*", char1);
+			
+			if(char1.equals("*")) {
+				test.log(LogStatus.PASS, "Test Passed- Astricks present for Input Field 1");
+			}else {
+				test.log(LogStatus.FAIL, "Test Failed- Astricks not present for Input field 1");
+			}
 
 			String astricks2 = (String) js.executeScript(
 					"return window.getComputedStyle(document.querySelector(\"fieldset > div.required:nth-child(3) > label.control-label\"),':before').getPropertyValue('content')");
 			String char2 = Character.toString(astricks2.charAt(1));
-			Assert.assertEquals("*", char2);
-
+			
+			if(char2.equals("*")) {
+				test.log(LogStatus.PASS, "Test Passed- Astricks present for Input Field 2");
+			}else {
+				test.log(LogStatus.FAIL, "Test Failed- Astricks not present for Input field 2");
+			}
+			
 			String astricks3 = (String) js.executeScript(
 					"return window.getComputedStyle(document.querySelector(\"fieldset > div.required:nth-child(4) > label.control-label\"),':before').getPropertyValue('content')");
 			String char3 = Character.toString(astricks3.charAt(1));
-			Assert.assertEquals("*", char3);
+
+			if(char3.equals("*")) {
+				test.log(LogStatus.PASS, "Test Passed- Astricks present for Input Field 3");
+			}else {
+				test.log(LogStatus.FAIL, "Test Failed- Astricks not present for Input field 3");
+			}
 
 		} catch (Exception e) {
-			System.out.println(e);
+			test.log(LogStatus.INFO, e);
 		}
 	}
 
-	@Test(enabled = false)
+	//TC_OC_CU_008
+	@Test
 	public void testCase008() {
+		test.log(LogStatus.INFO, "TC_OC_CU_008-To test whether name and email field is blank when user is not signed in");
 		try {
 			WebElement nameField = driver.findElement(By.id("input-name"));
-			Assert.assertEquals("", nameField.getText());
+			WebElement emailField=driver.findElement(By.id("input-email"));
+			if(nameField.getText().equals("") && emailField.getText().equals("")) {
+				test.log(LogStatus.PASS, "Test Passed-Name & Email Field is Blank");		
+			}
+			else if(nameField.getText().equals("") && !emailField.getText().equals("")) {
+				test.log(LogStatus.FAIL, "Test Failed-Name Field is Blank & Email Field is not Blank: "+emailField);
+			}
+			else if(!nameField.getText().equals("") && emailField.getText().equals("")) {
+				test.log(LogStatus.FAIL, "Test Failed-Name Field is Not Blank & Email Field is Blank: "+nameField);
+			}
+			else {
+				test.log(LogStatus.FAIL, "Test Failed-Name Field is not Blank, Contains Text: "+nameField);
+			}
 		} catch (Exception e) {
-			System.out.println(e);
+			test.log(LogStatus.INFO, e);
 		}
 	}
 
 	@BeforeMethod
-	public void beforeMethod() {
+	public void beforeMethod(Method m) {
+		report =new ExtentReports("ExtentReports\\ContactUs\\"+m.getName()+".html");
+		test=report.startTest(m.getName());
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -105,7 +184,9 @@ public class ContactUsTest {
 	}
 
 	@AfterMethod
-	public void afterMethod() {
+	public void afterMethod(Method m) {
+		report.endTest(test);
+		report.flush();
 		driver.quit();
 	}
 
