@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Tests">
-  <test name="Search">
+  <test name="ChromeTest">
     <classes>
       <class name="com.team3.miniproject.testcases.search.SearchTest"/>
+      <class name="com.team3.miniproject.testcases.registration.RegistrationTestSetup"/>
+      <class name="com.team3.miniproject.testcases.checkout.CheckoutTestSetup"/>
     </classes>
   </test>
-  <test name="Registration">
+  <test name="FireFoxTest">
     <classes>
+      <class name="com.team3.miniproject.testcases.search.SearchTest"/>
       <class name="com.team3.miniproject.testcases.registration.RegistrationTestSetup"/>
+      <class name="com.team3.miniproject.testcases.checkout.CheckoutTestSetup"/>
     </classes>
   </test>  
 </suite>

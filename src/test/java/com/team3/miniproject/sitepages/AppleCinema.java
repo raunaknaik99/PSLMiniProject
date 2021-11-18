@@ -145,22 +145,29 @@ public class AppleCinema {
 		}
 	}
 	
-	public void checkPageTitle(String title) {
-		Assert.assertEquals(title, driver.getTitle());
+	public String checkPageTitle() {
+		//Assert.assertEquals(title, driver.getTitle());
+		return driver.getTitle();
 	}
 	
 	//method to click fb like button
 	public void clickFbLikeBtn() throws InterruptedException, IOException {
 		JavascriptExecutor js=(JavascriptExecutor)driver;
+		ss=new ScreenShotCapture(driver);
 		js.executeScript("arguments[0].scrollIntoView();", driver.findElement(By.xpath("//div[@class='rating']")));
 		WebElement fbIframe=driver.findElement(By.xpath("//iframe[@title='fb:like Facebook Social Plugin']"));
 		driver.switchTo().frame(fbIframe);
 		Thread.sleep(5000);
-		WebElement likeBtn=driver.findElement(By.xpath("//button[@title='Like']/span"));
+		WebElement likeBtn1=driver.findElement(By.xpath("//button[@title='Like']"));
+		WebElement likeBtn=driver.findElement(By.xpath("//span[@class='_8f1i']"));
+		//WebElement likeBtn2=driver.findElement(By.xpath("//span[text()='Like']"));
+		//WebDriverWait w=new WebDriverWait(driver,5);
+		//w.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Like']")));
 		Actions hoverAction=new Actions(driver);
 		hoverAction.moveToElement(likeBtn).perform();
-		likeBtn.click();
-		ss=new ScreenShotCapture(driver);
+		Thread.sleep(3000);
+		likeBtn1.click();
+		//
 		ss.captureScreenshot("FBWindow.png");
 		Thread.sleep(3000);//only to visualize the opening of new window
 	}

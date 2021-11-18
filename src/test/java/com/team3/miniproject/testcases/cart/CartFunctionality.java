@@ -199,7 +199,8 @@ public class CartFunctionality {
 	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='10']");
 	  hpc_object.clickAddToCart("button-cart");
 	  hpc_object.checkMandatoryFieldsWarning("//div[@class='text-danger']");
-	  hpc_object.checkPageTitle("Apple Cinema 30");
+	  Assert.assertEquals("Apple Cinema 30", hpc_object.checkPageTitle());
+	  
   }
   @BeforeMethod
   public void beforeMethod() {

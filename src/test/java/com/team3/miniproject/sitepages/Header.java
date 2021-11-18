@@ -3,6 +3,7 @@ package com.team3.miniproject.sitepages;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -40,11 +41,10 @@ public class Header {
 
 	@FindBy(xpath = "//*[@id='top-links']/ul/li[5]/a")
 	WebElement checkoutLink;
-	
-	//HomeLink
+
+	// HomeLink
 	@FindBy(xpath = "//*[@id=\"logo\"]/h1/a")
 	public WebElement homepageLink;
-	
 
 	// Locators for search bar and shopping cart
 
@@ -171,20 +171,26 @@ public class Header {
 	public void clickCheckoutLink() {
 		checkoutLink.click();
 	}
-	
-	//Enter HomePage Link
+
+	// Enter HomePage Link
 	public void clickHomePageLink() {
 		homepageLink.click();
 	}
-	
+
 	// Actions for search bar and shopping cart
 
-
 	// Actions for search bar
+	public void clickSearchBar() {
+		searchBar.click();
+	}
 
 	public void enterSearchQuery(String query) {
 		searchBar.clear();
 		searchBar.sendKeys(query);
+	}
+
+	public void pressEnterOnSearchBar() {
+		searchBar.sendKeys(Keys.ENTER);
 	}
 
 	public void clickSearchBtn() {

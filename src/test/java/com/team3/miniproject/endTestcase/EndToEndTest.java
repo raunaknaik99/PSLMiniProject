@@ -1,5 +1,15 @@
 package com.team3.miniproject.endTestcase;
 
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.team3.miniproject.sitepages.Cart;
@@ -16,23 +26,10 @@ import com.team3.miniproject.sitepages.WishList;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import org.testng.annotations.BeforeMethod;
-
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-
 public class EndToEndTest {
 	WebDriver driver;
 	String baseUrl = "http://localhost";
-	
+
 	Cart objCart;
 	ContactUs objContactUs;
 	CheckoutPage objCheckout;
@@ -44,30 +41,30 @@ public class EndToEndTest {
 	SearchPage objSearch;
 	Tablets objTablets;
 	WishList objWishlist;
-	
-  @Test
-  public void endTestOpenCart_001() throws InterruptedException {
-	  WebDriverWait wait = new WebDriverWait(driver, 10);
-	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	  JavascriptExecutor js = (JavascriptExecutor)driver;
-	  objHeader = new Header(driver);
-	  objRegistration = new RegistrationPage(driver);
-	  objLoginPage = new LoginPage(driver);
-	  objSearch = new SearchPage(driver);
-	  objFooter = new Footer(driver);
-	  objWishlist = new WishList(driver);
-	  objCart = new Cart(driver);
-	  objCheckout = new CheckoutPage(driver);
-	  
-	  //click on registration link
-//	  objHeader.selectFromMyAccountDropDown(0);
+
+	@Test
+	public void endTestOpenCart_001() throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		objHeader = new Header(driver);
+		objRegistration = new RegistrationPage(driver);
+		objLoginPage = new LoginPage(driver);
+		objSearch = new SearchPage(driver);
+		objFooter = new Footer(driver);
+		objWishlist = new WishList(driver);
+		objCart = new Cart(driver);
+		objCheckout = new CheckoutPage(driver);
+
+		// click on registration link
+	  objHeader.selectFromMyAccountDropDown(0);
 //	  
-//	  objRegistration.fillRegistrationForm("Tony", "Stark", "tony004@starkenterprises.com", "9999999999", "ironman", "ironman");
-//	  objRegistration.checkPrivacyPolicy();
-//	  objRegistration.clickContinueBtn();
+	  objRegistration.fillRegistrationForm("Tony", "Stark", "tony004@starkenterprises.com", "9999999999", "ironman", "ironman");
+	  objRegistration.checkPrivacyPolicy();
+	  objRegistration.clickContinueBtn();
 //	  
 //	  //logout
-//	  objHeader.selectFromMyAccountDropDown(4);
+	  objHeader.selectFromMyAccountDropDown(4);
 	  
 	  //click on login
 	  objHeader.selectFromMyAccountDropDown(1);

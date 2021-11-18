@@ -1,6 +1,10 @@
 package com.team3.miniproject.testcases.checkout;
 
 import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.sitepages.CheckoutPage;
 import com.team3.miniproject.sitepages.LoginPage;
 
@@ -8,6 +12,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.testng.annotations.BeforeMethod;
 
+import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
@@ -26,6 +31,8 @@ public class CheckoutTestSetup {
 	WebDriver driver;
 	CheckoutPage checkout;
 	LoginPage login;
+	ExtentReports report;
+	ExtentTest test;
 	
 	//TC_OC_CE_001
   @Test(enabled=false)
@@ -145,7 +152,7 @@ public class CheckoutTestSetup {
 	  //login.logout();
   }
 	//TC_OC_CF_004
-	@Test(enabled=true)
+	@Test(enabled=false)
   public void testCase004() throws InterruptedException {
 		
 	  login.login("tester234@gmail.com", "tester234");
@@ -189,30 +196,38 @@ public class CheckoutTestSetup {
 	//TC_OC_CF_005
 	@Test(enabled=false)
 	public void testCase005() {
-		  login.login("tester234", "tester234");
+		  test.log(LogStatus.INFO, "TC_OC_CF_005-to test if the placeholders are present on all the input fields under billing details");
+		  login.login("demo4@example.com", "test1234");
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+		  //method to navigate to home page
 		  checkout.navigateToHomepage();
 		  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
+		  //method to click checout button
 		  checkout.checkout();
+		  //get placeholder text and store in variables
 		  String fnamePlaceholder=driver.findElement(By.id("input-payment-firstname")).getAttribute("placeholder");
 		  String lnamePlaceholder=driver.findElement(By.id("input-payment-lastname")).getAttribute("placeholder");
 		  String company=driver.findElement(By.id("input-payment-company")).getAttribute("placeholder");
 		  String address1=driver.findElement(By.id("input-payment-address-1")).getAttribute("placeholder");
 		  String city=driver.findElement(By.id("input-payment-city")).getAttribute("placeholder");
 		  String postCode=driver.findElement(By.id("input-payment-postcode")).getAttribute("placeholder");
-		  Assert.assertEquals("First Name", fnamePlaceholder);
-		  Assert.assertEquals("Last Name", lnamePlaceholder);
-		  Assert.assertEquals("Company", company);
-		  Assert.assertEquals("Address 1", address1);
-		  Assert.assertEquals("City", city);
-		  Assert.assertEquals("Post Code", postCode);
+		  //assert if the placeholders are present
+		  if(fnamePlaceholder.equals("")&& lnamePlaceholder.equals("")&&company.equals("")&&address1.equals("")&&city.equals("")&&postCode.equals("")) {
+			  test.log(LogStatus.FAIL, "Test Failed- Placeholders are not present on billing form");
+		  }
+		  else {
+			  test.log(LogStatus.PASS, "Test Passed- Placeholders are present on billing form");
+		  }
+		  
 	}
 	
 	
 	//TC_OC_CF_006
 	@Test(enabled=false)
 	public void testCase006() {
-		  login.login("tester234@gmail.com", "tester234");
+		  test.log(LogStatus.INFO, "TC_OC_CF_006-To test if city field accepts less than 2 characters and we can proceed to step 3");
+		  login.login("demo4@example.com", "test1234");
+		  //assert if user is logged in
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		  checkout.navigateToHomepage();
 		  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
@@ -226,19 +241,34 @@ public class CheckoutTestSetup {
 		  checkout.enterCountry("India");
 		  checkout.enterState("Goa");
 		  checkout.clickContinue();
-		  Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
-		  Assert.assertTrue(driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed());
+		  String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
+		  //check for the test cases
+		  if(step3Heading.equals("Step 3: Delivery Details")) {
+			  test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
+		  }
+		  else {
+			  test.log(LogStatus.FAIL, "Test Failed-Can proceed to next form");
+		  }
+		  Boolean warningPresence=driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed();
+		  if(warningPresence) {
+			  test.log(LogStatus.PASS, "Test Passed-Warning is Present");
+		  }else {
+			  test.log(LogStatus.FAIL, "Test Failed-Warning is not present");
+		  }
 	}
 	
 	
 	//TC_OC_CF_007
-	@Test(enabled=false)
+	@Test
 	public void testCase007() {
-		login.login("tester234@gmail.com", "tester234");
+		  test.log(LogStatus.INFO, "TC_OC_CF_007-to test if lastname can be more than 32 characters");
+		  login.login("demo4@example.com", "test1234");
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+		  //to go to home page
 		  checkout.navigateToHomepage();
 		  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
 		  checkout.checkout();
+		  //enter form details
 		  checkout.enterNewBillingDetails();
 		  checkout.enterFirstName("Errol");
 		  checkout.enterLastName("Costabirfernandeserrolcostabirmenezesdsouzacabralsouzapereira");  
@@ -248,14 +278,27 @@ public class CheckoutTestSetup {
 		  checkout.enterCountry("India");
 		  checkout.enterState("Goa");
 		  checkout.clickContinue();
-		  Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
-		  Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed());
-	}
+		  //check for test cases
+		  String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
+		  if(step3Heading.equals("Step 3: Delivery Details")) {
+			  test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
+		  }
+		  else {
+			  test.log(LogStatus.FAIL, "Test Failed-Can proceed to next form");
+		  }
+		  Boolean warningPresence=driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed();
+		  if(warningPresence) {
+			  test.log(LogStatus.PASS, "Test Passed-Warning is Present");
+		  }else {
+			  test.log(LogStatus.FAIL, "Test Failed-Warning is not present");
+		  }
+    }
 	
 	
   @BeforeMethod
-  public void beforeMethod() {
-	  //System.setProperty("webdriver.chrome.driver", "C:\\Users\\diffa_pinto\\eclipse-workspace-new\\Project1\\resources\\chromedriver.exe");
+  public void beforeMethod(Method m) {
+	  report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+".html");
+	  test=report.startTest(m.getName());
 	  WebDriverManager.chromedriver().setup();
 	  driver = new ChromeDriver();
 	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -265,7 +308,9 @@ public class CheckoutTestSetup {
   }
 
   @AfterMethod
-  public void afterMethod() throws InterruptedException {
+  public void afterMethod(Method m) throws InterruptedException {
+	  report.endTest(test);
+	  report.flush();
 	  Thread.sleep(5000);
 	  checkout.closeBrowser();
   }
