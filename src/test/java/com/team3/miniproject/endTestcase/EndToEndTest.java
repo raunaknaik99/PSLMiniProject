@@ -20,6 +20,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -83,7 +84,14 @@ public class EndToEndTest {
 	  js.executeScript("window.scrollBy(0, 600);");
 	  
 	  Thread.sleep(3000);
+	  
 	  objSearch.addToWishlist(0);
+	  
+	  //search for another product
+	  objHeader.enterSearchQuery("iphone");
+	  objHeader.clickSearchBtn();
+	  
+	  objSearch.addToCart(0);
 	  
 	  Thread.sleep(2000);
 	  //navigate to wishlist
@@ -111,12 +119,13 @@ public class EndToEndTest {
 	  objCart.checkout();
 	  
 	  //checkout process
-//	  objCheckout.enterExistingBillingDetailsAndContinue();
-//	  objCheckout.enterExistingDeliveryDetailsAndContinue();
-//	  objCheckout.enterDeliveryMethodAndContinue();
-//	  objCheckout.enterPaymentMethod();
-//	  objCheckout.confirmOrder();
-	  
+	  objCheckout.enterExistingBillingDetailsAndContinue();
+	  objCheckout.enterExistingDeliveryDetailsAndContinue();
+	  objCheckout.enterDeliveryMethodAndContinue();
+	  objCheckout.enterPaymentMethod();
+	  objCheckout.agreeToTermsAndConditionsAndContinue();
+	  objCheckout.confirmOrder();
+	  Thread.sleep(5000);
   }
   @BeforeMethod
   public void beforeMethod() {
@@ -126,7 +135,6 @@ public class EndToEndTest {
 	  driver.get(baseUrl);
 	  driver.manage().window().maximize();
 	  JavascriptExecutor js;
-
   }
 
   @AfterMethod

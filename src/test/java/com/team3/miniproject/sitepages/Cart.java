@@ -81,14 +81,30 @@ public class Cart {
 	@FindAll(value = { @FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[2]") })
 	List<WebElement> prodCells;
 	
-	@FindAll(value = { @FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]") })
-	List<WebElement> QuantityCells;
+//	@FindAll(value = { @FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]") })
+//	List<WebElement> QuantityCells;
+	
+	//xpath for product details cell in cart
+	String bfrXpath = "//*[@id=\"content\"]/form/div/table/tbody/tr[";
+	String aftrXpath = "]/td[2]";
+	
+	//xpath for remove item button
+	String bfrXpathBtn = "//*[@id=\"content\"]/form/div/table/tbody/tr[";
+	String aftrXpathBtn = "]/td[4]/div/span/button[2]";
+	
 	
 	public void removeOutOfStockItems() {
-//		for(int i = 1; i <= tableRows.size(); i++)
+		int index;
 		for(WebElement element : prodCells) {
 			if(element.getAttribute("span") != null) {
-				// logic yet to be implemented
+				index = prodCells.indexOf(element) + 1;
+				WebElement quantityCell = driver.findElement(By.xpath(bfrXpath + index + aftrXpath));
+				WebElement removeItem = driver.findElement(By.xpath(bfrXpathBtn + index + aftrXpathBtn));
+				js.executeScript("arguments[0].scrollIntoView();", removeItem);
+				removeItem.click();
+			}
+			else {
+				continue;
 			}
 		}
 	}

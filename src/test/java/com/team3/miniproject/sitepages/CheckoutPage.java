@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 //import org.openqa.selenium.JavascriptExecutor;
@@ -22,8 +23,10 @@ import org.testng.Assert;
 public class CheckoutPage {
 	public WebDriver driver;
 	String baseUrl="http://localhost/miniproject";
+	JavascriptExecutor js;
 	public CheckoutPage(WebDriver driver) {
 		this.driver=driver;
+		js = (JavascriptExecutor) this.driver;
 		PageFactory.initElements(driver, this);
 	}
 	@FindBy(xpath="//*[@id='top-links']/ul/li[5]/a")
@@ -106,6 +109,7 @@ public class CheckoutPage {
 		newPaymentAddress.click();
 	}
 	public void enterExistingDeliveryDetailsAndContinue() {
+		js.executeScript("arguments[0].scrollIntoView();", existingShippingAddress);
 		existingShippingAddress.click();
 		shippingAddressContinueButton.click();
 	}
@@ -123,7 +127,11 @@ public class CheckoutPage {
 		agree.click();
 		paymentMethodContinueButton.click();
 	}
-	public void confirmOrder() {
+	public void confirmOrder() throws InterruptedException {
+		confirmButton.click();
+		Thread.sleep(6000);
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
 		confirmButton.click();
 	}
 	

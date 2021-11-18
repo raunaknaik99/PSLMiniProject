@@ -135,10 +135,13 @@ public class AppleCinema {
 		}
 	}
 	
-	public void checkSuccessAlert() throws InterruptedException {
+	public boolean checkSuccessAlert() throws InterruptedException {
 		WebElement successMessage = driver.findElement(By.xpath("//*[@id=\"product-product\"]/div[1]"));
 		if(successMessage.isDisplayed()) {
-			System.out.println("Apple Cinema added to cart successfully!");
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 	

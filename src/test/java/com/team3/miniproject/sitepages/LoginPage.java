@@ -41,14 +41,11 @@ public class LoginPage {
 			  System.out.println("Page Title matched");
 		  }
 		  driver.manage().window().maximize();
-<<<<<<< HEAD
 		  driver.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[2]/a")).click();
 		  driver.findElement(By.xpath("//*[@id=\'top-links\']/ul/li[2]/ul/li[2]/a")).click();
 		  
-=======
 		  myAccountIcon.click();
 		  chooseLogin.click();
->>>>>>> 09f999ed2a7a4790fd846a8f9ebbe9e0f01114ae
 	}
 	public void  login(String user_name, String password) {
 		usernameField.clear();
