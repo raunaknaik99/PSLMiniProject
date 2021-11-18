@@ -91,8 +91,8 @@ public class CartFunctionality {
 	  
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  
-	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='5']");
-	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='8']");	  
+	  hpc_object.clickRadioButton();
+	  hpc_object.clickCheckbox();	  
 	  hpc_object.enterInTextbox("test");
 	  	  
 	  hpc_object.clickDropdown("4");
@@ -103,7 +103,7 @@ public class CartFunctionality {
 	  
 	  Thread.sleep(2000);
 	  hpc_object.enterQuantity("2");
-	  hpc_object.clickAddToCart("button-cart");
+	  hpc_object.clickAddToCart();
 	  Thread.sleep(2000);
 	  if(hpc_object.checkSuccessAlert()) {
 		  test.log(LogStatus.PASS, "The success message for adding Apple Cinema to the cart was displayed.");
@@ -221,8 +221,8 @@ public class CartFunctionality {
 	  
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  
-	  hpc_object.clickRadioButton("//input[@name='option[218]' and @value='5']");
-	  hpc_object.clickCheckbox("//input[@name='option[223][]' and @value='8']");	  
+	  hpc_object.clickRadioButton();
+	  hpc_object.clickCheckbox();	  
 	  hpc_object.enterInTextbox("test");
 	  	  
 	  hpc_object.clickDropdown("4");
@@ -232,7 +232,7 @@ public class CartFunctionality {
 	  hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt");	
   	  Thread.sleep(2000);
 	  hpc_object.enterQuantity("1");
-	  hpc_object.clickAddToCart("button-cart"); 
+	  hpc_object.clickAddToCart(); 
 	  Thread.sleep(2000);
 	  
 	  if(hpc_object.checkSuccessAlert()) {
