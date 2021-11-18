@@ -57,7 +57,7 @@ public class CartTestSetup {
   }
   
   //TC_OC_CART_009
-  @Test
+  @Test(enabled=false)
   public void testCase009() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_009-To verify that new window opens when user clicks the like button");
 	  hpc_object=new AppleCinema(driver); //create an instance of AppleCart class
@@ -111,7 +111,7 @@ public class CartTestSetup {
   }
   
   //TC_OC_CART_010
-  @Test(enabled=false)
+  @Test
   public void testCase010() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_010-To verify that new window opens when user clicks the Tweet button");
 	  
