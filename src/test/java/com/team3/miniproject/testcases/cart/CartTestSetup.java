@@ -34,7 +34,7 @@ public class CartTestSetup {
 	ExtentTest test;
 	
   //TC_OC_CART_008
-  @Test(enabled=false)
+  @Test
   public void testCase008() {
 	  test.log(LogStatus.INFO, "TC_OC_CART_008-Add product with customizable features to cart but leave some of the required fields in the features form blank ");
 	  hpc_object=new AppleCinema(driver); //create a new instance of AppleCinema Class
@@ -57,7 +57,7 @@ public class CartTestSetup {
   }
   
   //TC_OC_CART_009
-  @Test(enabled=false)
+  @Test
   public void testCase009() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_009-To verify that new window opens when user clicks the like button");
 	  hpc_object=new AppleCinema(driver); //create an instance of AppleCart class

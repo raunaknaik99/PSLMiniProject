@@ -36,31 +36,31 @@ public class RegistrationPage {
 	WebElement confirmPasswordInput;
 
 	// privacy checkbox element
-	@FindBy(xpath = "//input[@name='agree']")
+	@FindBy(name = "agree")
 	WebElement privacyCheckbox;
 
 	// continue button element
-	@FindBy(xpath = "//input[@value='Continue']")
+	@FindBy(css = "input[value='Continue']")
 	WebElement continueBtn;
 
 	// warning div element
-	@FindBy(xpath = "//div[@class='alert alert-danger alert-dismissible']")
+	@FindBy(css = "div[class='alert alert-danger alert-dismissible']" )
 	WebElement warningDiv;
 
 	// confirm password warning(when confirm password is not same as password)
-	@FindBy(xpath = "//*[@id='content']/form/fieldset[2]/div[2]/div/div")
+	@FindBy(css="form.form-horizontal>fieldset:nth-of-type(2)>div:nth-of-type(2)>div>div")
 	WebElement confirmPasswordWarning;
 
 	// first name warning (appears when invalid input in first name field)
-	@FindBy(xpath = "//*[@id='account']/div[2]/div/div")
+	@FindBy(css="fieldset#account>div:nth-of-type(2)>div>div")
 	WebElement fNameWarning;
 
 	// first name warning (appears when invalid input in last name field)
-	@FindBy(xpath = "//*[@id='account']/div[3]/div/div")
+	@FindBy(css="fieldset#account>div:nth-of-type(3)>div>div")
 	WebElement lNameWarning;
 
 	// first name warning (appears when invalid input in telephone field)
-	@FindBy(xpath = "//*[@id='account']/div[5]/div/div")
+	@FindBy(css="fieldset#account>div:nth-of-type(5)>div>div")
 	WebElement telephoneWarning;
 
 	public RegistrationPage(WebDriver driver) {
@@ -115,25 +115,25 @@ public class RegistrationPage {
 		Assert.assertTrue(warningDiv.isDisplayed());
 	}
 
-	// method to verify warning visibility
+	// method to verify confirm password warning visibility
 	public String verifyConfirmPasswordWarning() {
 		String warningText = confirmPasswordWarning.getText();
 		return warningText;
 	}
 
-	// method to verify warning visibility
+	// method to verify first name warning visibility
 	public String verifyFirstNameWarning() {
 		String warningText = fNameWarning.getText();
 		return warningText;
 	}
 
-	// method to verify warning visibility
+	// method to return last name warning visibility
 	public String verifyLastNameWarning() {
 		String warningText = lNameWarning.getText();
 		return warningText;
 	}
 
-	// method to verify warning visibility
+	// method to return telephone warning visibility
 	public String verifyTelephoneWarning() {
 		String warningText = telephoneWarning.getText();
 		return warningText;

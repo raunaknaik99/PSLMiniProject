@@ -22,19 +22,19 @@ public class ContactUs {
 	WebElement enquiryField;
 
 	// submit button element
-	@FindBy(xpath = "//input[@value='Submit']")
+	@FindBy(css = "input[value='Submit']")
 	WebElement submitBtn;
 
 	// your name field warning (appears if input is not valid)
-	@FindBy(xpath = "//*[@id='content']/form/fieldset/div[1]/div/div")
+	@FindBy(css="form.form-horizontal>fieldset>div>div>div")
 	WebElement yourNameWarning;
 
 	// E-mail address field warning (appears if input is not valid)
-	@FindBy(xpath = "//*[@id='content']/form/fieldset/div[2]/div/div")
+	@FindBy(css="form.form-horizontal>fieldset>div:nth-of-type(2)>div>div")
 	WebElement emailWarning;
 
 	// Enquiry field warning (appears if input is not valid)
-	@FindBy(xpath = "//*[@id='content']/form/fieldset/div[3]/div/div")
+	@FindBy(css="form.form-horizontal>fieldset>div:nth-of-type(3)>div>div")
 	WebElement enquiryWarning;
 
 	public ContactUs(WebDriver driver) {

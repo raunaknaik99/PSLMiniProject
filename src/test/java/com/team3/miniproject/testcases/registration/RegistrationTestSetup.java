@@ -33,7 +33,7 @@ public class RegistrationTestSetup {
 	ScreenShotCapture s;
 
 	// Should Pass
-	@Test(enabled = false)
+	@Test
 	public void testCase001() {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
@@ -50,7 +50,7 @@ public class RegistrationTestSetup {
 	}
 
 	// should Pass
-	@Test(enabled = false)
+	@Test
 	public void testCase002() {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
@@ -67,7 +67,7 @@ public class RegistrationTestSetup {
 	}
 
 	// Should Pass
-	@Test(enabled = false)
+	@Test
 	public void testCase003() {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
@@ -83,7 +83,7 @@ public class RegistrationTestSetup {
 		}
 	}
 
-	@Test(enabled = false)
+	@Test(enabled=false)
 	public void testCase004() {
 		rg_object = new RegistrationPage(driver);
 		rg_object.verifyPageTitle("Register Account");
@@ -94,7 +94,7 @@ public class RegistrationTestSetup {
 	}
 
 	// Should Pass
-	@Test(enabled = false)
+	@Test
 	public void testCase005() {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
@@ -113,7 +113,7 @@ public class RegistrationTestSetup {
 	}
 
 	// should Fail
-	@Test(enabled = false)
+	@Test
 	public void testCase008() {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
@@ -267,7 +267,7 @@ public class RegistrationTestSetup {
 	}
 
 	// should pass
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase015() {
 		rg_object = new RegistrationPage(driver);
 		h_object = new Header(driver);

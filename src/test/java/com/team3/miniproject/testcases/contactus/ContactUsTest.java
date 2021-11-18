@@ -52,7 +52,7 @@ public class ContactUsTest {
 	  driver.findElement(By.linkText("Continue"));
   }
 	
-	@Test(enabled = false)
+	@Test
 	public void testCase003() {
 		cnct_object = new ContactUs(driver);
 		cnct_object.enterName("Tester");
@@ -62,7 +62,7 @@ public class ContactUsTest {
 		Assert.assertEquals(cnct_object.getEmailWarning(), "E-Mail Address does not appear to be valid!");
 	}
 
-	@Test(enabled = false)
+	@Test
 	public void testCase004() {
 		cnct_object = new ContactUs(driver);
 		cnct_object.enterName("Te");
@@ -72,7 +72,7 @@ public class ContactUsTest {
 		Assert.assertEquals(cnct_object.getYourNameWarning(), "Name must be between 3 and 32 characters!");
 	}
 
-	@Test(enabled = false)
+	@Test
 	public void testCase005() {
 		cnct_object = new ContactUs(driver);
 		cnct_object.enterName("Tester");

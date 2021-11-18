@@ -27,11 +27,10 @@ public class AppleCinema {
 	
 	WebDriver driver;
 	ScreenShotCapture ss;
+	JavascriptExecutor js;
 	
-
 	//add apple cinema to cart btn
-	//button[onclick="cart.add('42');"]
-	@FindBy(xpath = "//button[@onclick=\"cart.add('42');\"]")
+	@FindBy(css = "button[onclick=\"cart.add('42');\"]")
 	WebElement appleCinemaCart;
 	
 	//radio button on apple cinema form
@@ -89,38 +88,37 @@ public class AppleCinema {
 	public AppleCinema(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
+		js=(JavascriptExecutor)driver;
 	}
 	
-	
-	public void clickAppleCinemaCart() {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
+	//method to click Apple Cinema add to Cart
+	public void clickAppleCinemaCart() {	
 		js.executeScript("arguments[0].scrollIntoView();", appleCinemaCart);
 		appleCinemaCart.click();
 	}
 	
+	//method to click radio button on Apple Cinema Form page
 	public void clickRadioButton() {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
 		js.executeScript("arguments[0].scrollIntoView();", radioBtn);
 		radioBtn.click();
 	}
 	
+	//method to click checkbox on apple cinema form page
 	public void clickCheckbox() {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
 		js.executeScript("arguments[0].scrollIntoView();", checkBx);
 		checkBx.click();
 	}
 	
+	//method to enter text in textbox on apple cinema form page
 	public void enterInTextbox(String text) {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
 		js.executeScript("arguments[0].scrollIntoView();", textBx);
 		textBx.click();
 		textBx.clear();
 		textBx.sendKeys(text);
 	}
 	
+	//method to select from dropdown on apple cinema form page
 	public void clickDropdown(String value) {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
-		//WebElement dropdown = driver.findElement(By.id("input-option217"));
 		js.executeScript("arguments[0].scrollIntoView();", dropDown);
 		dropDown.click();
 		Select item = new Select(dropDown);
@@ -128,9 +126,9 @@ public class AppleCinema {
 		dropDown.click();
 	}
 	
+	//method to enter text in text area field on apple cinema form page
 	public void enterInTextArea(String text) {
 		WebElement textArea = driver.findElement(By.id("input-option209"));
-		JavascriptExecutor js=(JavascriptExecutor)driver;
 		js.executeScript("arguments[0].scrollIntoView();", textArea);
 		textArea.click();
 		textArea.clear();
@@ -138,12 +136,9 @@ public class AppleCinema {
 	}
 	
 	//File upload part
-	
 	public void selectFileForUpload(String path) throws InterruptedException, AWTException {
 		StringSelection stringSelection = new StringSelection(path); // StringSelction class is used for copy and paste operations
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-		JavascriptExecutor js=(JavascriptExecutor)driver;
-
 		WebElement uploadBtn = driver.findElement(By.id("button-upload222"));
 		js.executeScript("arguments[0].scrollIntoView();", uploadBtn);
 		uploadBtn.click();
@@ -163,35 +158,28 @@ public class AppleCinema {
 	    
 	}
 	
+	//method to enter quantity in apply cinema form page
 	public void enterQuantity(String num) {
-		//WebElement quantity = driver.findElement(By.id("input-quantity"));
-		//JavascriptExecutor js=(JavascriptExecutor)driver;
-		JavascriptExecutor js=(JavascriptExecutor)driver;
-
 		js.executeScript("arguments[0].scrollIntoView();", quantity);
 		quantity.click();
 		quantity.clear();
 		quantity.sendKeys(num);
 	}
 
-
+    //method to click add to cart button on apple cinema form page
 	public void clickAddToCart() {
-		//String id_temp="";
-		//WebElement addbtn=driver.findElement(By.id(id));
-		//JavascriptExecutor js=(JavascriptExecutor)driver;
-		JavascriptExecutor js=(JavascriptExecutor)driver;
-
 		js.executeScript("arguments[0].scrollIntoView();", addBtn);
 		addBtn.click();
 	}
 	
+	//method to check if mandatory field warning is visible
 	public void checkMandatoryFieldsWarning() {
-		//String path_temp="";
 		if(mandatoryWarning.isDisplayed()) {
 			System.out.println("Warning was displayed! Add to cart failed");
 		}
 	}
 	
+	//method to check success alert
 	public boolean checkSuccessAlert() throws InterruptedException {
 		WebElement successMessage = driver.findElement(By.xpath("//*[@id=\"product-product\"]/div[1]"));
 		if(successMessage.isDisplayed()) {
@@ -209,20 +197,14 @@ public class AppleCinema {
 	
 	//method to click fb like button
 	public void clickFbLikeBtn() throws InterruptedException, IOException {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
-
 		ss=new ScreenShotCapture(driver);
 		js.executeScript("arguments[0].scrollIntoView();", ratingArea);
-		//WebElement fbIframe=driver.findElement(By.xpath());
 		driver.switchTo().frame(fbIframe);
 		Thread.sleep(5000);
-		//WebElement likeBtn1=driver.findElement(By.xpath("//button[@title='Like']"));
-		//WebElement likeBtn=driver.findElement(By.xpath("//span[@class='_8f1i']"));
 		Actions hoverAction=new Actions(driver);
 		hoverAction.moveToElement(likeBtnSpan).perform();
 		Thread.sleep(3000);
 		likeBtn.click();
-		//
 		ss.captureScreenshot("FBWindow.png");
 		Thread.sleep(3000);//only to visualize the opening of new window
 	}
@@ -230,15 +212,11 @@ public class AppleCinema {
 	
     //method to click tweet button
 	public void clickTweetBtn() throws InterruptedException, IOException {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
-		
 		js.executeScript("arguments[0].scrollIntoView();", ratingArea);
 		WebDriverWait w=new WebDriverWait(driver,5);
 		w.until(ExpectedConditions.presenceOfElementLocated(By.id("twitter-widget-0")));
 		driver.switchTo().frame("twitter-widget-0");
-		//WebDriverWait w2=new WebDriverWait(driver,3);
 		w.until(ExpectedConditions.presenceOfElementLocated(By.id("b")));
-		//driver.findElement(By.xpath("//a[@id='b']")).click();
 		tweetBtn.click();
 		ss=new ScreenShotCapture(driver);
 		ss.captureScreenshot("TwitterWindow.png");
