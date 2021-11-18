@@ -34,7 +34,7 @@ public class CartTestSetup {
 	ExtentTest test;
 	
 	//TC_OC_CART_008
-  @Test
+  @Test(enabled=false)
   public void testCase008() {
 	  test.log(LogStatus.INFO, "TC_OC_CART_008-Add product with customizable features to cart but leave some of the required fields in the features form blank ");
 	  hpc_object=new AppleCinema(driver);
@@ -71,6 +71,7 @@ public class CartTestSetup {
 	  hpc_object.clickFbLikeBtn();
 	  
 	  Set<String> childWindowHandles=driver.getWindowHandles();
+	  //System.out.println(childWindowHandles);
 	  Iterator<String> itr=childWindowHandles.iterator();  
 	  while(itr.hasNext()) {
 		  String childWindow=itr.next();
@@ -88,6 +89,9 @@ public class CartTestSetup {
 			  }
 			  driver.close();
 		  }
+		  else {
+			  test.log(LogStatus.FAIL, "Test Failed- Did not switch to child window");
+		  }
 	  }
 	  Thread.sleep(3000);//only to visualize the going back to parent window
 	  driver.switchTo().window(parentWindowHandle);
@@ -102,7 +106,7 @@ public class CartTestSetup {
   }
   
 //TC_OC_CART_010
-  @Test
+  @Test(enabled=false)
   public void testCase010() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_010-To verify that new window opens when user clicks the Tweet button");
 	  hpc_object=new AppleCinema(driver);
@@ -142,6 +146,9 @@ public class CartTestSetup {
 				  test.log(LogStatus.FAIL, "Test Failed- Child Window title mismatched");
 			  }
 			  driver.close();
+		  }
+		  else {
+			  test.log(LogStatus.FAIL, "Test Failed- Did not switch to child window");
 		  }
 	  }
 	  Thread.sleep(3000); //only to visualize the going back to parent window
