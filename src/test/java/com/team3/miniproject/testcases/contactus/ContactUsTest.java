@@ -1,6 +1,8 @@
 package com.team3.miniproject.testcases.contactus;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -202,7 +204,8 @@ public class ContactUsTest {
 
 	@BeforeMethod
 	public void beforeMethod(Method m) {
-		report =new ExtentReports("ExtentReports\\ContactUs\\"+m.getName()+".html");
+		String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+		report =new ExtentReports("ExtentReports\\ContactUs\\"+m.getName()+"_"+timeStamp+".html");
 		test=report.startTest(m.getName());
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();

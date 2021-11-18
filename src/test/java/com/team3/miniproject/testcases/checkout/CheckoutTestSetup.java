@@ -13,6 +13,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.annotations.BeforeMethod;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
@@ -297,7 +299,8 @@ public class CheckoutTestSetup {
 	
   @BeforeMethod
   public void beforeMethod(Method m) {
-	  report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+".html");
+	  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+	  report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+"_"+timeStamp+".html");
 	  test=report.startTest(m.getName());
 	  WebDriverManager.chromedriver().setup();
 	  driver = new ChromeDriver();
