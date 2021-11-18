@@ -142,8 +142,9 @@ public class AppleCinema {
 		}
 	}
 	
-	public void checkPageTitle(String title) {
-		Assert.assertEquals(title, driver.getTitle());
+	public String checkPageTitle() {
+		//Assert.assertEquals(title, driver.getTitle());
+		return driver.getTitle();
 	}
 	
 	//method to click fb like button
