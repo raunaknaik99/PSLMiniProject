@@ -14,6 +14,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.team3.miniproject.sitepages.Header;
+import com.team3.miniproject.sitepages.LoginPage;
 import com.team3.miniproject.sitepages.RegistrationPage;
 import com.team3.miniproject.testcases.ddt.RegistrationData;
 
@@ -23,6 +25,8 @@ import screenshot.ScreenShotCapture;
 public class RegistrationTestSetup {
 
 	RegistrationPage rg_object;
+	LoginPage lg_object;
+	Header h_object;
 	WebDriver driver;
 	String baseUrl = "http://localhost/opencartsite/index.php?route=account/register";
 	RegistrationData rd = new RegistrationData();
@@ -135,98 +139,145 @@ public class RegistrationTestSetup {
 	}
 
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase006() {
-		rg_object = new RegistrationPage(driver);
-		rg_object.verifyPageTitle("Register Account");
-		rg_object.fillRegistrationForm("Raunak", "Naik", "demo@example.com", "2123434565", "testing123", "test4567");
-		rg_object.checkPrivacyPolicy();
-		rg_object.clickContinueBtn();
-		rg_object.verifyPageTitle("Register Account");
-		Assert.assertEquals(rg_object.verifyConfirmPasswordWarning(), "Password confirmation does not match password!");
+		try {
+			ArrayList<ArrayList<String>> myData = rd.userData();
+			rg_object = new RegistrationPage(driver);
+			rg_object.verifyPageTitle("Register Account");
+			rg_object.fillRegistrationForm(myData.get(5).get(0), myData.get(5).get(1), myData.get(5).get(2),
+					myData.get(5).get(3), myData.get(5).get(4), myData.get(5).get(5));
+			rg_object.checkPrivacyPolicy();
+			rg_object.clickContinueBtn();
+			rg_object.verifyPageTitle("Register Account");
+			Assert.assertEquals(rg_object.verifyConfirmPasswordWarning(),
+					"Password confirmation does not match password!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase007() {
-		rg_object = new RegistrationPage(driver);
-		rg_object.verifyPageTitle("Register Account");
-		rg_object.fillRegistrationForm("Raunak", "Naik", "demo1@example.com", "2123434565", "testing123", "testing123");
-		rg_object.checkPrivacyPolicy();
-		rg_object.clickContinueBtn();
-		rg_object.verifyPageTitle("Register Account");
-		rg_object.verifyWarningVisibility();
+		try {
+			ArrayList<ArrayList<String>> myData = rd.userData();
+			rg_object = new RegistrationPage(driver);
+			rg_object.verifyPageTitle("Register Account");
+			rg_object.fillRegistrationForm(myData.get(6).get(0), myData.get(6).get(1), myData.get(6).get(2),
+					myData.get(6).get(3), myData.get(6).get(4), myData.get(6).get(5));
+			rg_object.checkPrivacyPolicy();
+			rg_object.clickContinueBtn();
+			rg_object.verifyPageTitle("Register Account");
+			rg_object.verifyWarningVisibility();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase010() {
-		rg_object = new RegistrationPage(driver);
-		rg_object.verifyPageTitle("Register Account");
-		rg_object.fillRegistrationForm("", "Naik", "demo2@example.com", "2123434565", "testing123", "testing123");
-		rg_object.checkPrivacyPolicy();
-		rg_object.clickContinueBtn();
-		rg_object.verifyPageTitle("Register Account");
-		Assert.assertEquals(rg_object.verifyFirstNameWarning(), "First Name must be between 1 and 32 characters!");
+		try {
+			ArrayList<ArrayList<String>> myData = rd.userData();
+			rg_object = new RegistrationPage(driver);
+			rg_object.verifyPageTitle("Register Account");
+			rg_object.fillRegistrationForm(myData.get(7).get(0), myData.get(7).get(1), myData.get(7).get(2),
+					myData.get(7).get(3), myData.get(7).get(4), myData.get(7).get(5));
+			rg_object.checkPrivacyPolicy();
+			rg_object.clickContinueBtn();
+			rg_object.verifyPageTitle("Register Account");
+			Assert.assertEquals(rg_object.verifyFirstNameWarning(), "First Name must be between 1 and 32 characters!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase011() {
-		rg_object = new RegistrationPage(driver);
-		rg_object.verifyPageTitle("Register Account");
-		rg_object.fillRegistrationForm("Raunak", "", "demo3@example.com", "12", "testing123", "testing123");
-		rg_object.checkPrivacyPolicy();
-		rg_object.clickContinueBtn();
-		rg_object.verifyPageTitle("Register Account");
-		Assert.assertEquals(rg_object.verifyLastNameWarning(), "Last Name must be between 1 and 32 characters!");
+		try {
+			ArrayList<ArrayList<String>> myData = rd.userData();
+			rg_object = new RegistrationPage(driver);
+			rg_object.verifyPageTitle("Register Account");
+			rg_object.fillRegistrationForm(myData.get(8).get(0), myData.get(8).get(1), myData.get(8).get(2),
+					myData.get(8).get(3), myData.get(8).get(4), myData.get(8).get(5));
+			rg_object.checkPrivacyPolicy();
+			rg_object.clickContinueBtn();
+			rg_object.verifyPageTitle("Register Account");
+			Assert.assertEquals(rg_object.verifyTelephoneWarning(), "Telephone must be between 3 and 32 characters!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase012() {
-		rg_object = new RegistrationPage(driver);
-		rg_object.verifyPageTitle("Register Account");
-		rg_object.fillRegistrationForm("Raunakabcdefghijklmnopqrstuvwxyza", "Naik", "demo4@example.com", "2123434565",
-				"testing123", "testing123");
-		rg_object.checkPrivacyPolicy();
-		rg_object.clickContinueBtn();
-		rg_object.verifyPageTitle("Register Account");
-		Assert.assertEquals(rg_object.verifyFirstNameWarning(), "First Name must be between 1 and 32 characters!");
+		try {
+			ArrayList<ArrayList<String>> myData = rd.userData();
+			rg_object = new RegistrationPage(driver);
+			rg_object.verifyPageTitle("Register Account");
+			rg_object.fillRegistrationForm(myData.get(9).get(0), myData.get(9).get(1), myData.get(9).get(2),
+					myData.get(9).get(3), myData.get(9).get(4), myData.get(9).get(5));
+			rg_object.checkPrivacyPolicy();
+			rg_object.clickContinueBtn();
+			rg_object.verifyPageTitle("Register Account");
+			Assert.assertEquals(rg_object.verifyFirstNameWarning(), "First Name must be between 1 and 32 characters!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 	}
 
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase013() {
-		rg_object = new RegistrationPage(driver);
-		rg_object.verifyPageTitle("Register Account");
-		rg_object.fillRegistrationForm("Raunak", "Naikabcdefghijklmnopqrstuvwxyzabc", "demo5@example.com", "2123434565",
-				"testing123", "testing123");
-		rg_object.checkPrivacyPolicy();
-		rg_object.clickContinueBtn();
-		rg_object.verifyPageTitle("Register Account");
-		Assert.assertEquals(rg_object.verifyLastNameWarning(), "Last Name must be between 1 and 32 characters!");
+		try {
+			ArrayList<ArrayList<String>> myData = rd.userData();
+			rg_object = new RegistrationPage(driver);
+			rg_object.verifyPageTitle("Register Account");
+			rg_object.fillRegistrationForm(myData.get(10).get(0), myData.get(10).get(1), myData.get(10).get(2),
+					myData.get(10).get(3), myData.get(10).get(4), myData.get(10).get(5));
+			rg_object.checkPrivacyPolicy();
+			rg_object.clickContinueBtn();
+			rg_object.verifyPageTitle("Register Account");
+			Assert.assertEquals(rg_object.verifyLastNameWarning(), "Last Name must be between 1 and 32 characters!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	// should pass
 	@Test(enabled = true)
 	public void testCase014() {
-		rg_object = new RegistrationPage(driver);
-		rg_object.verifyPageTitle("Register Account");
-		rg_object.fillRegistrationForm("Raunak", "Naik", "demo6@example.com", "212343456521312312312313123231313213 ",
-				"testing123", "testing123");
-		rg_object.checkPrivacyPolicy();
-		rg_object.clickContinueBtn();
-		rg_object.verifyPageTitle("Register Account");
-		Assert.assertEquals(rg_object.verifyTelephoneWarning(), "Telephone must be between 3 and 32 characters!");
+		try {
+			ArrayList<ArrayList<String>> myData = rd.userData();
+			rg_object = new RegistrationPage(driver);
+			rg_object.verifyPageTitle("Register Account");
+			rg_object.fillRegistrationForm(myData.get(11).get(0), myData.get(11).get(1), myData.get(11).get(2),
+					myData.get(11).get(3), myData.get(11).get(4), myData.get(11).get(5));
+			rg_object.checkPrivacyPolicy();
+			rg_object.clickContinueBtn();
+			rg_object.verifyPageTitle("Register Account");
+			Assert.assertEquals(rg_object.verifyTelephoneWarning(), "Telephone must be between 3 and 32 characters!");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	// should pass
-//	@Test(enabled = true)
-//	public void testCase015() {
-//		rg_object = new RegistrationPage(driver);
-//		rg_object.verifyPageTitle("My Account");
-//	}
+	@Test(enabled = true)
+	public void testCase015() {
+		rg_object = new RegistrationPage(driver);
+		h_object = new Header(driver);
+		lg_object = new LoginPage(driver);
+
+		h_object.selectFromMyAccountDropDown(1);
+		lg_object.login("demo1@example.com", "testing123");
+		driver.get(baseUrl);
+		rg_object.verifyPageTitle("My Account");
+	}
 
 	@BeforeMethod
 	public void beforeMethod() {

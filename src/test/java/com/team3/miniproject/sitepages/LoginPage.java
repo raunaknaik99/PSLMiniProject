@@ -30,6 +30,20 @@ public class LoginPage {
 	WebElement loginButton;
 
 	public void navigateToLogin() {
+<<<<<<< HEAD
+		 driver.get(baseUrl);
+		  String actualTitle=driver.getTitle();
+		  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		  if ( actualTitle == expectedTitle) {
+			  System.out.println("Page Title matched");
+		  }
+		  driver.manage().window().maximize();
+		  driver.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[2]/a")).click();
+		  driver.findElement(By.xpath("//*[@id=\'top-links\']/ul/li[2]/ul/li[2]/a")).click();
+		  
+		  myAccountIcon.click();
+		  chooseLogin.click();
+=======
 		driver.get(baseUrl);
 		String actualTitle = driver.getTitle();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -41,6 +55,7 @@ public class LoginPage {
 		driver.findElement(By.xpath("//*[@id=\'top-links\']/ul/li[2]/ul/li[2]/a")).click();
 		myAccountIcon.click();
 		chooseLogin.click();
+>>>>>>> 1e113630f373a91cd28ea9b94bb31a5c65c72bdc
 	}
 
 	public void login(String user_name, String password) {

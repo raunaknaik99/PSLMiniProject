@@ -15,6 +15,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 import com.team3.miniproject.sitepages.AppleCinema;
 import com.team3.miniproject.sitepages.Cart;
 import com.team3.miniproject.sitepages.Header;
@@ -26,6 +28,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class CartFunctionality {
 	WebDriver driver;
 	String baseUrl = "http://localhost";
+	ExtentReports report;
+	static ExtentTest test;
+	
+	//page objects
 	HomePage objHomePage;
 	Cart objCart;
 	Tablets objTablets;
@@ -80,7 +86,9 @@ public class CartFunctionality {
 	  hpc_object.enterQuantity("2");
 	  hpc_object.clickAddToCart();
 	  Thread.sleep(2000);
-	  hpc_object.checkSuccessAlert();
+	  if(hpc_object.checkSuccessAlert()) {
+		  
+	  }
 	  
   }
   @Test // working
@@ -184,7 +192,7 @@ public class CartFunctionality {
 	 System.out.println("Success: You have added ");
   }
   @Test //working
-  public void TC_OC_CART_008() {
+  public void cart_TC008() {
 	  hpc_object=new AppleCinema(driver);
 	  hpc_object.clickAppleCinemaCart();
 	  hpc_object.clickRadioButton();
