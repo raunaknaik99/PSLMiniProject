@@ -28,31 +28,59 @@ public class ContactUsTest {
 	ExtentReports report;
 	ExtentTest test;
 
-  @Test(enabled=false)
-  public void contactTC_001() throws InterruptedException {
-	  driver.findElement(By.linkText("My Account")).click();
-	  driver.findElement(By.linkText("Login")).click();
-	  
-	  WebElement email = driver.findElement(By.id("input-email"));
-	  email.sendKeys("deekshavishwakarma@yahoo.com");
-	  
-	  driver.findElement(By.id("input-password")).sendKeys("deeksha");
-	  driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[2]/div/form/input")).click();
-	  //Thread.sleep(4000);
+/*------------------------------*/
+  @Test
+  public void contactTestCase001() throws InterruptedException {
+	  cnct_object = new ContactUs(driver);
+	  cnct_object.loginForContactUs();
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
 	  js.executeScript("window.scrollBy(0,500)", "");
+	  Thread.sleep(3000);
 	  
+	  //link text to click on Contact Us link
+	  driver.findElement(By.linkText("Contact Us")).click();
+	  cnct_object.enterEnquiry("This is the input for enquiry field");
+	  Thread.sleep(3000);
+	  
+	  //css of submit button of Contact Us Page---input[type=\"submit\"]
+	  cnct_object.clickSubmit();
+	  Thread.sleep(3000);
+	  cnct_object.getPageTitle();
+	  
+	  //link text to click Continue after navigating next to Contact Us page
+	  driver.findElement(By.linkText("Continue"));
+  }
+
+  @Test
+  public void contactTestCase002() throws InterruptedException {
+	  cnct_object = new ContactUs(driver);
+	  cnct_object.loginForContactUs();
+	  JavascriptExecutor js = (JavascriptExecutor) driver;
+	  js.executeScript("window.scrollBy(0,500)", "");
 	  Thread.sleep(3000);
 	  driver.findElement(By.linkText("Contact Us")).click();
-	  driver.findElement(By.id("input-enquiry")).sendKeys("This is the input for enquiry field");
+	  
+	  WebElement name = driver.findElement(By.id("input-name"));
+	  name.clear();
+	  name.sendKeys("Joe");
+
+	  WebElement email_field = driver.findElement(By.id("input-email"));
+	  email_field.clear();
+	  email_field.sendKeys("joe@demo.com");
+	  
+	  cnct_object.enterEnquiry("This is the input for enquiry field");
 	  Thread.sleep(3000);
-	  driver.findElement(By.xpath("//*[@id=\"content\"]/form/div/div/input")).click();
+	  cnct_object.clickSubmit();
 	  Thread.sleep(3000);
-	  System.out.println(driver.getTitle());
+	  cnct_object.getPageTitle();
+	  
+	  //link Text to click Continue
 	  driver.findElement(By.linkText("Continue"));
   }
 	
-	@Test
+
+/*-------------------------------*/
+	@Test(enabled = false)
 	public void testCase003() {
 		cnct_object = new ContactUs(driver);
 		cnct_object.enterName("Tester");

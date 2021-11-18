@@ -15,6 +15,7 @@ import org.testng.Assert;
 
 public class CheckoutPage {
 	public WebDriver driver;
+
 	String baseUrl = "http://localhost/miniproject";
 	JavascriptExecutor js;
 
