@@ -104,7 +104,13 @@ public class CartFunctionality {
 
 	  hpc_object.enterInTextArea("This is a test order");
 	  
-	  hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt");	  
+	  if(hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
+		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
+	  }
+	  else {
+		  test.log(LogStatus.FAIL, "The driver did not switch to the alert.");
+	  }
+	  
 	  
 	  Thread.sleep(2000);
 	  hpc_object.enterQuantity("2");
@@ -114,7 +120,7 @@ public class CartFunctionality {
 		  test.log(LogStatus.PASS, "The success message for adding Apple Cinema to the cart was displayed.");
 	  }
 	  else {
-		  test.log(LogStatus.INFO, "The success message for adding Apple Cinema to the cart was not displayed.");
+		  test.log(LogStatus.FAIL, "The success message for adding Apple Cinema to the cart was not displayed.");
 	  }
 	  
   }
@@ -234,7 +240,12 @@ public class CartFunctionality {
 	  
 	  hpc_object.enterInTextArea("This is a test order");
 	  
-	  hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt");	
+	  if(hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
+		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
+	  }
+	  else {
+		  test.log(LogStatus.FAIL, "The driver did not switch to the alert.");
+	  }	
   	  Thread.sleep(2000);
 	  hpc_object.enterQuantity("1");
 	  hpc_object.clickAddToCart(); 
@@ -244,7 +255,7 @@ public class CartFunctionality {
 		  test.log(LogStatus.FAIL, "The warning message about the minimum required quantity is not displayed.");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The warning message about the minimum required quantity is displayed.");
+		  test.log(LogStatus.PASS, "The warning message about the minimum required quantity is displayed.");
 	  }
   }
   //TC_OC_CART_007
