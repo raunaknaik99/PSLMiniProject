@@ -28,12 +28,12 @@ import screenshot.ScreenShotCapture;
 public class ContactUsTest {
 
 	WebDriver driver;
-	String baseUrl = "http://localhost/miniproject/index.php?route=information/contact";
+	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
 	ContactUs cnct_object;
 	ExtentReports report;
 	ExtentTest test;
 	ScreenShotCapture objScreenshot;
-	ContactUsData contactdata;
+	ContactUsData contactdata = new ContactUsData();
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 
 	/*------------------------------*/
@@ -88,14 +88,16 @@ public class ContactUsTest {
 
 	/*-------------------------------*/
 	@Test(enabled = true)
-	public void testCase003() {
+	public void testCase003() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
+		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
+
 		test.log(LogStatus.INFO, "TC_OC_CU_003 - To test whether the contact us form accepts an invalid email id");
 		try {
 			cnct_object = new ContactUs(driver);
-			cnct_object.enterName("Tester");
-			cnct_object.enterEmail("demo1@example");
-			cnct_object.enterEnquiry("When will the iPad Air be in stock again");
+			cnct_object.enterName(myData.get(1).get(0));
+			cnct_object.enterEmail(myData.get(1).get(1));
+			cnct_object.enterEnquiry(myData.get(1).get(2));
 			cnct_object.clickSubmit();
 			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
@@ -120,15 +122,17 @@ public class ContactUsTest {
 	}
 
 	@Test
-	public void testCase004() {
+	public void testCase004() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
+		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
+
 		test.log(LogStatus.INFO,
 				"TC_OC_CU_004 - To test whether the contact us form accepts less than 3 characters in 'Your Name' field");
 		try {
 			cnct_object = new ContactUs(driver);
-			cnct_object.enterName("Te");
-			cnct_object.enterEmail("demo@email.com");
-			cnct_object.enterEnquiry("When will the iPad Air be in stock again");
+			cnct_object.enterName(myData.get(2).get(0));
+			cnct_object.enterEmail(myData.get(2).get(1));
+			cnct_object.enterEnquiry(myData.get(2).get(2));
 			cnct_object.clickSubmit();
 			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
@@ -153,15 +157,17 @@ public class ContactUsTest {
 	}
 
 	@Test
-	public void testCase005() {
+	public void testCase005() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
+		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
+
 		test.log(LogStatus.INFO,
 				"TC_OC_CU_005 - To test whether the contact us form accepts less than 10 characters in the 'Enquiry' field");
 		try {
 			cnct_object = new ContactUs(driver);
-			cnct_object.enterName("Tester");
-			cnct_object.enterEmail("demo@email.com");
-			cnct_object.enterEnquiry("abcd");
+			cnct_object.enterName(myData.get(3).get(0));
+			cnct_object.enterEmail(myData.get(3).get(1));
+			cnct_object.enterEnquiry(myData.get(3).get(2));
 			cnct_object.clickSubmit();
 			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
