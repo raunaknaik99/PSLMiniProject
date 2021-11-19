@@ -34,7 +34,7 @@ public class RegistrationTestSetup {
 	LoginPage lg_object;
 	Header h_object;
 	WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/index.php?route=account/register";
+	String baseUrl = "http://localhost/miniproject/index.php?route=account/register";
 	RegistrationData rd = new RegistrationData();
 	ScreenShotCapture s;
 	ExtentReports report;
@@ -74,27 +74,29 @@ public class RegistrationTestSetup {
 	}
 
 	// should Pass
-	//TC_OC_REG_002
-	@Test
+	//TC_OC_REG_002 - Registering by entering valid data in input fields, selecting the privacy policy checkbox, but entering insufficient characters for password
+	@Test(priority=1)
 	public void testCase002() {
 		s= new ScreenShotCapture(driver);
 	 	test.log(LogStatus.INFO, "TC_OC_REG_002-Registering by entering valid data in input fields, selecting the privacy policy checkbox, but entering insufficient characters for password");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
+			//Verify if page title matches
 			if(rg_object.getPageTitle().equals("Register Account")) {
-				test.log(LogStatus.PASS, "Test Passed- Title Matched");
+				test.log(LogStatus.INFO, "Check Passed- Title Matched");
 			}else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
+				test.log(LogStatus.INFO, "Check Failed- Title Mismatched");
 				s.captureScreenshot("\\Registration\\" + "testCase002.1_"+ timeStamp +".PNG");
 			}
+			//Fill in registration data, but keep insufficient characters for password
 			rg_object.fillRegistrationForm(myData.get(1).get(0), myData.get(1).get(1), myData.get(1).get(2),
 					myData.get(1).get(3), myData.get(1).get(4), myData.get(1).get(5));
 			rg_object.clickContinueBtn();
 			if(rg_object.getPageTitle().equals("Register Account")) {
-				test.log(LogStatus.PASS, "Test Passed- Title Matched");
+				test.log(LogStatus.PASS, "Test Passed- Warning is displayed and user is not allowed to procees");
 			}else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
+				test.log(LogStatus.FAIL, "Test Failed- User is able to proceed");
 				s.captureScreenshot("\\Registration\\" + "testCase002.2_"+ timeStamp +".PNG");
 			}
 			test.log(LogStatus.INFO, "Warning Status: "+rg_object.verifyWarningVisibility());
@@ -104,7 +106,7 @@ public class RegistrationTestSetup {
 	}
 
 	// Should Pass
-	//TC_OC_REG_003
+	//TC_OC_REG_003 - Registering by entering valid data in input fields, selecting the privacy policy checkbox, not entering data in the necessary marked fields. ie lastname
 	@Test
 	public void testCase003() {
 		s= new ScreenShotCapture(driver);
@@ -112,6 +114,7 @@ public class RegistrationTestSetup {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
+			//Verify if page title matches
 			if(rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			}else {
@@ -119,6 +122,7 @@ public class RegistrationTestSetup {
 				s.captureScreenshot("\\Registration\\" + "testCase003.1_"+ timeStamp +".PNG");
 
 			}
+			//Fill in registration data, but keep lastName (mandatory) field empty
 			rg_object.fillRegistrationForm(myData.get(2).get(0), myData.get(2).get(1), myData.get(2).get(2),
 					myData.get(2).get(3), myData.get(2).get(4), myData.get(2).get(5));
 			rg_object.clickContinueBtn();
