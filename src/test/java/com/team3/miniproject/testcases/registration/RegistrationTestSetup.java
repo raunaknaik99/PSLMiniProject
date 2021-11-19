@@ -44,7 +44,7 @@ public class RegistrationTestSetup {
 	//TC_OC_REG_001
 	@Test
 	public void testCase001() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_001-Try registering by entering valid data in input fields but not selecting the privacy policy checkbox");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -71,7 +71,7 @@ public class RegistrationTestSetup {
 	//TC_OC_REG_002
 	@Test
 	public void testCase002() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_002-Registering by entering valid data in input fields, selecting the privacy policy checkbox, but entering insufficient characters for password");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -98,7 +98,7 @@ public class RegistrationTestSetup {
 	//TC_OC_REG_003
 	@Test
 	public void testCase003() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_003-Registering by entering valid data in input fields, selecting the privacy policy checkbox, not entering data in the necessary marked fields. ie lastname");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -124,7 +124,7 @@ public class RegistrationTestSetup {
 	//TC_OC_REG_004
 	@Test(enabled=false)
 	public void testCase004() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_004-Registering by entering inappropriate data in input fields, selecting the privacy policy checkbox.");
 		rg_object = new RegistrationPage(driver);
 		if(rg_object.getPageTitle().equals("Register Account")) {
 			test.log(LogStatus.PASS, "Test Passed- Title Matched");
@@ -138,14 +138,13 @@ public class RegistrationTestSetup {
 		}else {
 			test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
 		}
-		//Assert.assertTrue(rg_object.verifyConfirmPasswordWarning());
 	}
 
 	// Should Pass
 	//TC_OC_REG_005
 	@Test
 	public void testCase005() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_005-Registering by entering appropriate data in input fields, selecting the privacy policy checkbox.");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -174,7 +173,7 @@ public class RegistrationTestSetup {
 	//TC_OC_REG_008
 	@Test
 	public void testCase008() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_008-Registering by entering invalid data in Telephone field");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -201,7 +200,7 @@ public class RegistrationTestSetup {
 
 	@Test(enabled = false)
 	public void testCase009() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_009-Verify the login navigation link is working on registration page");
 		rg_object = new RegistrationPage(driver);
 		rg_object.clickLoginLink();
 		if(rg_object.getPageTitle().equals("Account Login")) {
@@ -215,7 +214,7 @@ public class RegistrationTestSetup {
 	//TC_OC_REG_006
 	@Test(enabled = true)
 	public void testCase006() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_006-Registering by entering appropriate data in input fields but entering different passwords in 'Password' and 'Password Confirm' fields.");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -244,7 +243,7 @@ public class RegistrationTestSetup {
 	//TC_OC_REG_007
 	@Test(enabled = true)
 	public void testCase007() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_007-Registering by entering an email id with which an account has already been registered previously");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -272,7 +271,7 @@ public class RegistrationTestSetup {
 	//TC_OC_REG_0010
 	@Test(enabled = true)
 	public void testCase010() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_010-Registering by keeping the First Name field empty");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -300,7 +299,7 @@ public class RegistrationTestSetup {
 	//TC_OC_REG_0011
 	@Test(enabled = true)
 	public void testCase011() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_011-Registering by entering insufficient numbers in the Telephone field");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -328,7 +327,7 @@ public class RegistrationTestSetup {
 	//TC_OC_REG_0012
 	@Test(enabled = true)
 	public void testCase012() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_012-Registering by entering a First Name having more than 32 characters");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -356,7 +355,7 @@ public class RegistrationTestSetup {
 	// should pass
 	@Test(enabled = true)
 	public void testCase013() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_013-Registering by entering a Last Name having more than 32 characters");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -383,7 +382,7 @@ public class RegistrationTestSetup {
 	// should pass
 	@Test(enabled = true)
 	public void testCase014() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_014-Registering by entering more than 32 numbers in the Telephone field");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
@@ -410,7 +409,7 @@ public class RegistrationTestSetup {
 	// should pass
 	@Test(enabled = false)
 	public void testCase015() {
-	 	//test.log(LogStatus.INFO, "TC_OC_REG_001-To verify that new window opens when user clicks the Tweet button");
+	 	test.log(LogStatus.INFO, "TC_OC_REG_015-To verify the that Register page is inaccessible when user is logged in");
 		rg_object = new RegistrationPage(driver);
 		h_object = new Header(driver);
 		lg_object = new LoginPage(driver);

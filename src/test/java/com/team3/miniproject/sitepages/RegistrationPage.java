@@ -95,24 +95,11 @@ public class RegistrationPage {
 	// method to return page title
 	public String getPageTitle() {
 		return driver.getTitle();
-//		try {
-//			String registerPageTitle = driver.getTitle();
-//			Assert.assertEquals(title, registerPageTitle);
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-
 	}
 
 	// method to click login link
 	public void clickLoginLink() {
 		loginLink.click();
-//		try {
-//			WebElement loginLink = driver.findElement(By.linkText("login page"));
-//			loginLink.click();
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
 	}
 
 	// method verify warning visibility

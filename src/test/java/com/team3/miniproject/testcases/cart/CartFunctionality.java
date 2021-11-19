@@ -34,7 +34,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class CartFunctionality {
 	WebDriver driver;
-	String baseUrl = "http://localhost/miniproject";
+	String baseUrl = "http://localhost/opencartsite/";
 	ExtentReports report;
 	static ExtentTest test;
 	
@@ -48,15 +48,15 @@ public class CartFunctionality {
 	
 	// TC_OC_CART_001
   @Test(enabled = true)
-  public void cart_TC001() throws InterruptedException{
+  public void testCase001() throws InterruptedException{
 	  test.log(LogStatus.INFO, "TC_OC_CART_001 - To add a product in the cart and verify its addition in the cart.");
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
 	  objHomePage = new HomePage(driver);
 	  objHeader = new Header(driver);
 	  
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
-	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.addMacbook);
-	  objHomePage.addMacbookToCart();
+	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.homeProducts.get(0));
+	  objHomePage.addProductToCart(0);;
 	  
 	  Thread.sleep(3000);
 	  
@@ -78,16 +78,21 @@ public class CartFunctionality {
 	  }
 	  
 }
-  //TC_OC_CART_002
+//  TC_OC_CART_002
   @Test (enabled = true)
-  public void cart_TC002() throws InterruptedException, AWTException {
+  public void testCase002() throws InterruptedException, AWTException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_002 - Adding a product with customizable features to the cart.");
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
+	  
+	  //object instantiation
 	  objHomePage = new HomePage(driver);
 	  hpc_object = new AppleCinema(driver);
+	  
+	  
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
-	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.addCinema);
-	  objHomePage.addCinemaToCart();
+	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.homeProducts.get(0));
+	  
+	  objHomePage.addProductToCart(2); // index 2 for Apple cinema
 	  
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  
@@ -99,7 +104,13 @@ public class CartFunctionality {
 
 	  hpc_object.enterInTextArea("This is a test order");
 	  
-	  hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt");	  
+	  if(hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
+		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
+	  }
+	  else {
+		  test.log(LogStatus.FAIL, "The driver did not switch to the alert.");
+	  }
+	  
 	  
 	  Thread.sleep(2000);
 	  hpc_object.enterQuantity("2");
@@ -109,13 +120,13 @@ public class CartFunctionality {
 		  test.log(LogStatus.PASS, "The success message for adding Apple Cinema to the cart was displayed.");
 	  }
 	  else {
-		  test.log(LogStatus.INFO, "The success message for adding Apple Cinema to the cart was not displayed.");
+		  test.log(LogStatus.FAIL, "The success message for adding Apple Cinema to the cart was not displayed.");
 	  }
 	  
   }
   //TC_OC_CART_003
   @Test (enabled = true)
-  public void Cart_TC003() throws InterruptedException {
+  public void testCase003() throws InterruptedException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_003 - Adding a product which is not in stock to the cart.");
 	  objHomePage = new HomePage(driver);
 	  objTablets = new Tablets(driver);
@@ -149,11 +160,11 @@ public class CartFunctionality {
 }
   //TC_OC_CART_004
   @Test (enabled = true)
-  public void Cart_TC004() throws InterruptedException {
+  public void testCase004() throws InterruptedException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_004 - Removing a product from the cart.");
 	  objHomePage = new HomePage(driver);
 	  objHeader = new Header(driver);
-	  objHomePage.addMacbookToCart();
+	  objHomePage.addProductToCart(0);
 	  Thread.sleep(5000);
 	  
 	  if(objHomePage.successAlert.isDisplayed()) {
@@ -177,7 +188,7 @@ public class CartFunctionality {
 } 
   //TC_OC_CART_005
 @Test(enabled = true)
-  public void cart_TC005() throws InterruptedException {
+  public void testCase005() throws InterruptedException {
 	test.log(LogStatus.INFO, "TC_OC_CART_005 - Adding a product to the cart with quantity as zero.");
 	 driver.manage().window().maximize();
 	 driver.findElement(By.linkText("Desktops")).click();
@@ -210,14 +221,14 @@ public class CartFunctionality {
   }
 //TC_OC_CART_006
   @Test (enabled = true)
-  public void cart_TC006() throws InterruptedException, AWTException {
+  public void testCase006() throws InterruptedException, AWTException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart with quantity less than the minimum required quantity.");
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
 	  objHomePage = new HomePage(driver);
 	  hpc_object = new AppleCinema(driver);
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
-	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.addCinema);
-	  objHomePage.addCinemaToCart();
+	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.homeProducts.get(2));
+	  objHomePage.addProductToCart(2); // index 2 for Apple Cinema
 	  
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  
@@ -229,7 +240,12 @@ public class CartFunctionality {
 	  
 	  hpc_object.enterInTextArea("This is a test order");
 	  
-	  hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt");	
+	  if(hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
+		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
+	  }
+	  else {
+		  test.log(LogStatus.FAIL, "The driver did not switch to the alert.");
+	  }	
   	  Thread.sleep(2000);
 	  hpc_object.enterQuantity("1");
 	  hpc_object.clickAddToCart(); 
@@ -239,12 +255,12 @@ public class CartFunctionality {
 		  test.log(LogStatus.FAIL, "The warning message about the minimum required quantity is not displayed.");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The warning message about the minimum required quantity is displayed.");
+		  test.log(LogStatus.PASS, "The warning message about the minimum required quantity is displayed.");
 	  }
   }
   //TC_OC_CART_007
    @Test(enabled = true)
-  public void cart_TC007() throws InterruptedException {
+  public void testCase007() throws InterruptedException {
 	   test.log(LogStatus.INFO, "TC_OC_CART_007 - Adding a product to the cart but leaving the quantity field blank.");
 	 driver.manage().window().maximize();
 	 driver.findElement(By.linkText("Phones & PDAs")).click();
@@ -408,7 +424,7 @@ public class CartFunctionality {
 	  WebDriverManager.chromedriver().setup();
 	  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 	  report =new ExtentReports("ExtentReports\\AddToCart\\"+ m.getName() +"_"+ timeStamp + ".html");
-	  test=report.startTest(m.getName());
+	  test = report.startTest(m.getName());
 	  
 	  //driver initialisation
 	  driver = new ChromeDriver();

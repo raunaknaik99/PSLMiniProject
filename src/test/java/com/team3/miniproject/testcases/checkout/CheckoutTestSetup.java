@@ -66,7 +66,7 @@ public class CheckoutTestSetup {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  objHomePage.addIphoneToCart();
+	  objHomePage.addProductToCart(1);
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  //Assert "Your shopping cart is empty" message is displayed
@@ -92,7 +92,7 @@ public class CheckoutTestSetup {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  objHomePage.addIphoneToCart();
+	  objHomePage.addProductToCart(1);
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  checkout.enterNewBillingDetails(2);
@@ -111,7 +111,7 @@ public class CheckoutTestSetup {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  objHomePage.addIphoneToCart();
+	  objHomePage.addProductToCart(1);
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  Thread.sleep(5000); //delete if not necessary
@@ -134,7 +134,7 @@ public class CheckoutTestSetup {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  objHomePage.addIphoneToCart();
+	  objHomePage.addProductToCart(1);
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  //Assert user is redirected to checkout page
@@ -169,15 +169,15 @@ public class CheckoutTestSetup {
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		  //method to navigate to home page
 		  checkout.navigateToHomepage();
-		  objHomePage.addIphoneToCart();
+		  objHomePage.addProductToCart(1);
 		  checkout.checkout();
 		  //get placeholder text and store in variables
-		  String fnamePlaceholder=driver.findElement(By.id("input-payment-firstname")).getAttribute("placeholder");
-		  String lnamePlaceholder=driver.findElement(By.id("input-payment-lastname")).getAttribute("placeholder");
-		  String company=driver.findElement(By.id("input-payment-company")).getAttribute("placeholder");
-		  String address1=driver.findElement(By.id("input-payment-address-1")).getAttribute("placeholder");
-		  String city=driver.findElement(By.id("input-payment-city")).getAttribute("placeholder");
-		  String postCode=driver.findElement(By.id("input-payment-postcode")).getAttribute("placeholder");
+		  String fnamePlaceholder=checkout.getFnameElement().getAttribute("placeholder");//driver.findElement(By.id("input-payment-firstname")).getAttribute("placeholder");
+		  String lnamePlaceholder=checkout.getLnameElement().getAttribute("placeholder");//driver.findElement(By.id("input-payment-lastname")).getAttribute("placeholder");
+		  String company=checkout.getCompanyElement().getAttribute("placeholder");
+		  String address1=checkout.getAddress1().getAttribute("placeholder");
+		  String city=checkout.getCity().getAttribute("placeholder");
+		  String postCode=checkout.getPostCode().getAttribute("placeholder");
 		  //assert if the placeholders are present
 		  if(fnamePlaceholder.equals("")&& lnamePlaceholder.equals("")&&company.equals("")&&address1.equals("")&&city.equals("")&&postCode.equals("")) {
 			  test.log(LogStatus.FAIL, "Test Failed- Placeholders are not present on billing form");
@@ -197,7 +197,7 @@ public class CheckoutTestSetup {
 		  //assert if user is logged in
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		  checkout.navigateToHomepage();
-		  objHomePage.addIphoneToCart();
+		  objHomePage.addProductToCart(1);
 		  checkout.checkout();
 		  checkout.enterNewBillingDetails(3);
 		  Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
@@ -227,7 +227,7 @@ public class CheckoutTestSetup {
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		  //to go to home page
 		  checkout.navigateToHomepage();
-		  objHomePage.addIphoneToCart();
+		  objHomePage.addProductToCart(1);
 		  checkout.checkout();
 
 		  checkout.enterNewBillingDetails(4);

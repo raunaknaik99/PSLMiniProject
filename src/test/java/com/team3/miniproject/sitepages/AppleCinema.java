@@ -91,13 +91,13 @@ public class AppleCinema {
 		js=(JavascriptExecutor)driver;
 	}
 
-	public WebElement scrollAndClick1(String path) {
-		JavascriptExecutor js=(JavascriptExecutor)driver;
-		WebElement we = driver.findElement(By.xpath(path));
-		js.executeScript("arguments[0].scrollIntoView();",we);
-		we.click();
-		return we;
-	}
+//	public WebElement scrollAndClick1(String path) {
+//		//JavascriptExecutor js=(JavascriptExecutor)driver;
+//		WebElement we = driver.findElement(By.xpath(path));
+//		js.executeScript("arguments[0].scrollIntoView();",we);
+//		we.click();
+//		return we;
+//	}
 	public WebElement scrollAndClick2(String id) {
 		JavascriptExecutor js=(JavascriptExecutor)driver;
 		WebElement we = driver.findElement(By.id(id));
@@ -105,49 +105,54 @@ public class AppleCinema {
 		we.click();
 		return we;
 	}
-	
-	public void clickAppleCinemaCart(String path) {
-		scrollAndClick1(path);
+//	
+	//click the apple cinema cart button on home page
+	public void clickAppleCinemaCart() {
+		//scrollAndClick1(path);
+		appleCinemaCart.click();
 	}
 	
-	public void clickRadioButton(String path) {
+	//click the radio btn on apple cinema form page
+	public void clickRadioButton() {
 		//String path_temp="";
-		scrollAndClick1(path);
+		//scrollAndClick1(path);
+		radioBtn.click();
 	}
 	
-	public void clickCheckbox(String path) {
+	public void clickCheckbox() {
 		//String path="";
-		scrollAndClick1(path);
+		//scrollAndClick1(path);
+		checkBx.click();
 	}
 	
 	//method to enter text in textbox on apple cinema form page
 	public void enterInTextbox(String text) {
-
-		WebElement textbox= scrollAndClick2("input-option208");
-		textbox.clear();
-		textbox.sendKeys(text);
+		textBx.click();
+		//WebElement textbox= scrollAndClick2("input-option208");
+		textBx.clear();
+		textBx.sendKeys(text);
 
 	}
 	
 	//method to select from dropdown on apple cinema form page
 	public void clickDropdown(String value) {
 
-		WebElement dropdown =scrollAndClick2("input-option217");
-		Select item = new Select(dropdown);
+		//WebElement dropdown =scrollAndClick2("input-option217");
+		//dropDown.click();
+		Select item = new Select(dropDown);
 		item.selectByValue(value);
 		dropDown.click();
 	}
 	
 	//method to enter text in text area field on apple cinema form page
 	public void enterInTextArea(String text) {
-
-		WebElement textArea = scrollAndClick2("input-option209");
+		//WebElement textArea = scrollAndClick2("input-option209");
 		textArea.clear();
 		textArea.sendKeys(text);
 	}
 	
 	//File upload part
-	public void selectFileForUpload(String path) throws InterruptedException, AWTException {
+	public boolean selectFileForUpload(String path) throws InterruptedException, AWTException {
 		StringSelection stringSelection = new StringSelection(path); // StringSelction class is used for copy and paste operations
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
 		scrollAndClick2("button-upload222");
@@ -163,14 +168,21 @@ public class AppleCinema {
 	    
 	    Thread.sleep(2000);
 	    Alert alert = driver.switchTo().alert();
-	    alert.accept();
+	    if(alert.getText() == "Your file was successfully uploaded!") {
+	    	alert.accept();
+	    	return true;
+	    }
+	    else {
+	    	return false;
+	    }
+	    
 	    
 	}
 	
 	//method to enter quantity in apply cinema form page
 	public void enterQuantity(String num) {
 
-		WebElement quantity = scrollAndClick2("input-quantity");
+		//WebElement quantity = scrollAndClick2("input-quantity");
 		quantity.clear();
 		quantity.sendKeys(num);
 	}
