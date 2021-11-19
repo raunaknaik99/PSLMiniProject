@@ -221,18 +221,23 @@ public class CheckoutTestSetup {
 			objHomePage.addProductToCart(1);
 			checkout.checkout();
 			checkout.enterNewBillingDetails(3);
-			Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
-			Assert.assertTrue(driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed());
-			String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
-			//check for the test cases
-			if(step3Heading.equals("Step 3: Delivery Details")) {
+			
+			//Assert.assertEquals("Step 3: Delivery Details", checkout.getStep3Title().getText());
+			
+			//Boolean warningPresence =checkout.getCityWarning().isDisplayed();
+			//Assert.assertTrue(driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed());
+			//Assert.assertTrue(checkout.getCityWarning().isDisplayed());
+
+			if(checkout.getStep3Title().equals("Step 3: Delivery Details")) {
 				test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
 			}
 			else {
 				test.log(LogStatus.FAIL, "Test Failed-Can proceed to next form");
 				s.captureScreenshot("\\Checkout\\" + "testCase006.2_"+ timeStamp +".PNG");
 			}
-			Boolean warningPresence=driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed();
+			
+			Boolean warningPresence =checkout.getCityWarning().isDisplayed();
+			//Boolean warningPresence=driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed();
 			if(warningPresence) {
 				test.log(LogStatus.PASS, "Test Passed-Warning is Present");
 			}else {
