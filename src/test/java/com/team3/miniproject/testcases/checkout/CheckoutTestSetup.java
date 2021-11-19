@@ -173,12 +173,12 @@ public class CheckoutTestSetup {
 		  objHomePage.addProductToCart(1);
 		  checkout.checkout();
 		  //get placeholder text and store in variables
-		  String fnamePlaceholder=driver.findElement(By.id("input-payment-firstname")).getAttribute("placeholder");
-		  String lnamePlaceholder=driver.findElement(By.id("input-payment-lastname")).getAttribute("placeholder");
-		  String company=driver.findElement(By.id("input-payment-company")).getAttribute("placeholder");
-		  String address1=driver.findElement(By.id("input-payment-address-1")).getAttribute("placeholder");
-		  String city=driver.findElement(By.id("input-payment-city")).getAttribute("placeholder");
-		  String postCode=driver.findElement(By.id("input-payment-postcode")).getAttribute("placeholder");
+		  String fnamePlaceholder=checkout.getFnameElement().getAttribute("placeholder");//driver.findElement(By.id("input-payment-firstname")).getAttribute("placeholder");
+		  String lnamePlaceholder=checkout.getLnameElement().getAttribute("placeholder");//driver.findElement(By.id("input-payment-lastname")).getAttribute("placeholder");
+		  String company=checkout.getCompanyElement().getAttribute("placeholder");
+		  String address1=checkout.getAddress1().getAttribute("placeholder");
+		  String city=checkout.getCity().getAttribute("placeholder");
+		  String postCode=checkout.getPostCode().getAttribute("placeholder");
 		  //assert if the placeholders are present
 		  if(fnamePlaceholder.equals("")&& lnamePlaceholder.equals("")&&company.equals("")&&address1.equals("")&&city.equals("")&&postCode.equals("")) {
 			  test.log(LogStatus.FAIL, "Test Failed- Placeholders are not present on billing form");

@@ -31,62 +31,94 @@ public class CheckoutPage {
 
 	@FindBy(linkText="Checkout")
 	WebElement checkoutIcon;
+	
 	@FindBy(css="[name='payment_address'][value='existing']")
 	WebElement existingPaymentAddress;
+	
 	@FindBy(id="button-payment-address")
 	WebElement paymentAddressContinueButton;
+	
 	@FindBy(css="[name='payment_address'][value='new']")
 	WebElement newPaymentAddress;
+	
 	@FindBy(css="[name='shipping_address'][value='existing']")
 	WebElement existingShippingAddress;
+	
 	@FindBy(id="button-shipping-address")
 	WebElement shippingAddressContinueButton;
+	
 	@FindBy(css="[name='shipping_method'][value='flat.flat']")
 	WebElement shippingMethodFlat;
+	
 	@FindBy(css="[name='payment_method'][value='cod']")
 	WebElement paymentMethod;
+	
 	@FindBy(id="button-shipping-method")
 	WebElement shippingMethodContinueButton;
+	
 	@FindBy(linkText = "Terms & Conditions")
 	WebElement termsAndConditions;
+	
 	@FindBy(name="agree")
 	WebElement agree;
+	
 	@FindBy(id="button-payment-method")
 	WebElement paymentMethodContinueButton;
+	
 	@FindBy(id="cart-total")
 	WebElement cartTotal;
+	
 	@FindBy(css="[name='account'][value='register']")
 	WebElement registerAccount;
+	
 	@FindBy(id="button-confirm")
 	WebElement confirmButton;
+	
 	@FindBy(id="button-account")
 	WebElement accountContinueButton;
+	
 	@FindBy(id = "input-payment-firstname")
 	WebElement firstNameField;
+	
 	@FindBy(id = "input-payment-lastname")
 	WebElement lastNameField;
+	
 	@FindBy(id = "input-payment-email")
 	WebElement emailField;
+	
+	@FindBy(id="input-payment-company")
+	WebElement company;
+	
 	@FindBy(id = "input-payment-telephone")
 	WebElement telephoneField;
+	
 	@FindBy(id = "input-payment-password")
 	WebElement passwordField;
+	
 	@FindBy(id = "input-payment-confirm")
 	WebElement confirmPasswordField;
+	
 	@FindBy(id = "input-payment-address-1")
 	WebElement address1Field;
+	
 	@FindBy(id = "input-payment-city")
 	WebElement cityField;
+	
 	@FindBy(id = "input-payment-postcode")
 	WebElement postcodeField;
+	
 	@FindBy(id = "input-payment-country")
 	WebElement countryField;
+	
 	@FindBy(id = "input-payment-zone")
 	WebElement stateField;
+	
 	@FindBy(id="button-payment-address")
 	WebElement continueButton;
+	
 	@FindBy(css="#top-links > ul > li.dropdown > a > i")
 	WebElement myAccountIcon;
+	
 	@FindBy(linkText = "My Account")
 	WebElement myAccountLinkText;
 
@@ -266,7 +298,31 @@ public class CheckoutPage {
 	public void closeBrowser() {
 		driver.quit();
 	}
+	
+	public WebElement getFnameElement() {
+		return firstNameField;
+	}
+	
+	public WebElement getLnameElement() {
+		return lastNameField;
+	}
+	
+	public WebElement getCompanyElement() {
+		return company;
+	}
 
+	public WebElement getAddress1() {
+		return address1Field;
+	}
+	
+	public WebElement getCity() {
+		return cityField;
+	}
+	
+	public WebElement getPostCode() {
+		return postcodeField;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
