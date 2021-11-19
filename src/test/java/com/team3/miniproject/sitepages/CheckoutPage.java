@@ -421,9 +421,9 @@ public class CheckoutPage {
 	}
 	
 	//method to confirm the order
-	public void confirmOrder() {
-		confirmButton.click();
-	}
+//	public void confirmOrder() {
+//		confirmButton.click();
+//	}
 	
 	//method to accept alert while confirming the order
 	public void acceptAlert() throws InterruptedException {
@@ -449,4 +449,3 @@ public class CheckoutPage {
 	}	
 }
 
-}

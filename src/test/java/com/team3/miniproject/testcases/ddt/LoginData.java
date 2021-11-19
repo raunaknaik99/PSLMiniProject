@@ -8,38 +8,38 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class LoginData {
-	
-	public ArrayList<ArrayList<String>> loginData() throws IOException {
-		ArrayList<ArrayList<String>> logindata = new ArrayList<ArrayList<String>>(9);
 
-		FileInputStream fis = new FileInputStream("src\\test\\resources\\loginDDT.xlsx");
+	public ArrayList<ArrayList<String>> loginData() throws IOException {
+		ArrayList<ArrayList<String>> userdata = new ArrayList<ArrayList<String>>(10);
+
+		FileInputStream fis = new FileInputStream("src\\test\\resources\\RegistrationData.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-		XSSFSheet sheet = workbook.getSheetAt(0);
+		XSSFSheet sheet = workbook.getSheet("Login");
 		try {
-			for (int i = 0; i < 9; i++) {
-				logindata.add(new ArrayList());
-				ArrayList<String> ilogindata = new ArrayList<String>(6);
-				for (int j = 0; j < 3; j++) {
+			for (int i = 0; i < 10; i++) {
+				userdata.add(new ArrayList());
+				ArrayList<String> iuserdata = new ArrayList<String>(2);
+				for (int j = 0; j < 2; j++) {
 					if (sheet.getRow(i).getCell(j) == null) {
-						ilogindata.add("");
+						iuserdata.add("");
 					} else {
-						ilogindata.add(sheet.getRow(i).getCell(j).toString());
+						iuserdata.add(sheet.getRow(i).getCell(j).toString());
 					}
 				}
-				logindata.get(i).addAll(ilogindata);
+				userdata.get(i).addAll(iuserdata);
 			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return logindata;
+		return userdata;
 	}
 
-//	public static void main(String[] args) throws IOException {
-//		// TODO Auto-generated method stub
-//		LoginData dt=new LoginData();
-//		ArrayList<ArrayList<String>> myData=dt.loginData();
-//		System.out.println(myData.get(6).get(0));
-//
-//	}
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		LoginData dt=new LoginData();
+		ArrayList<ArrayList<String>> myData=dt.loginData();
+		System.out.println(myData);
+
+	}
 
 }
