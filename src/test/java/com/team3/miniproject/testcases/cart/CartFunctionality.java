@@ -35,7 +35,7 @@ import screenshot.*;
 
 public class CartFunctionality {
 	WebDriver driver;
-	String baseUrl = "http://localhost";
+	String baseUrl = "http://localhost/miniproject";
 	ExtentReports report;
 	static ExtentTest test;
 	
@@ -51,7 +51,7 @@ public class CartFunctionality {
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 	
 	// TC_OC_CART_001
-  @Test(enabled = true)
+  @Test(enabled = false)
   public void testCase001() throws InterruptedException, IOException{
 	  objScreenshot = new ScreenShotCapture(driver);
 	  test.log(LogStatus.INFO, "TC_OC_CART_001 - To add a product in the cart and verify its addition in the cart.");
@@ -86,7 +86,7 @@ public class CartFunctionality {
 	  
 }
 //  TC_OC_CART_002
-  @Test (enabled = true)
+  @Test (enabled = false)
   public void testCase002() throws InterruptedException, AWTException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart with quantity less than the minimum required quantity.");
 	  objScreenshot = new ScreenShotCapture(driver);
@@ -129,7 +129,7 @@ public class CartFunctionality {
 	  
   }
   //TC_OC_CART_003
-  @Test (enabled = true)
+  @Test (enabled = false)
   public void testCase003() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_003 - Adding a product which is not in stock to the cart.");
 	  objScreenshot = new ScreenShotCapture(driver);
@@ -166,7 +166,7 @@ public class CartFunctionality {
 	  
 }
   //TC_OC_CART_004
-  @Test (enabled = true)
+  @Test (enabled = false)
   public void testCase004() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_004 - Removing a product from the cart.");
 	  objScreenshot = new ScreenShotCapture(driver);
@@ -196,7 +196,7 @@ public class CartFunctionality {
 		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase004_"+ timeStamp +".PNG");
 	  }
 } 
-  //TC_OC_CART_005
+  //TC_OC_CART_005 - Adding a product to the cart with quantity as zero.
 @Test(enabled = true)
   public void testCase005() throws InterruptedException, IOException {
 	test.log(LogStatus.INFO, "TC_OC_CART_005 - Adding a product to the cart with quantity as zero.");
@@ -222,7 +222,7 @@ public class CartFunctionality {
 	 driver.findElement(By.id("button-cart")).click();
 	 Thread.sleep(2000);
 	 
-	 WebElement successAlert = driver.findElement(By.xpath("//*[@id=\"product-product\"]/div[1]"));
+	 WebElement successAlert = driver.findElement(By.cssSelector("#product-product > div.alert.alert-success.alert-dismissible"));
 	 if(successAlert.isDisplayed()) {
 		 test.log(LogStatus.FAIL, "The warning about the quantity is not displayed.");
 		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase005_"+ timeStamp +".PNG");
@@ -232,7 +232,7 @@ public class CartFunctionality {
 	 }
   }
 //TC_OC_CART_006
-  @Test (enabled = true)
+  @Test (enabled = false)
   public void testCase006() throws InterruptedException, AWTException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart with quantity less than the minimum required quantity.");
 	  objScreenshot = new ScreenShotCapture(driver);
@@ -274,7 +274,7 @@ public class CartFunctionality {
 	  }
   }
   //TC_OC_CART_007
-   @Test(enabled = true)
+   @Test(enabled = false)
   public void testCase007() throws InterruptedException, IOException {
 	   test.log(LogStatus.INFO, "TC_OC_CART_007 - Adding a product to the cart but leaving the quantity field blank.");
 	   objScreenshot = new ScreenShotCapture(driver);
@@ -306,7 +306,7 @@ public class CartFunctionality {
 	 }
   }
    //TC_OC_CART_008
-   @Test(enabled = true)
+   @Test(enabled = false)
    public void testCase008() throws IOException {
 	   try {
  	  test.log(LogStatus.INFO, "TC_OC_CART_008-Add product with customizable features to cart but leave some of the required fields in the features form blank ");
@@ -336,7 +336,7 @@ public class CartFunctionality {
    
    
    //TC_OC_CART_010
-   @Test(enabled=true)
+   @Test(enabled=false)
    public void testCase010() throws InterruptedException, IOException {
 	   try {
  	  test.log(LogStatus.INFO, "TC_OC_CART_010-To verify that new window opens when user clicks the Tweet button");

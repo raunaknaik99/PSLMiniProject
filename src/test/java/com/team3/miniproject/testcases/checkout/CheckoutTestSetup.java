@@ -194,7 +194,7 @@ public class CheckoutTestSetup {
 	
 	
 	//TC_OC_CF_005
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void testCase005() {
 		try {
 		  login.login("tester234@gmail.com", "tester234");
@@ -226,7 +226,7 @@ public class CheckoutTestSetup {
 	
 	
 	//TC_OC_CF_006
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void testCase006() {
 		  test.log(LogStatus.INFO, "TC_OC_CF_006-To test if city field accepts less than 2 characters and we can proceed to step 3");
 		  login.login("demo4@example.com", "test1234");
@@ -261,7 +261,7 @@ public class CheckoutTestSetup {
 	
 	
 	//TC_OC_CF_007
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void testCase007() throws InterruptedException {
 		  test.log(LogStatus.INFO, "TC_OC_CF_007-to test if lastname can be more than 32 characters");
 		  login.login("demo4@example.com", "test1234");

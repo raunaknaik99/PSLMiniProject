@@ -157,7 +157,7 @@ public class CheckoutPage {
 		newPaymentAddress.click();
 		reader.i=val;
 		try {
-			reader.readExcel("C:\\Users\\diffa_pinto\\Desktop","loginDDT.xlsx","Checkout");
+			reader.readExcel("C:\\Users\\diffa_pinto\\eclipse-workspace-new\\PSLMiniProject\\src\\test\\resources","loginDDT.xlsx","Checkout");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
