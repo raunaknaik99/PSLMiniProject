@@ -7,15 +7,18 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.sitepages.CheckoutPage;
 import com.team3.miniproject.sitepages.LoginPage;
+import com.team3.miniproject.testcases.ddt.LoginData;
 import com.team3.miniproject.testcases.ddt.ReadInputs;
 import com.team3.miniproject.sitepages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import screenshot.ScreenShotCapture;
 
 import org.testng.annotations.BeforeMethod;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -42,112 +45,114 @@ public class CheckoutTestSetup {
 
 	ExtentReports report;
 	ExtentTest test;
-	
+	ScreenShotCapture s;
+	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+	LoginData rd;
 
 	//TC_OC_CE_001
-  @Test(enabled=false)
-  public void testCase1() throws InterruptedException {
-	  
-	  Thread.sleep(5000);
-	  login.login("tester1@gmail.com", "tester123");
-	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true,"User is logged in!");
-	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),true,"Cart is Empty!");
-	  checkout.checkout();
-	  //Assert user is redirected to shopping cart page
-	  Assert.assertEquals(driver.getTitle(), "Shopping Cart");
-	  //Assert "Your shopping cart is empty" message is displayed 
-	  Assert.assertEquals(driver.findElement(By.cssSelector("#content > p")).getText(),"Your shopping cart is empty!");
-	  login.logout();
-  }
-//TC_OC_CF_001
-  @Test(enabled=false)
-  public void testCase01() throws InterruptedException {
-	  
-	  login.login("tester234@gmail.com", "tester234");
-	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-	  checkout.navigateToHomepage();
-	  objHomePage.addProductToCart(1);
-	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
-	  checkout.checkout();
-	  //Assert "Your shopping cart is empty" message is displayed
-	  checkout.enterNewBillingDetails(1);
-	  //Assert Warning is displayed
-	  WebElement we1= driver.findElement(By.className("text-danger"));
-	  Assert.assertEquals(we1.getText(), "Last Name must be between 1 and 32 characters!","Warning Appears!");
-	    JavascriptExecutor js = (JavascriptExecutor)driver;
-      js.executeScript("arguments[0].scrollIntoView(true)", we1);
-      Thread.sleep(3000);
-    //Assert following links are not clickable
-      WebElement we2= driver.findElement(By.xpath("//*[@id='accordion']/div[6]/div[1]"));
-      js.executeScript("arguments[0].scrollIntoView(true)", we2);
-	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[3]/div[1]/h4/a")),false);
-	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[4]/div[1]/h4/a")),false);
-	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[5]/div[1]/h4/a")),false);
-	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[6]/div[1]/h4/a")),false);
-	  login.logout();
-  }
-//TC_OC_CF_002
-   @Test(enabled=true)
-  public void testCase002() throws InterruptedException {
-	  login.login("tester234@gmail.com", "tester234");
-	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-	  checkout.navigateToHomepage();
-	  objHomePage.addProductToCart(1);
-	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
-	  checkout.checkout();
-	  checkout.enterNewBillingDetails(2);
-	  //Assert Warning is displayed
-	  WebElement we = driver.findElement(By.className("text-danger"));
-	  Assert.assertEquals(we.getText(), "Please enter a valid Postal Code!","Warning Appears!");
-	  JavascriptExecutor js = (JavascriptExecutor)driver;
-      js.executeScript("arguments[0].scrollIntoView(true)", we);
-      Thread.sleep(5000);
-	  //login.logout();
-	 
-  }
- //TC_OC_CF_003
 	@Test(enabled=false)
-    public void testCase003() throws InterruptedException {
-	  login.login("tester234@gmail.com", "tester234");
-	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-	  checkout.navigateToHomepage();
-	  objHomePage.addProductToCart(1);
-	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
-	  checkout.checkout();
-	  Thread.sleep(5000); //delete if not necessary
-	  //Assert user is redirected to checkout page
-	  Assert.assertEquals(driver.getTitle(), "Checkout");
-	  checkout.enterNewBillingDetails(2);
-	  checkout.enterExistingDeliveryDetailsAndContinue();
-	  checkout.enterDeliveryMethodAndContinue();
-	  checkout.enterPaymentMethod(); //Did not agree to Terms and Conditions
-	  driver.findElement(By.id("button-payment-method")).click();
-	  //Assert Warning is displayed
-	  Assert.assertEquals(driver.findElement(By.xpath("//*[@class='alert alert-danger alert-dismissible']")).getText().contains("Warning: You must agree to the Terms & Conditions!"),true);
-	 
-	  //login.logout();
-  }
+	public void testCase1() throws InterruptedException {
+
+		Thread.sleep(5000);
+		login.login("tester1@gmail.com", "tester123");
+		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true,"User is logged in!");
+		Assert.assertEquals(checkout.checkIfCartIsEmpty(),true,"Cart is Empty!");
+		checkout.checkout();
+		//Assert user is redirected to shopping cart page
+		Assert.assertEquals(driver.getTitle(), "Shopping Cart");
+		//Assert "Your shopping cart is empty" message is displayed 
+		Assert.assertEquals(driver.findElement(By.cssSelector("#content > p")).getText(),"Your shopping cart is empty!");
+		login.logout();
+	}
+	//TC_OC_CF_001
+	@Test(enabled=false)
+	public void testCase01() throws InterruptedException {
+
+		login.login("tester234@gmail.com", "tester234");
+		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+		checkout.navigateToHomepage();
+		objHomePage.addProductToCart(1);
+		Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
+		checkout.checkout();
+		//Assert "Your shopping cart is empty" message is displayed
+		checkout.enterNewBillingDetails(1);
+		//Assert Warning is displayed
+		WebElement we1= driver.findElement(By.className("text-danger"));
+		Assert.assertEquals(we1.getText(), "Last Name must be between 1 and 32 characters!","Warning Appears!");
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollIntoView(true)", we1);
+		Thread.sleep(3000);
+		//Assert following links are not clickable
+		WebElement we2= driver.findElement(By.xpath("//*[@id='accordion']/div[6]/div[1]"));
+		js.executeScript("arguments[0].scrollIntoView(true)", we2);
+		Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[3]/div[1]/h4/a")),false);
+		Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[4]/div[1]/h4/a")),false);
+		Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[5]/div[1]/h4/a")),false);
+		Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[6]/div[1]/h4/a")),false);
+		login.logout();
+	}
+	//TC_OC_CF_002
+	@Test(enabled=true)
+	public void testCase002() throws InterruptedException {
+		login.login("tester234@gmail.com", "tester234");
+		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+		checkout.navigateToHomepage();
+		objHomePage.addProductToCart(1);
+		Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
+		checkout.checkout();
+		checkout.enterNewBillingDetails(2);
+		//Assert Warning is displayed
+		WebElement we = driver.findElement(By.className("text-danger"));
+		Assert.assertEquals(we.getText(), "Please enter a valid Postal Code!","Warning Appears!");
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("arguments[0].scrollIntoView(true)", we);
+		Thread.sleep(5000);
+		//login.logout();
+
+	}
+	//TC_OC_CF_003
+	@Test(enabled=false)
+	public void testCase003() throws InterruptedException {
+		login.login("tester234@gmail.com", "tester234");
+		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+		checkout.navigateToHomepage();
+		objHomePage.addProductToCart(1);
+		Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
+		checkout.checkout();
+		Thread.sleep(5000); //delete if not necessary
+		//Assert user is redirected to checkout page
+		Assert.assertEquals(driver.getTitle(), "Checkout");
+		checkout.enterNewBillingDetails(2);
+		checkout.enterExistingDeliveryDetailsAndContinue();
+		checkout.enterDeliveryMethodAndContinue();
+		checkout.enterPaymentMethod(); //Did not agree to Terms and Conditions
+		driver.findElement(By.id("button-payment-method")).click();
+		//Assert Warning is displayed
+		Assert.assertEquals(driver.findElement(By.xpath("//*[@class='alert alert-danger alert-dismissible']")).getText().contains("Warning: You must agree to the Terms & Conditions!"),true);
+
+		//login.logout();
+	}
 	//TC_OC_CF_004
 	@Test(enabled=false)
-  public void testCase004() throws InterruptedException {
-		
-	  login.login("tester234@gmail.com", "tester234");
-	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-	  checkout.navigateToHomepage();
-	  objHomePage.addProductToCart(1);
-	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
-	  checkout.checkout();
-	  //Assert user is redirected to checkout page
-	  Thread.sleep(5000);
-	  Assert.assertEquals(driver.getTitle(),"Checkout");
-	  checkout.enterNewBillingDetails(2);
-	  checkout.enterExistingDeliveryDetailsAndContinue();
-	  checkout.enterDeliveryMethodAndContinue();
-	  checkout.enterPaymentMethod(); //Did not agree to Terms and Conditions
-	  checkout.agreeToTermsAndConditionsAndContinue();
-	  checkout.confirmOrder();
-	  Thread.sleep(10000);
-	  Alert alert1 = driver.switchTo().alert();
+	public void testCase004() throws InterruptedException {
+
+		login.login("tester234@gmail.com", "tester234");
+		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+		checkout.navigateToHomepage();
+		objHomePage.addProductToCart(1);
+		Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
+		checkout.checkout();
+		//Assert user is redirected to checkout page
+		Thread.sleep(5000);
+		Assert.assertEquals(driver.getTitle(),"Checkout");
+		checkout.enterNewBillingDetails(2);
+		checkout.enterExistingDeliveryDetailsAndContinue();
+		checkout.enterDeliveryMethodAndContinue();
+		checkout.enterPaymentMethod(); //Did not agree to Terms and Conditions
+		checkout.agreeToTermsAndConditionsAndContinue();
+		checkout.confirmOrder();
+		Thread.sleep(10000);
+		Alert alert1 = driver.switchTo().alert();
 		System.out.println(alert1.getText());
 		Thread.sleep(2000);
 		alert1.accept();
@@ -155,128 +160,159 @@ public class CheckoutTestSetup {
 		System.out.println("Alert Accepted");
 		checkout.confirmOrder();
 		Thread.sleep(5000);
-	  Assert.assertEquals(driver.getTitle(), "Your order has been placed!");
-	 // login.logout();
-  }
-	
-	
+		Assert.assertEquals(driver.getTitle(), "Your order has been placed!");
+		// login.logout();
+	}
+
+
 	//TC_OC_CF_005
 	@Test(enabled=false)
 	public void testCase005() {
+		s=new ScreenShotCapture(driver);
+		test.log(LogStatus.INFO, "TC_OC_CF_005-to test if the placeholders are present on all the input fields under billing details");
+
 		try {
-		  login.login("tester234@gmail.com", "tester234");
-		  test.log(LogStatus.INFO, "TC_OC_CF_005-to test if the placeholders are present on all the input fields under billing details");
-		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-		  //method to navigate to home page
-		  checkout.navigateToHomepage();
-		  objHomePage.addProductToCart(1);
-		  checkout.checkout();
-		  //get placeholder text and store in variables
-		  String fnamePlaceholder=checkout.getFnameElement().getAttribute("placeholder");
-		  String lnamePlaceholder=checkout.getLnameElement().getAttribute("placeholder");
-		  String company=checkout.getCompanyElement().getAttribute("placeholder");
-		  String address1=checkout.getAddress1().getAttribute("placeholder");
-		  String city=checkout.getCity().getAttribute("placeholder");
-		  String postCode=checkout.getPostCode().getAttribute("placeholder");
-		  //assert if the placeholders are present
-		  if(fnamePlaceholder.equals("")&& lnamePlaceholder.equals("")&&company.equals("")&&address1.equals("")&&city.equals("")&&postCode.equals("")) {
-			  test.log(LogStatus.FAIL, "Test Failed- Placeholders are not present on billing form");
-		  }
-		  else {
-			  test.log(LogStatus.PASS, "Test Passed- Placeholders are present on billing form");
-		  }
+			ArrayList<ArrayList<String>> myData = rd.loginData();
+			login.login(myData.get(6).get(0), myData.get(6).get(1));
+			Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+			//method to navigate to home page
+			checkout.navigateToHomepage();
+			objHomePage.addProductToCart(1);
+			checkout.checkout();
+			//get placeholder text and store in variables
+			String fnamePlaceholder=checkout.getFnameElement().getAttribute("placeholder");
+			String lnamePlaceholder=checkout.getLnameElement().getAttribute("placeholder");
+			String company=checkout.getCompanyElement().getAttribute("placeholder");
+			String address1=checkout.getAddress1().getAttribute("placeholder");
+			String city=checkout.getCity().getAttribute("placeholder");
+			String postCode=checkout.getPostCode().getAttribute("placeholder");
+			//assert if the placeholders are present
+			if(fnamePlaceholder.equals("")&& lnamePlaceholder.equals("")&&company.equals("")&&address1.equals("")&&city.equals("")&&postCode.equals("")) {
+				test.log(LogStatus.FAIL, "Test Failed- Placeholders are not present on billing form");
+			}
+			else {
+				test.log(LogStatus.PASS, "Test Passed- Placeholders are present on billing form");
+				s.captureScreenshot("\\Checkout\\" + "testCase005_"+ timeStamp +".PNG");
+			}
 		}catch(Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
-		  
+
 	}
-	
-	
+
+
 	//TC_OC_CF_006
 	@Test(enabled=false)
-	public void testCase006() {
-		  test.log(LogStatus.INFO, "TC_OC_CF_006-To test if city field accepts less than 2 characters and we can proceed to step 3");
-		  login.login("demo4@example.com", "test1234");
-		  //assert if user is logged in
-		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-		  checkout.navigateToHomepage();
-		  objHomePage.addProductToCart(1);
-		  checkout.checkout();
-		  checkout.enterNewBillingDetails(3);
-		  Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
-		  Assert.assertTrue(driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed());
-		  String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
-		  //check for the test cases
-		  if(step3Heading.equals("Step 3: Delivery Details")) {
-			  test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
-		  }
-		  else {
-			  test.log(LogStatus.FAIL, "Test Failed-Can proceed to next form");
-		  }
-		  Boolean warningPresence=driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed();
-		  if(warningPresence) {
-			  test.log(LogStatus.PASS, "Test Passed-Warning is Present");
-		  }else {
-			  test.log(LogStatus.FAIL, "Test Failed-Warning is not present");
-		  }
+	public void testCase006() throws IOException {
+		s=new ScreenShotCapture(driver);
+		test.log(LogStatus.INFO, "TC_OC_CF_006-To test if city field accepts less than 2 characters and we can proceed to step 3");
+
+		try {
+			ArrayList<ArrayList<String>> myData = rd.loginData();
+			login.login(myData.get(7).get(0), myData.get(7).get(1));
+			if(checkout.checkIfUserLoggedIn()) {
+				test.log(LogStatus.PASS,"Test Passed- user is logged in");
+			}
+			else {
+				test.log(LogStatus.FAIL, "Test failed- User Logged");
+				s.captureScreenshot("\\Checkout\\" + "testCase006.1_"+ timeStamp +".PNG");
+			}
+			checkout.navigateToHomepage();
+			objHomePage.addProductToCart(1);
+			checkout.checkout();
+			checkout.enterNewBillingDetails(3);
+			Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
+			Assert.assertTrue(driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed());
+			String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
+			//check for the test cases
+			if(step3Heading.equals("Step 3: Delivery Details")) {
+				test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
+			}
+			else {
+				test.log(LogStatus.FAIL, "Test Failed-Can proceed to next form");
+				s.captureScreenshot("\\Checkout\\" + "testCase006.2_"+ timeStamp +".PNG");
+			}
+			Boolean warningPresence=driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed();
+			if(warningPresence) {
+				test.log(LogStatus.PASS, "Test Passed-Warning is Present");
+			}else {
+				test.log(LogStatus.FAIL, "Test Failed-Warning is not present");
+				s.captureScreenshot("\\Checkout\\" + "testCase006.3_"+ timeStamp +".PNG");
+			}
+		}catch(Exception e) {
+			test.log(LogStatus.INFO,e);
+		}
 	}
-	
-	
+
+
 	//TC_OC_CF_007
 	@Test
-	public void testCase007() {
-		  test.log(LogStatus.INFO, "TC_OC_CF_007-to test if lastname can be more than 32 characters");
-		  login.login("demo4@example.com", "test1234");
-		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-		  //to go to home page
-		  checkout.navigateToHomepage();
-		  objHomePage.addProductToCart(1);
-		  checkout.checkout();
+	public void testCase007() throws IOException {
+		s=new ScreenShotCapture(driver);
+		test.log(LogStatus.INFO, "TC_OC_CF_007-to test if lastname can be more than 32 characters");
+		try {
+			ArrayList<ArrayList<String>> myData = rd.loginData();
+			login.login(myData.get(8).get(0), myData.get(8).get(1));
+			//to go to home page
+			if(checkout.checkIfUserLoggedIn()) {
+				test.log(LogStatus.PASS,"Test Passed- user is logged in");
+			}
+			else {
+				test.log(LogStatus.FAIL, "Test failed- User Logged");
+				s.captureScreenshot("\\Checkout\\" + "testCase007.1_"+ timeStamp +".PNG");
+			}
+			checkout.navigateToHomepage();
+			objHomePage.addProductToCart(1);
+			checkout.checkout();
 
-		  checkout.enterNewBillingDetails(4);
-		  Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
-		  Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed());
-	
-		  //check for test cases
-		  String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
-		  if(step3Heading.equals("Step 3: Delivery Details")) {
-			  test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
-		  }
-		  else {
-			  test.log(LogStatus.FAIL, "Test Failed-Can proceed to next form");
-		  }
-		  Boolean warningPresence=driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed();
-		  if(warningPresence) {
-			  test.log(LogStatus.PASS, "Test Passed-Warning is Present");
-		  }else {
-			  test.log(LogStatus.FAIL, "Test Failed-Warning is not present");
-		  }
-    }
+			checkout.enterNewBillingDetails(4);
+			Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
+			Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed());
 
-	
-	
-  @BeforeMethod
-  public void beforeMethod(Method m) {
-	  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
-	  report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+"_"+timeStamp+".html");
-	  test=report.startTest(m.getName());
-	  WebDriverManager.chromedriver().setup();
-	  driver = new ChromeDriver();
-	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	  login=new LoginPage(driver);
-	  checkout=new CheckoutPage(driver);
-	  login.navigateToLogin();	
-	  objHomePage=new HomePage(driver);
-	  
-  }
+			//check for test cases
+			String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
+			if(step3Heading.equals("Step 3: Delivery Details")) {
+				test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
+			}
+			else {
+				test.log(LogStatus.FAIL, "Test Failed-Can proceed to next form");
+				s.captureScreenshot("\\Checkout\\" + "testCase007.2_"+ timeStamp +".PNG");
+			}
+			Boolean warningPresence=driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed();
+			if(warningPresence) {
+				test.log(LogStatus.PASS, "Test Passed-Warning is Present");
+			}else {
+				test.log(LogStatus.FAIL, "Test Failed-Warning is not present");
+				s.captureScreenshot("\\Checkout\\" + "testCase007.3_"+ timeStamp +".PNG");
+			}
+		}catch(Exception e) {
+			test.log(LogStatus.INFO, e);
+		}
+	}
 
-  @AfterMethod
-  public void afterMethod(Method m) throws InterruptedException {
-	  report.endTest(test);
-	  report.flush();
-	  Thread.sleep(5000);
-	  checkout.closeBrowser();
-  }
+
+
+	@BeforeMethod
+	public void beforeMethod(Method m) {
+		report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+"_"+timeStamp+".html");
+		test=report.startTest(m.getName());
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		login=new LoginPage(driver);
+		checkout=new CheckoutPage(driver);
+		login.navigateToLogin();	
+		objHomePage=new HomePage(driver);
+
+	}
+
+	@AfterMethod
+	public void afterMethod(Method m) throws InterruptedException {
+		report.endTest(test);
+		report.flush();
+		Thread.sleep(5000);
+		checkout.closeBrowser();
+	}
 
 }
 
