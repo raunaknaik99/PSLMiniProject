@@ -25,7 +25,7 @@ package com.team3.miniproject.testcases.login;
 //	  WebElement email = driver.findElement(By.id("input-email"));
 //	  email.sendKeys("deekshavishwakarma@yahoo.com");
 //	  
-//	  driver.findElement(By.xpath("//*[@id=\"content\"]/form/div/div[2]/input")).click();
+//	  driver.findElement(By.cssSelector("input[value='Continue']")).click();
 //	  
 //	  String message = driver.findElement(By.xpath("//*[@id=\"account-login\"]/div[1]")).getText();
 //	  
@@ -44,7 +44,7 @@ package com.team3.miniproject.testcases.login;
 //	  WebElement email = driver.findElement(By.id("input-email"));
 //	  email.sendKeys("xyz-123@gmail.com");
 //	  
-//	  driver.findElement(By.xpath("//*[@id=\"content\"]/form/div/div[2]/input")).click();
+//	  driver.findElement(By.cssSelector("input[value='Continue']")).click();
 //	  
 //	  WebElement warning = driver.findElement(By.xpath("//*[@id=\"account-forgotten\"]/div[1]"));
 //	  System.out.println(warning.getText());
@@ -64,7 +64,7 @@ package com.team3.miniproject.testcases.login;
 //	  password.sendKeys("deeksha");
 //	  
 //	  Thread.sleep(2000);
-//	  driver.findElement(By.xpath("//*[@id=\"content\"]/div/div[2]/div/form/input")).click();
+//	  driver.findElement(By.cssSelector("input[value='Login']")).click();
 //	  
 //	  driver.findElement(By.linkText("My Account")).click();
 //	  Thread.sleep(2000);
