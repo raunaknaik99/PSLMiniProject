@@ -31,7 +31,7 @@ public class ContactUsTest {
 /*------------------------------*/
   @Test
   public void contactTestCase001() throws InterruptedException {
-	  cnct_object = new ContactPom(driver);
+	  cnct_object = new ContactUs(driver);
 	  cnct_object.loginForContactUs();
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
 	  js.executeScript("window.scrollBy(0,500)", "");
@@ -53,7 +53,7 @@ public class ContactUsTest {
 
   @Test
   public void contactTestCase002() throws InterruptedException {
-	  cnct_object = new ContactPom(driver);
+	  cnct_object = new ContactUs(driver);
 	  cnct_object.loginForContactUs();
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
 	  js.executeScript("window.scrollBy(0,500)", "");
