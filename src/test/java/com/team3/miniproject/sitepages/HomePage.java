@@ -18,7 +18,7 @@ public class HomePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(css = "#content > div.row > div:nth-child(1)")
+	@FindBy(css = "#content > div.row > div > div")
 	public List<WebElement> homeProducts;
 	
 	@FindBy(css = "#content > div.row > div:nth-child > div > div.image > a")
@@ -47,7 +47,6 @@ public class HomePage {
 	
 	//add products to cart
 	public void addProductToCart(int index) {
-		System.out.println(homeAddToCartBtns.size());
 		js.executeScript("arguments[0].scrollIntoView();", homeAddToCartBtns.get(index));
 		homeAddToCartBtns.get(index).click();
 	}

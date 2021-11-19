@@ -19,7 +19,7 @@ public class ScreenShotCapture {
 	
 	public void captureScreenshot(String filename) throws IOException {
 		File scrFile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		Files.copy(scrFile, new File("screenshots/"+filename));
+		Files.copy(scrFile, new File("screenshots"+filename));
 	}
 
 }

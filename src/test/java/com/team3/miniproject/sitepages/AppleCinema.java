@@ -168,15 +168,13 @@ public class AppleCinema {
 	    
 	    Thread.sleep(2000);
 	    Alert alert = driver.switchTo().alert();
-	    if(alert.getText() == "Your file was successfully uploaded!") {
+	    if(alert != null) {
 	    	alert.accept();
 	    	return true;
 	    }
 	    else {
 	    	return false;
 	    }
-	    
-	    
 	}
 	
 	//method to enter quantity in apply cinema form page

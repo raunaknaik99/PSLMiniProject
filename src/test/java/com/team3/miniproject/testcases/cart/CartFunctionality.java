@@ -31,10 +31,11 @@ import com.team3.miniproject.sitepages.HomePage;
 import com.team3.miniproject.sitepages.Tablets;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import screenshot.*;
 
 public class CartFunctionality {
 	WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/";
+	String baseUrl = "http://localhost";
 	ExtentReports report;
 	static ExtentTest test;
 	
@@ -44,11 +45,15 @@ public class CartFunctionality {
 	Tablets objTablets;
 	Header objHeader;
 	AppleCinema hpc_object;
+	
+	ScreenShotCapture objScreenshot;
 	JavascriptExecutor js = (JavascriptExecutor) driver;
+	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 	
 	// TC_OC_CART_001
   @Test(enabled = true)
-  public void testCase001() throws InterruptedException{
+  public void testCase001() throws InterruptedException, IOException{
+	  objScreenshot = new ScreenShotCapture(driver);
 	  test.log(LogStatus.INFO, "TC_OC_CART_001 - To add a product in the cart and verify its addition in the cart.");
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
 	  objHomePage = new HomePage(driver);
@@ -56,7 +61,7 @@ public class CartFunctionality {
 	  
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
 	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.homeProducts.get(0));
-	  objHomePage.addProductToCart(0);;
+	  objHomePage.addProductToCart(0);
 	  
 	  Thread.sleep(3000);
 	  
@@ -65,6 +70,7 @@ public class CartFunctionality {
 	  }
 	  else {
 		  test.log(LogStatus.FAIL, "The alert message about addition of the product to the cart is not displayed.");
+		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase001_"+ timeStamp +".PNG");
 	  }
 
 	  Thread.sleep(5000);
@@ -75,24 +81,21 @@ public class CartFunctionality {
 	  }
 	  else {
 		  test.log(LogStatus.FAIL, "The added product is not visible in the cart.");
+		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase001_"+ timeStamp +".PNG");
 	  }
 	  
 }
 //  TC_OC_CART_002
   @Test (enabled = true)
-  public void testCase002() throws InterruptedException, AWTException {
-	  test.log(LogStatus.INFO, "TC_OC_CART_002 - Adding a product with customizable features to the cart.");
+  public void testCase002() throws InterruptedException, AWTException, IOException {
+	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart with quantity less than the minimum required quantity.");
+	  objScreenshot = new ScreenShotCapture(driver);
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
-	  
-	  //object instantiation
 	  objHomePage = new HomePage(driver);
 	  hpc_object = new AppleCinema(driver);
-	  
-	  
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
-	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.homeProducts.get(0));
-	  
-	  objHomePage.addProductToCart(2); // index 2 for Apple cinema
+	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.homeProducts.get(2));
+	  objHomePage.addProductToCart(2); // index 2 for Apple Cinema
 	  
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  
@@ -101,7 +104,7 @@ public class CartFunctionality {
 	  hpc_object.enterInTextbox("test");
 	  	  
 	  hpc_object.clickDropdown("4");
-
+	  
 	  hpc_object.enterInTextArea("This is a test order");
 	  
 	  if(hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
@@ -109,25 +112,27 @@ public class CartFunctionality {
 	  }
 	  else {
 		  test.log(LogStatus.FAIL, "The driver did not switch to the alert.");
-	  }
-	  
-	  
+		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
+	  }	
+  	  Thread.sleep(2000);
+	  hpc_object.enterQuantity("1");
+	  hpc_object.clickAddToCart(); 
 	  Thread.sleep(2000);
-	  hpc_object.enterQuantity("2");
-	  hpc_object.clickAddToCart();
-	  Thread.sleep(2000);
+	  
 	  if(hpc_object.checkSuccessAlert()) {
-		  test.log(LogStatus.PASS, "The success message for adding Apple Cinema to the cart was displayed.");
+		  test.log(LogStatus.FAIL, "The warning message about the minimum required quantity is not displayed.");
+		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The success message for adding Apple Cinema to the cart was not displayed.");
+		  test.log(LogStatus.PASS, "The warning message about the minimum required quantity is displayed.");
 	  }
 	  
   }
   //TC_OC_CART_003
   @Test (enabled = true)
-  public void testCase003() throws InterruptedException {
+  public void testCase003() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_003 - Adding a product which is not in stock to the cart.");
+	  objScreenshot = new ScreenShotCapture(driver);
 	  objHomePage = new HomePage(driver);
 	  objTablets = new Tablets(driver);
 	  objCart = new Cart(driver);
@@ -143,6 +148,7 @@ public class CartFunctionality {
 	  }
 	  else {
 		  test.log(LogStatus.FAIL, "The success message for adding the product to the cart is not displayed.");
+		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase003_"+ timeStamp +".PNG");
 	  }
 	  
 	  objHeader.clickShoppingCartLink();
@@ -155,13 +161,15 @@ public class CartFunctionality {
 	  }
 	  else {
 		  test.log(LogStatus.FAIL, "The warning about the out of stock product in the cart is not displayed.");
+		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase003_"+ timeStamp +".PNG");
 	  }
 	  
 }
   //TC_OC_CART_004
   @Test (enabled = true)
-  public void testCase004() throws InterruptedException {
+  public void testCase004() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_004 - Removing a product from the cart.");
+	  objScreenshot = new ScreenShotCapture(driver);
 	  objHomePage = new HomePage(driver);
 	  objHeader = new Header(driver);
 	  objHomePage.addProductToCart(0);
@@ -172,6 +180,7 @@ public class CartFunctionality {
 	  }
 	  else {
 		  test.log(LogStatus.FAIL, "The alert message about addition of the product to the cart is not displayed.");
+		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase004_"+ timeStamp +".PNG");
 	  }
 	  
 	  objHeader.clickCartDropDown(); 
@@ -179,17 +188,19 @@ public class CartFunctionality {
 	  objHeader.removeItemFromCart(0);
 	  Thread.sleep(5000);
 	  
-	  if(objHeader.cartDropDown.getText() == " 0 item(s) - $0.00") {
+	  if(objHeader.cartDropDown.getText() == "0 item(s) - £0.00") {
 		  test.log(LogStatus.PASS, "The product was successfully removed from the cart.");
 	  }
 	  else {
 		  test.log(LogStatus.FAIL, "The product was not removed from the cart.");
+		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase004_"+ timeStamp +".PNG");
 	  }
 } 
   //TC_OC_CART_005
 @Test(enabled = true)
-  public void testCase005() throws InterruptedException {
+  public void testCase005() throws InterruptedException, IOException {
 	test.log(LogStatus.INFO, "TC_OC_CART_005 - Adding a product to the cart with quantity as zero.");
+	objScreenshot = new ScreenShotCapture(driver);
 	 driver.manage().window().maximize();
 	 driver.findElement(By.linkText("Desktops")).click();
 	 Thread.sleep(1000);
@@ -214,6 +225,7 @@ public class CartFunctionality {
 	 WebElement successAlert = driver.findElement(By.xpath("//*[@id=\"product-product\"]/div[1]"));
 	 if(successAlert.isDisplayed()) {
 		 test.log(LogStatus.FAIL, "The warning about the quantity is not displayed.");
+		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase005_"+ timeStamp +".PNG");
 	 }
 	 else {
 		 test.log(LogStatus.PASS, "The warning about the quantity is displayed.");
@@ -221,8 +233,9 @@ public class CartFunctionality {
   }
 //TC_OC_CART_006
   @Test (enabled = true)
-  public void testCase006() throws InterruptedException, AWTException {
+  public void testCase006() throws InterruptedException, AWTException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart with quantity less than the minimum required quantity.");
+	  objScreenshot = new ScreenShotCapture(driver);
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
 	  objHomePage = new HomePage(driver);
 	  hpc_object = new AppleCinema(driver);
@@ -245,6 +258,7 @@ public class CartFunctionality {
 	  }
 	  else {
 		  test.log(LogStatus.FAIL, "The driver did not switch to the alert.");
+		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
 	  }	
   	  Thread.sleep(2000);
 	  hpc_object.enterQuantity("1");
@@ -253,6 +267,7 @@ public class CartFunctionality {
 	  
 	  if(hpc_object.checkSuccessAlert()) {
 		  test.log(LogStatus.FAIL, "The warning message about the minimum required quantity is not displayed.");
+		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
 	  }
 	  else {
 		  test.log(LogStatus.PASS, "The warning message about the minimum required quantity is displayed.");
@@ -260,8 +275,9 @@ public class CartFunctionality {
   }
   //TC_OC_CART_007
    @Test(enabled = true)
-  public void testCase007() throws InterruptedException {
+  public void testCase007() throws InterruptedException, IOException {
 	   test.log(LogStatus.INFO, "TC_OC_CART_007 - Adding a product to the cart but leaving the quantity field blank.");
+	   objScreenshot = new ScreenShotCapture(driver);
 	 driver.manage().window().maximize();
 	 driver.findElement(By.linkText("Phones & PDAs")).click();
 	 Thread.sleep(1000);
@@ -283,6 +299,7 @@ public class CartFunctionality {
 	 WebElement successAlert = driver.findElement(By.xpath("//*[@id=\"product-product\"]/div[1]"));
 	 if(successAlert.isDisplayed()) {
 		 test.log(LogStatus.FAIL, "The warning about the quantity is not displayed.");
+		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase007_"+ timeStamp +".PNG");
 	 }
 	 else {
 		 test.log(LogStatus.PASS, "The warning about the quantity is displayed.");
@@ -290,8 +307,9 @@ public class CartFunctionality {
   }
    //TC_OC_CART_008
    @Test(enabled = true)
-   public void testCase008() {
+   public void testCase008() throws IOException {
  	  test.log(LogStatus.INFO, "TC_OC_CART_008-Add product with customizable features to cart but leave some of the required fields in the features form blank ");
+ 	  objScreenshot = new ScreenShotCapture(driver);
  	  hpc_object=new AppleCinema(driver); //create a new instance of AppleCinema Class
  	  //click on add to cart button on home page
  	  hpc_object.clickAppleCinemaCart();
@@ -308,6 +326,7 @@ public class CartFunctionality {
  		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
  	  }else {
  		  test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
+ 		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase008_"+ timeStamp +".PNG");
  	  }
    }
    
@@ -315,6 +334,7 @@ public class CartFunctionality {
    @Test(enabled = true)
    public void testCase009() throws InterruptedException, IOException {
  	  test.log(LogStatus.INFO, "TC_OC_CART_009-To verify that new window opens when user clicks the like button");
+ 	  objScreenshot = new ScreenShotCapture(driver);
  	  hpc_object=new AppleCinema(driver); //create an instance of AppleCart class
  	  //click on cinema cart
  	  hpc_object.clickAppleCinemaCart();
@@ -328,6 +348,7 @@ public class CartFunctionality {
  	  }
  	  else {
  	      test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
+ 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009_"+ timeStamp +".PNG");
  	  }
  	  //click on like btn
  	  hpc_object.clickFbLikeBtn();
@@ -345,11 +366,13 @@ public class CartFunctionality {
  				  test.log(LogStatus.PASS, "Test Passed- Child window Title matched");
  			  }else {
  				  test.log(LogStatus.FAIL, "Test Failed- Child Window title mismatched");
+ 				 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009_"+ timeStamp +".PNG");
  			  }
  			  driver.close();
  		  }
  		  else {
  			  test.log(LogStatus.FAIL, "Test Failed- Did not switch to child window");
+ 			 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009_"+ timeStamp +".PNG");
  		  }
  	  }
  	  Thread.sleep(3000);//only to visualize the going back to parent window
@@ -362,6 +385,7 @@ public class CartFunctionality {
  	  }
  	  else {
  	      test.log(LogStatus.FAIL, "Test Failed- Parent Window Title Mismatched");
+ 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009_"+ timeStamp +".PNG");
  	  }
    }
    
@@ -369,6 +393,7 @@ public class CartFunctionality {
    @Test(enabled=true)
    public void testCase010() throws InterruptedException, IOException {
  	  test.log(LogStatus.INFO, "TC_OC_CART_010-To verify that new window opens when user clicks the Tweet button");
+ 	  objScreenshot = new ScreenShotCapture(driver);
  	  
  	  hpc_object=new AppleCinema(driver); //create new instance of AppleCinema class
  	  //click on cinema cart
@@ -383,6 +408,7 @@ public class CartFunctionality {
  	  }
  	  else {
  	      test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
+ 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010_"+ timeStamp +".PNG");
  	  }	  
  	  //click on tweet btn
  	  hpc_object.clickTweetBtn();
@@ -400,11 +426,13 @@ public class CartFunctionality {
  				  test.log(LogStatus.PASS, "Test Passed- Child window Title matched");
  			  }else {
  				  test.log(LogStatus.FAIL, "Test Failed- Child Window title mismatched");
+ 				 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010_"+ timeStamp +".PNG");
  			  }
  			  driver.close();
  		  }
  		  else {
  			  test.log(LogStatus.FAIL, "Test Failed- Did not switch to child window");
+ 			 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010_"+ timeStamp +".PNG");
  		  }
  	  }
  	  Thread.sleep(3000); //only to visualize the going back to parent window
@@ -416,13 +444,13 @@ public class CartFunctionality {
  	  }
  	  else {
  	      test.log(LogStatus.FAIL, "Test Failed- Parent Window Title Mismatched");
+ 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010_"+ timeStamp +".PNG");
  	  }
    }
   @BeforeMethod
   public void beforeMethod(Method m) {
 	//Date setup for naming of extent reports and Screenshots
 	  WebDriverManager.chromedriver().setup();
-	  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 	  report =new ExtentReports("ExtentReports\\AddToCart\\"+ m.getName() +"_"+ timeStamp + ".html");
 	  test = report.startTest(m.getName());
 	  
