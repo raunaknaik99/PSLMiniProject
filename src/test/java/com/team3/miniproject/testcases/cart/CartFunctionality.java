@@ -34,7 +34,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class CartFunctionality {
 	WebDriver driver;
-	String baseUrl = "http://localhost/miniproject";
+	String baseUrl = "http://localhost/opencartsite/";
 	ExtentReports report;
 	static ExtentTest test;
 	
