@@ -361,4 +361,92 @@ public class CheckoutPage {
 		// TODO Auto-generated method stub
 
 	}
+	
+/*--------------------------------------------------------------*/
+	//css for add to cart button
+	@FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[2]/div/div[3]/button[1]")
+	WebElement addToCart;
+	
+	//link text of Checkout link
+	@FindBy(linkText = "Checkout")
+	WebElement checkout;
+	
+	//css to click on guest radio button 
+	@FindBy(css = "[name='account'][value='guest']")
+	WebElement guestRadioBtn;
+		
+	//method to fill all the details of guest customer
+	public void fillBillingDetails(String fname,String lname,String eml,String tel,String address,String city,String pCode) {
+		driver.findElement(By.id("input-payment-firstname")).sendKeys(fname);
+		driver.findElement(By.id("input-payment-lastname")).sendKeys(lname);		
+		driver.findElement(By.id("input-payment-email")).sendKeys(eml);
+		driver.findElement(By.id("input-payment-telephone")).sendKeys(tel);
+		driver.findElement(By.id("input-payment-address-1")).sendKeys(address);
+		driver.findElement(By.id("input-payment-city")).sendKeys(city);
+		driver.findElement(By.id("input-payment-postcode")).sendKeys(pCode);
+	}
+	
+	//method to fill delivery details if 'My billing and delivery address is same' checkbox is not ticked.
+	public void fillDeliveryDetails(String fname,String lname,String address,String city,String pCode) {
+		driver.findElement(By.id("input-shipping-firstname")).sendKeys(fname);
+		driver.findElement(By.id("input-shipping-lastname")).sendKeys(lname);
+		driver.findElement(By.id("input-shipping-address-1")).sendKeys(address);
+		driver.findElement(By.id("input-shipping-city")).sendKeys(city);
+		driver.findElement(By.id("input-shipping-postcode")).sendKeys(pCode);
+	}
+	
+	//to select country and state from dropdown from billing details section
+	public void selectCountryAndState(String country,String state) throws InterruptedException {
+			Select drpCountry1 = new Select(driver.findElement(By.id("input-payment-country")));
+			drpCountry1.selectByVisibleText(country);
+			
+			Thread.sleep(2000);
+			Select drpState1 = new Select(driver.findElement(By.id("input-payment-zone")));
+			drpState1.selectByVisibleText(state);
+	}
+	
+	//to select country and state from dropdown from delivery details section
+	public void selectCountryAndStateAgain(String countryName,String stateName) throws InterruptedException {
+		Select drpCountry2 = new Select(driver.findElement(By.id("input-shipping-country")));
+		drpCountry2.selectByVisibleText(countryName);
+	
+		Thread.sleep(2000);
+		Select drpState2 = new Select(driver.findElement(By.id("input-shipping-zone")));
+		drpState2.selectByVisibleText(stateName);
+	}
+	
+	//method to check the checkbox of terms and conditions
+	public void privacyCheckbox() {
+		agree.click();
+	}
+	
+	//method to confirm the order
+	public void confirmOrder() {
+		confirmButton.click();
+	}
+	
+	//method to accept alert while confirming the order
+	public void acceptAlert() throws InterruptedException {
+		Alert alert1 = driver.switchTo().alert();
+		Thread.sleep(2000);
+		alert1.accept();
+	}
+	
+	//method to click on the guest radio button
+	public void guestClick() throws InterruptedException {
+		  JavascriptExecutor js = (JavascriptExecutor) driver;
+		  js.executeScript("window.scrollBy(0,500)", "");
+		  addToCart.click();
+		  Thread.sleep(3000);
+		  checkout.click();
+		  Thread.sleep(2000);
+		  guestRadioBtn.click();
+	}
+	
+	//to confirm whether guest radio button is selected or not
+	public boolean guestBtnSelected() {
+		return guestRadioBtn.isSelected();
+	}	
+}
+
 }
