@@ -409,6 +409,7 @@ public class RegistrationTestSetup {
 	// should pass
 	@Test(enabled = true)
 	public void testCase013() {
+		s= new ScreenShotCapture(driver);
 	 	test.log(LogStatus.INFO, "TC_OC_REG_013-Registering by entering a Last Name having more than 32 characters");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
@@ -440,6 +441,7 @@ public class RegistrationTestSetup {
 	// should pass
 	@Test(enabled = true)
 	public void testCase014() {
+		s= new ScreenShotCapture(driver);
 	 	test.log(LogStatus.INFO, "TC_OC_REG_014-Registering by entering more than 32 numbers in the Telephone field");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
@@ -471,6 +473,7 @@ public class RegistrationTestSetup {
 	// should pass
 	@Test(enabled = false)
 	public void testCase015() throws IOException {
+		s= new ScreenShotCapture(driver);
 	 	test.log(LogStatus.INFO, "TC_OC_REG_015-To verify the that Register page is inaccessible when user is logged in");
 		rg_object = new RegistrationPage(driver);
 		h_object = new Header(driver);

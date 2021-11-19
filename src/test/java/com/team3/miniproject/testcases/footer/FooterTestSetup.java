@@ -40,6 +40,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_001
 	@Test
 	public void testCase001() {
+		s= new ScreenShotCapture(driver);
 		try {
 			f_object = new Footer(driver);
 			f_object.getContactUs();
@@ -59,6 +60,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_002
 	@Test
 	public void testCase002() {
+		s= new ScreenShotCapture(driver);
         try {
         	f_object = new Footer(driver);
     		f_object.getSiteMap();	
@@ -78,6 +80,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_003
 	@Test
 	public void testCase003() {
+		s= new ScreenShotCapture(driver);
         try {
         	f_object = new Footer(driver);
     		f_object.getReturns();
@@ -99,6 +102,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_004
 	@Test
 	public void testCase004() {
+		s= new ScreenShotCapture(driver);
         try {
         	f_object = new Footer(driver);
     		f_object.getBrandsPage();
@@ -120,6 +124,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_005
 	@Test
 	public void testCase005() {
+		s= new ScreenShotCapture(driver);
         try {
         	f_object = new Footer(driver);
     		f_object.getAffiliatePage();
@@ -141,6 +146,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_006
 	@Test
 	public void testCase006() {
+		s= new ScreenShotCapture(driver);
         try {
         	f_object = new Footer(driver);
     		f_object.getAboutUs();
@@ -161,6 +167,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_007
 	@Test
 	public void testCase007() {
+		s= new ScreenShotCapture(driver);
         try {
         	f_object = new Footer(driver);
     		f_object.getDeliveryInformation();
@@ -181,6 +188,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_008
 	@Test
 	public void testCase008() {
+		s= new ScreenShotCapture(driver);
         try {
         	f_object = new Footer(driver);
     		f_object.getPrivacyPolicy();
@@ -200,6 +208,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_009
 	@Test
 	public void testCase009() {
+		s= new ScreenShotCapture(driver);
         try {
         	f_object = new Footer(driver);
     		f_object.getTermsAndConditions();
@@ -220,6 +229,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_010
 	@Test
 	public void testCase010() {
+		s= new ScreenShotCapture(driver);
         try {
         	f_object = new Footer(driver);
     		f_object.getNewsletter();
@@ -239,6 +249,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_011
 	@Test
 	public void testCase011() {
+		s= new ScreenShotCapture(driver);
         try {
         	f_object = new Footer(driver);
     		f_object.getMyAccount();
@@ -259,6 +270,7 @@ public class FooterTestSetup {
 	//TC_OC_FL_012
 	@Test
 	public void testCase012() {
+		s= new ScreenShotCapture(driver);
         try {
         	h_object = new Header(driver);
     		f_object = new Footer(driver);
