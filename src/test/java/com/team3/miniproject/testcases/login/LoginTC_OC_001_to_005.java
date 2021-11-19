@@ -34,7 +34,7 @@ public class LoginTC_OC_001_to_005 {
   @Test
   //TC_OC_LR_001 TO TC_OC_LR_005
   public void testCase001To005() throws IOException, InterruptedException {
-	 // test.log(LogStatus.INFO, "TC_OC_LR_001 to TC_OC_LR_005 - to test all the possible scenarios for Login with email-id and password");
+	 test.log(LogStatus.INFO, "TC_OC_LR_001 to TC_OC_LR_005 - to test all the possible scenarios for Login with email-id and password");
 	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	  	reader.readExcel("src\\test\\resources","loginDDT.xlsx","Login");
 		  for (reader.i = 1; reader.i<reader.rowCount+1; reader.i++) {  
@@ -77,6 +77,7 @@ public class LoginTC_OC_001_to_005 {
 	@Test
 	
 	public void testCase006() throws IOException {
+		test.log(LogStatus.INFO, "TC_OC_LR_006 - To verify that Login page is inaccessible when user is logged in");
 		reader.i=5;
 		String emailId=reader.getEmailId();
 		  String password=reader.getPassword();  
@@ -96,6 +97,7 @@ public class LoginTC_OC_001_to_005 {
 
 	@Test
 	public void testCase007() throws IOException {
+		test.log(LogStatus.INFO, "TC_OC_LR_007 - To verify that Logged in user does not get logged out after clicking the back button on the browser");
 		reader.i=5;
 		String emailId=reader.getEmailId();
 		String password=reader.getPassword();  
