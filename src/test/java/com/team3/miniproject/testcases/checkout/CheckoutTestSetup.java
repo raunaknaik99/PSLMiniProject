@@ -290,7 +290,8 @@ public class CheckoutTestSetup {
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_007-to test if lastname can be more than 32 characters");
 		try {
-			login.login("demo4@example.com", "test1234");
+			ArrayList<ArrayList<String>> myData = rd.loginData();
+			login.login(myData.get(8).get(0), myData.get(8).get(1));
 			Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 			//to go to home page
 			checkout.navigateToHomepage();
