@@ -202,6 +202,7 @@ public class CartFunctionality {
 	test.log(LogStatus.INFO, "TC_OC_CART_005 - Adding a product to the cart with quantity as zero.");
 	objScreenshot = new ScreenShotCapture(driver);
 	 driver.manage().window().maximize();
+	 //Click on an item
 	 driver.findElement(By.linkText("Desktops")).click();
 	 Thread.sleep(1000);
 	 driver.findElement(By.linkText("Mac (1)")).click();
@@ -217,8 +218,10 @@ public class CartFunctionality {
 	 WebElement qty = driver.findElement(By.id("input-quantity"));
 	 qty.clear();
 	 Thread.sleep(2000);
+	 // Enter Quantity as 0
 	 qty.sendKeys("0");
 	 Thread.sleep(1000);
+	 //Add to cart
 	 driver.findElement(By.id("button-cart")).click();
 	 Thread.sleep(2000);
 	 

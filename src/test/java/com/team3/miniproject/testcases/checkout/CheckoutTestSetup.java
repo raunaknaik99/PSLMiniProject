@@ -235,18 +235,6 @@ public class CheckoutTestSetup {
 
 
 	//TC_OC_CF_006
-<<<<<<< HEAD
-	@Test(enabled=true)
-	public void testCase006() {
-		  test.log(LogStatus.INFO, "TC_OC_CF_006-To test if city field accepts less than 2 characters and we can proceed to step 3");
-		  login.login("demo4@example.com", "test1234");
-		  //assert if user is logged in
-		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-		  checkout.navigateToHomepage();
-		  objHomePage.addProductToCart(1);
-		  checkout.checkout();
-		  try {
-=======
 	@Test(enabled=false)
 	public void testCase006() throws IOException {
 		s=new ScreenShotCapture(driver);
@@ -265,7 +253,6 @@ public class CheckoutTestSetup {
 			checkout.navigateToHomepage();
 			objHomePage.addProductToCart(1);
 			checkout.checkout();
->>>>>>> 0516e711e3f0697ff3cde1214bb6440e832a26c8
 			checkout.enterNewBillingDetails(3);
 
 			//Assert.assertEquals("Step 3: Delivery Details", checkout.getStep3Title().getText());
@@ -294,66 +281,10 @@ public class CheckoutTestSetup {
 			test.log(LogStatus.INFO,e);
 		}
 	}
-<<<<<<< HEAD
+
 	
 	
 	//TC_OC_CF_007
-	@Test(enabled=true)
-	public void testCase007() throws InterruptedException {
-		  test.log(LogStatus.INFO, "TC_OC_CF_007-to test if lastname can be more than 32 characters");
-		  login.login("demo4@example.com", "test1234");
-		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-		  //to go to home page
-		  checkout.navigateToHomepage();
-		  objHomePage.addProductToCart(1);
-		  checkout.checkout();
-
-		  checkout.enterNewBillingDetails(4);
-		  Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
-		  Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed());
-	
-		  //check for test cases
-		  String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
-		  if(step3Heading.equals("Step 3: Delivery Details")) {
-			  test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
-		  }
-		  else {
-			  test.log(LogStatus.FAIL, "Test Failed-Can proceed to next form");
-		  }
-		  Boolean warningPresence=driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed();
-		  if(warningPresence) {
-			  test.log(LogStatus.PASS, "Test Passed-Warning is Present");
-		  }else {
-			  test.log(LogStatus.FAIL, "Test Failed-Warning is not present");
-		  }
-    }
-
-	
-	
-  @BeforeMethod
-  public void beforeMethod(Method m) {
-	  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
-	  report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+"_"+timeStamp+".html");
-	  test=report.startTest(m.getName());
-	  WebDriverManager.chromedriver().setup();
-	  driver = new ChromeDriver();
-	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	  login=new LoginPage(driver);
-	  checkout=new CheckoutPage(driver);
-	  login.navigateToLogin();	
-	  objHomePage=new HomePage(driver);
-	  
-  }
-
-  @AfterMethod
-  public void afterMethod(Method m) throws InterruptedException {
-	  report.endTest(test);
-	  report.flush();
-	  Thread.sleep(5000);
-	  checkout.closeBrowser();
-  }
-=======
-
 	@Test(enabled=false)
 	public void testCase007() throws InterruptedException, IOException {
 		s=new ScreenShotCapture(driver);
@@ -392,31 +323,32 @@ public class CheckoutTestSetup {
 			}
 	}
 
+	
+	
+  @BeforeMethod
+  public void beforeMethod(Method m) {
+	  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+	  report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+"_"+timeStamp+".html");
+	  test=report.startTest(m.getName());
+	  WebDriverManager.chromedriver().setup();
+	  driver = new ChromeDriver();
+	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	  login=new LoginPage(driver);
+	  checkout=new CheckoutPage(driver);
+	  login.navigateToLogin();	
+	  objHomePage=new HomePage(driver);
+	  
+  }
 
+  @AfterMethod
+  public void afterMethod(Method m) throws InterruptedException {
+	  report.endTest(test);
+	  report.flush();
+	  Thread.sleep(5000);
+	  checkout.closeBrowser();
+  }
+	
 
-	@BeforeMethod
-	public void beforeMethod(Method m) {
-		String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
-		report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+"_"+timeStamp+".html");
-		test=report.startTest(m.getName());
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		login=new LoginPage(driver);
-		checkout=new CheckoutPage(driver);
-		login.navigateToLogin();	
-		objHomePage=new HomePage(driver);
-
-	}
-
-	@AfterMethod
-	public void afterMethod(Method m) throws InterruptedException {
-		report.endTest(test);
-		report.flush();
-		Thread.sleep(5000);
-		checkout.closeBrowser();
-	}
->>>>>>> 0516e711e3f0697ff3cde1214bb6440e832a26c8
 
 }
 
