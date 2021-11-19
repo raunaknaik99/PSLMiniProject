@@ -16,43 +16,48 @@ public class HomePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[1]/div/div[1]/a/img")
+	//Image links for products on the homepage
+	@FindBy(css = "#content > div.row > div:nth-child(1) > div > div.image > a > img")
 	public WebElement macbook;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[2]/div/div[1]/a/img")
+	@FindBy(css = "#content > div.row > div:nth-child(2) > div > div.image > a > img")
 	public WebElement iPhone;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[3]/div/div[1]/a/img")
+	@FindBy(css = "#content > div.row > div:nth-child(3) > div > div.image > a > img")
 	public WebElement cinema;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[4]/div/div[1]/a/img")
+	@FindBy(css = "#content > div.row > div:nth-child(4) > div > div.image > a > img")
 	public WebElement canon;
 	
-	@FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[1]/div/div[3]/button[1]")
+	// add to cart buttons for the products on the homepage
+	@FindBy(css = "#content > div.row > div:nth-child(1) > div > div.button-group > button:nth-child(1)")
 	public WebElement addMacbook;
-	@FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[2]/div/div[3]/button[1]")
+	@FindBy(css = "#content > div.row > div:nth-child(2) > div > div.button-group > button:nth-child(1)")
 	public WebElement addIphone;
-	@FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[3]/div/div[3]/button[1]")
+	@FindBy(css = "#content > div.row > div:nth-child(3) > div > div.button-group > button:nth-child(1)")
 	public WebElement addCinema;
-	@FindBy(xpath = "//*[@id=\"content\"]/div[2]/div[4]/div/div[3]/button[1]")
+	@FindBy(css = "#content > div.row > div:nth-child(4) > div > div.button-group > button:nth-child(1)")
 	public WebElement addCanon;
 	
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[1]/div/div[3]/button[2]")
+	//wishlist products on the homepage
+	@FindBy(css = "#content > div.row > div:nth-child(1) > div > div.button-group > button:nth-child(2)")
 	public WebElement wishlistMacbook;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[2]/div/div[3]/button[2]")
+	@FindBy(css = "#content > div.row > div:nth-child(2) > div > div.button-group > button:nth-child(2)")
 	public WebElement wishlistIphone;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[3]/div/div[3]/button[2]")
+	@FindBy(css = "#content > div.row > div:nth-child(3) > div > div.button-group > button:nth-child(2)")
 	public WebElement wishlistCinema;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[4]/div/div[3]/button[2]")
+	@FindBy(css = "#content > div.row > div:nth-child(4) > div > div.button-group > button:nth-child(2)")
 	public WebElement wishlistCanon;
 	
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[1]/div/div[3]/button[3]")
+	//compare products on the homepage
+	@FindBy(css = "#content > div.row > div:nth-child(1) > div > div.button-group > button:nth-child(3)")
 	public WebElement compareMacbook;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[2]/div/div[3]/button[3]")
+	@FindBy(css = "#content > div.row > div:nth-child(2) > div > div.button-group > button:nth-child(3)")
 	public WebElement compareIphone;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[3]/div/div[3]/button[3]")
+	@FindBy(css = "#content > div.row > div:nth-child(3) > div > div.button-group > button:nth-child(3)")
 	public WebElement compareCinema;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[2]/div[4]/div/div[3]/button[3]")
+	@FindBy(css = "#content > div.row > div:nth-child(4) > div > div.button-group > button:nth-child(3)")
 	public WebElement compareCanon;
 	
-	@FindBy(xpath = "//*[@id=\"common-home\"]/div[1]")
+	//success alert Message
+	@FindBy(css = "#common-home > div.alert.alert-success.alert-dismissible")
 	public WebElement successAlert;
 	
 	

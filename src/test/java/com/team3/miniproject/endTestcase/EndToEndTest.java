@@ -57,81 +57,87 @@ public class EndToEndTest {
 		objCheckout = new CheckoutPage(driver);
 
 		// click on registration link
-//	  objHeader.selectFromMyAccountDropDown(0);
+	  objHeader.selectFromMyAccountDropDown(0);
 //	  
-//	  objRegistration.fillRegistrationForm("Tony", "Stark", "tony004@starkenterprises.com", "9999999999", "ironman", "ironman");
-//	  objRegistration.checkPrivacyPolicy();
-//	  objRegistration.clickContinueBtn();
+	  objRegistration.fillRegistrationForm("Tony", "Stark", "tony004@starkenterprises.com", "9999999999", "ironman", "ironman");
+	  objRegistration.checkPrivacyPolicy();
+	  objRegistration.clickContinueBtn();
 //	  
 //	  //logout
-//	  objHeader.selectFromMyAccountDropDown(4);
+	  objHeader.selectFromMyAccountDropDown(4);
+	  
+	  //click on login
+	  objHeader.selectFromMyAccountDropDown(1);
+	  objLoginPage.login("tony1@starkenterprises.com", "ironman");
+	  
+	  // navigate to homepage
+	  objHeader.clickHomePageLink();
+	  
+	  //search product
+	  objHeader.enterSearchQuery("macbook");
+	  objHeader.clickSearchBtn();
+	  
+	  wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Your Store")));
+	  js.executeScript("window.scrollBy(0, 600);");
+	  
+	  Thread.sleep(3000);
+	  
+	  objSearch.addToWishlist(0);
+	  
+	  //search for another product
+	  objHeader.enterSearchQuery("iphone");
+	  objHeader.clickSearchBtn();
+	  
+	  objSearch.addToCart(0);
+	  
+	  Thread.sleep(2000);
+	  //navigate to wishlist
+	  objHeader.clickWishlistLink();
+	  Thread.sleep(3000);
+	  objWishlist.addcartmacMethod(); // adds item from wishlist to cart
+	  
+	  Thread.sleep(2000);
+	  objHeader.clickShoppingCartLink();
+	  Thread.sleep(3000);
+	  objCart.enterQuantity("3");
+	  objCart.updateQuantity();
+	  
+	  Thread.sleep(2000);
+	  //apply coupon
+	  objCart.clickCouponDropdown();
+	  Thread.sleep(2000);
+	  objCart.enterCouponCode("15Off"); // custom code for 15% discount
+	  Thread.sleep(2000);
+	  objCart.clickApplyCoupon();
+	  
+	  Thread.sleep(3000);
+	  
+	  //click on Checkout button in the cart
+	  objCart.checkout();
+	  
+	  //checkout process
+	  objCheckout.enterExistingBillingDetailsAndContinue();
+	  objCheckout.enterExistingDeliveryDetailsAndContinue();
+	  objCheckout.enterDeliveryMethodAndContinue();
+	  objCheckout.enterPaymentMethod();
+	  objCheckout.agreeToTermsAndConditionsAndContinue();
+	  objCheckout.confirmOrder();
+	  Thread.sleep(5000);
+  }
+  @BeforeMethod
+  public void beforeMethod() {
+	  WebDriverManager.chromedriver().setup();
+	  driver = new ChromeDriver();
+	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	  driver.get(baseUrl);
+	  driver.manage().window().maximize();
+	  JavascriptExecutor js;
+  }
 
-		// click on login
-		objHeader.selectFromMyAccountDropDown(1);
-		objLoginPage.login("tony1@starkenterprises.com", "ironman");
-
-		// navigate to homepage
-		objHeader.clickHomePageLink();
-
-		// search product
-		objHeader.enterSearchQuery("macbook");
-		objHeader.clickSearchBtn();
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Your Store")));
-		js.executeScript("window.scrollBy(0, 600);");
-
-		Thread.sleep(3000);
-		objSearch.addToWishlist(0);
-
-		Thread.sleep(2000);
-		// navigate to wishlist
-		objHeader.clickWishlistLink();
-		Thread.sleep(3000);
-		objWishlist.addcartmacMethod(); // adds item from wishlist to cart
-
-		Thread.sleep(2000);
-		objHeader.clickShoppingCartLink();
-		Thread.sleep(3000);
-		objCart.enterQuantity("3");
-		objCart.updateQuantity();
-
-		Thread.sleep(2000);
-		// apply coupon
-		objCart.clickCouponDropdown();
-		Thread.sleep(2000);
-		objCart.enterCouponCode("15Off"); // custom code for 15% discount
-		Thread.sleep(2000);
-		objCart.clickApplyCoupon();
-
-		Thread.sleep(3000);
-
-		// click on Checkout button in the cart
-		objCart.checkout();
-
-		// checkout process
-//	  objCheckout.enterExistingBillingDetailsAndContinue();
-//	  objCheckout.enterExistingDeliveryDetailsAndContinue();
-//	  objCheckout.enterDeliveryMethodAndContinue();
-//	  objCheckout.enterPaymentMethod();
-//	  objCheckout.confirmOrder();
-
-	}
-
-	@BeforeMethod
-	public void beforeMethod() {
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.get(baseUrl);
-		driver.manage().window().maximize();
-		JavascriptExecutor js;
-
-	}
-
-	@AfterMethod
-	public void afterMethod() throws InterruptedException {
-		Thread.sleep(5000);
-		driver.close();
-	}
+  @AfterMethod
+  public void afterMethod() throws InterruptedException {
+	  Thread.sleep(5000);
+	  driver.close();
+  }
 
 }

@@ -2,7 +2,6 @@ package com.team3.miniproject.sitepages;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,125 +17,116 @@ public class Header {
 
 	// Locators for topmost Navbar
 
-	@FindBy(xpath = "//*[@id='form-currency']/div/button")
+	@FindBy(css = "#form-currency > div > button")
 	WebElement currencyDropDown;
 
-	@FindBy(xpath = "//*[@id='form-currency']/div/ul/li")
+	@FindBy(css = "#form-currency > div > ul > li")
 	List<WebElement> currencyOptions;
 
-	@FindBy(xpath = "//*[@id='top-links']/ul/li[1]/a")
+	@FindBy(css = "#top-links > ul > li:nth-child(1) > a")
 	WebElement contactUsLink;
 
-	@FindBy(xpath = "//*[@id='top-links']/ul/li[2]/a")
+	@FindBy(css = "#top-links > ul > li.dropdown > a")
 	WebElement myAccountDropDown;
 
-	@FindBy(xpath = "//*[@id='top-links']/ul/li[2]/ul/li")
+	@FindBy(css = "#top-links > ul > li.dropdown.open > ul > li")
 	List<WebElement> myAccountOptions;
 
 	@FindBy(id = "wishlist-total")
 	WebElement wishlistLink;
 
-	@FindBy(xpath = "//*[@id='top-links']/ul/li[4]/a")
+	@FindBy(css = "#top-links > ul > li:nth-child(4) > a")
 	WebElement shoppingCartLink;
 
-	@FindBy(xpath = "//*[@id='top-links']/ul/li[5]/a")
+	@FindBy(css = "#top-links > ul > li:nth-child(5) > a")
 	WebElement checkoutLink;
 
-	// HomeLink
-	@FindBy(xpath = "//*[@id=\"logo\"]/h1/a")
-	public WebElement homepageLink;
+	// Locator for home(Your Store) link
+	@FindBy(css = "#logo > h1 > a")
+	public WebElement homePageLink;
 
 	// Locators for search bar and shopping cart
 
 	@FindBy(name = "search")
 	WebElement searchBar;
 
-	@FindBy(xpath = "//*[@id='search']/span/button")
+	@FindBy(css = "#search > span > button")
 	WebElement searchBtn;
 
 	// Cart Drop Down
 	@FindBy(id = "cart")
-	WebElement cartDropDown;
+	public WebElement cartDropDown;
 
-	@FindBy(xpath = "//*[@id='cart']/ul/li/p")
+	@FindBy(css = "#cart > ul > li > p")
 	WebElement emptyCartText;
 
-	@FindBy(xpath = "//*[@id='cart']/ul/li[1]/table/tbody/tr")
+	@FindBy(css = "#cart > ul > li:nth-child(1) > table > tbody > tr")
 	List<WebElement> productsInCart;
 
-	@FindBy(xpath = "//*[@id='cart']/ul/li[1]/table/tbody/tr/td[1]/a/img")
+	@FindBy(css = "#cart > ul > li:nth-child(1) > table > tbody > tr > td:nth-child(1) > a > img")
 	List<WebElement> cartProductImg;
 
-	@FindBy(xpath = "//*[@id='cart']/ul/li[1]/table/tbody/tr/td[2]/a")
+	@FindBy(css = "#cart > ul > li:nth-child(1) > table > tbody > tr > td:nth-child(2) > a")
 	List<WebElement> cartProductNames;
 //
-	@FindBy(xpath = "//*[@id='cart']/ul/li[1]/table/tbody/tr/td[3]")
+	@FindBy(css = "#cart > ul > li:nth-child(1) > table > tbody > tr > td:nth-child(3)")
 	List<WebElement> cartProductQuantities;
 
-	@FindBy(xpath = "//*[@id=\"cart\"]/ul/li[1]/table/tbody/tr/td[4]")
+	@FindBy(css = "#cart > ul > li:nth-child(1) > table > tbody > tr > td:nth-child(4)")
 	List<WebElement> cartProductPrices;
 
-	@FindBy(xpath = "//*[@id='cart']/ul/li[1]/table/tbody/tr/td[5]/button")
+	@FindBy(css = "#cart > ul > li:nth-child(1) > table > tbody > tr > td:nth-child(5) > button")
 	List<WebElement> cartRemoveBtns;
-	//*[@id="content"]/form/div/table/tbody/tr/td[4]/div/span/button[2]
-	//*[@id="cart"]/ul/li[1]/table/tbody/tr/td[5]/button
-	@FindBy(xpath = "//*[@id='cart']/ul/li[2]/div/table/tbody/tr[1]/td[2]")
+
+	@FindBy(css = "#cart > ul > li:nth-child(2) > div > table > tbody > tr:nth-child(1) > td:nth-child(2)")
 	WebElement cartSubTotal;
 
-	@FindBy(xpath = "//*[@id='cart']/ul/li[2]/div/table/tbody/tr[2]/td[2]")
+	@FindBy(css = "#cart > ul > li:nth-child(2) > div > table > tbody > tr:nth-child(4) > td:nth-child(2)")
 	WebElement cartTotal;
-	
-	@FindBy(xpath = "//*[@id='cart']/ul/li[2]/div/p/a[1]")
-	//*[@id="cart"]/button
+
+	@FindBy(css = "#cart > ul > li:nth-child(2) > div > p > a:nth-child(1)")
 	WebElement viewCartOption;
 
-	@FindBy(xpath = "//*[@id='cart']/ul/li[2]/div/p/a[2]")
+	@FindBy(css = "#cart > ul > li:nth-child(2) > div > p > a:nth-child(2)")
 	WebElement checkoutOption;
-
-	@FindBy(xpath = "//*[@id='logo']/h1/a")
-	WebElement yourStoreLink;
 
 	// Locators for Blue Navbar
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[1]")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(1)")
 	WebElement desktopsDropDown;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[1]/div/div/ul/li")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(1) > div > div > ul > li")
 	List<WebElement> desktopsOptions;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[2]")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(2)")
 	WebElement laptopsNotebooksDropDown;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[2]/div/div/ul/li")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(2) > div > div > ul > li")
 	List<WebElement> laptopsNotebooksOptions;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[3]")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(3)")
 	WebElement componentsDropDown;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[3]/div/div/ul/li")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(3) > div > div > ul > li")
 	List<WebElement> componentsOptions;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[4]")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(4)")
 	WebElement tabletsDropDown;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[5]")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(5)")
 	WebElement softwareDropDown;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[6]")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(6)")
 	WebElement phonesPdasDropDown;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[7]")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(7)")
 	WebElement camerasDropDown;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[8]")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(8)")
 	WebElement mp3PlayersDropDown;
 
-	@FindBy(xpath = "//*[@id='menu']/div[2]/ul/li[8]/descendant::li")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(8) > div > div > ul > li")
 	List<WebElement> mp3PlayersOptions;
-
-	public List<WebElement> getCartProducts() {
-		return this.driver.findElements(By.xpath("//*[@id='cart']/ul/li[1]/table/tbody/tr"));
-	}
 
 	public Header(WebDriver driver) {
 		this.driver = driver;
@@ -174,12 +164,10 @@ public class Header {
 		checkoutLink.click();
 	}
 
-	// Enter HomePage Link
+	// Action HomePage Link
 	public void clickHomePageLink() {
-		homepageLink.click();
+		homePageLink.click();
 	}
-
-	// Actions for search bar and shopping cart
 
 	// Actions for search bar
 	public void clickSearchBar() {
@@ -229,7 +217,6 @@ public class Header {
 //	}
 
 	public void removeItemFromCart(int index) {
-//		productsInCart.get(index).findElement(By.tagName("button")).click();
 		cartRemoveBtns.get(index).click();
 	}
 
@@ -242,15 +229,11 @@ public class Header {
 	}
 
 	public void clickViewCartOption() {
-		viewCartOption.click();
+		shoppingCartLink.click();
 	}
 
 	public void clickCheckoutOption() {
 		checkoutOption.click();
-	}
-
-	public void clickYourStoreLink() {
-		yourStoreLink.click();
 	}
 
 	// Actions for Blue Navbar
@@ -260,7 +243,7 @@ public class Header {
 
 	public void selectFromDesktopsDropDown(int index) {
 		action = new Actions(driver);
-		action.moveToElement(desktopsDropDown);
+		action.moveToElement(desktopsDropDown).perform();
 		desktopsOptions.get(index).click();
 	}
 

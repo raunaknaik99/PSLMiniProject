@@ -16,7 +16,7 @@ public class RegistrationData {
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 		XSSFSheet sheet = workbook.getSheetAt(0);
 		try {
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 12; i++) {
 				userdata.add(new ArrayList());
 				ArrayList<String> iuserdata = new ArrayList<String>(6);
 				for (int j = 0; j < 6; j++) {

@@ -16,7 +16,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginPage {
 	public WebDriver driver;
-
 	String baseUrl = "http://localhost/miniproject";
 	String expectedTitle = "Account Login";
 
@@ -50,6 +49,7 @@ public class LoginPage {
 		driver.manage().window().maximize();
 		driver.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[2]/a")).click();
 		driver.findElement(By.xpath("//*[@id=\'top-links\']/ul/li[2]/ul/li[2]/a")).click();
+
 		myAccountIcon.click();
 		chooseLogin.click();
 
