@@ -67,7 +67,7 @@ public class CheckoutTestSetup {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  objHomePage.addIphoneToCart(1);
+	  objHomePage.addProductToCart(1);
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  //Assert "Your shopping cart is empty" message is displayed
@@ -93,7 +93,7 @@ public class CheckoutTestSetup {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  objHomePage.addIphoneToCart();
+	  objHomePage.addProductToCart(1);
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  checkout.enterNewBillingDetails(2);
@@ -112,7 +112,7 @@ public class CheckoutTestSetup {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  objHomePage.addIphoneToCart();
+	  objHomePage.addProductToCart(1);
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  Thread.sleep(5000); //delete if not necessary
@@ -135,7 +135,7 @@ public class CheckoutTestSetup {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  objHomePage.addIphoneToCart();
+	  objHomePage.addProductToCart(1);
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  //Assert user is redirected to checkout page
