@@ -1,22 +1,26 @@
 package com.team3.miniproject.sitepages;
 
+import static org.testng.Assert.assertEquals;
+
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-//import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import com.team3.miniproject.testcases.ddt.ReadInputs;
+
 
 public class CheckoutPage {
 	public WebDriver driver;
-
-	String baseUrl = "http://localhost/miniproject";
+	String baseUrl="http://localhost/miniproject";
+	ReadInputs reader= new ReadInputs();
 	JavascriptExecutor js;
 
 	public CheckoutPage(WebDriver driver) {
@@ -25,37 +29,37 @@ public class CheckoutPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(xpath = "//*[@id='top-links']/ul/li[5]/a")
+	@FindBy(linkText="Checkout")
 	WebElement checkoutIcon;
-	@FindBy(xpath = "//*[@name='payment_address' and @value='existing']")
+	@FindBy(css="[name='payment_address'][value='existing']")
 	WebElement existingPaymentAddress;
-	@FindBy(xpath = "//*[@id='button-payment-address']")
+	@FindBy(id="button-payment-address")
 	WebElement paymentAddressContinueButton;
-	@FindBy(xpath = "//*[@name='payment_address' and @value='new']")
+	@FindBy(css="[name='payment_address'][value='new']")
 	WebElement newPaymentAddress;
-	@FindBy(xpath = "//*[@name='shipping_address' and @value='existing']")
+	@FindBy(css="[name='shipping_address'][value='existing']")
 	WebElement existingShippingAddress;
-	@FindBy(xpath = "//*[@id='button-shipping-address']")
+	@FindBy(id="button-shipping-address")
 	WebElement shippingAddressContinueButton;
-	@FindBy(xpath = "//*[@name='shipping_method'  and @value='flat.flat']")
+	@FindBy(css="[name='shipping_method'][value='flat.flat']")
 	WebElement shippingMethodFlat;
-	@FindBy(xpath = "//*[@name='payment_method'  and @value='cod']")
+	@FindBy(css="[name='payment_method'][value='cod']")
 	WebElement paymentMethod;
-	@FindBy(xpath = "//*[@id='button-shipping-method']")
+	@FindBy(id="button-shipping-method")
 	WebElement shippingMethodContinueButton;
 	@FindBy(linkText = "Terms & Conditions")
 	WebElement termsAndConditions;
-	@FindBy(xpath = "//*[@name='agree']")
+	@FindBy(name="agree")
 	WebElement agree;
-	@FindBy(xpath = "//*[@id='button-payment-method']")
+	@FindBy(id="button-payment-method")
 	WebElement paymentMethodContinueButton;
-	@FindBy(xpath = "//*[@id='cart-total']")
+	@FindBy(id="cart-total")
 	WebElement cartTotal;
-	@FindBy(xpath = "//*[@name='account' and @value='register']")
+	@FindBy(css="[name='account'][value='register']")
 	WebElement registerAccount;
-	@FindBy(xpath = "//*[@id='button-confirm']")
+	@FindBy(id="button-confirm")
 	WebElement confirmButton;
-	@FindBy(xpath = "//*[@id='button-account']")
+	@FindBy(id="button-account")
 	WebElement accountContinueButton;
 	@FindBy(id = "input-payment-firstname")
 	WebElement firstNameField;
@@ -79,9 +83,9 @@ public class CheckoutPage {
 	WebElement countryField;
 	@FindBy(id = "input-payment-zone")
 	WebElement stateField;
-	@FindBy(xpath = "//*[@value='Continue']")
+	@FindBy(id="button-payment-address")
 	WebElement continueButton;
-	@FindBy(xpath = "//*[@id='top-links']/ul/li[2]/a/i")
+	@FindBy(css="#top-links > ul > li.dropdown > a > i")
 	WebElement myAccountIcon;
 	@FindBy(linkText = "My Account")
 	WebElement myAccountLinkText;
@@ -91,12 +95,18 @@ public class CheckoutPage {
 //		System.setProperty("webdriver.gecko.driver", "resources\\geckodriver.exe");
 //		driver= new FirefoxDriver();
 		driver.get(baseUrl);
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 	}
 
 	public void checkout() {
 		checkoutIcon.click();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void enterExistingBillingDetailsAndContinue() {
@@ -104,8 +114,23 @@ public class CheckoutPage {
 		paymentAddressContinueButton.click();
 	}
 
-	public void enterNewBillingDetails() {
+	public void enterNewBillingDetails(int val){
 		newPaymentAddress.click();
+		reader.i=val;
+		try {
+			reader.readExcel("C:\\Users\\diffa_pinto\\Desktop","loginDDT.xlsx","Checkout");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		enterFirstName(reader.getFirstName());
+		enterLastName(reader.getLastName());
+		enterAddress1(reader.getAddress1());
+		enterCity(reader.getCity());
+		enterPostCode(reader.getPostCode());
+		enterCountry(reader.getCountry());
+		enterState(reader.getState());
+		clickContinue();
 	}
 
 	public void enterExistingDeliveryDetailsAndContinue() {
@@ -141,7 +166,6 @@ public class CheckoutPage {
 
 	public void registerAccount() {
 		registerAccount.click();
-		Assert.assertEquals(accountContinueButton.getCssValue("color"), "#229ac8", "CSS Property matches!");
 		accountContinueButton.click();
 	}
 

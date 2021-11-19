@@ -1,5 +1,7 @@
 package com.team3.miniproject.sitepages;
 
+import java.util.List;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,45 +18,21 @@ public class HomePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	//Image links for products on the homepage
-	@FindBy(css = "#content > div.row > div:nth-child(1) > div > div.image > a > img")
-	public WebElement macbook;
-	@FindBy(css = "#content > div.row > div:nth-child(2) > div > div.image > a > img")
-	public WebElement iPhone;
-	@FindBy(css = "#content > div.row > div:nth-child(3) > div > div.image > a > img")
-	public WebElement cinema;
-	@FindBy(css = "#content > div.row > div:nth-child(4) > div > div.image > a > img")
-	public WebElement canon;
+	@FindBy(css = "#content > div.row > div:nth-child(1)")
+	public List<WebElement> homeProducts;
 	
-	// add to cart buttons for the products on the homepage
-	@FindBy(css = "#content > div.row > div:nth-child(1) > div > div.button-group > button:nth-child(1)")
-	public WebElement addMacbook;
-	@FindBy(css = "#content > div.row > div:nth-child(2) > div > div.button-group > button:nth-child(1)")
-	public WebElement addIphone;
-	@FindBy(css = "#content > div.row > div:nth-child(3) > div > div.button-group > button:nth-child(1)")
-	public WebElement addCinema;
-	@FindBy(css = "#content > div.row > div:nth-child(4) > div > div.button-group > button:nth-child(1)")
-	public WebElement addCanon;
+	@FindBy(css = "#content > div.row > div:nth-child > div > div.image > a")
+	public List<WebElement> homeImageLinks;
 	
-	//wishlist products on the homepage
-	@FindBy(css = "#content > div.row > div:nth-child(1) > div > div.button-group > button:nth-child(2)")
-	public WebElement wishlistMacbook;
-	@FindBy(css = "#content > div.row > div:nth-child(2) > div > div.button-group > button:nth-child(2)")
-	public WebElement wishlistIphone;
-	@FindBy(css = "#content > div.row > div:nth-child(3) > div > div.button-group > button:nth-child(2)")
-	public WebElement wishlistCinema;
-	@FindBy(css = "#content > div.row > div:nth-child(4) > div > div.button-group > button:nth-child(2)")
-	public WebElement wishlistCanon;
+	@FindBy(css = "#content > div.row > div > div > div.button-group > button:nth-child(1)")
+	public List<WebElement> homeAddToCartBtns;
 	
-	//compare products on the homepage
-	@FindBy(css = "#content > div.row > div:nth-child(1) > div > div.button-group > button:nth-child(3)")
-	public WebElement compareMacbook;
-	@FindBy(css = "#content > div.row > div:nth-child(2) > div > div.button-group > button:nth-child(3)")
-	public WebElement compareIphone;
-	@FindBy(css = "#content > div.row > div:nth-child(3) > div > div.button-group > button:nth-child(3)")
-	public WebElement compareCinema;
-	@FindBy(css = "#content > div.row > div:nth-child(4) > div > div.button-group > button:nth-child(3)")
-	public WebElement compareCanon;
+	@FindBy(css = "#content > div.row > div:nth-child > div > div.button-group > button:nth-child(2)")
+	public List<WebElement> homeWishlistBtns;
+	
+	@FindBy(css = "#content > div.row > div:nth-child > div > div.button-group > button:nth-child(3)")
+	public List<WebElement> homeCompareBtns;
+	
 	
 	//success alert Message
 	@FindBy(css = "#common-home > div.alert.alert-success.alert-dismissible")
@@ -62,85 +40,28 @@ public class HomePage {
 	
 	
 	//product description
-	public void getMacbookDetails() {
-		js.executeScript("arguments[0].scrollIntoView();", addMacbook);
-		macbook.click();
-	}
-	
-	public void getIphoneDetails() {
-		js.executeScript("arguments[0].scrollIntoView();", addIphone);
-		iPhone.click();
-	}
-	
-	public void getCinemaDetails() {
-		js.executeScript("arguments[0].scrollIntoView();", addCinema);
-		cinema.click();
-	}
-	
-	public void getCanonDetails() {
-		js.executeScript("arguments[0].scrollIntoView();", addCanon);
-		canon.click();
+	public void getProductDetails(int index) {
+		js.executeScript("arguments[0].scrollIntoView();", homeImageLinks.get(index));
+		homeImageLinks.get(index).click();
 	}
 	
 	//add products to cart
-	public void addMacbookToCart() {
-		js.executeScript("window.scrollBy(0,800);");
-		addMacbook.click();
+	public void addProductToCart(int index) {
+		System.out.println(homeAddToCartBtns.size());
+		js.executeScript("arguments[0].scrollIntoView();", homeAddToCartBtns.get(index));
+		homeAddToCartBtns.get(index).click();
 	}
 	
-	public void addIphoneToCart() {
-		js.executeScript("arguments[0].scrollIntoView();", addIphone);
-		addIphone.click();
-	}
-	
-	public void addCinemaToCart() {
-		js.executeScript("arguments[0].scrollIntoView();", addCinema);
-		addCinema.click();
-	}
-	
-	public void addCanonToCart() {
-		js.executeScript("arguments[0].scrollIntoView();", addCanon);
-		addCanon.click();
-	}
 	//wishlist products
-	public void addMackbookToWishlist() {
-		js.executeScript("arguments[0].scrollIntoView();", wishlistMacbook);
-		wishlistMacbook.click();
-	}
-	
-	public void addIphoneToWishList() {
-		js.executeScript("arguments[0].scrollIntoView();", wishlistIphone);
-		wishlistIphone.click();
-	}
-	
-	public void addCinemaToWishlist() {
-		js.executeScript("arguments[0].scrollIntoView();", wishlistCinema);
-		addCinema.click();
-	}
-	
-	public void addCanonToWishlist() {
-		js.executeScript("arguments[0].scrollIntoView();", wishlistCanon);
-		wishlistCanon.click();
+	public void addProductToWishlist(int index) {
+		js.executeScript("arguments[0].scrollIntoView();", homeWishlistBtns.get(index));
+		homeWishlistBtns.get(index);
 	}
 	
 	//compare products
-	public void addMacbookToCompare() {
-		js.executeScript("arguments[0].scrollIntoView();", compareMacbook);
-		compareMacbook.click();
+	public void addProductToCompare(int index) {
+		js.executeScript("arguments[0].scrollIntoView();", homeCompareBtns.get(index));
+		homeCompareBtns.get(index);
 	}
 	
-	public void addIphoneToCompare() {
-		js.executeScript("arguments[0].scrollIntoView();", compareIphone);
-		compareIphone.click();
-	}
-	
-	public void addCinemaToCompare() {
-		js.executeScript("arguments[0].scrollIntoView();", compareCinema);
-		compareCinema.click();
-	}
-	
-	public void addCanonToCompare() {
-		js.executeScript("arguments[0].scrollIntoView();", compareCanon);
-		compareCanon.click();
-	}
 }

@@ -25,7 +25,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class ContactUsTest {
 
 	WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
+	String baseUrl = "http://localhost/miniproject/index.php?route=information/contact";
 	ContactUs cnct_object;
 	ExtentReports report;
 	ExtentTest test;
@@ -112,8 +112,9 @@ public class ContactUsTest {
 		Assert.assertEquals(cnct_object.getEnquiryWarning(), "Enquiry must be between 10 and 3000 characters!");
 	}
 
+
+	@Test(enabled = true)
 	//TC_OC_CU_006
-	@Test
 	public void testCase006() {
 		test.log(LogStatus.INFO, "TC_OC_CU_006-To test whether contact us form works even when user is not signed in");
 		try {
@@ -135,6 +136,7 @@ public class ContactUsTest {
 			test.log(LogStatus.INFO, e);
 		}
 	}
+
 
 	//TC_OC_CU_007
 	@Test
@@ -177,6 +179,7 @@ public class ContactUsTest {
 			test.log(LogStatus.INFO, e);
 		}
 	}
+
 
 	//TC_OC_CU_008
 	@Test

@@ -28,7 +28,7 @@ public class Tablets {
 	WebElement wishlistTablet;
 	@FindBy(css = "")
 	WebElement compareTablet;
-	@FindBy(css = "#content > div:nth-child(3) > div > div > div:nth-child(2) > div.button-group > button:nth-child(3)")
+	@FindBy(css = "#menu > div.collapse.navbar-collapse.navbar-ex1-collapse > ul > li:nth-child(4) > a")
 	public WebElement tabletTab;
 
 	public void viewTabletDetails() {

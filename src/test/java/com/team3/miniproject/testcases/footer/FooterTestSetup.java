@@ -26,7 +26,7 @@ import screenshot.ScreenShotCapture;
 public class FooterTestSetup {
 
 	WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/";
+	String baseUrl = "http://localhost/miniproject/";
 	Footer f_object;
 	Header h_object;
 	LoginPage login_object;
@@ -50,8 +50,6 @@ public class FooterTestSetup {
 		catch(Exception e) {
 			test.log(LogStatus.FAIL, e);
 		}
-		
-		
 	}
 	
 	//TC_OC_FL_002
@@ -72,7 +70,6 @@ public class FooterTestSetup {
 		catch(Exception e) {
 			test.log(LogStatus.FAIL, e);
 		}
-		
 	}
 
 	//TC_OC_FL_003
@@ -93,7 +90,6 @@ public class FooterTestSetup {
 		catch(Exception e) {
 			test.log(LogStatus.FAIL, e);
 		}
-		
 	}
 
 	//TC_OC_FL_004
@@ -114,7 +110,6 @@ public class FooterTestSetup {
 		catch(Exception e) {
 			test.log(LogStatus.FAIL, e);
 		}
-		
 	}
 
 	//TC_OC_FL_005
@@ -135,7 +130,6 @@ public class FooterTestSetup {
 		catch(Exception e) {
 			test.log(LogStatus.FAIL, e);
 		}
-		
 	}
 
 	//TC_OC_FL_006
@@ -156,7 +150,6 @@ public class FooterTestSetup {
 		catch(Exception e) {
 			test.log(LogStatus.FAIL, e);
 		}
-		
 	}
 
 	//TC_OC_FL_007
@@ -177,7 +170,6 @@ public class FooterTestSetup {
 		catch(Exception e) {
 			test.log(LogStatus.FAIL, e);
 		}
-		
 	}
 
 	//TC_OC_FL_008
@@ -197,7 +189,6 @@ public class FooterTestSetup {
 		catch(Exception e) {
 			test.log(LogStatus.FAIL, e);
 		}
-		
 	}
 
 	//TC_OC_FL_009
@@ -237,7 +228,6 @@ public class FooterTestSetup {
 		catch(Exception e) {
 			test.log(LogStatus.FAIL, e);
 		}
-		
 	}
 
 	//TC_OC_FL_011
@@ -283,7 +273,7 @@ public class FooterTestSetup {
 		catch(Exception e) {
 			test.log(LogStatus.FAIL, e);
 		}
-		
+
 	}
 
 	@BeforeMethod
@@ -296,6 +286,7 @@ public class FooterTestSetup {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
+		f_object = new Footer(driver);
 	}
 
 	// addded ITestResult fo screenshot
