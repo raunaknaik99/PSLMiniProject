@@ -1,6 +1,8 @@
 package com.team3.miniproject.testcases.contactus;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -23,7 +25,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class ContactUsTest {
 
 	WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
+	String baseUrl = "http://localhost/miniproject/index.php?route=information/contact";
 	ContactUs cnct_object;
 	ExtentReports report;
 	ExtentTest test;
@@ -78,6 +80,7 @@ public class ContactUsTest {
 	  driver.findElement(By.linkText("Continue"));
   }
 	
+
 /*-------------------------------*/
 	@Test(enabled = false)
 	public void testCase003() {
@@ -89,7 +92,7 @@ public class ContactUsTest {
 		Assert.assertEquals(cnct_object.getEmailWarning(), "E-Mail Address does not appear to be valid!");
 	}
 
-	@Test(enabled = false)
+	@Test
 	public void testCase004() {
 		cnct_object = new ContactUs(driver);
 		cnct_object.enterName("Te");
@@ -99,7 +102,7 @@ public class ContactUsTest {
 		Assert.assertEquals(cnct_object.getYourNameWarning(), "Name must be between 3 and 32 characters!");
 	}
 
-	@Test(enabled = false)
+	@Test
 	public void testCase005() {
 		cnct_object = new ContactUs(driver);
 		cnct_object.enterName("Tester");
@@ -109,8 +112,9 @@ public class ContactUsTest {
 		Assert.assertEquals(cnct_object.getEnquiryWarning(), "Enquiry must be between 10 and 3000 characters!");
 	}
 
+
+	@Test(enabled = true)
 	//TC_OC_CU_006
-	@Test
 	public void testCase006() {
 		test.log(LogStatus.INFO, "TC_OC_CU_006-To test whether contact us form works even when user is not signed in");
 		try {
@@ -132,6 +136,7 @@ public class ContactUsTest {
 			test.log(LogStatus.INFO, e);
 		}
 	}
+
 
 	//TC_OC_CU_007
 	@Test
@@ -175,6 +180,7 @@ public class ContactUsTest {
 		}
 	}
 
+
 	//TC_OC_CU_008
 	@Test
 	public void testCase008() {
@@ -201,7 +207,8 @@ public class ContactUsTest {
 
 	@BeforeMethod
 	public void beforeMethod(Method m) {
-		report =new ExtentReports("ExtentReports\\ContactUs\\"+m.getName()+".html");
+		String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+		report =new ExtentReports("ExtentReports\\ContactUs\\"+m.getName()+"_"+timeStamp+".html");
 		test=report.startTest(m.getName());
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();

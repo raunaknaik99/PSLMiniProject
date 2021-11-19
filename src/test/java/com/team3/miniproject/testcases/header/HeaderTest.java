@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -24,10 +24,11 @@ public class HeaderTest {
 //	  Assert.assertEquals(h_object.getPageTitle(), "xxxxxxx");
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void g() {
-//	  h_object = new Header(driver);
-//	  h_object.selectFromMyAccountDropDown(1);
+		h_object = new Header(driver);
+		h_object.selectFromMyAccountDropDown(1);
+		h_object.clickHomePageLink();
 	}
 
 	@Test(enabled = true)
@@ -38,7 +39,7 @@ public class HeaderTest {
 		driver.findElement(By.id("input-password")).sendKeys("testing123");
 		driver.findElement(By.xpath("//*[@id='content']/div/div[2]/div/form/input")).click();
 		h_object = new Header(driver);
-		h_object.clickYourStoreLink();
+		h_object.clickHomePageLink();
 		driver.findElement(By.xpath("//*[@id='content']/div[2]/div[1]/div/div[3]/button[1]")).click();
 		driver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div[2]/div/div[3]/button[1]")).click();
 		Thread.sleep(2000);
@@ -61,10 +62,16 @@ public class HeaderTest {
 		h_object.getEmptyCartText();
 	}
 
+	@Test
+	public void k() throws InterruptedException {
+		h_object = new Header(driver);
+		h_object.selectFromMp3PlayersDropDown(5);
+	}
+
 	@BeforeMethod
 	public void beforeMethod() {
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+		WebDriverManager.edgedriver().setup();
+		driver = new EdgeDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(baseUrl);
 		driver.manage().window().maximize();

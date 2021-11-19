@@ -22,43 +22,43 @@ public class LoginTC_OC_001_to_005 {
 	String expectedTitle;
 	String actualTitle;
 
-	@Test
-	public void testCase001To004() throws IOException {
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		reader.readExcel("C:\\Users\\diffa_pinto\\Desktop", "loginDDT.xlsx", "Sheet1");
-		for (reader.i = 1; reader.i < reader.rowCount + 1; reader.i++) {
-			String emailId = reader.getEmailId();
-			String password = reader.getPassword();
-			login1.login(emailId, password);
-			actualTitle = login1.driver.getTitle();
+  @Test
+  public void testCase001To004() throws IOException {
+	
+	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	  	reader.readExcel("C:\\Users\\diffa_pinto\\Desktop","loginDDT.xlsx","Login");
+		  for (reader.i = 1; reader.i<reader.rowCount+1; reader.i++) {  
+		  String emailId=reader.getEmailId();
+		  String password=reader.getPassword();  
+		  login1.login(emailId,password);
+		  actualTitle=login1.driver.getTitle();
 
-			// assert Login unsuccessful/unsuccessful
-			if (reader.i < reader.rowCount) {
-				expectedTitle = "Account Login";
+		  //assert Login unsuccessful/unsuccessful
+		  if(reader.i<reader.rowCount) {
+			expectedTitle="Account Login";
+		  }
+		  if(reader.i==reader.rowCount) {
+			  try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			if (reader.i == reader.rowCount) {
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				expectedTitle = "My Account";
-			}
-			Assert.assertEquals(actualTitle, expectedTitle);
-		}
-	}
-
-	@Test
-	public void testCase005() throws IOException {
-
-		login1.login("", "");
-		actualTitle = login1.driver.getTitle();
-		expectedTitle = "Account Login";
-		Assert.assertEquals(actualTitle, expectedTitle);
-
-	}
+			  expectedTitle="My Account";
+		  }
+		  Assert.assertEquals(actualTitle, expectedTitle);  
+		  }
+  }
+  @Test 
+  public void testCase005() throws IOException {
+		  login1.login("","");
+		  actualTitle=login1.driver.getTitle();
+		  expectedTitle="Account Login";
+		  Assert.assertEquals(actualTitle, expectedTitle);
+		 
+	  }
+  
 
 	@Test
 	public void testCase006() throws IOException {
