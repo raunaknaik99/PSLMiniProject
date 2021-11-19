@@ -55,7 +55,7 @@ public class WishListTestCases {
 	  }
 	  else {
 		  test.log(LogStatus.FAIL, "Wish List Count is not reflected correctly");
-		s.captureScreenshot("\\WishList\\" + "testCase006_"+ timeStamp +".PNG");
+		  s.captureScreenshot("\\WishList\\" + "testCase006_"+ timeStamp +".PNG");
 
 	  }}catch(Exception e) {
 		  test.log(LogStatus.INFO, e);

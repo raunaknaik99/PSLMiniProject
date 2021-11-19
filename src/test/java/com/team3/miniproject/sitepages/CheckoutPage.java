@@ -123,7 +123,16 @@ public class CheckoutPage {
 	
 	@FindBy(linkText = "My Account")
 	WebElement myAccountLinkText;
+	
+	@FindBy(css="div#content> div>div:nth-of-type(3)>div>h4")
+	WebElement stepTitle;
+	
+	@FindBy(css="div#payment-new>div:nth-of-type(6)>div>div")
+	WebElement cityWarning;
 
+	@FindBy(css="div#payment-new>div:nth-of-type(2)>div>div")
+	WebElement lNameWarning;
+	
 	public void navigateToHomepage() {
 
 //		System.setProperty("webdriver.gecko.driver", "resources\\geckodriver.exe");
@@ -334,6 +343,18 @@ public class CheckoutPage {
 	//get post code element
 	public WebElement getPostCode() {
 		return postcodeField;
+	}
+	
+	public WebElement getStep3Title() {
+		return stepTitle;
+	}
+	
+	public WebElement getCityWarning() {
+		return cityWarning;
+	}
+	
+	public WebElement getLnameWarning() {
+		return lNameWarning;
 	}
 	
 	public static void main(String[] args) {

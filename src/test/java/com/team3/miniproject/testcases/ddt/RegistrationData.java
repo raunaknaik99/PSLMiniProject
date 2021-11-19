@@ -10,7 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class RegistrationData {
 
 	public ArrayList<ArrayList<String>> userData() throws IOException {
-		ArrayList<ArrayList<String>> userdata = new ArrayList<ArrayList<String>>(5);
+		ArrayList<ArrayList<String>> userdata = new ArrayList<ArrayList<String>>(12);
 
 		FileInputStream fis = new FileInputStream("src\\test\\resources\\RegistrationData.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
