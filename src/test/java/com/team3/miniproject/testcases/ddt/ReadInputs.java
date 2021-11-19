@@ -44,14 +44,21 @@ public class ReadInputs {
             Cell cell = row.getCell(0);
             cellData = cell.getStringCellValue();
         } catch (NullPointerException npe) {
-           cellData = " ";
+           cellData = "";
         }
     	return(cellData);
     }
     public String getPassword() {
     	Row row = Sheet.getRow(i);
-    	return(row.getCell(1).getStringCellValue());
-    }
+    	try {
+            Cell cell = row.getCell(1);
+            cellData = cell.getStringCellValue();
+        } catch (NullPointerException npe) {
+           cellData = "";
+        }
+    	return(cellData);
+    	    }
+    
     public String getFirstName() {
     	Row row = Sheet.getRow(i);
     	try {

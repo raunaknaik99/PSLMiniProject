@@ -12,7 +12,6 @@ import com.team3.miniproject.sitepages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.testng.annotations.BeforeMethod;
-import com.team3.miniproject.testcases.ddt.ReadInputs;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

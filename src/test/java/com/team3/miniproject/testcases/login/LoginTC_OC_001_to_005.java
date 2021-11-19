@@ -24,10 +24,10 @@ public class LoginTC_OC_001_to_005 {
 
 
   @Test
-  public void testCase001To004() throws IOException {
+  public void testCase001To005() throws IOException {
 	
 	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	  	reader.readExcel("C:\\Users\\diffa_pinto\\Desktop","loginDDT.xlsx","Login");
+	  	reader.readExcel("src\\test\\resources","loginDDT.xlsx","Login");
 		  for (reader.i = 1; reader.i<reader.rowCount+1; reader.i++) {  
 		  String emailId=reader.getEmailId();
 		  String password=reader.getPassword();  
@@ -50,21 +50,15 @@ public class LoginTC_OC_001_to_005 {
 		  Assert.assertEquals(actualTitle, expectedTitle);  
 		  }
   }
-  @Test 
-  public void testCase005() throws IOException {
-		  login1.login("","");
-		  actualTitle=login1.driver.getTitle();
-		  expectedTitle="Account Login";
-		  Assert.assertEquals(actualTitle, expectedTitle);
-		 
-	  }
-  
+
 
 	@Test
-	public void testCase006() throws IOException {
-
-		login1.login("demo1@example.com", "testing123");
-		driver.get("http://localhost/opencartsite/index.php?route=account/login");
+	public void testCase005() throws IOException {
+		reader.i=5;
+		String emailId=reader.getEmailId();
+		  String password=reader.getPassword();  
+		  login1.login(emailId,password);
+		driver.get("http://localhost/miniproject/index.php?route=account/login");
 		actualTitle = login1.driver.getTitle();
 		expectedTitle = "My Account";
 		Assert.assertEquals(actualTitle, expectedTitle);
@@ -72,8 +66,11 @@ public class LoginTC_OC_001_to_005 {
 	}
 
 	@Test
-	public void testCase007() throws IOException {
-		login1.login("demo1@example.com", "testing123");
+	public void testCase006() throws IOException {
+		reader.i=5;
+		String emailId=reader.getEmailId();
+		  String password=reader.getPassword();  
+		  login1.login(emailId,password);
 		driver.navigate().back();
 		actualTitle = login1.driver.getTitle();
 		expectedTitle = "My Account";
