@@ -12,55 +12,58 @@ import org.testng.annotations.Test;
 		WebDriver driver;
 		JavascriptExecutor js;
 		 
-	@FindBy(xpath="//*[@id='content']/div[2]/div[1]/div/div[3]/button[2]") //MacBook Wishlist Button
+	@FindBy(css="button[onclick=\"wishlist.add('43');\"]") //MacBook Wishlist Button
 	WebElement MacWishlishbtn;
     
-	@FindBy(xpath="//*[@id='content']/div[2]/div[2]/div/div[3]/button[2]") //iPhone Wishlist Button
+	@FindBy(css="button[onclick=\"wishlist.add('40');\"]") //iPhone Wishlist Button
 	WebElement iphonewishlishbtn;
 	
-	 @FindBy(xpath="//*[@id=\"content\"]/div[2]/div[3]/div/div[3]/button[2]") //Apple Cinema 30 Wishlist button
+	 @FindBy(css="button[onclick=\"wishlist.add('42');\"]") //Apple Cinema 30 Wishlist button
 	 WebElement applecinemawishlishbtn;
 	
-	 @FindBy(xpath="//*[@id=\"wishlist-total\"]") //Wishlist button Top
+	 @FindBy(css="a#wishlist-total") //Wishlist button Top
 	 WebElement Wishbtntop;
 	 
-	 @FindBy(xpath="//*[@id=\"content\"]/div[1]/table/tbody/tr/td[6]/a") //Remove Button for wishlist
+	 @FindBy(css="a[data-original-title=\"Remove\"]") //Remove Button for wishlist
 	 WebElement removemac;
 	
-	 @FindBy(xpath="//*[@id=\"content\"]/div[1]/table/tbody/tr/td[6]/button") //Add to Cart Button for wishlist
-	public WebElement addcartmac;
+	 @FindBy(css="button[onclick=\"cart.add('43');\"]") //Add to Cart Button for wishlist
+	WebElement addcartmac;
 	 
-	 @FindBy(xpath="//*[@id=\"content\"]/div[2]/div/a") //Continue Button for wishlist
+	 @FindBy(css="a.btn.btn-primary") //Continue Button for wishlist
 	 WebElement continuebtn;
 	 
-	 @FindBy(xpath="//*[@id=\"top-links\"]/ul/li[2]/a") //MyAccount Button present in header
+	 @FindBy(css="a[title=\"My Account\"]") //MyAccount Button present in header
 	 WebElement  Loginbtn;
 	 
 	 
-	 @FindBy(xpath="//*[@id=\"top-links\"]/ul/li[2]/ul/li[2]/a") //Login button present under MyAccount
+	 @FindBy(linkText="Login") //Login button present under MyAccount
 	 WebElement  Loginbtn1;
 	 
-	 @FindBy(xpath="//*[@id=\"input-email\"]") //Email text box for login
+	 @FindBy(css="input#input-email") //Email text box for login
 	 WebElement  email;
 	 
-	 @FindBy(xpath="//*[@id=\"input-password\"]") //Password text box for login
+	 @FindBy(css="input#input-password") //Password text box for login
      WebElement  password;
 	 
-	 @FindBy(xpath="//*[@id=\"content\"]/div/div[2]/div/form/input") //Login Button after entering password and email
+	 @FindBy(css="input[value=\"Login\"]") //Login Button after entering password and email
 	 WebElement  Login;
 	 
 	 @FindBy(xpath="//*[@id=\"account-account\"]/ul/li[1]") //Home button present in header tab
 	 WebElement  Home;
 	 
-	 @FindBy(xpath="//*[@id=\"top-links\"]/ul/li[4]/a")  //shopping cart button present on the top
+	 @FindBy(css="a[title=\"Shopping Cart\"]")  //shopping cart button present on the top
 	 WebElement  shoppingcart;
 	 
 	 @FindBy(xpath="//*[@id=\"content\"]/div[3]/div[1]/a") //Home button form cart
 	 WebElement  Home13;
 	 
 	 @FindBy(xpath="//*[@id=\"account-wishlist\"]/ul/li[1]/a")//Home button form wishlist
-	 WebElement  Homecart;	
-	 
+	 WebElement  Homecart;
+		
+	 @FindBy(css = "div.alert.alert-success.alert-dismissible")
+		public WebElement successAlert;
+		
 	 public WishList(WebDriver driver) {
 		 this.driver = driver;
 		 js = (JavascriptExecutor) this.driver;
@@ -134,3 +137,4 @@ import org.testng.annotations.Test;
 	
 	
 	}
+

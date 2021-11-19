@@ -85,19 +85,17 @@ public class AppleCinema {
 	@FindBy(css = "div[class='text-danger']")
 	WebElement mandatoryWarning;
 	
+	//Success message element
+	@FindBy(xpath = "//*[@id=\"product-product\"]/div[1]")
+	WebElement successMessage;
+	
 	public AppleCinema(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 		js=(JavascriptExecutor)driver;
 	}
-
-//	public WebElement scrollAndClick1(String path) {
-//		//JavascriptExecutor js=(JavascriptExecutor)driver;
-//		WebElement we = driver.findElement(By.xpath(path));
-//		js.executeScript("arguments[0].scrollIntoView();",we);
-//		we.click();
-//		return we;
-//	}
+	
+	//method to scroll and click
 	public WebElement scrollAndClick2(String id) {
 		JavascriptExecutor js=(JavascriptExecutor)driver;
 		WebElement we = driver.findElement(By.id(id));
@@ -105,40 +103,31 @@ public class AppleCinema {
 		we.click();
 		return we;
 	}
-//	
+	
 	//click the apple cinema cart button on home page
 	public void clickAppleCinemaCart() {
-		//scrollAndClick1(path);
 		appleCinemaCart.click();
 	}
 	
 	//click the radio btn on apple cinema form page
 	public void clickRadioButton() {
-		//String path_temp="";
-		//scrollAndClick1(path);
 		radioBtn.click();
 	}
 	
+	//method to click checkbox
 	public void clickCheckbox() {
-		//String path="";
-		//scrollAndClick1(path);
 		checkBx.click();
 	}
 	
 	//method to enter text in textbox on apple cinema form page
 	public void enterInTextbox(String text) {
 		textBx.click();
-		//WebElement textbox= scrollAndClick2("input-option208");
 		textBx.clear();
 		textBx.sendKeys(text);
-
 	}
 	
 	//method to select from dropdown on apple cinema form page
 	public void clickDropdown(String value) {
-
-		//WebElement dropdown =scrollAndClick2("input-option217");
-		//dropDown.click();
 		Select item = new Select(dropDown);
 		item.selectByValue(value);
 		dropDown.click();
@@ -146,7 +135,6 @@ public class AppleCinema {
 	
 	//method to enter text in text area field on apple cinema form page
 	public void enterInTextArea(String text) {
-		//WebElement textArea = scrollAndClick2("input-option209");
 		textArea.clear();
 		textArea.sendKeys(text);
 	}
@@ -156,8 +144,7 @@ public class AppleCinema {
 		StringSelection stringSelection = new StringSelection(path); // StringSelction class is used for copy and paste operations
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
 		scrollAndClick2("button-upload222");
-		Thread.sleep(5000);
-		
+		Thread.sleep(5000);		
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_CONTROL);
 	    robot.keyPress(KeyEvent.VK_V);
@@ -165,7 +152,6 @@ public class AppleCinema {
 	    robot.keyRelease(KeyEvent.VK_CONTROL);
 	    robot.keyPress(KeyEvent.VK_ENTER);
 	    robot.keyRelease(KeyEvent.VK_ENTER);
-	    
 	    Thread.sleep(2000);
 	    Alert alert = driver.switchTo().alert();
 	    if(alert != null) {
@@ -179,8 +165,6 @@ public class AppleCinema {
 	
 	//method to enter quantity in apply cinema form page
 	public void enterQuantity(String num) {
-
-		//WebElement quantity = scrollAndClick2("input-quantity");
 		quantity.clear();
 		quantity.sendKeys(num);
 	}
@@ -201,7 +185,6 @@ public class AppleCinema {
 	
 	//method to check success alert
 	public boolean checkSuccessAlert() throws InterruptedException {
-		WebElement successMessage = driver.findElement(By.xpath("//*[@id=\"product-product\"]/div[1]"));
 		if(successMessage.isDisplayed()) {
 			return true;
 		}
@@ -213,22 +196,7 @@ public class AppleCinema {
 	//returns page title
 	public String checkPageTitle() {
 		return driver.getTitle();
-	}
-	
-	//method to click fb like button
-	public void clickFbLikeBtn() throws InterruptedException, IOException {
-		ss=new ScreenShotCapture(driver);
-		js.executeScript("arguments[0].scrollIntoView();", ratingArea);
-		driver.switchTo().frame(fbIframe);
-		Thread.sleep(5000);
-		Actions hoverAction=new Actions(driver);
-		hoverAction.moveToElement(likeBtnSpan).perform();
-		Thread.sleep(3000);
-		likeBtn.click();
-		ss.captureScreenshot("FBWindow.png");
-		Thread.sleep(3000);//only to visualize the opening of new window
-	}
-	
+	}	
 	
     //method to click tweet button
 	public void clickTweetBtn() throws InterruptedException, IOException {

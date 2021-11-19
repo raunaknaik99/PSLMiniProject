@@ -35,7 +35,7 @@ import screenshot.*;
 
 public class CartFunctionality {
 	WebDriver driver;
-	String baseUrl = "http://localhost";
+	String baseUrl = "http://localhost/miniproject";
 	ExtentReports report;
 	static ExtentTest test;
 	
@@ -51,7 +51,7 @@ public class CartFunctionality {
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 	
 	// TC_OC_CART_001
-  @Test(enabled = true)
+  @Test(enabled = false)
   public void testCase001() throws InterruptedException, IOException{
 	  objScreenshot = new ScreenShotCapture(driver);
 	  test.log(LogStatus.INFO, "TC_OC_CART_001 - To add a product in the cart and verify its addition in the cart.");
@@ -86,7 +86,7 @@ public class CartFunctionality {
 	  
 }
 //  TC_OC_CART_002
-  @Test (enabled = true)
+  @Test (enabled = false)
   public void testCase002() throws InterruptedException, AWTException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart with quantity less than the minimum required quantity.");
 	  objScreenshot = new ScreenShotCapture(driver);
@@ -129,7 +129,7 @@ public class CartFunctionality {
 	  
   }
   //TC_OC_CART_003
-  @Test (enabled = true)
+  @Test (enabled = false)
   public void testCase003() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_003 - Adding a product which is not in stock to the cart.");
 	  objScreenshot = new ScreenShotCapture(driver);
@@ -166,7 +166,7 @@ public class CartFunctionality {
 	  
 }
   //TC_OC_CART_004
-  @Test (enabled = true)
+  @Test (enabled = false)
   public void testCase004() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_004 - Removing a product from the cart.");
 	  objScreenshot = new ScreenShotCapture(driver);
@@ -196,12 +196,13 @@ public class CartFunctionality {
 		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase004_"+ timeStamp +".PNG");
 	  }
 } 
-  //TC_OC_CART_005
+  //TC_OC_CART_005 - Adding a product to the cart with quantity as zero.
 @Test(enabled = true)
   public void testCase005() throws InterruptedException, IOException {
 	test.log(LogStatus.INFO, "TC_OC_CART_005 - Adding a product to the cart with quantity as zero.");
 	objScreenshot = new ScreenShotCapture(driver);
 	 driver.manage().window().maximize();
+	 //Click on an item
 	 driver.findElement(By.linkText("Desktops")).click();
 	 Thread.sleep(1000);
 	 driver.findElement(By.linkText("Mac (1)")).click();
@@ -217,12 +218,14 @@ public class CartFunctionality {
 	 WebElement qty = driver.findElement(By.id("input-quantity"));
 	 qty.clear();
 	 Thread.sleep(2000);
+	 // Enter Quantity as 0
 	 qty.sendKeys("0");
 	 Thread.sleep(1000);
+	 //Add to cart
 	 driver.findElement(By.id("button-cart")).click();
 	 Thread.sleep(2000);
 	 
-	 WebElement successAlert = driver.findElement(By.xpath("//*[@id=\"product-product\"]/div[1]"));
+	 WebElement successAlert = driver.findElement(By.cssSelector("#product-product > div.alert.alert-success.alert-dismissible"));
 	 if(successAlert.isDisplayed()) {
 		 test.log(LogStatus.FAIL, "The warning about the quantity is not displayed.");
 		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase005_"+ timeStamp +".PNG");
@@ -232,7 +235,7 @@ public class CartFunctionality {
 	 }
   }
 //TC_OC_CART_006
-  @Test (enabled = true)
+  @Test (enabled = false)
   public void testCase006() throws InterruptedException, AWTException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart with quantity less than the minimum required quantity.");
 	  objScreenshot = new ScreenShotCapture(driver);
@@ -274,7 +277,7 @@ public class CartFunctionality {
 	  }
   }
   //TC_OC_CART_007
-   @Test(enabled = true)
+   @Test(enabled = false)
   public void testCase007() throws InterruptedException, IOException {
 	   test.log(LogStatus.INFO, "TC_OC_CART_007 - Adding a product to the cart but leaving the quantity field blank.");
 	   objScreenshot = new ScreenShotCapture(driver);
@@ -306,8 +309,9 @@ public class CartFunctionality {
 	 }
   }
    //TC_OC_CART_008
-   @Test(enabled = true)
+   @Test(enabled = false)
    public void testCase008() throws IOException {
+	   try {
  	  test.log(LogStatus.INFO, "TC_OC_CART_008-Add product with customizable features to cart but leave some of the required fields in the features form blank ");
  	  objScreenshot = new ScreenShotCapture(driver);
  	  hpc_object=new AppleCinema(driver); //create a new instance of AppleCinema Class
@@ -328,70 +332,16 @@ public class CartFunctionality {
  		  test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
  		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase008_"+ timeStamp +".PNG");
  	  }
+	   }catch(Exception e) {
+		   test.log(LogStatus.INFO, e);
+	   }
    }
    
-   //TC_OC_CART_009
-   @Test(enabled = true)
-   public void testCase009() throws InterruptedException, IOException {
- 	  test.log(LogStatus.INFO, "TC_OC_CART_009-To verify that new window opens when user clicks the like button");
- 	  objScreenshot = new ScreenShotCapture(driver);
- 	  hpc_object=new AppleCinema(driver); //create an instance of AppleCart class
- 	  //click on cinema cart
- 	  hpc_object.clickAppleCinemaCart();
- 	  //wait till title loads
- 	  WebDriverWait w =new WebDriverWait(driver, 5);
- 	  w.until(ExpectedConditions.titleIs("Apple Cinema 30"));
- 	  //get parent window handle
- 	  String parentWindowHandle=driver.getWindowHandle();
- 	  if(driver.getTitle().equals("Apple Cinema 30")) {
- 		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
- 	  }
- 	  else {
- 	      test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
- 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009_"+ timeStamp +".PNG");
- 	  }
- 	  //click on like btn
- 	  hpc_object.clickFbLikeBtn();
- 	  //get all the window handles
- 	  Set<String> childWindowHandles=driver.getWindowHandles();
- 	  Iterator<String> itr=childWindowHandles.iterator();  
- 	  while(itr.hasNext()) {
- 		  String childWindow=itr.next();
- 		  //switch over to child handle
- 		  if(!parentWindowHandle.equals(childWindow)) {
- 			  driver.switchTo().window(childWindow);
- 			  w.until(ExpectedConditions.titleIs("Facebook"));
- 			  test.log(LogStatus.INFO, "Switched to child window handle");
- 			  if(driver.getTitle().equals("Facebook")) {
- 				  test.log(LogStatus.PASS, "Test Passed- Child window Title matched");
- 			  }else {
- 				  test.log(LogStatus.FAIL, "Test Failed- Child Window title mismatched");
- 				 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009_"+ timeStamp +".PNG");
- 			  }
- 			  driver.close();
- 		  }
- 		  else {
- 			  test.log(LogStatus.FAIL, "Test Failed- Did not switch to child window");
- 			 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009_"+ timeStamp +".PNG");
- 		  }
- 	  }
- 	  Thread.sleep(3000);//only to visualize the going back to parent window
- 	  //switch back to parent window handle
- 	  driver.switchTo().window(parentWindowHandle);
- 	  test.log(LogStatus.INFO, "Switched to parent window handle");
- 	  //verify is test passed or failed
- 	  if(driver.getTitle().equals("Apple Cinema 30")) {
- 		  test.log(LogStatus.PASS, "Test Passed- Parent Window Title Matched");
- 	  }
- 	  else {
- 	      test.log(LogStatus.FAIL, "Test Failed- Parent Window Title Mismatched");
- 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009_"+ timeStamp +".PNG");
- 	  }
-   }
    
    //TC_OC_CART_010
-   @Test(enabled=true)
+   @Test(enabled=false)
    public void testCase010() throws InterruptedException, IOException {
+	   try {
  	  test.log(LogStatus.INFO, "TC_OC_CART_010-To verify that new window opens when user clicks the Tweet button");
  	  objScreenshot = new ScreenShotCapture(driver);
  	  
@@ -446,6 +396,9 @@ public class CartFunctionality {
  	      test.log(LogStatus.FAIL, "Test Failed- Parent Window Title Mismatched");
  	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010_"+ timeStamp +".PNG");
  	  }
+	   }catch(Exception e) {
+		   test.log(LogStatus.INFO, e);
+	   }
    }
   @BeforeMethod
   public void beforeMethod(Method m) {

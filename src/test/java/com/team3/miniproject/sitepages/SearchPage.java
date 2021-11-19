@@ -161,6 +161,10 @@ public class SearchPage {
 		return noResultsText.getText();
 	}
 
+	public int numProductsFound() {
+		return foundProducts.size();
+	}
+
 	public ArrayList<String> getProductNames() {
 		ArrayList<String> productNames = new ArrayList<String>();
 		for (WebElement productNameLink : foundProductsNameLinks) {
