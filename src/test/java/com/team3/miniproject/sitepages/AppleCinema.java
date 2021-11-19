@@ -152,7 +152,7 @@ public class AppleCinema {
 	}
 	
 	//File upload part
-	public void selectFileForUpload(String path) throws InterruptedException, AWTException {
+	public boolean selectFileForUpload(String path) throws InterruptedException, AWTException {
 		StringSelection stringSelection = new StringSelection(path); // StringSelction class is used for copy and paste operations
 		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
 		scrollAndClick2("button-upload222");
@@ -168,7 +168,14 @@ public class AppleCinema {
 	    
 	    Thread.sleep(2000);
 	    Alert alert = driver.switchTo().alert();
-	    alert.accept();
+	    if(alert.getText() == "Your file was successfully uploaded!") {
+	    	alert.accept();
+	    	return true;
+	    }
+	    else {
+	    	return false;
+	    }
+	    
 	    
 	}
 	
