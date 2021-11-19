@@ -323,7 +323,100 @@ public class CheckoutTestSetup {
 			}
 	}
 
-	
+
+/*----------------------------------------------------------------*/
+ 	@Test
+	  public void guestTestCase001() throws InterruptedException {
+		//test.log(LogStatus.INFO, "TC_OC_CG_001 - to checkout as a guest user");
+		  
+		 System.out.println("worked");
+		 cout = new CheckoutPom(driver);
+		 cout.guestClick();
+		  if(cout.guestBtnSelected()) {
+			  System.out.println("Selected");
+			  cout.clickContinue();
+			  Thread.sleep(2000);
+			  cout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
+			  cout.selectCountryAndState("India","Maharashtra");
+			  JavascriptExecutor js = (JavascriptExecutor) driver;
+			  js.executeScript("window.scrollBy(0,500)", "");
+			  Thread.sleep(2000);
+			  
+			  driver.findElement(By.id("button-guest")).click();
+			  Thread.sleep(2000);
+			  driver.findElement(By.id("button-shipping-method")).click();
+			  Thread.sleep(2000);
+			  cout.privacyCheckbox();
+			  driver.findElement(By.id("button-payment-method")).click();
+			  Thread.sleep(2000);
+			  cout.confirmOrder();
+			  
+			  WebDriverWait wdw = new WebDriverWait(driver, 5);
+				  
+			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
+				  cout.acceptAlert();
+				  cout.confirmOrder();
+				  //test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
+			  }else {
+				  //test.log(LogStatus.FAIL, "The alert message about cart products is not displayed.");
+			  }
+			  Thread.sleep(3000);
+			  Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText(), "Your order has been placed!");
+		  }else {
+			  System.out.println("Register Account is selected");
+		  }
+	  }
+	  
+	 @Test
+	  public void guestTestCase002() throws InterruptedException {
+		 cout = new CheckoutPom(driver);
+		 cout.guestClick();
+		 
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
+		 
+		  if(cout.guestBtnSelected()) {
+			  System.out.println("Selected");
+			  cout.clickContinue();
+			  Thread.sleep(2000);
+			  cout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
+			  cout.selectCountryAndState("India","Maharashtra");
+			  
+			  js.executeScript("window.scrollBy(0,500)", "");
+			  Thread.sleep(2000);
+			  
+			  //to uncheck the checkbox
+			  driver.findElement(By.name("shipping_address")).click();
+			  driver.findElement(By.id("button-guest")).click();
+			  Thread.sleep(2000);
+			  js.executeScript("window.scrollBy(0,-400)", "");
+			  
+			  Thread.sleep(3000);
+			  //delivery details
+			  cout.fillDeliveryDetails("xyz","vtest","123address","nyc","585940");
+			  cout.selectCountryAndStateAgain("United States", "Texas");
+			  Thread.sleep(2000);
+			  
+			  driver.findElement(By.id("button-guest-shipping")).click();
+			  Thread.sleep(2000);
+			  driver.findElement(By.id("button-shipping-method")).click();
+			  Thread.sleep(2000);
+			  cout.privacyCheckbox();
+			  driver.findElement(By.id("button-payment-method")).click();
+			  Thread.sleep(2000);
+			  cout.confirmOrder();
+			  
+			  WebDriverWait wdw = new WebDriverWait(driver, 5);
+			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
+				  cout.acceptAlert();
+				  cout.confirmOrder();
+			  }
+			  Thread.sleep(3000);
+			  Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText(), "Your order has been placed!");
+		  }else {
+			  System.out.println("Register Account is selected");
+		  }
+	  }
+/*-----------------------------------------------*/
 	
   @BeforeMethod
   public void beforeMethod(Method m) {
