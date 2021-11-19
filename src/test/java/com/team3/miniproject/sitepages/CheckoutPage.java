@@ -12,7 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import com.team3.miniproject.testcases.ddt.ReadInputs;
 
@@ -29,7 +31,7 @@ public class CheckoutPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(linkText="Checkout")
+	@FindBy(css="#top-links > ul > li:nth-child(5) > a > i")
 	WebElement checkoutIcon;
 	
 	@FindBy(css="[name='payment_address'][value='existing']")
@@ -38,7 +40,7 @@ public class CheckoutPage {
 	@FindBy(id="button-payment-address")
 	WebElement paymentAddressContinueButton;
 	
-	@FindBy(css="[name='payment_address'][value='new']")
+	@FindBy(css="#collapse-payment-address > div > form > div:nth-child(3) > label > input[type=radio]")
 	WebElement newPaymentAddress;
 	
 	@FindBy(css="[name='shipping_address'][value='existing']")
@@ -132,6 +134,8 @@ public class CheckoutPage {
 	}
 
 	public void checkout() {
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#top-links > ul > li:nth-child(5) > a > i")));
 		checkoutIcon.click();
 		try {
 			Thread.sleep(5000);
@@ -146,7 +150,10 @@ public class CheckoutPage {
 		paymentAddressContinueButton.click();
 	}
 
-	public void enterNewBillingDetails(int val){
+	public void enterNewBillingDetails(int val) throws InterruptedException{
+
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#collapse-payment-address > div > form > div:nth-child(3) > label > input[type=radio]")));
 		newPaymentAddress.click();
 		reader.i=val;
 		try {
