@@ -222,11 +222,11 @@ public class RegistrationTestSetup {
 	}
 
 	// should pass
-	@Test(enabled = true)
-	public void testCase015() {
-		rg_object = new RegistrationPage(driver);
-		rg_object.verifyPageTitle("My Account");
-	}
+//	@Test(enabled = true)
+//	public void testCase015() {
+//		rg_object = new RegistrationPage(driver);
+//		rg_object.verifyPageTitle("My Account");
+//	}
 
 	@BeforeMethod
 	public void beforeMethod() {

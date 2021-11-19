@@ -1,10 +1,14 @@
 package com.team3.miniproject.sitepages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 public class Cart {
@@ -14,6 +18,7 @@ public class Cart {
 	public Cart(WebDriver driver) {
 		this.driver = driver;
 		js = (JavascriptExecutor) this.driver;
+		PageFactory.initElements(driver, this);
 	}
 	
 	@FindBy(name = "search")
@@ -23,21 +28,21 @@ public class Cart {
 	@FindBy(xpath = "//*[@id=\\\"cart\\\"]/button")
 	WebElement cartBtn;
 	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div/div/a")
-	WebElement continueBtn;
-	@FindBy(name = "quantity[51]")
+	WebElement continueBtn; //continue button when the cart is empty
+	@FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]/div/input")
 	WebElement quantity;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/form/div/table/tbody/tr/td[4]/div/span/button[1]")
+	@FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]/div/span/button[1]")
 	WebElement updateBtn;
 	@FindBy(xpath = "//*[@id=\\\"content\\\"]/form/div/table/tbody/tr/td[4]/div/span/button[2]")
 	WebElement removeBtn;
-	@FindBy(xpath = "//*[@id=\\\"content\\\"]/div[3]/div[2]/a")
-	WebElement checkout;
+	@FindBy(linkText = "Checkout")
+	WebElement checkoutBtn;
 	@FindBy(linkText = "Continue Shopping")
-	public WebElement addMoreItems;
+	public WebElement addMoreItems; // continue button when the cart has items
 	
 	
 	//coupons, estimate shipping and gift certificate dropdowns
-	@FindBy(xpath = "/html/body/div[2]/div/div/div[1]/div[1]/div[1]/h4/a")
+	@FindBy(xpath = "//*[@id=\"accordion\"]/div[1]/div[1]/h4/a")
 	WebElement couponDropdown;
 	@FindBy(xpath = "//*[@id=\"accordion\"]/div[2]/div[1]/h4/a")
 	WebElement shippingDropdown;
@@ -66,6 +71,27 @@ public class Cart {
 	WebElement postalCode;
 	@FindBy(id = "button-quote")
 	WebElement getQuote;
+	
+	@FindBy(xpath = "//*[@id=\"content\"]/form/div/table")
+	public List<WebElement> cartItems;
+	
+	@FindAll(value = { @FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr") })
+	List<WebElement> tableRows;
+	
+	@FindAll(value = { @FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[2]") })
+	List<WebElement> prodCells;
+	
+	@FindAll(value = { @FindBy(xpath = "//*[@id=\"content\"]/form/div/table/tbody/tr/td[4]") })
+	List<WebElement> QuantityCells;
+	
+	public void removeOutOfStockItems() {
+//		for(int i = 1; i <= tableRows.size(); i++)
+		for(WebElement element : prodCells) {
+			if(element.getAttribute("span") != null) {
+				// logic yet to be implemented
+			}
+		}
+	}
 	
 	public void searchItems(String itemName) {
 		js.executeScript("arguments[0].scrollIntoView();", searchBar);
@@ -103,9 +129,9 @@ public class Cart {
 		removeBtn.click();
 	}
 	
-	public void checkout() {
-		js.executeScript("arguments[0].scrollIntoView();", checkout);
-		checkout.click();
+	public void checkout() throws InterruptedException {
+		js.executeScript("arguments[0].scrollIntoView();", checkoutBtn);
+		checkoutBtn.click();
 	}
 	public void addMoreItemsToCart() {
 		js.executeScript("arguments[0].scrollIntoView();", addMoreItems);
@@ -119,6 +145,7 @@ public class Cart {
 	}
 	
 	public void enterCouponCode(String code) {
+		couponCode.clear();
 		js.executeScript("arguments[0].scrollIntoView();", couponCode);
 		couponCode.sendKeys(code);
 	}
@@ -155,6 +182,7 @@ public class Cart {
 	}
 	
 	public void enterGiftCertificateCode(String code) {
+		giftCode.clear();
 		js.executeScript("arguments[0].scrollIntoView();", giftCode);
 		giftCode.sendKeys(code);
 	}

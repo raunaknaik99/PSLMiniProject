@@ -19,7 +19,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class ContactUsTest {
 
 	WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
+	String baseUrl = "http://localhost/miniproject/index.php?route=information/contact";
 	ContactUs cnct_object;
 
 	@Test(enabled = true)
@@ -52,7 +52,7 @@ public class ContactUsTest {
 		Assert.assertEquals(cnct_object.getEnquiryWarning(), "Enquiry must be between 10 and 3000 characters!");
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase006() {
 		cnct_object = new ContactUs(driver);
 		cnct_object.enterName("Errol");
@@ -61,7 +61,7 @@ public class ContactUsTest {
 		cnct_object.clickSubmit();
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase007() {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -85,7 +85,7 @@ public class ContactUsTest {
 		}
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase008() {
 		try {
 			WebElement nameField = driver.findElement(By.id("input-name"));

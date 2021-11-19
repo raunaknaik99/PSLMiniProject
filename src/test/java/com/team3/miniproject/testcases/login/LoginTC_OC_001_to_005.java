@@ -26,7 +26,7 @@ public class LoginTC_OC_001_to_005 {
   public void testCase001To004() throws IOException {
 	
 	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	  	reader.readExcel("C:\\Users\\diffa_pinto\\Desktop","loginDDT.xlsx","Sheet1");
+	  	reader.readExcel("C:\\Users\\diffa_pinto\\Desktop","loginDDT.xlsx","Login");
 		  for (reader.i = 1; reader.i<reader.rowCount+1; reader.i++) {  
 		  String emailId=reader.getEmailId();
 		  String password=reader.getPassword();  
@@ -51,9 +51,13 @@ public class LoginTC_OC_001_to_005 {
   }
   @Test 
   public void testCase005() throws IOException {
+<<<<<<< HEAD
 	
 	  
 	  
+=======
+
+>>>>>>> branch 'master' of https://github.com/RedIce-X/PSLMiniProject.git
 		  login1.login("","");
 		  actualTitle=login1.driver.getTitle();
 		  expectedTitle="Account Login";

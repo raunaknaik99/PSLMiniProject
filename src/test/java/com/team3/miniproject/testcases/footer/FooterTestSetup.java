@@ -20,7 +20,7 @@ import screenshot.ScreenShotCapture;
 public class FooterTestSetup {
 
 	WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/";
+	String baseUrl = "http://localhost/miniproject/";
 	Footer f_object;
 	Header h_object;
 	LoginPage login_object;
@@ -28,77 +28,74 @@ public class FooterTestSetup {
 
 	@Test
 	public void testCase001() {
-		f_object = new Footer(driver);
+		
 		f_object.getContactUs();
 	}
 
 	@Test
 	public void testCase002() {
-		f_object = new Footer(driver);
+		
 		f_object.getSiteMap();
 	}
 
 	@Test
 	public void testCase003() {
-		f_object = new Footer(driver);
+		
 		f_object.getReturns();
 	}
 
 	@Test
 	public void testCase004() {
-		f_object = new Footer(driver);
+		
 		f_object.getBrandsPage();
 	}
 
 	@Test
 	public void testCase005() {
-		f_object = new Footer(driver);
+		
 		f_object.getAffiliatePage();
 	}
 
 	@Test
 	public void testCase006() {
-		f_object = new Footer(driver);
+		
 		f_object.getAboutUs();
 	}
 
 	@Test
 	public void testCase007() {
-		f_object = new Footer(driver);
+		
 		f_object.getDeliveryInformation();
 	}
 
 	@Test
 	public void testCase008() {
-		f_object = new Footer(driver);
+		
 		f_object.getPrivacyPolicy();
 	}
 
 	@Test
 	public void testCase009() {
-		f_object = new Footer(driver);
+		
 		f_object.getTermsAndConditions();
 	}
 
 	@Test
 	public void testCase010() {
-		f_object = new Footer(driver);
+		
 		f_object.getNewsletter();
 	}
 
 	@Test
 	public void testCase011() {
-		f_object = new Footer(driver);
+		
 		f_object.getMyAccount();
 	}
 
-	@Test
+	@Test(priority=1)
 	public void testCase012() {
-		h_object = new Header(driver);
-		f_object = new Footer(driver);
-//		login_object = new LoginPage(driver);
-
-		h_object.selectFromMyAccountDropDown(1);
+     	login_object = new LoginPage(driver);
+        login_object.navigateToLogin();
 		login_object.login("demo1@example.com", "testing123");
 		f_object.getMyAccount();
 	}
@@ -110,6 +107,7 @@ public class FooterTestSetup {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(baseUrl);
 		driver.manage().window().maximize();
+		f_object = new Footer(driver);
 	}
 
 	// addded ITestResult fo screenshot

@@ -107,6 +107,7 @@ public class CartFunctionality {
 	  objHeader = new Header(driver);
 	  objHomePage.addMacbookToCart();
 	  Thread.sleep(5000);
+	  objHeader.clickCartDropDown();
 	  objHeader.clickViewCartOption(); 
 	  Thread.sleep(5000);
 	  objHeader.removeItemFromCart(0);

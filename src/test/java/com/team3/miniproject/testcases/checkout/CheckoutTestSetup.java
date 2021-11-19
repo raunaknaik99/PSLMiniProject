@@ -3,11 +3,14 @@ package com.team3.miniproject.testcases.checkout;
 import org.testng.annotations.Test;
 import com.team3.miniproject.sitepages.CheckoutPage;
 import com.team3.miniproject.sitepages.LoginPage;
-
+import com.team3.miniproject.testcases.ddt.ReadInputs;
+import com.team3.miniproject.sitepages.HomePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.testng.annotations.BeforeMethod;
+import com.team3.miniproject.testcases.ddt.ReadInputs;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
@@ -22,11 +25,13 @@ import org.testng.annotations.AfterMethod;
 //import com.teasitepages.CheckoutPage;
 
 
+
 public class CheckoutTestSetup {
 	WebDriver driver;
 	CheckoutPage checkout;
 	LoginPage login;
-	
+	HomePage objHomePage;
+	ReadInputs reader= new ReadInputs();
 	//TC_OC_CE_001
   @Test(enabled=false)
   public void testCase1() throws InterruptedException {
@@ -49,21 +54,11 @@ public class CheckoutTestSetup {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
+	  objHomePage.addIphoneToCart();
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
-	  //Assert user is redirected to checkout page
-	  Assert.assertEquals(checkout.driver.getTitle(), "Checkout");
 	  //Assert "Your shopping cart is empty" message is displayed
-	  checkout.enterNewBillingDetails();
-	  checkout.enterFirstName("Diffa");
-	  //checkout.enterLastName("Pinto");  Mandatory Field is not entered
-	  checkout.enterAddress1("H.No 493, Somewhere, Some Place");
-	  checkout.enterCity("Somewhere");
-	  checkout.enterPostCode("12345");
-	  checkout.enterCountry("India");
-	  checkout.enterState("Goa");
-	  checkout.clickContinue();
+	  checkout.enterNewBillingDetails(1);
 	  //Assert Warning is displayed
 	  WebElement we1= driver.findElement(By.className("text-danger"));
 	  Assert.assertEquals(we1.getText(), "Last Name must be between 1 and 32 characters!","Warning Appears!");
@@ -73,38 +68,22 @@ public class CheckoutTestSetup {
     //Assert following links are not clickable
       WebElement we2= driver.findElement(By.xpath("//*[@id='accordion']/div[6]/div[1]"));
       js.executeScript("arguments[0].scrollIntoView(true)", we2);
-      
 	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[3]/div[1]/h4/a")),false);
-	  Thread.sleep(2000);
 	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[4]/div[1]/h4/a")),false);
-	  Thread.sleep(2000);
 	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[5]/div[1]/h4/a")),false);
-	  Thread.sleep(2000);
 	  Assert.assertEquals(checkout.isClickable(By.xpath("//*[@id='accordion']/div[6]/div[1]/h4/a")),false);
-	  Thread.sleep(5000);
-	 
 	  login.logout();
   }
 //TC_OC_CF_002
-   @Test(enabled=false)
+   @Test(enabled=true)
   public void testCase002() throws InterruptedException {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
+	  objHomePage.addIphoneToCart();
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
-	  //Assert user is redirected to checkout page
-	  Assert.assertEquals(driver.getTitle(), "Checkout");
-	  checkout.enterNewBillingDetails();
-	  checkout.enterFirstName("Diffa");
-	  checkout.enterLastName("Pinto");  
-	  checkout.enterAddress1("H.No 493, Somewhere, Some Place");
-	  checkout.enterCity("Somewhere");
-	  checkout.enterPostCode("hdjhdsh"); //Non alpha numeric postal code
-	  checkout.enterCountry("India");
-	  checkout.enterState("Goa");
-	  checkout.clickContinue();
+	  checkout.enterNewBillingDetails(2);
 	  //Assert Warning is displayed
 	  WebElement we = driver.findElement(By.className("text-danger"));
 	  Assert.assertEquals(we.getText(), "Please enter a valid Postal Code!","Warning Appears!");
@@ -120,21 +99,13 @@ public class CheckoutTestSetup {
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
+	  objHomePage.addIphoneToCart();
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
+	  Thread.sleep(5000); //delete if not necessary
 	  //Assert user is redirected to checkout page
 	  Assert.assertEquals(driver.getTitle(), "Checkout");
-	  checkout.enterNewBillingDetails();
-	  checkout.enterFirstName("Diffa");
-	  checkout.enterLastName("Pinto");  
-	  checkout.enterAddress1("H.No 493, Somewhere, Some Place");
-	  checkout.enterCity("Somewhere");
-	  checkout.enterPostCode("12345");
-	  checkout.enterCountry("India");
-	  checkout.enterState("Goa");
-//	  Thread.sleep(10000);
-	  checkout.clickContinue();
+	  checkout.enterNewBillingDetails(2);
 	  checkout.enterExistingDeliveryDetailsAndContinue();
 	  checkout.enterDeliveryMethodAndContinue();
 	  checkout.enterPaymentMethod(); //Did not agree to Terms and Conditions
@@ -145,28 +116,19 @@ public class CheckoutTestSetup {
 	  //login.logout();
   }
 	//TC_OC_CF_004
-	@Test(enabled=true)
+	@Test(enabled=false)
   public void testCase004() throws InterruptedException {
 		
 	  login.login("tester234@gmail.com", "tester234");
 	  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 	  checkout.navigateToHomepage();
-	  Thread.sleep(2000);
-	  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
+	  objHomePage.addIphoneToCart();
 	  Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
 	  checkout.checkout();
 	  //Assert user is redirected to checkout page
-	  Thread.sleep(2000);
-	  Assert.assertEquals(driver.getTitle(), "Checkout");
-	  checkout.enterNewBillingDetails();
-	  checkout.enterFirstName("Diffa");
-	  checkout.enterLastName("Pinto");  
-	  checkout.enterAddress1("H.No 493, Somewhere, Some Place");
-	  checkout.enterCity("Somewhere");
-	  checkout.enterPostCode("12345"); //Non alpha numeric postal code
-	  checkout.enterCountry("India");
-	  checkout.enterState("Goa");
-	  checkout.clickContinue();
+	  Thread.sleep(5000);
+	  Assert.assertEquals(driver.getTitle(),"Checkout");
+	  checkout.enterNewBillingDetails(2);
 	  checkout.enterExistingDeliveryDetailsAndContinue();
 	  checkout.enterDeliveryMethodAndContinue();
 	  checkout.enterPaymentMethod(); //Did not agree to Terms and Conditions
@@ -189,10 +151,10 @@ public class CheckoutTestSetup {
 	//TC_OC_CF_005
 	@Test(enabled=false)
 	public void testCase005() {
-		  login.login("tester234", "tester234");
+		  login.login("tester234@gmail.com", "tester234");
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		  checkout.navigateToHomepage();
-		  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
+		  objHomePage.addIphoneToCart();
 		  checkout.checkout();
 		  String fnamePlaceholder=driver.findElement(By.id("input-payment-firstname")).getAttribute("placeholder");
 		  String lnamePlaceholder=driver.findElement(By.id("input-payment-lastname")).getAttribute("placeholder");
@@ -215,17 +177,9 @@ public class CheckoutTestSetup {
 		  login.login("tester234@gmail.com", "tester234");
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		  checkout.navigateToHomepage();
-		  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
+		  objHomePage.addIphoneToCart();
 		  checkout.checkout();
-		  checkout.enterNewBillingDetails();
-		  checkout.enterFirstName("Errol");
-		  checkout.enterLastName("C");  
-		  checkout.enterAddress1("Somewhere, Some Place");
-		  checkout.enterCity("A");
-		  checkout.enterPostCode("12345");
-		  checkout.enterCountry("India");
-		  checkout.enterState("Goa");
-		  checkout.clickContinue();
+		  checkout.enterNewBillingDetails(3);
 		  Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
 		  Assert.assertTrue(driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed());
 	}
@@ -237,17 +191,9 @@ public class CheckoutTestSetup {
 		login.login("tester234@gmail.com", "tester234");
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		  checkout.navigateToHomepage();
-		  driver.findElement(By.xpath("//button[@onclick=\"cart.add('40');\"]")).click();
+		  objHomePage.addIphoneToCart();
 		  checkout.checkout();
-		  checkout.enterNewBillingDetails();
-		  checkout.enterFirstName("Errol");
-		  checkout.enterLastName("Costabirfernandeserrolcostabirmenezesdsouzacabralsouzapereira");  
-		  checkout.enterAddress1("Somewhere, Some Place");
-		  checkout.enterCity("Goa");
-		  checkout.enterPostCode("12345");
-		  checkout.enterCountry("India");
-		  checkout.enterState("Goa");
-		  checkout.clickContinue();
+		  checkout.enterNewBillingDetails(4);
 		  Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
 		  Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed());
 	}
@@ -261,7 +207,9 @@ public class CheckoutTestSetup {
 	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	  login=new LoginPage(driver);
 	  checkout=new CheckoutPage(driver);
-	  login.navigateToLogin();	 
+	  login.navigateToLogin();	
+	  objHomePage=new HomePage(driver);
+	  
   }
 
   @AfterMethod
@@ -271,3 +219,4 @@ public class CheckoutTestSetup {
   }
 
 }
+
