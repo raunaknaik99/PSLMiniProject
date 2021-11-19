@@ -22,6 +22,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.sitepages.WishList;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import screenshot.ScreenShotCapture;
 
 public class WishListTestCases {
 	
@@ -30,32 +31,38 @@ public class WishListTestCases {
 	WishList w_object;
     ExtentTest test;
     ExtentReports report;
+    ScreenShotCapture s;
+	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+
 	
     //TC_OC_WL_006
   @Test
   public void testCase006() throws InterruptedException {
+	  s= new ScreenShotCapture(driver);
 	  test.log(LogStatus.INFO, "TC_OC_WL_006-To check that the count of the number of products added to wishlist is reflected in the UI at the top of the Header");
+	  try {
 	  w_object=new WishList(driver);
       w_object.iphonewishlishbtnMethod();
       WebDriverWait w1=new WebDriverWait(driver, 10);
-	  w1.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='content']/div[2]/div[1]/div/div[3]/button[2]")));
-      w_object.macWishlishbtnMethod();
+      w1.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[onclick=\"wishlist.add('40');\"]")));
+	  w_object.macWishlishbtnMethod();
       WebDriverWait w2=new WebDriverWait(driver,10);
 	  w2.until(ExpectedConditions.attributeContains(By.id("wishlist-total"), "title", "Wish List (2)"));
       String title=driver.findElement(By.id("wishlist-total")).getAttribute("title");
 	  String title11=Character.toString(title.charAt(11));
-	  //System.out.println(title11);
-	  //Assert.assertEquals("2", title11);
 	  if(title11.equals("2")) {
 		  test.log(LogStatus.PASS, "Wish List Count is reflected correctly");
 	  }
 	  else {
 		  test.log(LogStatus.FAIL, "Wish List Count is not reflected correctly");
+		s.captureScreenshot("\\WishList\\" + "testCase006_"+ timeStamp +".PNG");
+
+	  }}catch(Exception e) {
+		  test.log(LogStatus.INFO, e);
 	  }
   }
   @BeforeMethod
   public void beforeMethod(Method m) {
-	  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 	  report =new ExtentReports("ExtentReports\\Wish_List_Reports\\"+m.getName()+"_"+timeStamp+".html");
 	  test=report.startTest(m.getName());
 	  WebDriverManager.chromedriver().setup();

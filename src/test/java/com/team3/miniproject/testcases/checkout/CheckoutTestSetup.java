@@ -196,7 +196,7 @@ public class CheckoutTestSetup {
 	//TC_OC_CF_005
 	@Test(enabled=false)
 	public void testCase005() {
-
+		try {
 		  login.login("tester234@gmail.com", "tester234");
 		  test.log(LogStatus.INFO, "TC_OC_CF_005-to test if the placeholders are present on all the input fields under billing details");
 		  Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
@@ -205,8 +205,8 @@ public class CheckoutTestSetup {
 		  objHomePage.addProductToCart(1);
 		  checkout.checkout();
 		  //get placeholder text and store in variables
-		  String fnamePlaceholder=checkout.getFnameElement().getAttribute("placeholder");//driver.findElement(By.id("input-payment-firstname")).getAttribute("placeholder");
-		  String lnamePlaceholder=checkout.getLnameElement().getAttribute("placeholder");//driver.findElement(By.id("input-payment-lastname")).getAttribute("placeholder");
+		  String fnamePlaceholder=checkout.getFnameElement().getAttribute("placeholder");
+		  String lnamePlaceholder=checkout.getLnameElement().getAttribute("placeholder");
 		  String company=checkout.getCompanyElement().getAttribute("placeholder");
 		  String address1=checkout.getAddress1().getAttribute("placeholder");
 		  String city=checkout.getCity().getAttribute("placeholder");
@@ -218,6 +218,9 @@ public class CheckoutTestSetup {
 		  else {
 			  test.log(LogStatus.PASS, "Test Passed- Placeholders are present on billing form");
 		  }
+		}catch(Exception e) {
+			test.log(LogStatus.INFO, e);
+		}
 		  
 	}
 	

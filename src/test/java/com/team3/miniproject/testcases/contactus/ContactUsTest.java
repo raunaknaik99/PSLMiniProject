@@ -1,7 +1,9 @@
 package com.team3.miniproject.testcases.contactus;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -19,8 +21,10 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.sitepages.ContactUs;
+import com.team3.miniproject.testcases.ddt.ContactUsData;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import screenshot.ScreenShotCapture;
 
 public class ContactUsTest {
 
@@ -29,7 +33,9 @@ public class ContactUsTest {
 	ContactUs cnct_object;
 	ExtentReports report;
 	ExtentTest test;
-
+	ScreenShotCapture objScreenshot;
+	ContactUsData contactdata;
+	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 /*------------------------------*/
   @Test
   public void contactTestCase001() throws InterruptedException {
@@ -115,14 +121,17 @@ public class ContactUsTest {
 
 	@Test(enabled = true)
 	//TC_OC_CU_006
-	public void testCase006() {
+	public void testCase006() throws IOException {
+		objScreenshot=new ScreenShotCapture(driver);
+		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
+
 		test.log(LogStatus.INFO, "TC_OC_CU_006-To test whether contact us form works even when user is not signed in");
 		try {
 		cnct_object = new ContactUs(driver);
 		//enter the details in the contact us form
-		cnct_object.enterName("Errol");
-		cnct_object.enterEmail("demo@email.com");
-		cnct_object.enterEnquiry("Testing if this field is working without");
+		cnct_object.enterName(myData.get(0).get(0));
+		cnct_object.enterEmail(myData.get(0).get(1));
+		cnct_object.enterEnquiry(myData.get(0).get(2));
 		cnct_object.clickSubmit();
 		String actualUrl="http://localhost/opencartsite/index.php?route=information/contact/success";
 		if(driver.getCurrentUrl().equals(actualUrl)) {
@@ -130,6 +139,7 @@ public class ContactUsTest {
 		}
 		else {
 			test.log(LogStatus.FAIL, "Test Failed- user navigated to wrong URL");
+			objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase006_"+ timeStamp +".PNG");
 		}
 		}
 		catch(Exception e) {
@@ -141,6 +151,7 @@ public class ContactUsTest {
 	//TC_OC_CU_007
 	@Test
 	public void testCase007() {
+		objScreenshot=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CU_007-To check if labels for mandatory fields are present");
 		//to test the presence of astricks
 		try {
@@ -153,6 +164,7 @@ public class ContactUsTest {
 				test.log(LogStatus.PASS, "Test Passed- Astricks present for Input Field 1");
 			}else {
 				test.log(LogStatus.FAIL, "Test Failed- Astricks not present for Input field 1");
+				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase007.1_"+ timeStamp +".PNG");
 			}
 
 			String astricks2 = (String) js.executeScript(
@@ -163,6 +175,7 @@ public class ContactUsTest {
 				test.log(LogStatus.PASS, "Test Passed- Astricks present for Input Field 2");
 			}else {
 				test.log(LogStatus.FAIL, "Test Failed- Astricks not present for Input field 2");
+				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase007.2_"+ timeStamp +".PNG");
 			}
 			
 			String astricks3 = (String) js.executeScript(
@@ -173,6 +186,7 @@ public class ContactUsTest {
 				test.log(LogStatus.PASS, "Test Passed- Astricks present for Input Field 3");
 			}else {
 				test.log(LogStatus.FAIL, "Test Failed- Astricks not present for Input field 3");
+				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase007.3_"+ timeStamp +".PNG");
 			}
 
 		} catch (Exception e) {
@@ -184,6 +198,7 @@ public class ContactUsTest {
 	//TC_OC_CU_008
 	@Test
 	public void testCase008() {
+		objScreenshot=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CU_008-To test whether name and email field is blank when user is not signed in");
 		try {
 			WebElement nameField = driver.findElement(By.id("input-name"));
@@ -193,12 +208,15 @@ public class ContactUsTest {
 			}
 			else if(nameField.getText().equals("") && !emailField.getText().equals("")) {
 				test.log(LogStatus.FAIL, "Test Failed-Name Field is Blank & Email Field is not Blank: "+emailField);
+				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.1_"+ timeStamp +".PNG");
 			}
 			else if(!nameField.getText().equals("") && emailField.getText().equals("")) {
 				test.log(LogStatus.FAIL, "Test Failed-Name Field is Not Blank & Email Field is Blank: "+nameField);
+				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.2_"+ timeStamp +".PNG");
 			}
 			else {
 				test.log(LogStatus.FAIL, "Test Failed-Name Field is not Blank, Contains Text: "+nameField);
+				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.3_"+ timeStamp +".PNG");
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -207,7 +225,6 @@ public class ContactUsTest {
 
 	@BeforeMethod
 	public void beforeMethod(Method m) {
-		String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 		report =new ExtentReports("ExtentReports\\ContactUs\\"+m.getName()+"_"+timeStamp+".html");
 		test=report.startTest(m.getName());
 		WebDriverManager.chromedriver().setup();

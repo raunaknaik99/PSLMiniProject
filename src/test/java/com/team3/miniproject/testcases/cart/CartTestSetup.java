@@ -56,60 +56,6 @@ public class CartTestSetup {
 	  }
   }
   
-  //TC_OC_CART_009
-  @Test
-  public void testCase009() throws InterruptedException, IOException {
-	  test.log(LogStatus.INFO, "TC_OC_CART_009-To verify that new window opens when user clicks the like button");
-	  hpc_object=new AppleCinema(driver); //create an instance of AppleCart class
-	  //click on cinema cart
-	  hpc_object.clickAppleCinemaCart();
-	  //wait till title loads
-	  WebDriverWait w =new WebDriverWait(driver, 5);
-	  w.until(ExpectedConditions.titleIs("Apple Cinema 30"));
-	  //get parent window handle
-	  String parentWindowHandle=driver.getWindowHandle();
-	  if(driver.getTitle().equals("Apple Cinema 30")) {
-		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
-	  }
-	  else {
-	      test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-	  }
-	  //click on like btn
-	  hpc_object.clickFbLikeBtn();
-	  //get all the window handles
-	  Set<String> childWindowHandles=driver.getWindowHandles();
-	  Iterator<String> itr=childWindowHandles.iterator();  
-	  while(itr.hasNext()) {
-		  String childWindow=itr.next();
-		  //switch over to child handle
-		  if(!parentWindowHandle.equals(childWindow)) {
-			  driver.switchTo().window(childWindow);
-			  w.until(ExpectedConditions.titleIs("Facebook"));
-			  test.log(LogStatus.INFO, "Switched to child window handle");
-			  if(driver.getTitle().equals("Facebook")) {
-				  test.log(LogStatus.PASS, "Test Passed- Child window Title matched");
-			  }else {
-				  test.log(LogStatus.FAIL, "Test Failed- Child Window title mismatched");
-			  }
-			  driver.close();
-		  }
-		  else {
-			  test.log(LogStatus.FAIL, "Test Failed- Did not switch to child window");
-		  }
-	  }
-	  Thread.sleep(3000);//only to visualize the going back to parent window
-	  //switch back to parent window handle
-	  driver.switchTo().window(parentWindowHandle);
-	  test.log(LogStatus.INFO, "Switched to parent window handle");
-	  //verify is test passed or failed
-	  if(driver.getTitle().equals("Apple Cinema 30")) {
-		  test.log(LogStatus.PASS, "Test Passed- Parent Window Title Matched");
-	  }
-	  else {
-	      test.log(LogStatus.FAIL, "Test Failed- Parent Window Title Mismatched");
-	  }
-  }
-  
   //TC_OC_CART_010
   @Test
   public void testCase010() throws InterruptedException, IOException {
