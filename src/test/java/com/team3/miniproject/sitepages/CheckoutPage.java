@@ -299,26 +299,32 @@ public class CheckoutPage {
 		driver.quit();
 	}
 	
+	//get firstname element
 	public WebElement getFnameElement() {
 		return firstNameField;
 	}
 	
+	//get last name element
 	public WebElement getLnameElement() {
 		return lastNameField;
 	}
 	
+	//get company element
 	public WebElement getCompanyElement() {
 		return company;
 	}
 
+	//get address1 element
 	public WebElement getAddress1() {
 		return address1Field;
 	}
 	
+	//get city element
 	public WebElement getCity() {
 		return cityField;
 	}
 	
+	//get post code element
 	public WebElement getPostCode() {
 		return postcodeField;
 	}
