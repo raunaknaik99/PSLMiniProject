@@ -52,7 +52,7 @@ public class CheckoutTestSetup {
 	LoginData rd;
 
 	//TC_OC_CE_001 - To implement the checkout functionality when the cart is empty
-	@Test(enabled=true,priority=1)
+	@Test(enabled=false,priority=1)
 	public void testCase1() throws InterruptedException {
 		test.log(LogStatus.INFO, "TC_OC_CE_001-To implement the checkout functionality when the cart is empty");
 		Thread.sleep(5000);
@@ -77,7 +77,7 @@ public class CheckoutTestSetup {
 	}
 	//TC_OC_CF_001 - User clicks on checkout, but does not fill a mandatory field
 
-	@Test(enabled=true,priority=2)
+	@Test(enabled=false,priority=2)
 	public void testCase01() throws InterruptedException {
 		test.log(LogStatus.INFO, "TC_OC_CF_001 - User clicks on checkout, but does not fill a mandatory field");
 		login.login("tester234@gmail.com", "tester234");
@@ -112,7 +112,7 @@ public class CheckoutTestSetup {
 		login.logout();
 	}
 	//TC_OC_CF_002 - User clicks on checkout, but does not enter an alphanumeric postal code
-	@Test(enabled=true,priority=3)
+	@Test(enabled=false,priority=3)
 	public void testCase002() throws InterruptedException {
 		test.log(LogStatus.INFO, "User clicks on checkout, but does not enter an alphanumeric postal code");
 		login.login("tester234@gmail.com", "tester234");
@@ -139,7 +139,7 @@ public class CheckoutTestSetup {
 
 	}
 	//TC_OC_CF_003 - User clicks on checkout, enters all details uptil Payment method, but does not check 'Terms and Conditions
-	@Test(enabled=true,priority=4)
+	@Test(enabled=false,priority=4)
 	public void testCase003() throws InterruptedException {
 		test.log(LogStatus.INFO, "User clicks on checkout, enters all details uptil Payment method, but does not check 'Terms and Conditions'");
 		login.login("tester234@gmail.com", "tester234");
@@ -164,7 +164,7 @@ public class CheckoutTestSetup {
 	}
 
 	//TC_OC_CF_004 - User enters all details uptil Payment method, checks 'Terms and Conditions' and confirms order
-	@Test(enabled=true,priority=5)
+	@Test(enabled=false,priority=5)
 	public void testCase004() throws InterruptedException {
 		test.log(LogStatus.INFO, "User enters all details uptil Payment method, checks 'Terms and Conditions' and confirms order");
 		login.login("tester234@gmail.com", "tester234");
@@ -199,7 +199,7 @@ public class CheckoutTestSetup {
 
 
 	//TC_OC_CF_005
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void testCase005() {
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_005-to test if the placeholders are present on all the input fields under billing details");
@@ -235,7 +235,7 @@ public class CheckoutTestSetup {
 
 
 	//TC_OC_CF_006
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void testCase006() throws IOException {
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_006-To test if city field accepts less than 2 characters and we can proceed to step 3");

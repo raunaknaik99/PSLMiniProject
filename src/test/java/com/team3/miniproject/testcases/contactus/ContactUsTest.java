@@ -222,6 +222,22 @@ public class ContactUsTest {
 			test.log(LogStatus.INFO, e);
 		}
 	}
+	@Test(priority = 1)
+	public void testCase009() {
+		objScreenshot=new ScreenShotCapture(driver);
+		test.log(LogStatus.INFO, "TC_OC_CU_009-To test whether Store location details are present on the page");
+		try {
+			WebElement nameField = driver.findElement(By.cssSelector("#content > div > div > div > div:nth-child(1) > address"));
+			if(nameField.getText().equals("Address 1")) {
+				test.log(LogStatus.PASS, "Test Passed-Store location details are visible");		
+			}
+			else  {
+				test.log(LogStatus.FAIL, "Test Failed-Store location details are not visible ");
+			}
+		} catch (Exception e) {
+			test.log(LogStatus.INFO, e);
+		}
+	}
 
 	@BeforeMethod
 	public void beforeMethod(Method m) {
