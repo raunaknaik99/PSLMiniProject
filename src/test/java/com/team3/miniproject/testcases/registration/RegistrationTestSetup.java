@@ -262,12 +262,6 @@ public class RegistrationTestSetup {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
-			if (rg_object.getPageTitle().equals("Register Account")) {
-				test.log(LogStatus.PASS, "Test Passed- Title Matched");
-			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase006.1_" + timeStamp + ".PNG");
-			}
 			rg_object.fillRegistrationForm(myData.get(5).get(0), myData.get(5).get(1), myData.get(5).get(2),
 					myData.get(5).get(3), myData.get(5).get(4), myData.get(5).get(5));
 			rg_object.checkPrivacyPolicy();
@@ -275,11 +269,20 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase006.2_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase006_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 			}
-			Assert.assertEquals(rg_object.verifyConfirmPasswordWarning(),
-					"Password confirmation does not match password!");
+			if (rg_object.verifyConfirmPasswordWarning().equals("Password confirmation does not match password!")) {
+				test.log(LogStatus.PASS, "Test Passed- Correct warning is displayed");
+			} else {
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase006_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
+			}
+			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyConfirmPasswordWarning());
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
@@ -294,14 +297,6 @@ public class RegistrationTestSetup {
 				"TC_OC_REG_007-Registering by entering an email id with which an account has already been registered previously");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
-			rg_object = new RegistrationPage(driver);
-			if (rg_object.getPageTitle().equals("Register Account")) {
-				test.log(LogStatus.PASS, "Test Passed- Title Matched");
-			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase007.1_" + timeStamp + ".PNG");
-
-			}
 			rg_object.fillRegistrationForm(myData.get(6).get(0), myData.get(6).get(1), myData.get(6).get(2),
 					myData.get(6).get(3), myData.get(6).get(4), myData.get(6).get(5));
 			rg_object.checkPrivacyPolicy();
@@ -309,8 +304,7 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase007.2_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase007_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
 
 			}
 			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyWarningVisibility());
@@ -328,13 +322,6 @@ public class RegistrationTestSetup {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
-			if (rg_object.getPageTitle().equals("Register Account")) {
-				test.log(LogStatus.PASS, "Test Passed- Title Matched");
-			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase0010.1_" + timeStamp + ".PNG");
-
-			}
 			rg_object.fillRegistrationForm(myData.get(7).get(0), myData.get(7).get(1), myData.get(7).get(2),
 					myData.get(7).get(3), myData.get(7).get(4), myData.get(7).get(5));
 			rg_object.checkPrivacyPolicy();
@@ -342,11 +329,9 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase0010.2_" + timeStamp + ".PNG");
-
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase0010_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
+				test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyFirstNameWarning());
 			}
-			Assert.assertEquals(rg_object.verifyFirstNameWarning(), "First Name must be between 1 and 32 characters!");
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
@@ -361,13 +346,6 @@ public class RegistrationTestSetup {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
-			if (rg_object.getPageTitle().equals("Register Account")) {
-				test.log(LogStatus.PASS, "Test Passed- Title Matched");
-			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase011.1_" + timeStamp + ".PNG");
-
-			}
 			rg_object.fillRegistrationForm(myData.get(8).get(0), myData.get(8).get(1), myData.get(8).get(2),
 					myData.get(8).get(3), myData.get(8).get(4), myData.get(8).get(5));
 			rg_object.checkPrivacyPolicy();
@@ -375,10 +353,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase0011.2_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase0011_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
 
 			}
+			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyTelephoneWarning());
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
@@ -393,13 +371,6 @@ public class RegistrationTestSetup {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
-			if (rg_object.getPageTitle().equals("Register Account")) {
-				test.log(LogStatus.PASS, "Test Passed- Title Matched");
-			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase0012.1_" + timeStamp + ".PNG");
-
-			}
 			rg_object.fillRegistrationForm(myData.get(9).get(0), myData.get(9).get(1), myData.get(9).get(2),
 					myData.get(9).get(3), myData.get(9).get(4), myData.get(9).get(5));
 			rg_object.checkPrivacyPolicy();
@@ -407,11 +378,9 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase0012.2_" + timeStamp + ".PNG");
-
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase0012_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
 			}
-			Assert.assertEquals(rg_object.verifyFirstNameWarning(), "First Name must be between 1 and 32 characters!");
+			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyFirstNameWarning());
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
@@ -426,13 +395,6 @@ public class RegistrationTestSetup {
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
 			rg_object = new RegistrationPage(driver);
-			if (rg_object.getPageTitle().equals("Register Account")) {
-				test.log(LogStatus.PASS, "Test Passed- Title Matched");
-			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase013.1_" + timeStamp + ".PNG");
-
-			}
 			rg_object.fillRegistrationForm(myData.get(10).get(0), myData.get(10).get(1), myData.get(10).get(2),
 					myData.get(10).get(3), myData.get(10).get(4), myData.get(10).get(5));
 			rg_object.checkPrivacyPolicy();
@@ -441,10 +403,9 @@ public class RegistrationTestSetup {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
 				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase013.2_" + timeStamp + ".PNG");
-
+				s.captureScreenshot("\\Registration\\" + "testCase013_" + timeStamp + ".PNG");
 			}
-			Assert.assertEquals(rg_object.verifyLastNameWarning(), "Last Name must be between 1 and 32 characters!");
+			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyLastNameWarning());
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
@@ -465,9 +426,9 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase014.2_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase0014_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
 			}
+			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyTelephoneWarning());
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
@@ -489,8 +450,7 @@ public class RegistrationTestSetup {
 		if (rg_object.getPageTitle().equals("My Account")) {
 			test.log(LogStatus.PASS, "Test Passed- Title Matched");
 		} else {
-			test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-			s.captureScreenshot("\\Registration\\" + "testCase015_" + timeStamp + ".PNG");
+			test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase0015_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
 		}
 	}
 
