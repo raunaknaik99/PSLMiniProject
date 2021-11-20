@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -29,13 +30,14 @@ import com.team3.miniproject.sitepages.Cart;
 import com.team3.miniproject.sitepages.Header;
 import com.team3.miniproject.sitepages.HomePage;
 import com.team3.miniproject.sitepages.Tablets;
+import com.team3.miniproject.testcases.ddt.AppleCinemaData;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.*;
 
 public class CartFunctionality {
 	WebDriver driver;
-	String baseUrl = "http://localhost/miniproject";
+	String baseUrl = "http://localhost";
 	ExtentReports report;
 	static ExtentTest test;
 	
@@ -45,6 +47,7 @@ public class CartFunctionality {
 	Tablets objTablets;
 	Header objHeader;
 	AppleCinema hpc_object;
+	AppleCinemaData objCinemaData;
 	
 	ScreenShotCapture objScreenshot;
 	JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -86,13 +89,17 @@ public class CartFunctionality {
 	  
 }
 //  TC_OC_CART_002
-  @Test (enabled = false)
+  @Test (enabled = true)
   public void testCase002() throws InterruptedException, AWTException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart with quantity less than the minimum required quantity.");
 	  objScreenshot = new ScreenShotCapture(driver);
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
 	  objHomePage = new HomePage(driver);
 	  hpc_object = new AppleCinema(driver);
+	  objCinemaData = new AppleCinemaData();
+	  
+	  ArrayList<ArrayList<String>> myData = objCinemaData.appleCinemaData();
+	  
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
 	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.homeProducts.get(2));
 	  objHomePage.addProductToCart(2); // index 2 for Apple Cinema
@@ -101,11 +108,13 @@ public class CartFunctionality {
 	  
 	  hpc_object.clickRadioButton();
 	  hpc_object.clickCheckbox();	  
-	  hpc_object.enterInTextbox("test");
-	  	  
+	  hpc_object.enterInTextbox(myData.get(0).get(0)); //data from Apple cinema data excel sheet
+	  Thread.sleep(2000);
+	  
 	  hpc_object.clickDropdown("4");
 	  
-	  hpc_object.enterInTextArea("This is a test order");
+	  hpc_object.enterInTextArea(myData.get(0).get(1)); // data from apple cinema excel sheet
+	  Thread.sleep(2000);
 	  
 	  if(hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
 		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
@@ -197,7 +206,7 @@ public class CartFunctionality {
 	  }
 } 
   //TC_OC_CART_005 - Adding a product to the cart with quantity as zero.
-@Test(enabled = true)
+@Test(enabled = false)
   public void testCase005() throws InterruptedException, IOException {
 	test.log(LogStatus.INFO, "TC_OC_CART_005 - Adding a product to the cart with quantity as zero.");
 	objScreenshot = new ScreenShotCapture(driver);
@@ -235,14 +244,17 @@ public class CartFunctionality {
 	 }
   }
 //TC_OC_CART_006
-  @Test (enabled = false)
+  @Test (enabled = true)
   public void testCase006() throws InterruptedException, AWTException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart with quantity less than the minimum required quantity.");
 	  objScreenshot = new ScreenShotCapture(driver);
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
 	  objHomePage = new HomePage(driver);
 	  hpc_object = new AppleCinema(driver);
+	  objCinemaData = new AppleCinemaData();
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
+	  ArrayList<ArrayList<String>> myData = objCinemaData.appleCinemaData();
+	  
 	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.homeProducts.get(2));
 	  objHomePage.addProductToCart(2); // index 2 for Apple Cinema
 	  
@@ -250,11 +262,11 @@ public class CartFunctionality {
 	  
 	  hpc_object.clickRadioButton();
 	  hpc_object.clickCheckbox();	  
-	  hpc_object.enterInTextbox("test");
-	  	  
+	  hpc_object.enterInTextbox(myData.get(0).get(0)); //data from Apple cinema data excel sheet
+  	  
 	  hpc_object.clickDropdown("4");
 	  
-	  hpc_object.enterInTextArea("This is a test order");
+	  hpc_object.enterInTextArea(myData.get(0).get(1)); // data from apple cinema excel sheet
 	  
 	  if(hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
 		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");

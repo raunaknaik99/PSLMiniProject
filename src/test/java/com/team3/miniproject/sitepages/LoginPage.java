@@ -16,7 +16,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginPage {
 	public WebDriver driver;
-	String baseUrl = "http://localhost/miniproject";
+	String baseUrl = "http://localhost";
 	String expectedTitle = "Account Login";
 
 	public LoginPage(WebDriver driver) {
