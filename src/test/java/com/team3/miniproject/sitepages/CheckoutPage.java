@@ -21,7 +21,7 @@ import com.team3.miniproject.testcases.ddt.ReadInputs;
 
 public class CheckoutPage {
 	public WebDriver driver;
-	String baseUrl="http://localhost/miniproject";
+	String baseUrl="http://localhost/opencartsite";
 	ReadInputs reader= new ReadInputs();
 	JavascriptExecutor js;
 
@@ -166,7 +166,7 @@ public class CheckoutPage {
 		newPaymentAddress.click();
 		reader.i=val;
 		try {
-			reader.readExcel("C:\\Users\\diffa_pinto\\eclipse-workspace-new\\PSLMiniProject\\src\\test\\resources","loginDDT.xlsx","Checkout");
+			reader.readExcel("src\\test\\resources","loginDDT.xlsx","Checkout");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
