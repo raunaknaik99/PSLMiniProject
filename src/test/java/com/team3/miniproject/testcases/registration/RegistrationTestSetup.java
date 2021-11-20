@@ -52,8 +52,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase001.1_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase001.1_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 			}
 			rg_object.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(0).get(2),
 					myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
@@ -61,8 +63,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase001.2_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase001.2_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 
 			}
 			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyWarningVisibility());
@@ -87,8 +91,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.INFO, "Check Passed- Title Matched");
 			} else {
-				test.log(LogStatus.INFO, "Check Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase002.1_" + timeStamp + ".PNG");
+				test.log(LogStatus.INFO,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase002.1_" + timeStamp + ".PNG"))
+								+ "Check Failed- Title Mismatched");
 			}
 			// Fill in registration data, but keep insufficient characters for password
 			rg_object.fillRegistrationForm(myData.get(1).get(0), myData.get(1).get(1), myData.get(1).get(2),
@@ -97,8 +103,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Warning is displayed and user is not allowed to procees");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- User is able to proceed");
-				s.captureScreenshot("\\Registration\\" + "testCase002.2_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase002.2_" + timeStamp + ".PNG"))
+								+ "Test Failed- User is able to proceed");
 			}
 			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyWarningVisibility());
 		} catch (Exception e) {
@@ -122,8 +130,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase003.1_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase003.1_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 
 			}
 			// Fill in registration data, but keep lastName (mandatory) field empty
@@ -133,8 +143,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase003.2_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase003.2_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 
 			}
 			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyWarningVisibility());
@@ -153,16 +165,20 @@ public class RegistrationTestSetup {
 		if (rg_object.getPageTitle().equals("Register Account")) {
 			test.log(LogStatus.PASS, "Test Passed- Title Matched");
 		} else {
-			test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-			s.captureScreenshot("\\Registration\\" + "testCase004.1_" + timeStamp + ".PNG");
+			test.log(LogStatus.FAIL,
+					test.addScreenCapture(
+							s.captureScreenshot("\\Registration\\" + "testCase004.1_" + timeStamp + ".PNG"))
+							+ "Test Failed- Title Mismatched");
 		}
 		rg_object.fillRegistrationForm("Deeksha", "123", "1.1@example.com", "123", "testing123", "testing123");
 		rg_object.clickContinueBtn();
 		if (rg_object.getPageTitle().equals("Your Account Has Been Created!")) {
 			test.log(LogStatus.PASS, "Test Passed- Title Matched");
 		} else {
-			test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-			s.captureScreenshot("\\Registration\\" + "testCase004.2_" + timeStamp + ".PNG");
+			test.log(LogStatus.FAIL,
+					test.addScreenCapture(
+							s.captureScreenshot("\\Registration\\" + "testCase004.2_" + timeStamp + ".PNG"))
+							+ "Test Failed- Title Mismatched");
 
 		}
 	}
@@ -180,8 +196,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase005.1_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase005.1_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 
 			}
 			rg_object.fillRegistrationForm(myData.get(3).get(0), myData.get(3).get(1), myData.get(3).get(2),
@@ -193,8 +211,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Your Account Has Been Created!")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase005.2_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase005.2_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 
 			}
 		} catch (Exception e) {
@@ -214,8 +234,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase008.1_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase008.1_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 
 			}
 			rg_object.fillRegistrationForm(myData.get(4).get(0), myData.get(4).get(1), myData.get(4).get(2),
@@ -227,8 +249,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-				s.captureScreenshot("\\Registration\\" + "testCase008.2_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase008.2_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 
 			}
 		} catch (Exception e) {
@@ -245,8 +269,9 @@ public class RegistrationTestSetup {
 		if (rg_object.getPageTitle().equals("Account Login")) {
 			test.log(LogStatus.PASS, "Test Passed- Title Matched");
 		} else {
-			test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
-			s.captureScreenshot("\\Registration\\" + "testCase009_" + timeStamp + ".PNG");
+			test.log(LogStatus.FAIL,
+					test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase009_" + timeStamp + ".PNG"))
+							+ "Test Failed- Title Mismatched");
 
 		}
 	}
