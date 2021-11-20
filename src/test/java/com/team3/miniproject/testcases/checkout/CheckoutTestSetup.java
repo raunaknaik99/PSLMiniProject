@@ -52,6 +52,7 @@ public class CheckoutTestSetup {
 	LoginData rd;
 
 	//TC_OC_CE_001 - To implement the checkout functionality when the cart is empty
+
 	@Test(enabled=false,priority=1)
 	public void testCase1() throws InterruptedException {
 		test.log(LogStatus.INFO, "TC_OC_CE_001-To implement the checkout functionality when the cart is empty");
@@ -77,7 +78,8 @@ public class CheckoutTestSetup {
 	}
 	//TC_OC_CF_001 - User clicks on checkout, but does not fill a mandatory field
 
-	@Test(enabled=false,priority=2)
+    @Test(enabled=false,priority=2)
+
 	public void testCase01() throws InterruptedException {
 		test.log(LogStatus.INFO, "TC_OC_CF_001 - User clicks on checkout, but does not fill a mandatory field");
 		login.login("tester234@gmail.com", "tester234");
@@ -112,7 +114,9 @@ public class CheckoutTestSetup {
 		login.logout();
 	}
 	//TC_OC_CF_002 - User clicks on checkout, but does not enter an alphanumeric postal code
+
 	@Test(enabled=false,priority=3)
+
 	public void testCase002() throws InterruptedException {
 		test.log(LogStatus.INFO, "User clicks on checkout, but does not enter an alphanumeric postal code");
 		login.login("tester234@gmail.com", "tester234");
@@ -139,7 +143,9 @@ public class CheckoutTestSetup {
 
 	}
 	//TC_OC_CF_003 - User clicks on checkout, enters all details uptil Payment method, but does not check 'Terms and Conditions
+
 	@Test(enabled=false,priority=4)
+
 	public void testCase003() throws InterruptedException {
 		test.log(LogStatus.INFO, "User clicks on checkout, enters all details uptil Payment method, but does not check 'Terms and Conditions'");
 		login.login("tester234@gmail.com", "tester234");
@@ -164,7 +170,9 @@ public class CheckoutTestSetup {
 	}
 
 	//TC_OC_CF_004 - User enters all details uptil Payment method, checks 'Terms and Conditions' and confirms order
+
 	@Test(enabled=false,priority=5)
+
 	public void testCase004() throws InterruptedException {
 		test.log(LogStatus.INFO, "User enters all details uptil Payment method, checks 'Terms and Conditions' and confirms order");
 		login.login("tester234@gmail.com", "tester234");
@@ -205,10 +213,17 @@ public class CheckoutTestSetup {
 		test.log(LogStatus.INFO, "TC_OC_CF_005-to test if the placeholders are present on all the input fields under billing details");
 
 		try {
+			rd=new LoginData();
 			ArrayList<ArrayList<String>> myData = rd.loginData();
+			//System.out.println(myData);
 			login.login(myData.get(6).get(0), myData.get(6).get(1));
-			Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-			//method to navigate to home page
+			if(checkout.checkIfUserLoggedIn()) {
+				test.log(LogStatus.PASS,"Test Passed- user is logged in");
+			}
+			else {
+				test.log(LogStatus.FAIL, "Test failed- User Logged");
+				s.captureScreenshot("\\Checkout\\" + "testCase005.1_"+ timeStamp +".PNG");
+			}			//method to navigate to home page
 			checkout.navigateToHomepage();
 			objHomePage.addProductToCart(1);
 			checkout.checkout();
@@ -225,7 +240,7 @@ public class CheckoutTestSetup {
 			}
 			else {
 				test.log(LogStatus.PASS, "Test Passed- Placeholders are present on billing form");
-				s.captureScreenshot("\\Checkout\\" + "testCase005_"+ timeStamp +".PNG");
+				s.captureScreenshot("\\Checkout\\" + "testCase005.2_"+ timeStamp +".PNG");
 			}
 		}catch(Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -241,6 +256,7 @@ public class CheckoutTestSetup {
 		test.log(LogStatus.INFO, "TC_OC_CF_006-To test if city field accepts less than 2 characters and we can proceed to step 3");
 
 		try {
+			rd=new LoginData();
 			ArrayList<ArrayList<String>> myData = rd.loginData();
 			login.login(myData.get(7).get(0), myData.get(7).get(1));
 			if(checkout.checkIfUserLoggedIn()) {
@@ -254,14 +270,13 @@ public class CheckoutTestSetup {
 			objHomePage.addProductToCart(1);
 			checkout.checkout();
 			checkout.enterNewBillingDetails(3);
-
 			//Assert.assertEquals("Step 3: Delivery Details", checkout.getStep3Title().getText());
 
 			//Boolean warningPresence =checkout.getCityWarning().isDisplayed();
 			//Assert.assertTrue(driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed());
 			//Assert.assertTrue(checkout.getCityWarning().isDisplayed());
 
-			if(checkout.getStep3Title().equals("Step 3: Delivery Details")) {
+			if(checkout.getStep3Title().getText().equals("Step 3: Delivery Details")) {
 				test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
 			}
 			else {
@@ -285,13 +300,22 @@ public class CheckoutTestSetup {
 	
 	
 	//TC_OC_CF_007
-	@Test(enabled=false)
+	@Test(enabled=true)
 	public void testCase007() throws InterruptedException, IOException {
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_007-to test if lastname can be more than 32 characters");
 		try {
-			login.login("demo4@example.com", "test1234");
-			Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+			rd=new LoginData();
+			ArrayList<ArrayList<String>> myData = rd.loginData();
+			login.login(myData.get(8).get(0), myData.get(8).get(1));
+			//Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+			if(checkout.checkIfUserLoggedIn()) {
+				test.log(LogStatus.PASS,"Test Passed- user is logged in");
+			}
+			else {
+				test.log(LogStatus.FAIL, "Test failed- User Logged");
+				s.captureScreenshot("\\Checkout\\" + "testCase007.1_"+ timeStamp +".PNG");
+			}
 			//to go to home page
 			checkout.navigateToHomepage();
 			objHomePage.addProductToCart(1);
@@ -303,12 +327,12 @@ public class CheckoutTestSetup {
 
 			//check for test cases
 			//String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
-			if(checkout.getStep3Title().equals("Step 3: Delivery Details")) {
+			if(checkout.getStep3Title().getText().equals("Step 3: Delivery Details")) {
 				test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
 			}
 			else {
 				test.log(LogStatus.FAIL, "Test Failed-Can proceed to next form");
-				s.captureScreenshot("\\Checkout\\" + "testCase007.1_"+ timeStamp +".PNG");
+				s.captureScreenshot("\\Checkout\\" + "testCase007.2_"+ timeStamp +".PNG");
 			}
 			//Boolean warningPresence=driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed();
 			Boolean warningPresence=checkout.getLnameElement().isDisplayed();
@@ -316,14 +340,107 @@ public class CheckoutTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Warning is Present");
 			}else {
 				test.log(LogStatus.FAIL, "Test Failed-Warning is not present");
-				s.captureScreenshot("\\Checkout\\" + "testCase007.2_"+ timeStamp +".PNG");
+				s.captureScreenshot("\\Checkout\\" + "testCase007.3_"+ timeStamp +".PNG");
 
 			}}catch(Exception e) {
 				test.log(LogStatus.INFO, e);
 			}
 	}
 
-	
+
+/*----------------------------------------------------------------*/
+ 	@Test(enabled=false)
+	  public void guestTestCase001() throws InterruptedException {
+		//test.log(LogStatus.INFO, "TC_OC_CG_001 - to checkout as a guest user");
+		  
+		 System.out.println("worked");
+		 checkout = new CheckoutPage(driver);
+		 checkout.guestClick();
+		  if(checkout.guestBtnSelected()) {
+			  System.out.println("Selected");
+			  checkout.clickContinue();
+			  Thread.sleep(2000);
+			  checkout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
+			  checkout.selectCountryAndState("India","Maharashtra");
+			  JavascriptExecutor js = (JavascriptExecutor) driver;
+			  js.executeScript("window.scrollBy(0,500)", "");
+			  Thread.sleep(2000);
+			  
+			  driver.findElement(By.id("button-guest")).click();
+			  Thread.sleep(2000);
+			  driver.findElement(By.id("button-shipping-method")).click();
+			  Thread.sleep(2000);
+			  checkout.privacyCheckbox();
+			  driver.findElement(By.id("button-payment-method")).click();
+			  Thread.sleep(2000);
+			  checkout.confirmOrder();
+			  
+			  WebDriverWait wdw = new WebDriverWait(driver, 5);
+				  
+			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
+				  checkout.acceptAlert();
+				  checkout.confirmOrder();
+				  //test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
+			  }else {
+				  //test.log(LogStatus.FAIL, "The alert message about cart products is not displayed.");
+			  }
+			  Thread.sleep(3000);
+			  Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText(), "Your order has been placed!");
+		  }else {
+			  System.out.println("Register Account is selected");
+		  }
+	  }
+	  
+	 @Test(enabled=false)
+	  public void guestTestCase002() throws InterruptedException {
+		 checkout = new CheckoutPage(driver);
+		 checkout.guestClick();
+		 
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
+		 
+		  if(checkout.guestBtnSelected()) {
+			  System.out.println("Selected");
+			  checkout.clickContinue();
+			  Thread.sleep(2000);
+			  checkout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
+			  checkout.selectCountryAndState("India","Maharashtra");
+			  
+			  js.executeScript("window.scrollBy(0,500)", "");
+			  Thread.sleep(2000);
+			  
+			  //to uncheck the checkbox
+			  driver.findElement(By.name("shipping_address")).click();
+			  driver.findElement(By.id("button-guest")).click();
+			  Thread.sleep(2000);
+			  js.executeScript("window.scrollBy(0,-400)", "");
+			  
+			  Thread.sleep(3000);
+			  //delivery details
+			  checkout.fillDeliveryDetails("xyz","vtest","123address","nyc","585940");
+			  checkout.selectCountryAndStateAgain("United States", "Texas");
+			  Thread.sleep(2000);
+			  
+			  driver.findElement(By.id("button-guest-shipping")).click();
+			  Thread.sleep(2000);
+			  driver.findElement(By.id("button-shipping-method")).click();
+			  Thread.sleep(2000);
+			  checkout.privacyCheckbox();
+			  driver.findElement(By.id("button-payment-method")).click();
+			  Thread.sleep(2000);
+			  checkout.confirmOrder();
+			  
+			  WebDriverWait wdw = new WebDriverWait(driver, 5);
+			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
+				  checkout.acceptAlert();
+				  checkout.confirmOrder();
+			  }
+			  Thread.sleep(3000);
+			  Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText(), "Your order has been placed!");
+		  }else {
+			  System.out.println("Register Account is selected");
+		  }
+	  }
+/*-----------------------------------------------*/
 	
   @BeforeMethod
   public void beforeMethod(Method m) {

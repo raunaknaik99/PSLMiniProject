@@ -28,7 +28,7 @@ public class WishListTestCases {
 	
 	WebDriver driver;
 	String baseUrl="http://localhost/opencartsite/index.php?route=common/home";
-	WishList w_object;
+	WishList wishListObject;
     ExtentTest test;
     ExtentReports report;
     ScreenShotCapture s;
@@ -41,11 +41,11 @@ public class WishListTestCases {
 	  s= new ScreenShotCapture(driver);
 	  test.log(LogStatus.INFO, "TC_OC_WL_006-To check that the count of the number of products added to wishlist is reflected in the UI at the top of the Header");
 	  try {
-	  w_object=new WishList(driver);
-      w_object.iphonewishlishbtnMethod();
+	  wishListObject=new WishList(driver);
+      wishListObject.iphonewishlishbtnMethod();
       WebDriverWait w1=new WebDriverWait(driver, 10);
       w1.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[onclick=\"wishlist.add('40');\"]")));
-	  w_object.macWishlishbtnMethod();
+	  wishListObject.macWishlishbtnMethod();
       WebDriverWait w2=new WebDriverWait(driver,10);
 	  w2.until(ExpectedConditions.attributeContains(By.id("wishlist-total"), "title", "Wish List (2)"));
       String title=driver.findElement(By.id("wishlist-total")).getAttribute("title");

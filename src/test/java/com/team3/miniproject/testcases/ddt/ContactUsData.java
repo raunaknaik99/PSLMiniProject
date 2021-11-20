@@ -8,7 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ContactUsData {
-	
+
 	public ArrayList<ArrayList<String>> contactUsData() throws IOException {
 		ArrayList<ArrayList<String>> contactData = new ArrayList<ArrayList<String>>(1);
 
@@ -16,7 +16,7 @@ public class ContactUsData {
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 		XSSFSheet sheet = workbook.getSheetAt(0);
 		try {
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < 4; i++) {
 				contactData.add(new ArrayList());
 				ArrayList<String> icontactdata = new ArrayList<String>(6);
 				for (int j = 0; j < 3; j++) {
@@ -33,7 +33,7 @@ public class ContactUsData {
 		}
 		return contactData;
 	}
-	
+
 //	public static void main(String args[]) throws IOException {
 //	ContactUsData rd=new ContactUsData();
 //	ArrayList<ArrayList<String>> myData=rd.contactUsData();

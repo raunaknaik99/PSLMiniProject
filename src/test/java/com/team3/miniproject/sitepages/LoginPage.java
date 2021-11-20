@@ -5,18 +5,13 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
-
-
 public class LoginPage {
 	public WebDriver driver;
-	String baseUrl = "http://localhost/miniproject";
+
+	String baseUrl = "http://localhost/opencartsite";
 	String expectedTitle = "Account Login";
 
 	public LoginPage(WebDriver driver) {
@@ -24,19 +19,18 @@ public class LoginPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(css="#top-links > ul > li.dropdown > a")
+	@FindBy(css = "#top-links > ul > li.dropdown > a")
 	WebElement myAccountIcon;
-	@FindBy(linkText="Login")
+	@FindBy(linkText = "Login")
 	WebElement chooseLogin;
-	@FindBy(id="input-email")
+	@FindBy(id = "input-email")
 	WebElement usernameField;
-	@FindBy(id="input-password")
+	@FindBy(id = "input-password")
 	WebElement passwordField;
-	@FindBy(css="input[value='Login']")
+	@FindBy(css = "input[value='Login']")
 	WebElement loginButton;
-	@FindBy(linkText="Logout")
+	@FindBy(linkText = "Logout")
 	WebElement chooseLogout;
-	
 
 	public void navigateToLogin() {
 
@@ -55,7 +49,6 @@ public class LoginPage {
 
 	}
 
-
 	public void login(String user_name, String password) {
 		usernameField.clear();
 		usernameField.sendKeys(user_name);
@@ -64,9 +57,7 @@ public class LoginPage {
 
 		loginButton.click();
 
-
 	}
-
 
 	public void logout() {
 		myAccountIcon.click();
