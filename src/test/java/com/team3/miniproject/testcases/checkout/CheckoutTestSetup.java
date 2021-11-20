@@ -199,7 +199,7 @@ public class CheckoutTestSetup {
 
 
 	//TC_OC_CF_005
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void testCase005() {
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_005-to test if the placeholders are present on all the input fields under billing details");
@@ -242,7 +242,7 @@ public class CheckoutTestSetup {
 
 
 	//TC_OC_CF_006
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void testCase006() throws IOException {
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_006-To test if city field accepts less than 2 characters and we can proceed to step 3");
@@ -268,7 +268,7 @@ public class CheckoutTestSetup {
 			//Assert.assertTrue(driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed());
 			//Assert.assertTrue(checkout.getCityWarning().isDisplayed());
 
-			if(checkout.getStep3Title().equals("Step 3: Delivery Details")) {
+			if(checkout.getStep3Title().getText().equals("Step 3: Delivery Details")) {
 				test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
 			}
 			else {
@@ -300,7 +300,14 @@ public class CheckoutTestSetup {
 			rd=new LoginData();
 			ArrayList<ArrayList<String>> myData = rd.loginData();
 			login.login(myData.get(8).get(0), myData.get(8).get(1));
-			Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+			//Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+			if(checkout.checkIfUserLoggedIn()) {
+				test.log(LogStatus.PASS,"Test Passed- user is logged in");
+			}
+			else {
+				test.log(LogStatus.FAIL, "Test failed- User Logged");
+				s.captureScreenshot("\\Checkout\\" + "testCase007.1_"+ timeStamp +".PNG");
+			}
 			//to go to home page
 			checkout.navigateToHomepage();
 			objHomePage.addProductToCart(1);
@@ -312,12 +319,12 @@ public class CheckoutTestSetup {
 
 			//check for test cases
 			//String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
-			if(checkout.getStep3Title().equals("Step 3: Delivery Details")) {
+			if(checkout.getStep3Title().getText().equals("Step 3: Delivery Details")) {
 				test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
 			}
 			else {
 				test.log(LogStatus.FAIL, "Test Failed-Can proceed to next form");
-				s.captureScreenshot("\\Checkout\\" + "testCase007.1_"+ timeStamp +".PNG");
+				s.captureScreenshot("\\Checkout\\" + "testCase007.2_"+ timeStamp +".PNG");
 			}
 			//Boolean warningPresence=driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed();
 			Boolean warningPresence=checkout.getLnameElement().isDisplayed();
@@ -325,7 +332,7 @@ public class CheckoutTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Warning is Present");
 			}else {
 				test.log(LogStatus.FAIL, "Test Failed-Warning is not present");
-				s.captureScreenshot("\\Checkout\\" + "testCase007.2_"+ timeStamp +".PNG");
+				s.captureScreenshot("\\Checkout\\" + "testCase007.3_"+ timeStamp +".PNG");
 
 			}}catch(Exception e) {
 				test.log(LogStatus.INFO, e);
