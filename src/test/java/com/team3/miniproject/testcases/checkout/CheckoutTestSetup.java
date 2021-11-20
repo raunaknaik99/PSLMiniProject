@@ -292,7 +292,7 @@ public class CheckoutTestSetup {
 	
 	
 	//TC_OC_CF_007
-	@Test(enabled=true)
+	@Test(enabled=false)
 	public void testCase007() throws InterruptedException, IOException {
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_007-to test if lastname can be more than 32 characters");
@@ -340,16 +340,14 @@ public class CheckoutTestSetup {
 	}
 
 
-/*----------------------------------------------------------------*/
- 	@Test(enabled=false)
-	  public void guestTestCase001() throws InterruptedException {
-		//test.log(LogStatus.INFO, "TC_OC_CG_001 - to checkout as a guest user");
+ 	@Test(enabled=true)
+	  public void testCase008() throws InterruptedException {
+		test.log(LogStatus.INFO, "TC_OC_CG_001 - to checkout as a guest user");
 		  
-		 System.out.println("worked");
 		 checkout = new CheckoutPage(driver);
 		 checkout.guestClick();
 		  if(checkout.guestBtnSelected()) {
-			  System.out.println("Selected");
+			  test.log(LogStatus.INFO, "Guest Account is selected.");
 			  checkout.clickContinue();
 			  Thread.sleep(2000);
 			  checkout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
@@ -372,26 +370,27 @@ public class CheckoutTestSetup {
 			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
 				  checkout.acceptAlert();
 				  checkout.confirmOrder();
-				  //test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
+				  test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
 			  }else {
-				  //test.log(LogStatus.FAIL, "The alert message about cart products is not displayed.");
+				  test.log(LogStatus.FAIL, "The alert message about cart products is not displayed.");
 			  }
 			  Thread.sleep(3000);
 			  Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText(), "Your order has been placed!");
 		  }else {
-			  System.out.println("Register Account is selected");
+			  test.log(LogStatus.INFO, "Register Account is Selected.");
 		  }
 	  }
 	  
-	 @Test(enabled=false)
-	  public void guestTestCase002() throws InterruptedException {
+	 @Test(enabled=true)
+	  public void testCase009() throws InterruptedException {
+		 test.log(LogStatus.INFO, "TC_OC_CG_002 - To checkout as Guest with Billing and Delivery addresses not being same.");
 		 checkout = new CheckoutPage(driver);
 		 checkout.guestClick();
 		 
 		 JavascriptExecutor js = (JavascriptExecutor) driver;
 		 
 		  if(checkout.guestBtnSelected()) {
-			  System.out.println("Selected");
+			  test.log(LogStatus.INFO, "Guest Account is selected.");
 			  checkout.clickContinue();
 			  Thread.sleep(2000);
 			  checkout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
@@ -425,14 +424,21 @@ public class CheckoutTestSetup {
 			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
 				  checkout.acceptAlert();
 				  checkout.confirmOrder();
+				  test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
 			  }
 			  Thread.sleep(3000);
-			  Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText(), "Your order has been placed!");
-		  }else {
-			  System.out.println("Register Account is selected");
+			  
+			  if(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText() == "Your order has been placed!") {
+				  test.log(LogStatus.PASS, "The order is successfully placed!");
+			  }
+			  else {
+				  test.log(LogStatus.FAIL, "The order was not placed!");
+			  }
+		  }
+		  else {
+			  test.log(LogStatus.INFO, "Guest Account is selected.");
 		  }
 	  }
-/*-----------------------------------------------*/
 	
   @BeforeMethod
   public void beforeMethod(Method m) {

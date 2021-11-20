@@ -458,7 +458,7 @@ public class CheckoutPage {
 	//method to click on the guest radio button
 	public void guestClick() throws InterruptedException {
 		  JavascriptExecutor js = (JavascriptExecutor) driver;
-		  js.executeScript("window.scrollBy(0,500)", "");
+		  js.executeScript("arguments[0].scrollIntoView();", addToCart);
 		  addToCart.click();
 		  Thread.sleep(3000);
 		  checkout.click();
