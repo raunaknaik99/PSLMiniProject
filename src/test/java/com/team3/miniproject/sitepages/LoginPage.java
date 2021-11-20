@@ -11,7 +11,8 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
 	public WebDriver driver;
 
-	String baseUrl = "http://localhost";
+
+	String baseUrl = "http://localhost/miniproject";
 	String expectedTitle = "Account Login";
 
 	public LoginPage(WebDriver driver) {
@@ -41,9 +42,6 @@ public class LoginPage {
 			System.out.println("Page Title matched");
 		}
 		driver.manage().window().maximize();
-		driver.findElement(By.xpath("//*[@id=\"top-links\"]/ul/li[2]/a")).click();
-		driver.findElement(By.xpath("//*[@id=\'top-links\']/ul/li[2]/ul/li[2]/a")).click();
-
 		myAccountIcon.click();
 		chooseLogin.click();
 
@@ -54,7 +52,6 @@ public class LoginPage {
 		usernameField.sendKeys(user_name);
 		passwordField.clear();
 		passwordField.sendKeys(password);
-
 		loginButton.click();
 
 	}
