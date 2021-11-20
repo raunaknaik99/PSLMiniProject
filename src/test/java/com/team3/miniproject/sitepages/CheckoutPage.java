@@ -21,7 +21,7 @@ import com.team3.miniproject.testcases.ddt.ReadInputs;
 
 public class CheckoutPage {
 	public WebDriver driver;
-	String baseUrl="http://localhost/opencartsite";
+	String baseUrl="http://localhost/miniproject";
 	ReadInputs reader= new ReadInputs();
 	JavascriptExecutor js;
 
@@ -115,7 +115,7 @@ public class CheckoutPage {
 	@FindBy(id = "input-payment-zone")
 	WebElement stateField;
 	
-	@FindBy(id="button-payment-address")
+	@FindBy(className="btn btn-primary")
 	WebElement continueButton;
 	
 	@FindBy(css="#top-links > ul > li.dropdown > a > i")
@@ -132,6 +132,12 @@ public class CheckoutPage {
 
 	@FindBy(css="div#payment-new>div:nth-of-type(2)>div>div")
 	WebElement lNameWarning;
+	
+	@FindBy(css="#collapse-payment-address > div > div.checkbox > label > input[type=checkbox]")
+	WebElement check;
+	@FindBy(id="button-account")
+	WebElement guestContinue;
+	
 	
 	public void navigateToHomepage() {
 
@@ -160,47 +166,34 @@ public class CheckoutPage {
 	}
 
 	public void enterNewBillingDetails(int val) throws InterruptedException{
-		System.out.println("reacehd enter new deatils");
+		System.out.println("reached enter new details");
 		WebDriverWait wait = new WebDriverWait(driver,30);
 		System.out.println(val);
 		
 		if(val==3 || val==4) {
 			System.out.println("entered if");
-			reader.i=val;
-			try {
-				reader.readExcel("src\\test\\resources","loginDDT.xlsx","Checkout");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			enterFirstName(reader.getFirstName());
-			enterLastName(reader.getLastName());
-			enterAddress1(reader.getAddress1());
-			enterCity(reader.getCity());
-			enterPostCode(reader.getPostCode());
-			enterCountry(reader.getCountry());
-			enterState(reader.getState());
-			clickContinue();
+			
 		}
 		else {
 			wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#collapse-payment-address > div > form > div:nth-child(3) > label > input[type=radio]")));
 			newPaymentAddress.click();
-			reader.i=val;
-			try {
-				reader.readExcel("src\\test\\resources","loginDDT.xlsx","Checkout");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			enterFirstName(reader.getFirstName());
-			enterLastName(reader.getLastName());
-			enterAddress1(reader.getAddress1());
-			enterCity(reader.getCity());
-			enterPostCode(reader.getPostCode());
-			enterCountry(reader.getCountry());
-			enterState(reader.getState());
-			clickContinue();
+			
 		}
+		reader.i=val;
+		try {
+			reader.readExcel("src\\test\\resources","loginDDT.xlsx","Checkout");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		enterFirstName(reader.getFirstName());
+		enterLastName(reader.getLastName());
+		enterAddress1(reader.getAddress1());
+		enterCity(reader.getCity());
+		enterPostCode(reader.getPostCode());
+		enterCountry(reader.getCountry());
+		enterState(reader.getState());
+		clickContinue();
 		
 	}
 
@@ -214,6 +207,25 @@ public class CheckoutPage {
 		Thread.sleep(2000);
 		shippingMethodFlat.click();
 		shippingMethodContinueButton.click();
+	}
+	public void enterNewDeliveryDetails(int val) {
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		reader.i=val;
+		try {
+			reader.readExcel("src\\test\\resources","loginDDT.xlsx","Checkout");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		enterFirstName(reader.getFirstName());
+		enterLastName(reader.getLastName());
+		enterAddress1(reader.getAddress1());
+		enterCity(reader.getCity());
+		enterPostCode(reader.getPostCode());
+		enterCountry(reader.getCountry());
+		enterState(reader.getState());
+		clickContinue();
+		
 	}
 
 	public void enterPaymentMethod() throws InterruptedException {
@@ -458,7 +470,7 @@ public class CheckoutPage {
 	//method to click on the guest radio button
 	public void guestClick() throws InterruptedException {
 		  JavascriptExecutor js = (JavascriptExecutor) driver;
-		  js.executeScript("window.scrollBy(0,500)", "");
+		  js.executeScript("arguments[0].scrollIntoView();", addToCart);
 		  addToCart.click();
 		  Thread.sleep(3000);
 		  checkout.click();
@@ -471,5 +483,3 @@ public class CheckoutPage {
 		return guestRadioBtn.isSelected();
 	}	
 }
-
-
