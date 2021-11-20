@@ -72,8 +72,7 @@ public class CartFunctionality {
 		  test.log(LogStatus.PASS, "The alert message about addition of the product to the cart is displayed.");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The alert message about addition of the product to the cart is not displayed.");
-		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase001_"+ timeStamp +".PNG");
+		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase001.1_"+ timeStamp +".PNG") + "The alert message about addition of the product to the cart is not displayed.");
 	  }
 
 	  Thread.sleep(5000);
@@ -83,8 +82,8 @@ public class CartFunctionality {
 		  test.log(LogStatus.PASS, "The added product is visible in the cart.");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The added product is not visible in the cart.");
-		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase001_"+ timeStamp +".PNG");
+		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase001.2_"+ timeStamp +".PNG") + "The added product is not visible in the cart.");
+		  
 	  }
 	  
 }
@@ -120,8 +119,7 @@ public class CartFunctionality {
 		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The driver did not switch to the alert.");
-		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
+		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006.1_"+ timeStamp +".PNG") +"The driver did not switch to the alert.");
 	  }	
   	  Thread.sleep(2000);
 	  appleCinemaObject.enterQuantity("1");
@@ -129,8 +127,7 @@ public class CartFunctionality {
 	  Thread.sleep(2000);
 	  
 	  if(appleCinemaObject.checkSuccessAlert()) {
-		  test.log(LogStatus.FAIL, "The warning message about the minimum required quantity is not displayed.");
-		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
+		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006.2_"+ timeStamp +".PNG") + "The warning message about the minimum required quantity is not displayed.");
 	  }
 	  else {
 		  test.log(LogStatus.PASS, "The warning message about the minimum required quantity is displayed.");
@@ -156,8 +153,7 @@ public class CartFunctionality {
 		  test.log(LogStatus.PASS, "The success message of adding the product to the cart is displayed.");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The success message for adding the product to the cart is not displayed.");
-		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase003_"+ timeStamp +".PNG");
+		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase003.1_"+ timeStamp +".PNG") + "The success message for adding the product to the cart is not displayed.");
 	  }
 	  
 	  objHeader.clickShoppingCartLink();
@@ -169,8 +165,7 @@ public class CartFunctionality {
 		  test.log(LogStatus.PASS, "The warning about the out of stock product in the cart is displayed.");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The warning about the out of stock product in the cart is not displayed.");
-		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase003_"+ timeStamp +".PNG");
+		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase003.2_"+ timeStamp +".PNG") + "The warning about the out of stock product in the cart is not displayed.");
 	  }
 	  
 }
@@ -188,8 +183,8 @@ public class CartFunctionality {
 		  test.log(LogStatus.PASS, "The alert message about addition of the product to the cart is displayed.");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The alert message about addition of the product to the cart is not displayed.");
-		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase004_"+ timeStamp +".PNG");
+		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase004.1_"+ timeStamp +".PNG") + "The alert message about addition of the product to the cart is not displayed.");
+		  
 	  }
 	  
 	  objHeader.clickCartDropDown(); 
@@ -201,8 +196,7 @@ public class CartFunctionality {
 		  test.log(LogStatus.PASS, "The product was successfully removed from the cart.");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The product was not removed from the cart.");
-		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase004_"+ timeStamp +".PNG");
+		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase004.2_"+ timeStamp +".PNG") + "The product was not removed from the cart.");
 	  }
 } 
   //TC_OC_CART_005 - Adding a product to the cart with quantity as zero.
@@ -236,8 +230,7 @@ public class CartFunctionality {
 	 
 	 WebElement successAlert = driver.findElement(By.cssSelector("#product-product > div.alert.alert-success.alert-dismissible"));
 	 if(successAlert.isDisplayed()) {
-		 test.log(LogStatus.FAIL, "The warning about the quantity is not displayed.");
-		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase005_"+ timeStamp +".PNG");
+		 test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase005.1_"+ timeStamp +".PNG") + "The warning about the quantity is not displayed.");
 	 }
 	 else {
 		 test.log(LogStatus.PASS, "The warning about the quantity is displayed.");
@@ -275,8 +268,8 @@ public class CartFunctionality {
 		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "The driver did not switch to the alert.");
-		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
+		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006.1_"+ timeStamp +".PNG") + "The driver did not switch to the alert.");
+		  
 	  }	
   	  Thread.sleep(2000);
 	  appleCinemaObject.enterQuantity("1");
@@ -284,8 +277,7 @@ public class CartFunctionality {
 	  Thread.sleep(2000);
 	  
 	  if(appleCinemaObject.checkSuccessAlert()) {
-		  test.log(LogStatus.FAIL, "The warning message about the minimum required quantity is not displayed.");
-		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
+		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006.2_"+ timeStamp +".PNG") + "The warning message about the minimum required quantity is not displayed.");
 	  }
 	  else {
 		  test.log(LogStatus.PASS, "The warning message about the minimum required quantity is displayed.");
@@ -316,8 +308,7 @@ public class CartFunctionality {
 	 
 	 WebElement successAlert = driver.findElement(By.xpath("//*[@id=\"product-product\"]/div[1]"));
 	 if(successAlert.isDisplayed()) {
-		 test.log(LogStatus.FAIL, "The warning about the quantity is not displayed.");
-		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase007_"+ timeStamp +".PNG");
+		 test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase007.1_"+ timeStamp +".PNG") + "The warning about the quantity is not displayed.");
 	 }
 	 else {
 		 test.log(LogStatus.PASS, "The warning about the quantity is displayed.");
@@ -343,15 +334,13 @@ public class CartFunctionality {
  		test.log(LogStatus.PASS, "Test Passed- Warning was displayed");
  	 }
  	 else {
- 		test.log(LogStatus.FAIL, "Test Failed- Warning was not displayed");
-		objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase008.1_"+ timeStamp +".PNG");
+ 		test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase008.1_"+ timeStamp +".PNG") + "Test Failed- Warning was not displayed");
  	 }
  	  //Check if test Passed or failed
  	  if(appleCinemaObject.checkPageTitle().equals("Apple Cinema 30")) {
  		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
  	  }else {
- 		  test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
- 		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase008.2_"+ timeStamp +".PNG");
+ 		  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase008.2_"+ timeStamp +".PNG") + "Test Failed- Title Mismatched");
  	  }
 	   }catch(Exception e) {
 		   test.log(LogStatus.INFO, e);
@@ -361,7 +350,7 @@ public class CartFunctionality {
    
    //TC_OC_CART_010
    @Test(enabled=true)
-   public void testCase010() throws InterruptedException, IOException {
+   public void testCase009() throws InterruptedException, IOException {
 	   try {
  	  test.log(LogStatus.INFO, "TC_OC_CART_010-To verify that new window opens when user clicks the Tweet button");
  	  objScreenshot = new ScreenShotCapture(driver);
@@ -378,8 +367,7 @@ public class CartFunctionality {
  		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
  	  }
  	  else {
- 	      test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
- 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.1_"+ timeStamp +".PNG");
+ 	      test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009.1_"+ timeStamp +".PNG") + "Test Failed- Title Mismatched");
  	  }	  
  	  //click on tweet btn
  	  appleCinemaObject.clickTweetBtn();
@@ -396,8 +384,7 @@ public class CartFunctionality {
  			  if(driver.getTitle().equals("Twitter")) {
  				  test.log(LogStatus.PASS, "Test Passed- Child window Title matched");
  			  }else {
- 				  test.log(LogStatus.FAIL, "Test Failed- Child Window title mismatched");
- 				 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.2_"+ timeStamp +".PNG");
+ 				  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009.2_"+ timeStamp +".PNG") + "Test Failed- Child Window title mismatched");
  			  }
  			  driver.close();
  		  }
@@ -405,8 +392,8 @@ public class CartFunctionality {
  			  continue;
  		  }
  		  else {
- 			  test.log(LogStatus.FAIL, "Test Failed- Did not switch to child window");
- 			 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.3_"+ timeStamp +".PNG");
+ 			  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009.3_"+ timeStamp +".PNG") + "Test Failed- Did not switch to child window");
+ 			 
  		  }
  	  }
  	  Thread.sleep(3000); //only to visualize the going back to parent window
@@ -417,8 +404,7 @@ public class CartFunctionality {
  		  test.log(LogStatus.PASS, "Test Passed- Parent Window Title Matched");
  	  }
  	  else {
- 	      test.log(LogStatus.FAIL, "Test Failed- Parent Window Title Mismatched");
- 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.4_"+ timeStamp +".PNG");
+ 	      test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009.4_"+ timeStamp +".PNG") + "Test Failed- Parent Window Title Mismatched");
  	  }
 	   }catch(Exception e) {
 		   test.log(LogStatus.INFO, e);

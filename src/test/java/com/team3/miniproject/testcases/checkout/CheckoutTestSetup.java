@@ -302,7 +302,9 @@ public class CheckoutTestSetup {
 	
 	
 	//TC_OC_CF_007
+
 	@Test(enabled= false)
+
 	public void testCase007() throws InterruptedException, IOException {
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_007-to test if lastname can be more than 32 characters");
@@ -443,12 +445,13 @@ public class CheckoutTestSetup {
 			  else {
 				  test.log(LogStatus.FAIL, "The order was not placed!");
 			  }
+
 		  }
 		  else {
 			  test.log(LogStatus.INFO, "Guest Account is selected.");
 		  }
-	 }
-/*-----------------------------------------------*/
+	  }
+
 	
   @BeforeMethod
   public void beforeMethod(Method m) {
