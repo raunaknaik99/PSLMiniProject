@@ -21,7 +21,7 @@ import com.team3.miniproject.testcases.ddt.ReadInputs;
 
 public class CheckoutPage {
 	public WebDriver driver;
-	String baseUrl="http://localhost/miniproject";
+	String baseUrl="http://localhost/opencartsite";
 	ReadInputs reader= new ReadInputs();
 	JavascriptExecutor js;
 
@@ -160,25 +160,48 @@ public class CheckoutPage {
 	}
 
 	public void enterNewBillingDetails(int val) throws InterruptedException{
-
+		System.out.println("reacehd enter new deatils");
 		WebDriverWait wait = new WebDriverWait(driver,30);
-		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#collapse-payment-address > div > form > div:nth-child(3) > label > input[type=radio]")));
-		newPaymentAddress.click();
-		reader.i=val;
-		try {
-			reader.readExcel("C:\\Users\\diffa_pinto\\eclipse-workspace-new\\PSLMiniProject\\src\\test\\resources","loginDDT.xlsx","Checkout");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		System.out.println(val);
+		
+		if(val==3 || val==4) {
+			System.out.println("entered if");
+			reader.i=val;
+			try {
+				reader.readExcel("src\\test\\resources","loginDDT.xlsx","Checkout");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			enterFirstName(reader.getFirstName());
+			enterLastName(reader.getLastName());
+			enterAddress1(reader.getAddress1());
+			enterCity(reader.getCity());
+			enterPostCode(reader.getPostCode());
+			enterCountry(reader.getCountry());
+			enterState(reader.getState());
+			clickContinue();
 		}
-		enterFirstName(reader.getFirstName());
-		enterLastName(reader.getLastName());
-		enterAddress1(reader.getAddress1());
-		enterCity(reader.getCity());
-		enterPostCode(reader.getPostCode());
-		enterCountry(reader.getCountry());
-		enterState(reader.getState());
-		clickContinue();
+		else {
+			wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#collapse-payment-address > div > form > div:nth-child(3) > label > input[type=radio]")));
+			newPaymentAddress.click();
+			reader.i=val;
+			try {
+				reader.readExcel("src\\test\\resources","loginDDT.xlsx","Checkout");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			enterFirstName(reader.getFirstName());
+			enterLastName(reader.getLastName());
+			enterAddress1(reader.getAddress1());
+			enterCity(reader.getCity());
+			enterPostCode(reader.getPostCode());
+			enterCountry(reader.getCountry());
+			enterState(reader.getState());
+			clickContinue();
+		}
+		
 	}
 
 	public void enterExistingDeliveryDetailsAndContinue() {
@@ -421,9 +444,9 @@ public class CheckoutPage {
 	}
 	
 	//method to confirm the order
-	public void confirmOrder() {
-		confirmButton.click();
-	}
+//	public void confirmOrder() {
+//		confirmButton.click();
+//	}
 	
 	//method to accept alert while confirming the order
 	public void acceptAlert() throws InterruptedException {
@@ -449,4 +472,3 @@ public class CheckoutPage {
 	}	
 }
 
-}

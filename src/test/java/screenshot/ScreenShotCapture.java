@@ -10,16 +10,19 @@ import org.openqa.selenium.WebDriver;
 import com.google.common.io.Files;
 
 public class ScreenShotCapture {
-	
+
 	WebDriver driver;
-	
+
 	public ScreenShotCapture(WebDriver driver) {
-		this.driver=driver;
+		this.driver = driver;
 	}
-	
-	public void captureScreenshot(String filename) throws IOException {
-		File scrFile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		Files.copy(scrFile, new File("screenshots"+filename));
+
+	public String captureScreenshot(String filename) throws IOException {
+		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		File Dest = new File("screenshots" + filename);
+		String errflpath = Dest.getAbsolutePath();
+		Files.copy(scrFile, Dest);
+		return errflpath;
 	}
 
 }

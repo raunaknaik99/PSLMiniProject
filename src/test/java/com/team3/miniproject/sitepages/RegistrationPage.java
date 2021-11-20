@@ -1,11 +1,9 @@
 package com.team3.miniproject.sitepages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 public class RegistrationPage {
 
@@ -44,25 +42,25 @@ public class RegistrationPage {
 	WebElement continueBtn;
 
 	// warning div element
-	@FindBy(css = "div[class='alert alert-danger alert-dismissible']" )
+	@FindBy(css = "div[class='alert alert-danger alert-dismissible']")
 	WebElement warningDiv;
 
 	// confirm password warning(when confirm password is not same as password)
-	@FindBy(css="form.form-horizontal>fieldset:nth-of-type(2)>div:nth-of-type(2)>div>div")
+	@FindBy(css = "form.form-horizontal>fieldset:nth-of-type(2)>div:nth-of-type(2)>div>div")
 	WebElement confirmPasswordWarning;
 
 	// first name warning (appears when invalid input in first name field)
-	@FindBy(css="fieldset#account>div:nth-of-type(2)>div>div")
+	@FindBy(css = "fieldset#account>div:nth-of-type(2)>div>div")
 	WebElement fNameWarning;
 
 	// first name warning (appears when invalid input in last name field)
-	@FindBy(css="fieldset#account>div:nth-of-type(3)>div>div")
+	@FindBy(css = "fieldset#account>div:nth-of-type(3)>div>div")
 	WebElement lNameWarning;
 
 	// first name warning (appears when invalid input in telephone field)
-	@FindBy(css="fieldset#account>div:nth-of-type(5)>div>div")
+	@FindBy(css = "fieldset#account>div:nth-of-type(5)>div>div")
 	WebElement telephoneWarning;
-	
+
 	@FindBy(linkText = "login page")
 	WebElement loginLink;
 
@@ -105,30 +103,26 @@ public class RegistrationPage {
 	// method verify warning visibility
 	public Boolean verifyWarningVisibility() {
 		return warningDiv.isDisplayed();
-		//Assert.assertTrue(warningDiv.isDisplayed());
+		// Assert.assertTrue(warningDiv.isDisplayed());
 	}
 
 	// method to verify confirm password warning visibility
-	public String verifyConfirmPasswordWarning() {
-		String warningText = confirmPasswordWarning.getText();
-		return warningText;
+	public Boolean verifyConfirmPasswordWarning() {
+		return confirmPasswordWarning.isDisplayed();
 	}
 
 	// method to verify first name warning visibility
-	public String verifyFirstNameWarning() {
-		String warningText = fNameWarning.getText();
-		return warningText;
+	public Boolean verifyFirstNameWarning() {
+		return fNameWarning.isDisplayed();
 	}
 
 	// method to return last name warning visibility
-	public String verifyLastNameWarning() {
-		String warningText = lNameWarning.getText();
-		return warningText;
+	public Boolean verifyLastNameWarning() {
+		return lNameWarning.isDisplayed();
 	}
 
 	// method to return telephone warning visibility
-	public String verifyTelephoneWarning() {
-		String warningText = telephoneWarning.getText();
-		return warningText;
+	public Boolean verifyTelephoneWarning() {
+		return telephoneWarning.isDisplayed();
 	}
 }

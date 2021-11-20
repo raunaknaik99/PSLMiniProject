@@ -177,10 +177,8 @@ public class AppleCinema {
 	}
 	
 	//method to check if mandatory field warning is visible
-	public void checkMandatoryFieldsWarning() {
-		if(mandatoryWarning.isDisplayed()) {
-			System.out.println("Warning was displayed! Add to cart failed");
-		}
+	public WebElement checkMandatoryFieldsWarning() {
+		return mandatoryWarning;
 	}
 	
 	//method to check success alert
@@ -206,8 +204,8 @@ public class AppleCinema {
 		driver.switchTo().frame("twitter-widget-0");
 		w.until(ExpectedConditions.presenceOfElementLocated(By.id("b")));
 		tweetBtn.click();
-		ss=new ScreenShotCapture(driver);
-		ss.captureScreenshot("TwitterWindow.png");
-		Thread.sleep(3000); //only to visualize the opening of new window
+		//ss=new ScreenShotCapture(driver);
+		//ss.captureScreenshot("TwitterWindow.png");
+		Thread.sleep(5000); //only to visualize the opening of new window
 	}
 }

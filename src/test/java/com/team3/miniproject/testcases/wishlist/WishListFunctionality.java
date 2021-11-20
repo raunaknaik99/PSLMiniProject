@@ -1,6 +1,17 @@
 package com.team3.miniproject.testcases.wishlist;
-import java.util.concurrent.TimeUnit;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,203 +20,296 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+import com.team3.miniproject.sitepages.LoginPage;
 import com.team3.miniproject.sitepages.WishList;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-
-//import Pages.NewTest1;
-//import Pages.WishList;
-
-
-	public class WishListFunctionality {
-		
-		WebDriver driver ;
+public class WishListFunctionality {
+	
+	  	WebDriver driver ;
 		WishList obj12;
-		
-		@BeforeTest
-		public void setup() {
-		WebDriverManager.chromedriver().setup();
-	    driver = new ChromeDriver();
+		ExtentTest test;
+	    ExtentReports report;
 	    
-		driver.get("http://localhost/opencart/");
-		
-		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-		
-		driver.manage().window().maximize();
+	    @Test(priority=1) //Check that user is able to add products  to wishlist.
+		 public void testCase001() throws InterruptedException, IOException  {
 			
-		}	
-		@Test(priority = 1) //To check that trying to add a product to the wishlist while not logged in shows the correct warning message
-		 public void wishlist_TC007() throws InterruptedException  {
-			obj12 = new WishList(driver);
+			 test.log(LogStatus.INFO, "Check that user is able to add products  to wishlist");
+			 obj12 = new WishList(driver);
+			 obj12.loginbtnMethod(); //Account
+			 obj12.loginbtn1Method();
+			 File file = new File("src\\test\\resources\\loginDDT.xlsx");
+		        FileInputStream inputStream = new FileInputStream(file);
+		        XSSFWorkbook wb=new XSSFWorkbook(inputStream);
+		        XSSFSheet sheet=wb.getSheet("Wishlist");
+		        XSSFRow row2=sheet.getRow(1);
+		        XSSFCell cell12=row2.getCell(0);
+		        XSSFCell cell1=row2.getCell(1);
+		        String userName= cell12.getStringCellValue();
+		        String password= cell1.getStringCellValue();
+		        obj12.email(userName);
+		        obj12.passwordMethod(password);
+	                obj12.loginMethod(); //Login Button
+	            //Login Into Account
+				obj12.homeMethod(); //Navigating To Home Page
+				
 			 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			 //
-			 JavascriptExecutor js = (JavascriptExecutor) driver;
-			 Thread.sleep(5000);
-			 js.executeScript("window.scrollBy(0,5000)");
-			
-			 Thread.sleep(5000);
-			 obj12.macWishlishbtnMethod();
-			
-			 WebDriverWait w = new WebDriverWait(driver, 20);
-			 w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"common-home\"]/div[1]")));
-			 WebElement AlertMessage1=driver.findElement(By.xpath("//*[@id=\"common-home\"]/div[1]"));
-			 Assert.assertTrue(AlertMessage1.isDisplayed());
-			 Thread.sleep(5000);
-			 }
-		 
-		@Test(priority = 2) 
-		public void wishlist_Login() throws InterruptedException  {
-			//
-			
-			obj12.loginbtnMethod();
-			obj12.loginbtn1Method();
-			obj12.email("123@gmail.com");
-			obj12.passwordMethod("Shriya@123");
-			Thread.sleep(5000);
-            obj12.loginMethod();
-            Thread.sleep(5000);
-			obj12.homeMethod();
-			
-		}
-		
-		 @Test(priority = 3) //Check that user is able to add products  to wishlist.
-		 public void wishlist_TC001() throws InterruptedException  {
-			 //
-			 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			 //
 			 JavascriptExecutor js = (JavascriptExecutor) driver;
 			 js.executeScript("window.scrollBy(0,5000)");
-			// js.executeScript("arguments[0].scrollIntoView();", obj12.MacWishlishbtn);
-			 Thread.sleep(5000);
-			 obj12.macWishlishbtnMethod();
-			 //
-			 WebDriverWait w = new WebDriverWait(driver, 20);
-			 w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"common-home\"]/div[1]")));
-			 WebElement AlertMessage1=driver.findElement(By.xpath("//*[@id=\"common-home\"]/div[1]"));
-			Assert.assertTrue(AlertMessage1.isDisplayed());
-			Thread.sleep(5000);
-			 }
-		 @Test(priority = 4) //Verify that added product is present on the wishlist page.
-		 public void wishlist_TC002() throws InterruptedException  {
-			 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			 obj12.macWishlishbtnMethod(); //Adding MacBook To Wishlsit
+             Thread.sleep(5000);
+             //Checking Alert Displayed or Not
+			 if(obj12.successAlert.isDisplayed())
+			  {
+			  test.log(LogStatus.PASS, "Success: You have added MacBook to your wish list!");
+			  }
+			  else
+			  {
+			  test.log(LogStatus.FAIL, "Test Failed");
+			  }
 			 
-			 obj12.wishbtntopMethod();
-			 Thread.sleep(5000);
-			 JavascriptExecutor js = (JavascriptExecutor) driver;
-			 js.executeScript("window.scrollBy(0,5000)");
+			 }
+		 @Test(priority=2) //Verify that added product is present on the wishlist page.
+		 public void testCase002() throws InterruptedException, IOException  {
+			 test.log(LogStatus.INFO, "Verify that added product is present on the wishlist page");
+			 obj12 = new WishList(driver);
+			 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+			
+			    obj12.loginbtnMethod();
+				obj12.loginbtn1Method();
+				File file = new File("src\\test\\resources\\loginDDT.xlsx");
+		        FileInputStream inputStream = new FileInputStream(file);
+		        XSSFWorkbook wb=new XSSFWorkbook(inputStream);
+		        XSSFSheet sheet=wb.getSheet("Wishlist");
+		        XSSFRow row2=sheet.getRow(1);
+		        XSSFCell cell12=row2.getCell(0);
+		        XSSFCell cell1=row2.getCell(1);
+		        String userName= cell12.getStringCellValue();
+		        String password= cell1.getStringCellValue();
+		        obj12.email(userName);
+		        obj12.passwordMethod(password);
+	            obj12.loginMethod();
+	            //Login Into Account
+				obj12.homeMethod(); //Navigating To Home Page
+				
+			 obj12.wishbtntopMethod(); //Checking Element is displayed into Wishlist or not
+			 WebElement product=driver.findElement(By.linkText("MacBook"));
+			 if(product.isDisplayed()) {
+				  test.log(LogStatus.PASS, "The added product is visible in the WishList.");
+			  }
+			  else {
+				  test.log(LogStatus.FAIL, "The added product is not visible in the WishList.");
+			  }
+
 			 obj12.continuebtnMethod();
-			 Thread.sleep(5000);
-			 
-			 obj12.homeMethod();
-			 Thread.sleep(5000);
-			 
-		 }
+			 obj12.homeMethod(); //Navigating To Home Page
+			  }
 		 
-		 @Test(priority = 5)//Check that user is able to remove Product from wishlist.
-		 public void wishlist_TC003() throws InterruptedException  {
+		 @Test(priority=3)//Check that user is able to remove Product from wishlist.
+		 public void testCase003() throws InterruptedException, IOException  {
+			 test.log(LogStatus.INFO, "Check that user is able to remove Product from wishlist");
+			 obj12 = new WishList(driver);
 			 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			 obj12.wishbtntopMethod();
-			 Thread.sleep(5000);
-			 obj12.removemacMethod();
-			 WebDriverWait w = new WebDriverWait(driver, 20);
-			 w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"account-wishlist\"]/div[1]/i")));
-			 WebElement AlertMessage13=driver.findElement(By.xpath("//*[@id=\"account-wishlist\"]/div[1]/i"));
-			 Assert.assertTrue(AlertMessage13.isDisplayed());
-			
-			Thread.sleep(5000);
-			obj12.homeMethod1();
+			    obj12.loginbtnMethod();
+				obj12.loginbtn1Method();
+				File file = new File("src\\test\\resources\\loginDDT.xlsx");
+		        FileInputStream inputStream = new FileInputStream(file);
+		        XSSFWorkbook wb=new XSSFWorkbook(inputStream);
+		        XSSFSheet sheet=wb.getSheet("Wishlist");
+		        XSSFRow row2=sheet.getRow(1);
+		        XSSFCell cell12=row2.getCell(0);
+		        XSSFCell cell1=row2.getCell(1);
+		        String userName= cell12.getStringCellValue();
+		        String password= cell1.getStringCellValue();
+		        obj12.email(userName);
+		        obj12.passwordMethod(password);
+	            obj12.loginMethod(); //Login into Account
+				obj12.homeMethod(); //Navigating To Home Page
+			    obj12.wishbtntopMethod();
+			   
+			  obj12.removemacMethod(); //Remove product from wishlsit
+			  Thread.sleep(5000);
+			  if(obj12.successAlert.isDisplayed())
+			  {
+			  test.log(LogStatus.PASS, "Success: You have modified your wish list!");
+			  test.log(LogStatus.PASS, "The added product is remove from WishList.");
+			  }
+			  else
+			  {
+			  test.log(LogStatus.FAIL, "Test Failed");
+			  }
+			obj12.continuebtnMethod();  
+			  obj12.homeMethod(); //Navigating To Home Page
 		 }
 		 
-		 @Test(priority = 6)//Check that user is able to add products to Cart form wishlist.
-		 public void wishlist_TC004() throws InterruptedException {
-			 JavascriptExecutor js = (JavascriptExecutor) driver;
-			 js.executeScript("window.scrollBy(0,5000)");
+		 @Test(priority=4)//Check that user is able to add products to Cart form wishlist.
+		 public void testCase004() throws InterruptedException, IOException {
+			
+			 test.log(LogStatus.INFO, "Check that user is able to add products to Cart form wishlist");
+			 obj12 = new WishList(driver);
 			 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			 js.executeScript("window.scrollBy(0,5000)");
-			 js.executeScript("window.scrollBy(0,5000)");
-			 Thread.sleep(5000);
-			 obj12.macWishlishbtnMethod();
+			    obj12.loginbtnMethod();
+				obj12.loginbtn1Method();
+				File file = new File("src\\test\\resources\\loginDDT.xlsx");
+		        FileInputStream inputStream = new FileInputStream(file);
+		        XSSFWorkbook wb=new XSSFWorkbook(inputStream);
+		        XSSFSheet sheet=wb.getSheet("Wishlist");
+		        XSSFRow row2=sheet.getRow(1);
+		        XSSFCell cell12=row2.getCell(0);
+		        XSSFCell cell1=row2.getCell(1);
+		        String userName= cell12.getStringCellValue();
+		        String password= cell1.getStringCellValue();
+		        obj12.email(userName);
+		        obj12.passwordMethod(password);
+	            obj12.loginMethod();//Login into account
+				obj12.homeMethod(); //Navigating To Home Page
+				
+			    JavascriptExecutor js = (JavascriptExecutor) driver;
+			    js.executeScript("window.scrollBy(0,5000)");
+			    driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 			 
-			 Thread.sleep(5000);
+			    obj12.macWishlishbtnMethod();//Added product into wishlist
+			    obj12.wishbtntopMethod();
+			    obj12.addcartmacMethod();//Added product into cart from wishlist
 			 
-			 obj12.wishbtntopMethod();
-			 Thread.sleep(5000);
-
-		     obj12.addcartmacMethod();
-		     Thread.sleep(5000);
-			 WebDriverWait w = new WebDriverWait(driver, 20);
-			 w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"account-wishlist\"]/div[1]")));
-			 WebElement AlertMessage13=driver.findElement(By.xpath("//*[@id=\"account-wishlist\"]/div[1]"));
-			 Assert.assertTrue(AlertMessage13.isDisplayed());
-			
-
-			 obj12.removemacMethod();
-			
-			 w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"account-wishlist\"]/div[1]/i")));
-			 WebElement AlertMessage14=driver.findElement(By.xpath("//*[@id=\"account-wishlist\"]/div[1]/i"));
-			 Assert.assertTrue(AlertMessage14.isDisplayed());
-			 Thread.sleep(5000);
-			 			
-			 obj12.shoppingcartMethod();
-			 Thread.sleep(5000);
-			
-			 obj12.homeCartMethod();
-			 Thread.sleep(5000);
-		 }
-		 
+			    if(obj12.successAlert.isDisplayed())
+			    {
+			    test.log(LogStatus.PASS, "Success: You have added MacBook to your shopping cart!");
+			    }
+			    else
+			    {
+			    test.log(LogStatus.FAIL, "Test Failed");
+			    }
+			    Thread.sleep(5000);
+		        obj12.shoppingcartMethod();
+			    WebElement product=driver.findElement(By.linkText("MacBook"));
+			    if(product.isDisplayed()) {
+				  test.log(LogStatus.PASS, "The added product is visible in the Shopping Cart.");
+			     }
+			    else {
+				  test.log(LogStatus.FAIL, "The added product is not visible in the Shopping Cart.");
+			     }
+			    obj12.homeCartMethod();//Navigating To Home Page
+			 }
 		
-		 @Test(priority = 7)//Check that user is able to add more than one products to wishlist.
-		 public void wishlist_TC005() throws InterruptedException {
+		 @Test(priority=5)//Check that user is able to add more than one products to wishlist.
+		 public void testCase005() throws InterruptedException, IOException {
 			 
-			 driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-			 JavascriptExecutor js = (JavascriptExecutor) driver;
-			
-			 js.executeScript("window.scrollBy(0,5000)");
-			 Thread.sleep(5000);
-			 obj12.macWishlishbtnMethod();
+			    test.log(LogStatus.INFO, "Check that user is able to add more than one products to wishlist");
+			    obj12 = new WishList(driver);
+			    obj12.loginbtnMethod();
+				obj12.loginbtn1Method();
+				File file = new File("src\\test\\resources\\loginDDT.xlsx");
+		        FileInputStream inputStream = new FileInputStream(file);
+		        XSSFWorkbook wb=new XSSFWorkbook(inputStream);
+		        XSSFSheet sheet=wb.getSheet("Wishlist");
+		        XSSFRow row2=sheet.getRow(1);
+		        XSSFCell cell12=row2.getCell(0);
+		        XSSFCell cell1=row2.getCell(1);
+		        String userName= cell12.getStringCellValue();
+		        String password= cell1.getStringCellValue();
+		        obj12.email(userName);
+		        obj12.passwordMethod(password);
+	                obj12.loginMethod();//Login into account
+			   obj12.homeMethod();//Navigating To Home Page
+				
+			    JavascriptExecutor js = (JavascriptExecutor) driver;
+			    js.executeScript("window.scrollBy(0,5000)");
+			    obj12.iphonewishlishbtnMethod(); //Added iphone into wishlist
+			    if(obj12.successAlert.isDisplayed())
+			    {
+			    test.log(LogStatus.PASS, "Success: You have added iPhone to your wish list!");
+			    }
+			    else
+			     {
+			    test.log(LogStatus.FAIL, "Test Failed");
+			     }
+			    Thread.sleep(5000);
+			    js.executeScript("window.scrollBy(0,5000)");
+			    obj12.applecinemawishlishbtnMethod();//Added apple cinema into wishlist
+			    if(obj12.successAlert.isDisplayed())
+			    {
+			     test.log(LogStatus.PASS, "Success: You have added Apple Cinema 30\" to your wish list!");
+			    }
+			    else
+			    {
+			    test.log(LogStatus.FAIL, "Test Failed");
+			    }
+			    Thread.sleep(5000);
+			    obj12.wishbtntopMethod();
+			    WebElement product1=driver.findElement(By.linkText("iPhone"));
+			    WebElement product2=driver.findElement(By.linkText("Apple Cinema 30\""));
+			//Checking alert diplayed for not
+			 if(product1.isDisplayed()) {
+				  test.log(LogStatus.PASS, "The first added product is visible in the WishList.");
+			  }
+			  else {
+				  test.log(LogStatus.FAIL, "The  first added product is not  visible in the WishList.");
+			  }
+			 if(product2.isDisplayed()) {
+				  test.log(LogStatus.PASS, "The second added product is visible in the WishList.");
+			  }
+			  else {
+				  test.log(LogStatus.FAIL, "The second added product is not  visible in the Shopping Cart.");
+			  }
+			 obj12.homeMethod1();
 			 
-			 WebDriverWait w = new WebDriverWait(driver, 20);
-			 w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"common-home\"]/div[1]")));
-			 WebElement AlertMessage1=driver.findElement(By.xpath("//*[@id=\"common-home\"]/div[1]"));
-			 Assert.assertTrue(AlertMessage1.isDisplayed());
-
-			Thread.sleep(5000);
-			js.executeScript("window.scrollBy(0,5000)");
-			Thread.sleep(5000);
-			 obj12.iphonewishlishbtnMethod();
-			 
-			 w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"common-home\"]/div[1]")));
-			 WebElement AlertMessage12=driver.findElement(By.xpath("//*[@id=\"common-home\"]/div[1]"));
-			 Assert.assertTrue(AlertMessage1.isDisplayed());
-			 Thread.sleep(5000);
-			 
-			
-			 js.executeScript("window.scrollBy(0,5000)");
-			 Thread.sleep(5000);
-			 obj12.applecinemawishlishbtnMethod();
-			 
-			 w.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"common-home\"]/div[1]")));
-			 WebElement AlertMessage13=driver.findElement(By.xpath("//*[@id=\"common-home\"]/div[1]"));
-			 Assert.assertTrue(AlertMessage1.isDisplayed());
-			 Thread.sleep(5000);
-			
-			  obj12.wishbtntopMethod();
-			  obj12.homeMethod1();
 		 }
+		 @Test(priority=6) //To check that trying to add a product to the wishlist while not logged in shows the correct warning message
+		 public void testCase007() throws InterruptedException  {
+			
+					
+					test.log(LogStatus.INFO, "To check that trying to add a product to the wishlist while not logged in shows the correct warning message");
+					obj12 = new WishList(driver);
+					driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					js.executeScript("window.scrollBy(0,5000)");
+					obj12.macWishlishbtnMethod(); //Added Product before login.
+					
+					if(obj12.successAlert.isDisplayed())
+					  {
+					  test.log(LogStatus.PASS, "You must login or create an account to save MacBook to your wish list!");
+					  }
+					  else
+					  {
+					  test.log(LogStatus.FAIL, "Test Failed");
+					  }
+					  Thread.sleep(5000);
+					}
+					 
+			 @BeforeMethod
+			public void setup(Method m) {
+				String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+				  report =new ExtentReports("ExtentReports\\Wish_List_Reports\\"+m.getName()+"_"+timeStamp+".html");
+				  test=report.startTest(m.getName());
+			      WebDriverManager.chromedriver().setup();
+		          driver = new ChromeDriver();
+		          driver.get("http://localhost/opencart/");
+			      driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			      driver.manage().window().maximize();
+				}	
 		 
-		 
-		 
-		 
-		 @AfterTest
+		      @AfterMethod
 			public void quit() {
 				
 				driver.quit();
+				report.endTest(test);
+				report.flush();
+			}
+		 
+}
+
+
+		
 			
 
-		}
 
-}
