@@ -29,7 +29,7 @@ public class ContactUsTest {
 
 	WebDriver driver;
 	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
-	ContactUs cnct_object;
+	ContactUs contactUsObject;
 	ExtentReports report;
 	ExtentTest test;
 	ScreenShotCapture objScreenshot;
@@ -37,32 +37,32 @@ public class ContactUsTest {
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 
 	/*------------------------------*/
-	@Test
+	@Test(enabled=false)
 	public void contactTestCase001() throws InterruptedException {
-		cnct_object = new ContactUs(driver);
-		cnct_object.loginForContactUs();
+		contactUsObject = new ContactUs(driver);
+		contactUsObject.loginForContactUs();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,500)", "");
 		Thread.sleep(3000);
 
 		// link text to click on Contact Us link
 		driver.findElement(By.linkText("Contact Us")).click();
-		cnct_object.enterEnquiry("This is the input for enquiry field");
+		contactUsObject.enterEnquiry("This is the input for enquiry field");
 		Thread.sleep(3000);
 
 		// css of submit button of Contact Us Page---input[type=\"submit\"]
-		cnct_object.clickSubmit();
+		contactUsObject.clickSubmit();
 		Thread.sleep(3000);
-		cnct_object.getPageTitle();
+		contactUsObject.getPageTitle();
 
 		// link text to click Continue after navigating next to Contact Us page
 		driver.findElement(By.linkText("Continue"));
 	}
 
-	@Test
+	@Test(enabled=false)
 	public void contactTestCase002() throws InterruptedException {
-		cnct_object = new ContactUs(driver);
-		cnct_object.loginForContactUs();
+		contactUsObject = new ContactUs(driver);
+		contactUsObject.loginForContactUs();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,500)", "");
 		Thread.sleep(3000);
@@ -76,29 +76,29 @@ public class ContactUsTest {
 		email_field.clear();
 		email_field.sendKeys("joe@demo.com");
 
-		cnct_object.enterEnquiry("This is the input for enquiry field");
+		contactUsObject.enterEnquiry("This is the input for enquiry field");
 		Thread.sleep(3000);
-		cnct_object.clickSubmit();
+		contactUsObject.clickSubmit();
 		Thread.sleep(3000);
-		cnct_object.getPageTitle();
+		contactUsObject.getPageTitle();
 
 		// link Text to click Continue
 		driver.findElement(By.linkText("Continue"));
 	}
 
 	/*-------------------------------*/
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase003() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
 		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
 
 		test.log(LogStatus.INFO, "TC_OC_CU_003 - To test whether the contact us form accepts an invalid email id");
 		try {
-			cnct_object = new ContactUs(driver);
-			cnct_object.enterName(myData.get(1).get(0));
-			cnct_object.enterEmail(myData.get(1).get(1));
-			cnct_object.enterEnquiry(myData.get(1).get(2));
-			cnct_object.clickSubmit();
+			contactUsObject = new ContactUs(driver);
+			contactUsObject.enterName(myData.get(1).get(0));
+			contactUsObject.enterEmail(myData.get(1).get(1));
+			contactUsObject.enterEnquiry(myData.get(1).get(2));
+			contactUsObject.clickSubmit();
 			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
 				test.log(LogStatus.PASS, "Test Passed - Contact us form was not submitted");
@@ -108,7 +108,7 @@ public class ContactUsTest {
 								objScreenshot.captureScreenshot("\\ContactUs\\testCase003.1_" + timeStamp + ".PNG"))
 								+ "Test Failed - Contact us form was submitted");
 			}
-			if (cnct_object.getEmailWarning().equals("E-Mail Address does not appear to be valid!")) {
+			if (contactUsObject.getEmailWarning().equals("E-Mail Address does not appear to be valid!")) {
 				test.log(LogStatus.PASS, "Test Passed- Correct warning message was shown");
 			} else {
 				test.log(LogStatus.FAIL,
@@ -121,7 +121,7 @@ public class ContactUsTest {
 		}
 	}
 
-	@Test
+	@Test(enabled=false)
 	public void testCase004() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
 		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
@@ -129,11 +129,11 @@ public class ContactUsTest {
 		test.log(LogStatus.INFO,
 				"TC_OC_CU_004 - To test whether the contact us form accepts less than 3 characters in 'Your Name' field");
 		try {
-			cnct_object = new ContactUs(driver);
-			cnct_object.enterName(myData.get(2).get(0));
-			cnct_object.enterEmail(myData.get(2).get(1));
-			cnct_object.enterEnquiry(myData.get(2).get(2));
-			cnct_object.clickSubmit();
+			contactUsObject = new ContactUs(driver);
+			contactUsObject.enterName(myData.get(2).get(0));
+			contactUsObject.enterEmail(myData.get(2).get(1));
+			contactUsObject.enterEnquiry(myData.get(2).get(2));
+			contactUsObject.clickSubmit();
 			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
 				test.log(LogStatus.PASS, "Test Passed - Contact us form was not submitted");
@@ -143,7 +143,7 @@ public class ContactUsTest {
 								objScreenshot.captureScreenshot("\\ContactUs\\testCase004.1_" + timeStamp + ".PNG"))
 								+ "Test Failed - Contact us form was submitted");
 			}
-			if (cnct_object.getYourNameWarning().equals("Name must be between 3 and 32 characters!")) {
+			if (contactUsObject.getYourNameWarning().equals("Name must be between 3 and 32 characters!")) {
 				test.log(LogStatus.PASS, "Test Passed- Correct warning message was shown");
 			} else {
 				test.log(LogStatus.FAIL,
@@ -156,7 +156,7 @@ public class ContactUsTest {
 		}
 	}
 
-	@Test
+	@Test(enabled=false)
 	public void testCase005() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
 		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
@@ -164,11 +164,11 @@ public class ContactUsTest {
 		test.log(LogStatus.INFO,
 				"TC_OC_CU_005 - To test whether the contact us form accepts less than 10 characters in the 'Enquiry' field");
 		try {
-			cnct_object = new ContactUs(driver);
-			cnct_object.enterName(myData.get(3).get(0));
-			cnct_object.enterEmail(myData.get(3).get(1));
-			cnct_object.enterEnquiry(myData.get(3).get(2));
-			cnct_object.clickSubmit();
+			contactUsObject = new ContactUs(driver);
+			contactUsObject.enterName(myData.get(3).get(0));
+			contactUsObject.enterEmail(myData.get(3).get(1));
+			contactUsObject.enterEnquiry(myData.get(3).get(2));
+			contactUsObject.clickSubmit();
 			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
 				test.log(LogStatus.PASS, "Test Passed - Contact us form was not submitted");
@@ -178,7 +178,7 @@ public class ContactUsTest {
 								objScreenshot.captureScreenshot("\\ContactUs\\testCase005.1_" + timeStamp + ".PNG"))
 								+ "Test Failed - Contact us form was submitted");
 			}
-			if (cnct_object.getEnquiryWarning().equals("Enquiry must be between 10 and 3000 characters!")) {
+			if (contactUsObject.getEnquiryWarning().equals("Enquiry must be between 10 and 3000 characters!")) {
 				test.log(LogStatus.PASS, "Test Passed- Correct warning message was shown");
 			} else {
 				test.log(LogStatus.FAIL,
@@ -195,16 +195,15 @@ public class ContactUsTest {
 	// TC_OC_CU_006
 	public void testCase006() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
-		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
-
 		test.log(LogStatus.INFO, "TC_OC_CU_006-To test whether contact us form works even when user is not signed in");
 		try {
-			cnct_object = new ContactUs(driver);
+			ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
+			contactUsObject = new ContactUs(driver);
 			// enter the details in the contact us form
-			cnct_object.enterName(myData.get(0).get(0));
-			cnct_object.enterEmail(myData.get(0).get(1));
-			cnct_object.enterEnquiry(myData.get(0).get(2));
-			cnct_object.clickSubmit();
+			contactUsObject.enterName(myData.get(0).get(0));
+			contactUsObject.enterEmail(myData.get(0).get(1));
+			contactUsObject.enterEnquiry(myData.get(0).get(2));
+			contactUsObject.clickSubmit();
 			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact/success";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
 				test.log(LogStatus.PASS,
@@ -219,7 +218,7 @@ public class ContactUsTest {
 	}
 
 	// TC_OC_CU_007
-	@Test
+	@Test(enabled=true)
 	public void testCase007() {
 		objScreenshot = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CU_007-To check if labels for mandatory fields are present");
@@ -265,7 +264,7 @@ public class ContactUsTest {
 	}
 
 	// TC_OC_CU_008
-	@Test
+	@Test(enabled=true)
 	public void testCase008() {
 		objScreenshot = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
