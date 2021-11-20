@@ -94,10 +94,10 @@ public class SearchTest {
 							+ "Test Failed: \"No results found\" is not displayed");
 	}
 
-	// To test if no products are found when searching with no search input
+	// To test if search is done even when there is no search input
 	@Test
 	public void testCase004() throws InterruptedException, IOException {
-		test.log(LogStatus.INFO, "To test if no products are found when searching with no search input");
+		test.log(LogStatus.INFO, "To test if search is done even when there is no search input");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
@@ -105,12 +105,12 @@ public class SearchTest {
 		test.log(LogStatus.INFO, "Clicking search button");
 		h_object.clickSearchBtn();
 
-		if (sp_object.numProductsFound() == 0)
-			test.log(LogStatus.PASS, "Test Passed: No results were found, as expected");
+		if (sp_object.getPageTitle().equals("Your Store"))
+			test.log(LogStatus.PASS, "Test Passed: A search was not done");
 		else
 			test.log(LogStatus.FAIL,
 					test.addScreenCapture(s.captureScreenshot("\\Search\\testCase004_" + timeStamp + ".PNG"))
-							+ "Test Failed: Unexpected results were found");
+							+ "Test Failed: A search was done");
 	}
 
 	// To test if no products found when searching with an input having no results
@@ -122,8 +122,8 @@ public class SearchTest {
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Searching for \"asjdnjasndjbnajsdbjadbjasbndjasbnjdbn\"");
-		h_object.enterSearchQuery("asjdnjasndjbnajsdbjadbjasbndjasbnjdbn");
+		test.log(LogStatus.INFO, "Searching for \"lenovo\"");
+		h_object.enterSearchQuery("lenovo");
 		h_object.clickSearchBtn();
 
 		if (sp_object.numProductsFound() == 0)
