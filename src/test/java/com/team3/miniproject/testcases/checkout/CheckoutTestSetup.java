@@ -274,12 +274,7 @@ public class CheckoutTestSetup {
 			objHomePage.addProductToCart(1);
 			checkout.checkout();
 			checkout.enterNewBillingDetails(3);
-			//Assert.assertEquals("Step 3: Delivery Details", checkout.getStep3Title().getText());
-
-			//Boolean warningPresence =checkout.getCityWarning().isDisplayed();
-			//Assert.assertTrue(driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed());
-			//Assert.assertTrue(checkout.getCityWarning().isDisplayed());
-
+			
 			if(checkout.getStep3Title().getText().equals("Step 3: Delivery Details")) {
 				test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
 			}
@@ -288,7 +283,6 @@ public class CheckoutTestSetup {
 			}
 
 			Boolean warningPresence =checkout.getCityWarning().isDisplayed();
-			//Boolean warningPresence=driver.findElement(By.xpath("//div[text()='City must be between 2 and 128 characters!']")).isDisplayed();
 			if(warningPresence) {
 				test.log(LogStatus.PASS, "Test Passed-Warning is Present");
 			}else {
@@ -325,18 +319,13 @@ public class CheckoutTestSetup {
 			checkout.checkout();
 
 			checkout.enterNewBillingDetails(4);
-			//Assert.assertEquals("Step 3: Delivery Details", driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText());
-			//Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed());
-
-			//check for test cases
-			//String step3Heading=driver.findElement(By.xpath("//h4[text()='Step 3: Delivery Details']")).getText();
+			
 			if(checkout.getStep3Title().getText().equals("Step 3: Delivery Details")) {
 				test.log(LogStatus.PASS, "Test Passed-Cannot proceed to next form");
 			}
 			else {
 				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Checkout\\" + "testCase007.2_"+ timeStamp +".PNG"))+"Test Failed-Can proceed to next form");
 			}
-			//Boolean warningPresence=driver.findElement(By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']")).isDisplayed();
 			Boolean warningPresence=checkout.getLnameElement().isDisplayed();
 			if(warningPresence) {
 				test.log(LogStatus.PASS, "Test Passed-Warning is Present");

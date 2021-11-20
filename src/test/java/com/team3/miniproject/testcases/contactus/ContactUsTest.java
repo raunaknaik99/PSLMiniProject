@@ -209,55 +209,10 @@ public class ContactUsTest {
 				test.log(LogStatus.PASS,
 						"Test Passed- User navigated to Success correct Url after submiting contact us form");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- user navigated to wrong URL");
-				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase006_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,test.addScreenCapture(objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase006_" + timeStamp + ".PNG")) 
+						+"Test Failed- user navigated to wrong URL");
+				
 			}
-		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
-		}
-	}
-
-	// TC_OC_CU_007
-	@Test(enabled=true)
-	public void testCase007() {
-		objScreenshot = new ScreenShotCapture(driver);
-		test.log(LogStatus.INFO, "TC_OC_CU_007-To check if labels for mandatory fields are present");
-		// to test the presence of astricks
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			String astricks1 = (String) js.executeScript(
-					"return window.getComputedStyle(document.querySelector(\"fieldset > div.required:nth-child(2) > label.control-label\"),':before').getPropertyValue('content')");
-			String char1 = Character.toString(astricks1.charAt(1));
-
-			if (char1.equals("*")) {
-				test.log(LogStatus.PASS, "Test Passed- Astricks present for Input Field 1");
-			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Astricks not present for Input field 1");
-				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase007.1_" + timeStamp + ".PNG");
-			}
-
-			String astricks2 = (String) js.executeScript(
-					"return window.getComputedStyle(document.querySelector(\"fieldset > div.required:nth-child(3) > label.control-label\"),':before').getPropertyValue('content')");
-			String char2 = Character.toString(astricks2.charAt(1));
-
-			if (char2.equals("*")) {
-				test.log(LogStatus.PASS, "Test Passed- Astricks present for Input Field 2");
-			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Astricks not present for Input field 2");
-				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase007.2_" + timeStamp + ".PNG");
-			}
-
-			String astricks3 = (String) js.executeScript(
-					"return window.getComputedStyle(document.querySelector(\"fieldset > div.required:nth-child(4) > label.control-label\"),':before').getPropertyValue('content')");
-			String char3 = Character.toString(astricks3.charAt(1));
-
-			if (char3.equals("*")) {
-				test.log(LogStatus.PASS, "Test Passed- Astricks present for Input Field 3");
-			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Astricks not present for Input field 3");
-				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase007.3_" + timeStamp + ".PNG");
-			}
-
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
@@ -275,19 +230,20 @@ public class ContactUsTest {
 			if (nameField.getText().equals("") && emailField.getText().equals("")) {
 				test.log(LogStatus.PASS, "Test Passed-Name & Email Field is Blank");
 			} else if (nameField.getText().equals("") && !emailField.getText().equals("")) {
-				test.log(LogStatus.FAIL, "Test Failed-Name Field is Blank & Email Field is not Blank: " + emailField);
-				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.1_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,test.addScreenCapture(objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.1_" + timeStamp + ".PNG")) 
+						+"Test Failed-Name Field is Blank & Email Field is not Blank: " + emailField);
 			} else if (!nameField.getText().equals("") && emailField.getText().equals("")) {
-				test.log(LogStatus.FAIL, "Test Failed-Name Field is Not Blank & Email Field is Blank: " + nameField);
-				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.2_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,test.addScreenCapture(objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.2_" + timeStamp + ".PNG")) 
+						+"Test Failed-Name Field is Not Blank & Email Field is Blank: " + nameField);
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed-Name Field is not Blank, Contains Text: " + nameField);
-				objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.3_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,test.addScreenCapture(objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.3_" + timeStamp + ".PNG"))
+						+ "Test Failed-Name Field is not Blank, Contains Text: " + nameField);
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
 	}
+	
 	@Test(priority = 1)
 	public void testCase009() {
 		objScreenshot=new ScreenShotCapture(driver);

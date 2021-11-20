@@ -48,8 +48,8 @@ public class FooterTestSetup {
 			if (driver.getTitle().equals("Contact Us")) {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title MisMatched");
-				s.captureScreenshot("\\Footer\\" + "testCase001_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,  test.addScreenCapture(s.captureScreenshot("\\Footer\\" + "testCase001_" + timeStamp + ".PNG")) 
+						+"Test Failed- Title MisMatched");
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -67,8 +67,8 @@ public class FooterTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
 
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title MisMatched");
-				s.captureScreenshot("\\Footer\\" + "testCase002_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Footer\\" + "testCase002_" + timeStamp + ".PNG")) 
+						+"Test Failed- Title MisMatched");
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -87,8 +87,7 @@ public class FooterTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
 
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title MisMatched");
-				s.captureScreenshot("\\Footer\\" + "testCase003_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Footer\\" + "testCase003_" + timeStamp + ".PNG")) + "Test Failed- Title MisMatched");
 
 			}
 		} catch (Exception e) {
@@ -108,8 +107,8 @@ public class FooterTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
 
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title MisMatched");
-				s.captureScreenshot("\\Footer\\" + "testCase004_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,test.addScreenCapture(s.captureScreenshot("\\Footer\\" + "testCase004_" + timeStamp + ".PNG")) 
+						+"Test Failed- Title MisMatched");
 
 			}
 		} catch (Exception e) {
@@ -129,8 +128,8 @@ public class FooterTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
 
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title MisMatched");
-				s.captureScreenshot("\\Footer\\" + "testCase005_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,test.addScreenCapture(s.captureScreenshot("\\Footer\\" + "testCase005_" + timeStamp + ".PNG")) 
+						+ "Test Failed- Title MisMatched");
 
 			}
 		} catch (Exception e) {
@@ -150,8 +149,8 @@ public class FooterTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
 
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title MisMatched");
-				s.captureScreenshot("\\Footer\\" + "testCase006_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Footer\\" + "testCase006_" + timeStamp + ".PNG")) 
+						+ "Test Failed- Title MisMatched");
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -170,8 +169,8 @@ public class FooterTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
 
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title MisMatched");
-				s.captureScreenshot("\\Footer\\" + "testCase007_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,test.addScreenCapture(s.captureScreenshot("\\Footer\\" + "testCase007_" + timeStamp + ".PNG")) 
+						+"Test Failed- Title MisMatched");
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -189,8 +188,9 @@ public class FooterTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
 
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title MisMatched");
-				s.captureScreenshot("\\Footer\\" + "testCase008_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Footer\\" + "testCase008_" + timeStamp + ".PNG")) 
+						+"Test Failed- Title MisMatched");
+				
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -208,8 +208,9 @@ public class FooterTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
 
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title MisMatched");
-				s.captureScreenshot("\\Footer\\" + "testCase009_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,test.addScreenCapture(s.captureScreenshot("\\Footer\\" + "testCase009_" + timeStamp + ".PNG")) 
+						+"Test Failed- Title MisMatched");
+				
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -228,8 +229,9 @@ public class FooterTestSetup {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
 
 			} else {
-				test.log(LogStatus.FAIL, "Test Failed- Title MisMatched");
-				s.captureScreenshot("\\Footer\\" + "testCase010_" + timeStamp + ".PNG");
+				test.log(LogStatus.FAIL,test.addScreenCapture(s.captureScreenshot("\\Footer\\" + "testCase010_" + timeStamp + ".PNG")) 
+						+"Test Failed- Title MisMatched");
+				
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);

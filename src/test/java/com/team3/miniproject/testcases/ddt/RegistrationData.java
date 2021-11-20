@@ -12,7 +12,7 @@ public class RegistrationData {
 	public ArrayList<ArrayList<String>> userData() throws IOException {
 		ArrayList<ArrayList<String>> userdata = new ArrayList<ArrayList<String>>(12);
 
-		FileInputStream fis = new FileInputStream("src\\test\\resources\\RegistrationData.xlsx");
+		FileInputStream fis = new FileInputStream("src\\test\\resources\\loginDDT.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 		XSSFSheet sheet = workbook.getSheet("Registration");
 		try {
@@ -34,9 +34,9 @@ public class RegistrationData {
 		return userdata;
 	}
 
-	public static void main(String args[]) throws IOException {
-		RegistrationData rd=new RegistrationData();
-		ArrayList<ArrayList<String>> myData=rd.userData();
-		System.out.println(myData);
-	}
+//	public static void main(String args[]) throws IOException {
+//		RegistrationData rd=new RegistrationData();
+//		ArrayList<ArrayList<String>> myData=rd.userData();
+//		System.out.println(myData);
+//	}
 }

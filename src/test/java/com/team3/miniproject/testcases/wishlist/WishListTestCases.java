@@ -50,13 +50,12 @@ public class WishListTestCases {
 	  w2.until(ExpectedConditions.attributeContains(By.id("wishlist-total"), "title", "Wish List (2)"));
       String title=driver.findElement(By.id("wishlist-total")).getAttribute("title");
 	  String title11=Character.toString(title.charAt(11));
-	  if(title11.equals("2")) {
+	  if(title11.equals("3")) {
 		  test.log(LogStatus.PASS, "Wish List Count is reflected correctly");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "Wish List Count is not reflected correctly");
-		  s.captureScreenshot("\\WishList\\" + "testCase006_"+ timeStamp +".PNG");
-
+		  test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\WishList\\" + "testCase006_"+ timeStamp +".PNG"))
+				  +"Wish List Count is not reflected correctly");
 	  }}catch(Exception e) {
 		  test.log(LogStatus.INFO, e);
 	  }
