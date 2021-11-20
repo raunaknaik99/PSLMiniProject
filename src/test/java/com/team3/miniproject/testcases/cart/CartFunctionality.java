@@ -44,7 +44,7 @@ public class CartFunctionality {
 	Cart objCart;
 	Tablets objTablets;
 	Header objHeader;
-	AppleCinema hpc_object;
+	AppleCinema appleCinemaObject;
 	
 	ScreenShotCapture objScreenshot;
 	JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -92,22 +92,22 @@ public class CartFunctionality {
 	  objScreenshot = new ScreenShotCapture(driver);
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
 	  objHomePage = new HomePage(driver);
-	  hpc_object = new AppleCinema(driver);
+	  appleCinemaObject = new AppleCinema(driver);
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
 	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.homeProducts.get(2));
 	  objHomePage.addProductToCart(2); // index 2 for Apple Cinema
 	  
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  
-	  hpc_object.clickRadioButton();
-	  hpc_object.clickCheckbox();	  
-	  hpc_object.enterInTextbox("test");
+	  appleCinemaObject.clickRadioButton();
+	  appleCinemaObject.clickCheckbox();	  
+	  appleCinemaObject.enterInTextbox("test");
 	  	  
-	  hpc_object.clickDropdown("4");
+	  appleCinemaObject.clickDropdown("4");
 	  
-	  hpc_object.enterInTextArea("This is a test order");
+	  appleCinemaObject.enterInTextArea("This is a test order");
 	  
-	  if(hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
+	  if(appleCinemaObject.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
 		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
 	  }
 	  else {
@@ -115,11 +115,11 @@ public class CartFunctionality {
 		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
 	  }	
   	  Thread.sleep(2000);
-	  hpc_object.enterQuantity("1");
-	  hpc_object.clickAddToCart(); 
+	  appleCinemaObject.enterQuantity("1");
+	  appleCinemaObject.clickAddToCart(); 
 	  Thread.sleep(2000);
 	  
-	  if(hpc_object.checkSuccessAlert()) {
+	  if(appleCinemaObject.checkSuccessAlert()) {
 		  test.log(LogStatus.FAIL, "The warning message about the minimum required quantity is not displayed.");
 		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
 	  }
@@ -241,22 +241,22 @@ public class CartFunctionality {
 	  objScreenshot = new ScreenShotCapture(driver);
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
 	  objHomePage = new HomePage(driver);
-	  hpc_object = new AppleCinema(driver);
+	  appleCinemaObject = new AppleCinema(driver);
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
 	  js.executeScript("arguments[0].scrollIntoView();", objHomePage.homeProducts.get(2));
 	  objHomePage.addProductToCart(2); // index 2 for Apple Cinema
 	  
 	  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	  
-	  hpc_object.clickRadioButton();
-	  hpc_object.clickCheckbox();	  
-	  hpc_object.enterInTextbox("test");
+	  appleCinemaObject.clickRadioButton();
+	  appleCinemaObject.clickCheckbox();	  
+	  appleCinemaObject.enterInTextbox("test");
 	  	  
-	  hpc_object.clickDropdown("4");
+	  appleCinemaObject.clickDropdown("4");
 	  
-	  hpc_object.enterInTextArea("This is a test order");
+	  appleCinemaObject.enterInTextArea("This is a test order");
 	  
-	  if(hpc_object.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
+	  if(appleCinemaObject.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
 		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
 	  }
 	  else {
@@ -264,11 +264,11 @@ public class CartFunctionality {
 		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
 	  }	
   	  Thread.sleep(2000);
-	  hpc_object.enterQuantity("1");
-	  hpc_object.clickAddToCart(); 
+	  appleCinemaObject.enterQuantity("1");
+	  appleCinemaObject.clickAddToCart(); 
 	  Thread.sleep(2000);
 	  
-	  if(hpc_object.checkSuccessAlert()) {
+	  if(appleCinemaObject.checkSuccessAlert()) {
 		  test.log(LogStatus.FAIL, "The warning message about the minimum required quantity is not displayed.");
 		  objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006_"+ timeStamp +".PNG");
 	  }
@@ -314,17 +314,17 @@ public class CartFunctionality {
 	   try {
  	  test.log(LogStatus.INFO, "TC_OC_CART_008-Add product with customizable features to cart but leave some of the required fields in the features form blank ");
  	  objScreenshot = new ScreenShotCapture(driver);
- 	  hpc_object=new AppleCinema(driver); //create a new instance of AppleCinema Class
+ 	  appleCinemaObject=new AppleCinema(driver); //create a new instance of AppleCinema Class
  	  //click on add to cart button on home page
- 	  hpc_object.clickAppleCinemaCart();
+ 	  appleCinemaObject.clickAppleCinemaCart();
  	  //click on radio button
- 	  hpc_object.clickRadioButton();
+ 	  appleCinemaObject.clickRadioButton();
  	  //click on checkbox
- 	  hpc_object.clickCheckbox();
+ 	  appleCinemaObject.clickCheckbox();
  	  //click on add to cart button
- 	  hpc_object.clickAddToCart();
+ 	  appleCinemaObject.clickAddToCart();
  	  //Assert if warning is visible
- 	 if(hpc_object.checkMandatoryFieldsWarning().isDisplayed()) {
+ 	 if(appleCinemaObject.checkMandatoryFieldsWarning().isDisplayed()) {
  		test.log(LogStatus.PASS, "Test Passed- Warning was displayed");
  	 }
  	 else {
@@ -332,7 +332,7 @@ public class CartFunctionality {
 		objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase008.1_"+ timeStamp +".PNG");
  	 }
  	  //Check if test Passed or failed
- 	  if(hpc_object.checkPageTitle().equals("Apple Cinema 30")) {
+ 	  if(appleCinemaObject.checkPageTitle().equals("Apple Cinema 30")) {
  		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
  	  }else {
  		  test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
@@ -351,9 +351,9 @@ public class CartFunctionality {
  	  test.log(LogStatus.INFO, "TC_OC_CART_010-To verify that new window opens when user clicks the Tweet button");
  	  objScreenshot = new ScreenShotCapture(driver);
  	  
- 	  hpc_object=new AppleCinema(driver); //create new instance of AppleCinema class
+ 	  appleCinemaObject=new AppleCinema(driver); //create new instance of AppleCinema class
  	  //click on cinema cart
- 	  hpc_object.clickAppleCinemaCart();
+ 	  appleCinemaObject.clickAppleCinemaCart();
  	  //wait till title loads
  	  WebDriverWait w =new WebDriverWait(driver, 5);
  	  w.until(ExpectedConditions.titleIs("Apple Cinema 30"));
@@ -367,7 +367,7 @@ public class CartFunctionality {
  	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.1_"+ timeStamp +".PNG");
  	  }	  
  	  //click on tweet btn
- 	  hpc_object.clickTweetBtn();
+ 	  appleCinemaObject.clickTweetBtn();
  	  //get child window handles
  	  Set<String> childWindowHandles=driver.getWindowHandles();
  	  Iterator<String> itr=childWindowHandles.iterator();  
