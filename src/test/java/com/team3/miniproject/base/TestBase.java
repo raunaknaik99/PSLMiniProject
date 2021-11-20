@@ -1,29 +1,30 @@
 package com.team3.miniproject.base;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
-	public WebDriver driver;
+	public static WebDriver driver;
 
-	@Parameters("browser")
-	@BeforeClass
-	public void beforeTest(String browser) {
-		if (browser.equalsIgnoreCase("firefox")) {
-			driver = new FirefoxDriver();
-		} else if (browser.equalsIgnoreCase("chrome")) {
+	public static void initialize(String browser) {
+		if (browser.equalsIgnoreCase("chrome")) {
+			WebDriverManager.chromedriver().setup();
 			driver = new ChromeDriver();
+		} else if (browser.equalsIgnoreCase("firefox")) {
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();
+		} else if (browser.equalsIgnoreCase("edge")) {
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
 		}
-	}
-
-	@AfterClass
-	public void afterTest() {
-		driver.quit();
-
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		driver.manage().window().maximize();
 	}
 
 }

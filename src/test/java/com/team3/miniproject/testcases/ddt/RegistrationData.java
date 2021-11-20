@@ -28,6 +28,7 @@ public class RegistrationData {
 				}
 				userdata.get(i).addAll(iuserdata);
 			}
+			workbook.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -39,4 +40,3 @@ public class RegistrationData {
 //		ArrayList<ArrayList<String>> myData=rd.userData();
 //		System.out.println(myData);
 //	}
-}
