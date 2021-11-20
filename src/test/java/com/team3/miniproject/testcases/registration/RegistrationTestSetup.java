@@ -33,7 +33,7 @@ public class RegistrationTestSetup {
 	LoginPage lg_object;
 	Header h_object;
 	WebDriver driver;
-	String baseUrl = "http://localhost/miniproject/index.php?route=account/register";
+	String baseUrl = "http://localhost/opencartsite/index.php?route=account/register";
 	RegistrationData rd = new RegistrationData();
 	ScreenShotCapture s;
 	ExtentReports report;
@@ -42,7 +42,7 @@ public class RegistrationTestSetup {
 
 	// Should Pass
 	// TC_OC_REG_001
-	@Test
+	@Test(enabled=true)
 	public void testCase001() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -76,7 +76,7 @@ public class RegistrationTestSetup {
 	// TC_OC_REG_002 - Registering by entering valid data in input fields, selecting
 	// the privacy policy checkbox, but entering insufficient characters for
 	// password
-	@Test(priority = 1)
+	@Test(enabled=false)
 	public void testCase002() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -111,7 +111,7 @@ public class RegistrationTestSetup {
 	// TC_OC_REG_003 - Registering by entering valid data in input fields, selecting
 	// the privacy policy checkbox, not entering data in the necessary marked
 	// fields. ie lastname
-	@Test
+	@Test(enabled=false)
 	public void testCase003() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -170,7 +170,7 @@ public class RegistrationTestSetup {
 
 	// Should Pass
 	// TC_OC_REG_005
-	@Test
+	@Test(enabled=true)
 	public void testCase005() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -205,7 +205,7 @@ public class RegistrationTestSetup {
 
 	// should Fail
 	// TC_OC_REG_008
-	@Test
+	@Test(enabled=true)
 	public void testCase008() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_008-Registering by entering invalid data in Telephone field");
@@ -237,7 +237,7 @@ public class RegistrationTestSetup {
 		}
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase009() throws IOException {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_009-Verify the login navigation link is working on registration page");
@@ -254,7 +254,7 @@ public class RegistrationTestSetup {
 
 	// should pass
 	// TC_OC_REG_006
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase006() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -287,7 +287,7 @@ public class RegistrationTestSetup {
 
 	// should pass
 	// TC_OC_REG_007
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase007() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -321,7 +321,7 @@ public class RegistrationTestSetup {
 
 	// should pass
 	// TC_OC_REG_0010
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase010() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_010-Registering by keeping the First Name field empty");
@@ -354,7 +354,7 @@ public class RegistrationTestSetup {
 
 	// should pass
 	// TC_OC_REG_0011
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase011() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_011-Registering by entering insufficient numbers in the Telephone field");
@@ -386,7 +386,7 @@ public class RegistrationTestSetup {
 
 	// should pass
 	// TC_OC_REG_0012
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase012() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_012-Registering by entering a First Name having more than 32 characters");
@@ -419,7 +419,7 @@ public class RegistrationTestSetup {
 	}
 
 	// should pass
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase013() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_013-Registering by entering a Last Name having more than 32 characters");
@@ -451,7 +451,7 @@ public class RegistrationTestSetup {
 	}
 
 	// should pass
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void testCase014() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_014-Registering by entering more than 32 numbers in the Telephone field");

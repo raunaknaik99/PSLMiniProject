@@ -55,7 +55,7 @@ public class LoginCssTestCases {
 	//TC_OC_LCSS_002
 	@Test
 	public void testCaseCss002() {
-		test.log(LogStatus.INFO, "TC_OC_LCSS_001");
+		test.log(LogStatus.INFO, "TC_OC_LCSS_002");
 		try {
 			login=new LoginPage(driver);
 			login.navigateToLogin();
@@ -66,7 +66,7 @@ public class LoginCssTestCases {
 			}
 			else {
 				test.log(LogStatus.FAIL, "Test Failed");
-				s.captureScreenshot("\\Login\\" + "testCaseCss001_"+ timeStamp +".PNG");
+				s.captureScreenshot("\\Login\\" + "testCaseCss002_"+ timeStamp +".PNG");
 			}
 		}catch(Exception e) {
 			test.log(LogStatus.INFO, e);

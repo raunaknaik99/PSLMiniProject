@@ -35,7 +35,7 @@ import screenshot.*;
 
 public class CartFunctionality {
 	WebDriver driver;
-	String baseUrl = "http://localhost/miniproject";
+	String baseUrl = "http://localhost/opencartsite";
 	ExtentReports report;
 	static ExtentTest test;
 	
@@ -197,7 +197,7 @@ public class CartFunctionality {
 	  }
 } 
   //TC_OC_CART_005 - Adding a product to the cart with quantity as zero.
-@Test(enabled = true)
+@Test(enabled = false)
   public void testCase005() throws InterruptedException, IOException {
 	test.log(LogStatus.INFO, "TC_OC_CART_005 - Adding a product to the cart with quantity as zero.");
 	objScreenshot = new ScreenShotCapture(driver);
@@ -324,13 +324,19 @@ public class CartFunctionality {
  	  //click on add to cart button
  	  hpc_object.clickAddToCart();
  	  //Assert if warning is visible
- 	  hpc_object.checkMandatoryFieldsWarning();
+ 	 if(hpc_object.checkMandatoryFieldsWarning().isDisplayed()) {
+ 		test.log(LogStatus.PASS, "Test Passed- Warning was displayed");
+ 	 }
+ 	 else {
+ 		test.log(LogStatus.FAIL, "Test Failed- Warning was not displayed");
+		objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase008.1_"+ timeStamp +".PNG");
+ 	 }
  	  //Check if test Passed or failed
  	  if(hpc_object.checkPageTitle().equals("Apple Cinema 30")) {
  		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
  	  }else {
  		  test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
- 		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase008_"+ timeStamp +".PNG");
+ 		 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase008.2_"+ timeStamp +".PNG");
  	  }
 	   }catch(Exception e) {
 		   test.log(LogStatus.INFO, e);
@@ -339,7 +345,7 @@ public class CartFunctionality {
    
    
    //TC_OC_CART_010
-   @Test(enabled=false)
+   @Test(enabled=true)
    public void testCase010() throws InterruptedException, IOException {
 	   try {
  	  test.log(LogStatus.INFO, "TC_OC_CART_010-To verify that new window opens when user clicks the Tweet button");
@@ -349,7 +355,7 @@ public class CartFunctionality {
  	  //click on cinema cart
  	  hpc_object.clickAppleCinemaCart();
  	  //wait till title loads
- 	  WebDriverWait w =new WebDriverWait(driver, 3);
+ 	  WebDriverWait w =new WebDriverWait(driver, 5);
  	  w.until(ExpectedConditions.titleIs("Apple Cinema 30"));
  	  //get parent window handle
  	  String parentWindowHandle=driver.getWindowHandle();
@@ -358,7 +364,7 @@ public class CartFunctionality {
  	  }
  	  else {
  	      test.log(LogStatus.FAIL, "Test Failed- Title Mismatched");
- 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010_"+ timeStamp +".PNG");
+ 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.1_"+ timeStamp +".PNG");
  	  }	  
  	  //click on tweet btn
  	  hpc_object.clickTweetBtn();
@@ -376,13 +382,16 @@ public class CartFunctionality {
  				  test.log(LogStatus.PASS, "Test Passed- Child window Title matched");
  			  }else {
  				  test.log(LogStatus.FAIL, "Test Failed- Child Window title mismatched");
- 				 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010_"+ timeStamp +".PNG");
+ 				 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.2_"+ timeStamp +".PNG");
  			  }
  			  driver.close();
  		  }
+ 		  else if(parentWindowHandle.equals(childWindow)) {
+ 			  continue;
+ 		  }
  		  else {
  			  test.log(LogStatus.FAIL, "Test Failed- Did not switch to child window");
- 			 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010_"+ timeStamp +".PNG");
+ 			 objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.3_"+ timeStamp +".PNG");
  		  }
  	  }
  	  Thread.sleep(3000); //only to visualize the going back to parent window
@@ -394,7 +403,7 @@ public class CartFunctionality {
  	  }
  	  else {
  	      test.log(LogStatus.FAIL, "Test Failed- Parent Window Title Mismatched");
- 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010_"+ timeStamp +".PNG");
+ 	     objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.4_"+ timeStamp +".PNG");
  	  }
 	   }catch(Exception e) {
 		   test.log(LogStatus.INFO, e);

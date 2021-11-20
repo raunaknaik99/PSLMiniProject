@@ -34,12 +34,12 @@ public class LoginData {
 		return userdata;
 	}
 
-	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		LoginData dt=new LoginData();
-		ArrayList<ArrayList<String>> myData=dt.loginData();
-		System.out.println(myData);
-
-	}
+//	public static void main(String[] args) throws IOException {
+//		// TODO Auto-generated method stub
+//		LoginData dt=new LoginData();
+//		ArrayList<ArrayList<String>> myData=dt.loginData();
+//		System.out.println(myData);
+//
+//	}
 
 }
