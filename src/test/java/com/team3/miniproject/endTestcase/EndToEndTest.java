@@ -1,5 +1,7 @@
 package com.team3.miniproject.endTestcase;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -23,6 +25,8 @@ import com.team3.miniproject.sitepages.RegistrationPage;
 import com.team3.miniproject.sitepages.SearchPage;
 import com.team3.miniproject.sitepages.Tablets;
 import com.team3.miniproject.sitepages.WishList;
+import com.team3.miniproject.testcases.ddt.LoginData;
+import com.team3.miniproject.testcases.ddt.RegistrationData;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -41,12 +45,15 @@ public class EndToEndTest {
 	SearchPage objSearch;
 	Tablets objTablets;
 	WishList objWishlist;
+	RegistrationData objRegister;
+	LoginData objLogin;
 
 	@Test
-	public void endTestOpenCart_001() throws InterruptedException {
+	public void endTestOpenCart_001() throws InterruptedException, IOException {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
+		//objects for pages
 		objHeader = new Header(driver);
 		objRegistration = new RegistrationPage(driver);
 		objLoginPage = new LoginPage(driver);
@@ -55,20 +62,26 @@ public class EndToEndTest {
 		objWishlist = new WishList(driver);
 		objCart = new Cart(driver);
 		objCheckout = new CheckoutPage(driver);
-
+		
+		//objects for DDT
+		objRegister = new RegistrationData();
+		objLogin = new LoginData();
+		
+		ArrayList<ArrayList<String>> myData = objRegister.userData();
+		ArrayList<ArrayList<String>> myLoginData = objLogin.loginData();
 		// click on registration link
-	  objHeader.selectFromMyAccountDropDown(0);
-//	  
-	  objRegistration.fillRegistrationForm("Tony", "Stark", "tony004@starkenterprises.com", "9999999999", "ironman", "ironman");
-	  objRegistration.checkPrivacyPolicy();
-	  objRegistration.clickContinueBtn();
-//	  
+//	  objHeader.selectFromMyAccountDropDown(0);
+//	//	  
+//	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(2).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
+//	  objRegistration.checkPrivacyPolicy();
+//	  objRegistration.clickContinueBtn();
+//
 //	  //logout
-	  objHeader.selectFromMyAccountDropDown(4);
+//	  objHeader.selectFromMyAccountDropDown(4);
 	  
 	  //click on login
 	  objHeader.selectFromMyAccountDropDown(1);
-	  objLoginPage.login("tony1@starkenterprises.com", "ironman");
+	  objLoginPage.login(myLoginData.get(0).get(0), myLoginData.get(0).get(1));
 	  
 	  // navigate to homepage
 	  objHeader.clickHomePageLink();

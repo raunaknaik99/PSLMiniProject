@@ -350,7 +350,7 @@ public class CartFunctionality {
    
    //TC_OC_CART_010
    @Test(enabled=true)
-   public void testCase009() throws InterruptedException, IOException {
+   public void testCase010() throws InterruptedException, IOException {
 	   try {
  	  test.log(LogStatus.INFO, "TC_OC_CART_010-To verify that new window opens when user clicks the Tweet button");
  	  objScreenshot = new ScreenShotCapture(driver);
@@ -367,7 +367,7 @@ public class CartFunctionality {
  		  test.log(LogStatus.PASS, "Test Passed- Title Matched");
  	  }
  	  else {
- 	      test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009.1_"+ timeStamp +".PNG") + "Test Failed- Title Mismatched");
+ 	      test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.1_"+ timeStamp +".PNG") + "Test Failed- Title Mismatched");
  	  }	  
  	  //click on tweet btn
  	  appleCinemaObject.clickTweetBtn();
@@ -384,7 +384,7 @@ public class CartFunctionality {
  			  if(driver.getTitle().equals("Twitter")) {
  				  test.log(LogStatus.PASS, "Test Passed- Child window Title matched");
  			  }else {
- 				  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009.2_"+ timeStamp +".PNG") + "Test Failed- Child Window title mismatched");
+ 				  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.2_"+ timeStamp +".PNG") + "Test Failed- Child Window title mismatched");
  			  }
  			  driver.close();
  		  }
@@ -392,7 +392,7 @@ public class CartFunctionality {
  			  continue;
  		  }
  		  else {
- 			  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009.3_"+ timeStamp +".PNG") + "Test Failed- Did not switch to child window");
+ 			  test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.3_"+ timeStamp +".PNG") + "Test Failed- Did not switch to child window");
  			 
  		  }
  	  }
@@ -404,7 +404,7 @@ public class CartFunctionality {
  		  test.log(LogStatus.PASS, "Test Passed- Parent Window Title Matched");
  	  }
  	  else {
- 	      test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase009.4_"+ timeStamp +".PNG") + "Test Failed- Parent Window Title Mismatched");
+ 	      test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase010.4_"+ timeStamp +".PNG") + "Test Failed- Parent Window Title Mismatched");
  	  }
 	   }catch(Exception e) {
 		   test.log(LogStatus.INFO, e);
