@@ -11,7 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -42,7 +41,7 @@ public class RegistrationTestSetup {
 
 	// Should Pass
 	// TC_OC_REG_001
-	@Test(enabled=true)
+	@Test(enabled = true)
 	public void testCase001() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -76,7 +75,7 @@ public class RegistrationTestSetup {
 	// TC_OC_REG_002 - Registering by entering valid data in input fields, selecting
 	// the privacy policy checkbox, but entering insufficient characters for
 	// password
-	@Test(enabled=false)
+	@Test(enabled = false)
 	public void testCase002() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -111,7 +110,7 @@ public class RegistrationTestSetup {
 	// TC_OC_REG_003 - Registering by entering valid data in input fields, selecting
 	// the privacy policy checkbox, not entering data in the necessary marked
 	// fields. ie lastname
-	@Test(enabled=false)
+	@Test(enabled = false)
 	public void testCase003() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -170,7 +169,7 @@ public class RegistrationTestSetup {
 
 	// Should Pass
 	// TC_OC_REG_005
-	@Test(enabled=true)
+	@Test(enabled = true)
 	public void testCase005() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -205,7 +204,7 @@ public class RegistrationTestSetup {
 
 	// should Fail
 	// TC_OC_REG_008
-	@Test(enabled=true)
+	@Test(enabled = true)
 	public void testCase008() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_008-Registering by entering invalid data in Telephone field");
@@ -274,14 +273,6 @@ public class RegistrationTestSetup {
 								s.captureScreenshot("\\Registration\\" + "testCase006_" + timeStamp + ".PNG"))
 								+ "Test Failed- Title Mismatched");
 			}
-			if (rg_object.verifyConfirmPasswordWarning().equals("Password confirmation does not match password!")) {
-				test.log(LogStatus.PASS, "Test Passed- Correct warning is displayed");
-			} else {
-				test.log(LogStatus.FAIL,
-						test.addScreenCapture(
-								s.captureScreenshot("\\Registration\\" + "testCase006_" + timeStamp + ".PNG"))
-								+ "Test Failed- Title Mismatched");
-			}
 			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyConfirmPasswordWarning());
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -304,7 +295,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase007_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase007_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 
 			}
 			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyWarningVisibility());
@@ -329,7 +323,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase0010_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase0010_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 				test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyFirstNameWarning());
 			}
 		} catch (Exception e) {
@@ -353,7 +350,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase0011_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase0011_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 
 			}
 			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyTelephoneWarning());
@@ -378,7 +378,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase0012_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase0012_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 			}
 			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyFirstNameWarning());
 		} catch (Exception e) {
@@ -426,7 +429,10 @@ public class RegistrationTestSetup {
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
 			} else {
-				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase0014_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase0014_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
 			}
 			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyTelephoneWarning());
 		} catch (Exception e) {
@@ -450,7 +456,10 @@ public class RegistrationTestSetup {
 		if (rg_object.getPageTitle().equals("My Account")) {
 			test.log(LogStatus.PASS, "Test Passed- Title Matched");
 		} else {
-			test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Registration\\" + "testCase0015_" + timeStamp + ".PNG") + "Test Failed- Title Mismatched");
+			test.log(LogStatus.FAIL,
+					test.addScreenCapture(
+							s.captureScreenshot("\\Registration\\" + "testCase0015_" + timeStamp + ".PNG"))
+							+ "Test Failed- Title Mismatched");
 		}
 	}
 
