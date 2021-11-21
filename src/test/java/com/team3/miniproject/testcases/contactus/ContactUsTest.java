@@ -36,7 +36,7 @@ public class ContactUsTest extends BrowserSetup {
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 
 	/*------------------------------*/
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void contactTestCase001() throws InterruptedException {
 		contactUsObject = new ContactUs(driver);
 		contactUsObject.loginForContactUs();
@@ -58,7 +58,7 @@ public class ContactUsTest extends BrowserSetup {
 		driver.findElement(By.linkText("Continue"));
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void contactTestCase002() throws InterruptedException {
 		contactUsObject = new ContactUs(driver);
 		contactUsObject.loginForContactUs();
@@ -86,7 +86,7 @@ public class ContactUsTest extends BrowserSetup {
 	}
 
 	/*-------------------------------*/
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase003() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
 		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
@@ -120,7 +120,7 @@ public class ContactUsTest extends BrowserSetup {
 		}
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase004() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
 		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
@@ -155,7 +155,7 @@ public class ContactUsTest extends BrowserSetup {
 		}
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase005() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
 		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
@@ -286,7 +286,6 @@ public class ContactUsTest extends BrowserSetup {
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browser) {
-		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 		report = new ExtentReports("ExtentReports\\ContactUs\\ContactUsTests_" + browser + "_" + timeStamp + ".html");
 	}
 }
