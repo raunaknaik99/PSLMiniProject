@@ -1,4 +1,5 @@
 package com.team3.miniproject.testcases.login;
+import java.io.IOException;
 //package sitepages;
 //
 import java.util.concurrent.TimeUnit;
@@ -7,6 +8,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+
+import com.team3.miniproject.sitepages.LoginPage;
+import com.team3.miniproject.testcases.ddt.ReadInputs;
 
 public class LoginTestCases {
 	WebDriver driver;
