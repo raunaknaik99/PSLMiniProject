@@ -31,7 +31,7 @@ public class LoginTC_OC_001_to_007 extends BrowserSetup {
 	String actualTitle;
 	ExtentReports report;
 	ExtentTest test;
-	String timeStamp;
+	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 	ScreenShotCapture s;
 
 	@Test
@@ -183,7 +183,6 @@ public class LoginTC_OC_001_to_007 extends BrowserSetup {
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browser) {
-		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 		report = new ExtentReports("ExtentReports\\Login\\LoginTests_" + browser + "_" + timeStamp + ".html");
 	}
 }
