@@ -285,17 +285,15 @@ public class WishListFunctionality {
 					  }
 					  Thread.sleep(5000);
 					}
-					 
+			@Parameters("browser")		 
 			 @BeforeMethod
-			public void setup(Method m) {
-				String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
-				  report =new ExtentReports("ExtentReports\\Wish_List_Reports\\"+m.getName()+"_"+timeStamp+".html");
+			public void setup(Method m,String browser) {
 				  test=report.startTest(m.getName());
-			      WebDriverManager.chromedriver().setup();
-		          driver = new ChromeDriver();
-		          driver.get("http://localhost/opencart/");
-			      driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-			      driver.manage().window().maximize();
+			          //WebDriverManager.chromedriver().setup();
+		                // driver = new ChromeDriver();
+		                driver.get("http://localhost/opencart/");
+			         //driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+			         //driver.manage().window().maximize();
 				}	
 		 
 		      @AfterMethod
@@ -305,6 +303,12 @@ public class WishListFunctionality {
 				report.endTest(test);
 				report.flush();
 			}
+  @Parameters("browser")
+  @BeforeClass
+  public void beforeClass(String browser) {
+	   String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+	  report =new ExtentReports("ExtentReports\\Wish_List_Reports\\WishListTestCases_"+browser+"_"+timeStamp+".html");
+  }
 		 
 }
 
