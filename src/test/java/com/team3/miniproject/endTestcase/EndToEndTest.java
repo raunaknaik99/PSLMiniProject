@@ -127,9 +127,7 @@ public class EndToEndTest extends BrowserSetup{
 					objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.3_" + timeStamp + ".PNG")
 							+ "Login was not successful!");
 		}
-		else {
-			test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.3_" + timeStamp +".PNG")) + "Login was not successful!");
-		}
+		
 	  // navigate to homepage
 	  objHeader.clickHomePageLink();
 	  
