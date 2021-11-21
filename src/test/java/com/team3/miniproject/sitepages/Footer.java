@@ -55,7 +55,7 @@ public class Footer {
 	WebElement newsl;
 	
 	//my account link element
-	@FindBy(linkText = "My Account")
+	@FindBy(css="footer>div>div>div:nth-of-type(4)>ul>li:nth-of-type(1)>a")
 	WebElement myAcc;
 	
 	public Footer(WebDriver driver) {

@@ -13,7 +13,7 @@ public class LoginData {
 	public ArrayList<ArrayList<String>> loginData() throws IOException {
 		ArrayList<ArrayList<String>> userdata = new ArrayList<ArrayList<String>>(10);
 
-		FileInputStream fis = new FileInputStream("src\\test\\resources\\RegistrationData.xlsx");
+		FileInputStream fis = new FileInputStream("src\\test\\resources\\loginDDT.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 		XSSFSheet sheet = workbook.getSheet("Login");
 		try {
@@ -41,12 +41,12 @@ public class LoginData {
 		}
 		return userdata;
 	}
-//
+
 //	public static void main(String[] args) throws IOException {
 //		// TODO Auto-generated method stub
 //		LoginData dt=new LoginData();
 //		ArrayList<ArrayList<String>> myData=dt.loginData();
-//		System.out.println(myData.get(8).get(0));
+//		System.out.println(myData);
 //
 //	}
 

@@ -5,28 +5,27 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.sitepages.Header;
 import com.team3.miniproject.sitepages.LoginPage;
 import com.team3.miniproject.sitepages.RegistrationPage;
 import com.team3.miniproject.testcases.ddt.RegistrationData;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
 
-public class RegistrationTestSetup {
+public class RegistrationTestSetup extends BrowserSetup {
 
 	RegistrationPage rg_object;
 	LoginPage lg_object;
@@ -488,15 +487,17 @@ public class RegistrationTestSetup {
 		}
 	}
 
+	@Parameters("browser")
 	@BeforeMethod
-	public void beforeMethod(Method m) {
+	public void beforeMethod(Method m, String browser) {
 		report = new ExtentReports("ExtentReports\\Registration\\" + m.getName() + "_" + timeStamp + ".html");
 		test = report.startTest(m.getName());
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//		WebDriverManager.chromedriver().setup();
+//		driver = new ChromeDriver();
+//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		initialize(browser);
 		driver.get(baseUrl);
-		driver.manage().window().maximize();
+//		driver.manage().window().maximize();
 	}
 
 	@AfterMethod

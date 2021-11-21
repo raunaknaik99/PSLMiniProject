@@ -9,12 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchPage {
 	WebDriver driver;
+	WebDriverWait wait;
 
 	// Page Locators
 	@FindBy(xpath = "//*[@id='content']/h1")
@@ -85,10 +85,6 @@ public class SearchPage {
 			text = text.replace(child.getText(), "").trim();
 		}
 		return text;
-	}
-
-	private void waitForClickability(WebElement element) throws Error {
-		new WebDriverWait(driver, 60).until(ExpectedConditions.elementToBeClickable(element));
 	}
 
 	// Constructor
@@ -206,12 +202,6 @@ public class SearchPage {
 	}
 
 	public void addToCompare(int index) {
-		WebElement button = addToCompareBtns.get(index);
-		waitForClickability(button);
-		button.click();
-//		Actions action = new Actions(driver);
-//		action.moveToElement(button).perform();
-//		WebDriverWait wait = new WebDriverWait(driver, 10);
-//		wait.until(ExpectedConditions.elementToBeClickable(button)).click();
+		addToCompareBtns.get(index).click();
 	}
 }

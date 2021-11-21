@@ -3,49 +3,52 @@ package com.team3.miniproject.testcases.search;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.sitepages.Header;
 import com.team3.miniproject.sitepages.SearchPage;
+import com.team3.miniproject.testcases.ddt.SearchData;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
 
-public class SearchTest {
+public class SearchTest extends BrowserSetup {
 	Header h_object;
 	SearchPage sp_object;
-	WebDriver driver;
+//	WebDriver driver;
 	String baseUrl = "http://localhost/opencartsite/";
 	ExtentReports report;
 	ExtentTest test;
 	ScreenShotCapture s;
 	String timeStamp;
+	SearchData rd = new SearchData();
 
 	// To test if page title is correct after searching
 	// Should pass
-	@Test
+	@Test(enabled = true)
 	public void testCase001() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "To test if page title is correct after searching");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Searching for \"iPhone\"");
-		h_object.enterSearchQuery("iPhone");
+		ArrayList<ArrayList<String>> myData = rd.userData();
+		String query = myData.get(1).get(0);
+		test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
+		h_object.enterSearchQuery(query);
 		h_object.clickSearchBtn();
 
-		if (sp_object.getPageTitle().equals("Search - iPhone"))
+		if (sp_object.getPageTitle().equals("Search - " + query))
 			test.log(LogStatus.PASS, "Test Passed: The page title matched");
 		else
 			test.log(LogStatus.FAIL,
@@ -55,18 +58,20 @@ public class SearchTest {
 
 	// To test if search header is correct after a search
 	// Should pass
-	@Test
+	@Test(enabled = true)
 	public void testCase002() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "To test if search header is correct after a search");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Searching for \"iPhone\"");
-		h_object.enterSearchQuery("iPhone");
+		ArrayList<ArrayList<String>> myData = rd.userData();
+		String query = myData.get(1).get(0);
+		test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
+		h_object.enterSearchQuery(query);
 		h_object.clickSearchBtn();
 
-		if (sp_object.getSearchHeader().equals("Search - iPhone"))
+		if (sp_object.getSearchHeader().equals("Search - " + query))
 			test.log(LogStatus.PASS, "Test Passed: The search header is correct");
 		else
 			test.log(LogStatus.FAIL,
@@ -76,14 +81,17 @@ public class SearchTest {
 
 	// To test if No results found text is displayed when search gives no results
 	// should fail
-	@Test
+	@Test(enabled = true)
 	public void testCase003() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "To test if \"No results found\" text is displayed when search gives no results");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Clicking search button");
+		ArrayList<ArrayList<String>> myData = rd.userData();
+		String query = myData.get(4).get(0);
+		test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
+		h_object.enterSearchQuery(query);
 		h_object.clickSearchBtn();
 
 		if (sp_object.getNoResultsText().equals("No results found"))
@@ -95,14 +103,14 @@ public class SearchTest {
 	}
 
 	// To test if search is done even when there is no search input
-	@Test
+	@Test(enabled = true)
 	public void testCase004() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "To test if search is done even when there is no search input");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Clicking search button");
+		ArrayList<ArrayList<String>> myData = rd.userData();
 		h_object.clickSearchBtn();
 
 		if (sp_object.getPageTitle().equals("Your Store"))
@@ -115,15 +123,16 @@ public class SearchTest {
 
 	// To test if no products found when searching with an input having no results
 	// should pass
-	@Test
+	@Test(enabled = true)
 	public void testCase005() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "To test if no products found when searching with an input having no results");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Searching for \"lenovo\"");
-		h_object.enterSearchQuery("lenovo");
+		ArrayList<ArrayList<String>> myData = rd.userData();
+		String query = myData.get(4).get(0);
+		h_object.enterSearchQuery(query);
 		h_object.clickSearchBtn();
 
 		if (sp_object.numProductsFound() == 0)
@@ -136,15 +145,16 @@ public class SearchTest {
 
 	// To test if search is successful when exact product name is search input
 	// should pass
-	@Test
+	@Test(enabled = true)
 	public void testCase006() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "To test if search is successful when exact product name is search input");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Searching for \"iPhone\"");
-		h_object.enterSearchQuery("iPhone");
+		ArrayList<ArrayList<String>> myData = rd.userData();
+		String query = myData.get(1).get(0);
+		h_object.enterSearchQuery(query);
 		h_object.clickSearchBtn();
 
 		if (sp_object.numProductsFound() == 1)
@@ -161,19 +171,20 @@ public class SearchTest {
 
 	// To test if pressing enter key on search bar will initiate a search
 	// Should pass
-	@Test
+	@Test(enabled = true)
 	public void testCase007() throws IOException {
 		test.log(LogStatus.INFO, "To test if pressing enter key on search bar will initiate a search");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Entering \"iPhone in search bar\"");
-		h_object.enterSearchQuery("iPhone");
-		test.log(LogStatus.INFO, "Pressing Enter key");
+		ArrayList<ArrayList<String>> myData = rd.userData();
+		String query = myData.get(1).get(0);
+		test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
+		h_object.enterSearchQuery(query);
 		h_object.pressEnterOnSearchBar();
 
-		if (sp_object.getPageTitle().equals("Search - iPhone"))
+		if (sp_object.getPageTitle().equals("Search - " + query))
 			test.log(LogStatus.PASS, "Test Passed: Search page was reached");
 		else
 			test.log(LogStatus.FAIL,
@@ -183,22 +194,24 @@ public class SearchTest {
 
 	// To test if found product details displayed after search are correct
 	// should pass
-	@Test
+	@Test(enabled = true)
 	public void testCase008() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "To test if found product details displayed after search are correct");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
+		ArrayList<ArrayList<String>> myData = rd.userData();
+		String query = myData.get(1).get(0);
 		test.log(LogStatus.INFO, "Searching for \"iPhone\"");
-		h_object.enterSearchQuery("iPhone");
+		h_object.enterSearchQuery(query);
 		h_object.clickSearchBtn();
 
 		int flag = 0;
 
-		String expectedProductName = "iPhone";
-		String expectedProductDescription = "iPhone is a revolutionary new mobile phone that allows you to make a call by simply tapping a name o..";
-		String expectedProductPrice = "$123.20";
+		String expectedProductName = myData.get(1).get(1);
+		String expectedProductDescription = myData.get(1).get(2);
+		String expectedProductPrice = myData.get(1).get(3);
 
 		if (!sp_object.getProductNames().get(0).equals(expectedProductName)) {
 			test.log(LogStatus.FAIL,
@@ -228,15 +241,17 @@ public class SearchTest {
 
 	// To test if search is case sensitive
 	// should pass
-	@Test
+	@Test(enabled = true)
 	public void testCase009() throws IOException {
 		test.log(LogStatus.INFO, "To test if search is case sensitive");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Searching for \"IPHONE\"");
-		h_object.enterSearchQuery("IPHONE");
+		ArrayList<ArrayList<String>> myData = rd.userData();
+		String query = myData.get(2).get(0);
+		test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
+		h_object.enterSearchQuery(query);
 		h_object.clickSearchBtn();
 
 		if (sp_object.numProductsFound() == 1)
@@ -253,15 +268,17 @@ public class SearchTest {
 
 	// To test if search is successful if query contains part of product name
 	// should pass
-	@Test
+	@Test(enabled = true)
 	public void testCase010() throws IOException {
 		test.log(LogStatus.INFO, "To test if search is successful if query contains part of product name");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Searching for \"mac\"");
-		h_object.enterSearchQuery("mac");
+		ArrayList<ArrayList<String>> myData = rd.userData();
+		String query = myData.get(3).get(0);
+		test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
+		h_object.enterSearchQuery(query);
 		h_object.clickSearchBtn();
 
 		if (sp_object.numProductsFound() == 4)
@@ -278,21 +295,21 @@ public class SearchTest {
 
 	// To test if search is maintained when going to a product page and coming back
 	// Should pass
-	@Test
+	@Test(enabled = true)
 	public void testCase011() throws IOException {
 		test.log(LogStatus.INFO, "To test if search result is maintained when going to a product page and coming back");
 		s = new ScreenShotCapture(driver);
 		sp_object = new SearchPage(driver);
 		h_object = new Header(driver);
 
-		test.log(LogStatus.INFO, "Searching for \"mac\"");
-		h_object.enterSearchQuery("mac");
+		ArrayList<ArrayList<String>> myData = rd.userData();
+		String query = myData.get(3).get(0);
+		test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
+		h_object.enterSearchQuery(query);
 		h_object.clickSearchBtn();
 
-		test.log(LogStatus.INFO, "Clicking the product name link of \"" + sp_object.getProductNames().get(1) + "\"");
 		sp_object.clickProductName(1);
 
-		test.log(LogStatus.INFO, "Clicking the back button on the browser");
 		driver.navigate().back();
 
 		if (sp_object.numProductsFound() == 4)
@@ -352,28 +369,26 @@ public class SearchTest {
 //		Assert.assertEquals(foundProductNames.get(3), "iMac");
 //	}
 
+	@Parameters("browser")
 	@BeforeMethod
-	public void beforeMethod(Method m) {
+	public void beforeMethod(Method m, String browser) {
 		test = report.startTest(m.getName());
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		initialize(browser);
 		driver.get(baseUrl);
-		driver.manage().window().maximize();
 	}
 
 	@AfterMethod
-	public void afterMethod() throws InterruptedException {
+	public void afterMethod() {
 		report.endTest(test);
 		report.flush();
-		Thread.sleep(2000);
 		driver.quit();
 	}
 
+	@Parameters("browser")
 	@BeforeClass
-	public void beforeClass() {
+	public void beforeClass(String browser) {
 		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
-		report = new ExtentReports("ExtentReports\\Search\\SearchTests " + timeStamp + ".html");
+		report = new ExtentReports("ExtentReports\\Search\\SearchTests_" + browser + "_" + timeStamp + ".html");
 	}
 
 }

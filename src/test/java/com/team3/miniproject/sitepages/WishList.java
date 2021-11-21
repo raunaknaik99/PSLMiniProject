@@ -27,7 +27,7 @@ import org.testng.annotations.Test;
 	 @FindBy(css="a[data-original-title=\"Remove\"]") //Remove Button for wishlist
 	 WebElement removemac;
 	
-	 @FindBy(css="button[onclick=\"cart.add('43');\"]") //Add to Cart Button for wishlist
+	 @FindBy(css="#content > div.table-responsive > table > tbody > tr > td:nth-child(6) > button") //Add to Cart Button for wishlist
 	WebElement addcartmac;
 	 
 	 @FindBy(css="a.btn.btn-primary") //Continue Button for wishlist

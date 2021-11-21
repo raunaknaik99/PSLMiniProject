@@ -44,8 +44,9 @@ public class LoginCssTestCases {
 				test.log(LogStatus.PASS, "Test Passed- Placeholder Present");
 			}
 			else {
-				test.log(LogStatus.FAIL, "Test Failed");
-				s.captureScreenshot("\\Login\\" + "testCaseCss001_"+ timeStamp +".PNG");
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Login\\" + "testCaseCss001_"+ timeStamp +".PNG"))
+						+"Test Failed");
+				
 			}}
 		catch(Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -65,8 +66,8 @@ public class LoginCssTestCases {
 				test.log(LogStatus.PASS, "Test Passed- Placeholder Present");
 			}
 			else {
-				test.log(LogStatus.FAIL, "Test Failed");
-				s.captureScreenshot("\\Login\\" + "testCaseCss002_"+ timeStamp +".PNG");
+				test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Login\\" + "testCaseCss002_"+ timeStamp +".PNG")) 
+						+"Test Failed");
 			}
 		}catch(Exception e) {
 			test.log(LogStatus.INFO, e);
