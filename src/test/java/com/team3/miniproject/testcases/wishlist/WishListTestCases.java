@@ -50,7 +50,7 @@ public class WishListTestCases {
 	  w2.until(ExpectedConditions.attributeContains(By.id("wishlist-total"), "title", "Wish List (2)"));
       String title=driver.findElement(By.id("wishlist-total")).getAttribute("title");
 	  String title11=Character.toString(title.charAt(11));
-	  if(title11.equals("3")) {
+	  if(title11.equals("2")) {
 		  test.log(LogStatus.PASS, "Wish List Count is reflected correctly");
 	  }
 	  else {
