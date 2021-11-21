@@ -5,12 +5,14 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.sitepages.LoginPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -22,9 +24,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 
-public class LoginCssTestCases {
-	WebDriver driver;
+public class LoginCssTestCases extends BrowserSetup{
+	//WebDriver driver;
 	LoginPage login;
 	ScreenShotCapture s;
 	ExtentReports report;
@@ -74,14 +77,15 @@ public class LoginCssTestCases {
 		}
 	}
 
+	@Parameters("browser")
 	@BeforeMethod
-	public void beforeMethod(Method m) {
-		report =new ExtentReports("ExtentReports\\Login\\"+m.getName()+"_"+timeStamp+".html");
+	public void beforeMethod(Method m,String browser) {
 		test=report.startTest(m.getName());
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		driver.manage().window().maximize(); 
+		initialize(browser);
+		//WebDriverManager.chromedriver().setup();
+		//driver = new ChromeDriver();
+		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		//driver.manage().window().maximize(); 
 	}
 
 	@AfterMethod
@@ -91,4 +95,9 @@ public class LoginCssTestCases {
 		driver.quit();
 	}
 
+	@Parameters("browser")
+	@BeforeClass
+	public void beforeClass(String browser) {
+		report =new ExtentReports("ExtentReports\\Login\\LoginCssTest_"+browser+"_"+timeStamp+".html");
+	}
 }

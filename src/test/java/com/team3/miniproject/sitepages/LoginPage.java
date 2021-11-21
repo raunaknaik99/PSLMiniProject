@@ -2,7 +2,6 @@ package com.team3.miniproject.sitepages;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 	public WebDriver driver;
-
 
 	String baseUrl = "http://localhost/miniproject";
 	String expectedTitle = "Account Login";
@@ -32,7 +30,7 @@ public class LoginPage {
 	WebElement loginButton;
 	@FindBy(linkText = "Logout")
 	WebElement chooseLogout;
-	@FindBy(linkText ="Forgotten Password")
+	@FindBy(linkText = "Forgotten Password")
 	WebElement forgotPass;
 	@FindBy(css = "input[value='Continue']")
 	WebElement continueBtn;
@@ -68,11 +66,12 @@ public class LoginPage {
 	public void forgotPassword() {
 		forgotPass.click();
 	}
-	
+
 	public void enterEmail(String user_name) {
 		usernameField.sendKeys(user_name);
 		continueBtn.click();
 	}
+
 	public void finish() throws InterruptedException {
 		Thread.sleep(5000);
 		driver.quit();

@@ -1,7 +1,10 @@
 package com.team3.miniproject.endTestcase;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -11,9 +14,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.sitepages.Cart;
 import com.team3.miniproject.sitepages.CheckoutPage;
 import com.team3.miniproject.sitepages.ContactUs;
@@ -29,11 +37,15 @@ import com.team3.miniproject.testcases.ddt.LoginData;
 import com.team3.miniproject.testcases.ddt.RegistrationData;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import screenshot.ScreenShotCapture;
 
 public class EndToEndTest {
 	WebDriver driver;
 	String baseUrl = "http://localhost";
 
+	ExtentReports report;
+	ExtentTest test;
+	
 	Cart objCart;
 	ContactUs objContactUs;
 	CheckoutPage objCheckout;
@@ -48,8 +60,14 @@ public class EndToEndTest {
 	RegistrationData objRegister;
 	LoginData objLogin;
 
+	ScreenShotCapture objScreenshot;
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+	
 	@Test
-	public void endTestOpenCart_001() throws InterruptedException, IOException {
+	public void endTestOpenCart001() throws InterruptedException, IOException {
+		test.log(LogStatus.INFO, "End Test Case - Tests the overall flow of the application.");
+		objScreenshot = new ScreenShotCapture(driver);
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -69,22 +87,53 @@ public class EndToEndTest {
 		
 		ArrayList<ArrayList<String>> myData = objRegister.userData();
 		ArrayList<ArrayList<String>> myLoginData = objLogin.loginData();
+		
+		//verify title
+		test.log(LogStatus.INFO, "Title Verification:");
+		if((driver.getTitle() == "Your Store")) {
+			test.log(LogStatus.PASS, "Title matched!");
+		}
+		else {
+			test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.1_"+ timeStamp +".PNG") + "Title did not match.");
+		}
 		// click on registration link
 //	  objHeader.selectFromMyAccountDropDown(0);
-//	//	  
+//	  
 //	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(2).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
 //	  objRegistration.checkPrivacyPolicy();
 //	  objRegistration.clickContinueBtn();
-//
+		
+		test.log(LogStatus.INFO, "Registration Validation:");
+		if(driver.getTitle() == "Your Account Has Been Created!") {
+			test.log(LogStatus.PASS, "Registration successful!");
+		}
+		else {
+			test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.2_"+ timeStamp +".PNG") + "Registration is not successful.");
+		}
 //	  //logout
 //	  objHeader.selectFromMyAccountDropDown(4);
 	  
 	  //click on login
 	  objHeader.selectFromMyAccountDropDown(1);
-	  objLoginPage.login(myLoginData.get(0).get(0), myLoginData.get(0).get(1));
+	  objLoginPage.login(myLoginData.get(3).get(0), myLoginData.get(3).get(1));
 	  
+	  test.log(LogStatus.INFO, "Login Validation:");
+		if(driver.getTitle() == "My Account") {
+			test.log(LogStatus.PASS, "User has successfully logged in!");
+		}
+		else {
+			test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.3_"+ timeStamp +".PNG") + "Login was not successful!");
+		}
 	  // navigate to homepage
 	  objHeader.clickHomePageLink();
+	  
+	  test.log(LogStatus.INFO, "Navigation to HomePage Validation");
+		if((driver.getTitle() == "Your Store")) {
+			test.log(LogStatus.PASS, "Succesfully navigated to the Home Page.");
+		}
+		else {
+			test.log(LogStatus.FAIL, objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.4_"+ timeStamp +".PNG") + "The user was not redirected to the Home Page.");
+		}
 	  
 	  //search product
 	  objHeader.enterSearchQuery("macbook");
@@ -95,13 +144,33 @@ public class EndToEndTest {
 	  
 	  Thread.sleep(3000);
 	  
+	  //add product to wishlist
 	  objSearch.addToWishlist(0);
+	  
+	  //product added to wishlist validation
+	  test.log(LogStatus.INFO, "Validation for adding product to the Wishlist.");
+	  if(driver.findElement(By.cssSelector("#product-search > div.alert.alert-success.alert-dismissible")).isDisplayed()) {
+		  test.log(LogStatus.PASS, "Product was successfully added to the wishlist!");
+	  }
+	  else {
+		  test.log(LogStatus.FAIL,  objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.5_"+ timeStamp +".PNG") + "Product was not added to the wishlist.");
+	  }
 	  
 	  //search for another product
 	  objHeader.enterSearchQuery("iphone");
 	  objHeader.clickSearchBtn();
 	  
+	  //add product to cart
 	  objSearch.addToCart(0);
+	  
+	  //product added to cart validation
+	  test.log(LogStatus.INFO, "Validation for adding product to the Cart.");
+	  if(driver.findElement(By.cssSelector("#product-search > div.alert.alert-success.alert-dismissible")).isDisplayed()) {
+		  test.log(LogStatus.PASS, "Product was successfully added to the Cart!");
+	  }
+	  else {
+		  test.log(LogStatus.FAIL,  objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.6_"+ timeStamp +".PNG") + "Product was not added to the Cart.");
+	  }
 	  
 	  Thread.sleep(2000);
 	  //navigate to wishlist
@@ -109,11 +178,28 @@ public class EndToEndTest {
 	  Thread.sleep(3000);
 	  objWishlist.addcartmacMethod(); // adds item from wishlist to cart
 	  
+	  //Validation for adding product from wishlist to cart
+	  test.log(LogStatus.INFO, "Validation for adding product to the Cart from the wishlist.");
+	  if(driver.findElement(By.cssSelector("#account-wishlist > div.alert.alert-success.alert-dismissible")).isDisplayed()) {
+		  test.log(LogStatus.PASS, "Product was successfully added form the wishlist to the Cart!");
+	  }
+	  else {
+		  test.log(LogStatus.FAIL,  objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.7_"+ timeStamp +".PNG") + "Product was not added to the Cart.");
+	  }
+	  
 	  Thread.sleep(2000);
 	  objHeader.clickShoppingCartLink();
 	  Thread.sleep(3000);
 	  objCart.enterQuantity("3");
 	  objCart.updateQuantity();
+	  
+	  test.log(LogStatus.INFO, "Validation for updating quantity  of a product in the Cart.");
+	  if(driver.findElement(By.cssSelector("#checkout-cart > div.alert.alert-success.alert-dismissible")).isDisplayed()) {
+		  test.log(LogStatus.PASS, "Product was successfully added to the Cart!");
+	  }
+	  else {
+		  test.log(LogStatus.FAIL,  objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.8_"+ timeStamp +".PNG") + "Product was not added to the Cart.");
+	  }
 	  
 	  Thread.sleep(2000);
 	  //apply coupon
@@ -123,34 +209,60 @@ public class EndToEndTest {
 	  Thread.sleep(2000);
 	  objCart.clickApplyCoupon();
 	  
+	  //validation for Apply coupon
+	  test.log(LogStatus.INFO, "Validation for applying coupons for the products in the cart.");
+	  if(driver.findElement(By.cssSelector("#checkout-cart > div.alert.alert-success.alert-dismissible")).isDisplayed()) {
+		  test.log(LogStatus.PASS, "Coupon was successfully applied!");
+	  }
+	  else {
+		  test.log(LogStatus.FAIL,  objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.9_"+ timeStamp +".PNG") + "Coupon was not applied!");
+	  }
+	  
 	  Thread.sleep(3000);
 	  
 	  //click on Checkout button in the cart
 	  objCart.checkout();
 	  
 	  //checkout process
-	  objCheckout.enterExistingBillingDetailsAndContinue();
+	  objCheckout.enterNewBillingDetails(2);
 	  objCheckout.enterExistingDeliveryDetailsAndContinue();
 	  objCheckout.enterDeliveryMethodAndContinue();
 	  objCheckout.enterPaymentMethod();
 	  objCheckout.agreeToTermsAndConditionsAndContinue();
 	  objCheckout.confirmOrder();
+	  
+	  //validation of checkout
+	  test.log(LogStatus.INFO, "Validation for confirmed order.");
+	  if(driver.getTitle() == "Your order has been placed!") {
+		  test.log(LogStatus.PASS, "Order was succesfully placed!");
+	  }
+	  else {
+		  test.log(LogStatus.FAIL,  objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.10_"+ timeStamp +".PNG") + "The order could not be placed!");
+	  }
 	  Thread.sleep(5000);
   }
   @BeforeMethod
-  public void beforeMethod() {
+  public void beforeMethod(Method m) {
 	  WebDriverManager.chromedriver().setup();
 	  driver = new ChromeDriver();
 	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	  driver.get(baseUrl);
 	  driver.manage().window().maximize();
 	  JavascriptExecutor js;
+	  
+	  test = report.startTest(m.getName());
   }
 
   @AfterMethod
   public void afterMethod() throws InterruptedException {
 	  Thread.sleep(5000);
 	  driver.close();
+  }
+  
+  @Parameters(browser)
+  @BeforeClass
+  public void beforeClassMethod(String browser) {
+	  report =new ExtentReports("ExtentReports\\EndTestCase\\"+ browser +"_"+ timeStamp + ".html");
   }
 
 }
