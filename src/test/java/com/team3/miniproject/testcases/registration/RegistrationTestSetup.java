@@ -6,10 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -21,6 +21,7 @@ import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.sitepages.Header;
 import com.team3.miniproject.sitepages.LoginPage;
 import com.team3.miniproject.sitepages.RegistrationPage;
+import com.team3.miniproject.testcases.ddt.ReadInputs;
 import com.team3.miniproject.testcases.ddt.RegistrationData;
 
 import screenshot.ScreenShotCapture;
@@ -30,13 +31,13 @@ public class RegistrationTestSetup extends BrowserSetup {
 	RegistrationPage rg_object;
 	LoginPage lg_object;
 	Header h_object;
-	WebDriver driver;
+//	WebDriver driver;
 	String baseUrl = "http://localhost/opencartsite/index.php?route=account/register";
 	RegistrationData rd = new RegistrationData();
 	ScreenShotCapture s;
 	ExtentReports report;
 	ExtentTest test;
-	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+	String timeStamp;
 
 	// Should Pass
 	// TC_OC_REG_001
@@ -78,7 +79,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 	// TC_OC_REG_002 - Registering by entering valid data in input fields, selecting
 	// the privacy policy checkbox, but entering insufficient characters for
 	// password
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase002() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -117,7 +118,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 	// TC_OC_REG_003 - Registering by entering valid data in input fields, selecting
 	// the privacy policy checkbox, not entering data in the necessary marked
 	// fields. ie lastname
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase003() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -155,7 +156,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 	}
 
 	// TC_OC_REG_004
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase004() throws IOException {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -277,7 +278,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 
 	// should pass
 	// TC_OC_REG_006
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase006() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -305,13 +306,14 @@ public class RegistrationTestSetup extends BrowserSetup {
 
 	// should pass
 	// TC_OC_REG_007
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase007() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
 				"TC_OC_REG_007-Registering by entering an email id with which an account has already been registered previously");
 		try {
 			ArrayList<ArrayList<String>> myData = rd.userData();
+			rg_object = new RegistrationPage(driver);
 			rg_object.fillRegistrationForm(myData.get(6).get(0), myData.get(6).get(1), myData.get(6).get(2),
 					myData.get(6).get(3), myData.get(6).get(4), myData.get(6).get(5));
 			rg_object.checkPrivacyPolicy();
@@ -333,7 +335,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 
 	// should pass
 	// TC_OC_REG_0010
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase010() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_010-Registering by keeping the First Name field empty");
@@ -360,7 +362,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 
 	// should pass
 	// TC_OC_REG_0011
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase011() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_011-Registering by entering insufficient numbers in the Telephone field");
@@ -388,7 +390,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 
 	// should pass
 	// TC_OC_REG_0012
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase012() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_012-Registering by entering a First Name having more than 32 characters");
@@ -415,7 +417,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 	}
 
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase013() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_013-Registering by entering a Last Name having more than 32 characters");
@@ -439,7 +441,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 	}
 
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase014() {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_REG_014-Registering by entering more than 32 numbers in the Telephone field");
@@ -465,39 +467,41 @@ public class RegistrationTestSetup extends BrowserSetup {
 	}
 
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase015() throws IOException {
-		s = new ScreenShotCapture(driver);
-		test.log(LogStatus.INFO,
-				"TC_OC_REG_015-To verify the that Register page is inaccessible when user is logged in");
-		rg_object = new RegistrationPage(driver);
-		h_object = new Header(driver);
-		lg_object = new LoginPage(driver);
+		try {
+			s = new ScreenShotCapture(driver);
+			ReadInputs loginreader = new ReadInputs();
+			loginreader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
+			test.log(LogStatus.INFO,
+					"TC_OC_REG_015-To verify the that Register page is inaccessible when user is logged in");
+			rg_object = new RegistrationPage(driver);
+			h_object = new Header(driver);
+			lg_object = new LoginPage(driver);
 
-		h_object.selectFromMyAccountDropDown(1);
-		lg_object.login("demo1@example.com", "testing123");
-		driver.get(baseUrl);
-		if (rg_object.getPageTitle().equals("My Account")) {
-			test.log(LogStatus.PASS, "Test Passed- Title Matched");
-		} else {
-			test.log(LogStatus.FAIL,
-					test.addScreenCapture(
-							s.captureScreenshot("\\Registration\\" + "testCase0015_" + timeStamp + ".PNG"))
-							+ "Test Failed- Title Mismatched");
+			h_object.selectFromMyAccountDropDown(1);
+			loginreader.i = 5;
+			lg_object.login(loginreader.getEmailId(), loginreader.getPassword());
+			driver.get(baseUrl);
+			if (rg_object.getPageTitle().equals("My Account")) {
+				test.log(LogStatus.PASS, "Test Passed- Title Matched");
+			} else {
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								s.captureScreenshot("\\Registration\\" + "testCase0015_" + timeStamp + ".PNG"))
+								+ "Test Failed- Title Mismatched");
+			}
+		} catch (Exception e) {
+			test.log(LogStatus.INFO, e);
 		}
 	}
 
 	@Parameters("browser")
 	@BeforeMethod
 	public void beforeMethod(Method m, String browser) {
-		report = new ExtentReports("ExtentReports\\Registration\\" + m.getName() + "_" + timeStamp + ".html");
 		test = report.startTest(m.getName());
-//		WebDriverManager.chromedriver().setup();
-//		driver = new ChromeDriver();
-//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		initialize(browser);
 		driver.get(baseUrl);
-//		driver.manage().window().maximize();
 	}
 
 	@AfterMethod
@@ -505,5 +509,13 @@ public class RegistrationTestSetup extends BrowserSetup {
 		report.endTest(test);
 		report.flush();
 		driver.quit();
+	}
+
+	@Parameters("browser")
+	@BeforeClass
+	public void beforeClass(String browser) {
+		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+		report = new ExtentReports(
+				"ExtentReports\\Registration\\RegistrationTests_" + browser + "_" + timeStamp + ".html");
 	}
 }
