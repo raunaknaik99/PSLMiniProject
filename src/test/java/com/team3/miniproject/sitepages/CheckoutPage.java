@@ -166,7 +166,6 @@ public class CheckoutPage {
 	}
 
 	public void enterNewBillingDetails(int val) throws InterruptedException{
-		System.out.println("reached enter new details");
 		WebDriverWait wait = new WebDriverWait(driver,30);
 		System.out.println(val);
 		
@@ -177,7 +176,6 @@ public class CheckoutPage {
 		else {
 			wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#collapse-payment-address > div > form > div:nth-child(3) > label > input[type=radio]")));
 			newPaymentAddress.click();
-			
 		}
 		reader.i=val;
 		try {

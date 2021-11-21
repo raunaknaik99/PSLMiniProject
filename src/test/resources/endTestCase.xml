@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="EndTestCase" parallel="none">
+  <test name="ChromeTest">
+    <parameter name="browser" value="chrome"/>  
+    <classes>
+      <class name="com.team3.miniproject.endTestcase.EndToEndTest"/>
+    </classes>
+  </test>
+  <test name="EdgeTest">
+    <parameter name="browser" value="edge"/>
+    <classes>
+      <class name="com.team3.miniproject.endTestcase.EndToEndTest"/>
+    </classes>
+  </test>  
+</suite>
