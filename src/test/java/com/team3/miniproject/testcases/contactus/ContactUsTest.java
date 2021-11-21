@@ -26,7 +26,7 @@ import com.team3.miniproject.testcases.ddt.ContactUsData;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
 
-public class ContactUsTest {
+public class ContactUsTest extends BrowserSetup{
 
 	//WebDriver driver;
 	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
