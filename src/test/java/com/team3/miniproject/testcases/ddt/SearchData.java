@@ -12,7 +12,7 @@ public class SearchData {
 	public ArrayList<ArrayList<String>> userData() throws IOException {
 		ArrayList<ArrayList<String>> userdata = new ArrayList<ArrayList<String>>(12);
 
-		FileInputStream fis = new FileInputStream("src\\test\\resources\\SearchData.xlsx");
+		FileInputStream fis = new FileInputStream("src\\test\\resources\\loginDDT.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 		XSSFSheet sheet = workbook.getSheet("Search");
 		try {

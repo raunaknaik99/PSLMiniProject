@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
 	public WebDriver driver;
 
+
 	String baseUrl = "http://localhost/miniproject";
 	String expectedTitle = "Account Login";
 

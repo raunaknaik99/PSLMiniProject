@@ -30,7 +30,7 @@ public class SearchTest extends BrowserSetup {
 	ExtentReports report;
 	ExtentTest test;
 	ScreenShotCapture s;
-	String timeStamp;
+	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 	SearchData rd = new SearchData();
 
 	// To test if page title is correct after searching
@@ -375,9 +375,9 @@ public class SearchTest extends BrowserSetup {
 
 	@Parameters("browser")
 	@BeforeMethod
-	public void beforeMethod(Method m) {
+	public void beforeMethod(Method m, String browser) {
 		test = report.startTest(m.getName());
-		initialize("chrome");
+		initialize(browser);
 		driver.get(baseUrl);
 	}
 
@@ -391,7 +391,6 @@ public class SearchTest extends BrowserSetup {
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browser) {
-		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 		report = new ExtentReports("ExtentReports\\Search\\SearchTests_" + browser + "_" + timeStamp + ".html");
 	}
 

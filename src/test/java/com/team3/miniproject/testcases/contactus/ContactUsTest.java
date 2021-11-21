@@ -5,29 +5,28 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.sitepages.ContactUs;
 import com.team3.miniproject.testcases.ddt.ContactUsData;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
 
-public class ContactUsTest {
+public class ContactUsTest extends BrowserSetup {
 
-	WebDriver driver;
+	// WebDriver driver;
 	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
 	ContactUs contactUsObject;
 	ExtentReports report;
@@ -37,7 +36,7 @@ public class ContactUsTest {
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 
 	/*------------------------------*/
-	@Test(enabled=false)
+	@Test(enabled = true)
 	public void contactTestCase001() throws InterruptedException {
 		contactUsObject = new ContactUs(driver);
 		contactUsObject.loginForContactUs();
@@ -59,7 +58,7 @@ public class ContactUsTest {
 		driver.findElement(By.linkText("Continue"));
 	}
 
-	@Test(enabled=false)
+	@Test(enabled = true)
 	public void contactTestCase002() throws InterruptedException {
 		contactUsObject = new ContactUs(driver);
 		contactUsObject.loginForContactUs();
@@ -87,7 +86,7 @@ public class ContactUsTest {
 	}
 
 	/*-------------------------------*/
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase003() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
 		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
@@ -121,7 +120,7 @@ public class ContactUsTest {
 		}
 	}
 
-	@Test(enabled=false)
+	@Test(enabled = true)
 	public void testCase004() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
 		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
@@ -156,7 +155,7 @@ public class ContactUsTest {
 		}
 	}
 
-	@Test(enabled=false)
+	@Test(enabled = true)
 	public void testCase005() throws IOException {
 		objScreenshot = new ScreenShotCapture(driver);
 		ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
@@ -209,9 +208,11 @@ public class ContactUsTest {
 				test.log(LogStatus.PASS,
 						"Test Passed- User navigated to Success correct Url after submiting contact us form");
 			} else {
-				test.log(LogStatus.FAIL,test.addScreenCapture(objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase006_" + timeStamp + ".PNG")) 
-						+"Test Failed- user navigated to wrong URL");
-				
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(
+								objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase006_" + timeStamp + ".PNG"))
+								+ "Test Failed- user navigated to wrong URL");
+
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
@@ -219,7 +220,7 @@ public class ContactUsTest {
 	}
 
 	// TC_OC_CU_008
-	@Test(enabled=true)
+	@Test(enabled = true)
 	public void testCase008() {
 		objScreenshot = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
@@ -230,30 +231,36 @@ public class ContactUsTest {
 			if (nameField.getText().equals("") && emailField.getText().equals("")) {
 				test.log(LogStatus.PASS, "Test Passed-Name & Email Field is Blank");
 			} else if (nameField.getText().equals("") && !emailField.getText().equals("")) {
-				test.log(LogStatus.FAIL,test.addScreenCapture(objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.1_" + timeStamp + ".PNG")) 
-						+"Test Failed-Name Field is Blank & Email Field is not Blank: " + emailField);
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(objScreenshot
+								.captureScreenshot("\\ContactUs\\" + "testCase008.1_" + timeStamp + ".PNG"))
+								+ "Test Failed-Name Field is Blank & Email Field is not Blank: " + emailField);
 			} else if (!nameField.getText().equals("") && emailField.getText().equals("")) {
-				test.log(LogStatus.FAIL,test.addScreenCapture(objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.2_" + timeStamp + ".PNG")) 
-						+"Test Failed-Name Field is Not Blank & Email Field is Blank: " + nameField);
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(objScreenshot
+								.captureScreenshot("\\ContactUs\\" + "testCase008.2_" + timeStamp + ".PNG"))
+								+ "Test Failed-Name Field is Not Blank & Email Field is Blank: " + nameField);
 			} else {
-				test.log(LogStatus.FAIL,test.addScreenCapture(objScreenshot.captureScreenshot("\\ContactUs\\" + "testCase008.3_" + timeStamp + ".PNG"))
-						+ "Test Failed-Name Field is not Blank, Contains Text: " + nameField);
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(objScreenshot
+								.captureScreenshot("\\ContactUs\\" + "testCase008.3_" + timeStamp + ".PNG"))
+								+ "Test Failed-Name Field is not Blank, Contains Text: " + nameField);
 			}
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
 	}
-	
+
 	@Test(priority = 1)
 	public void testCase009() {
-		objScreenshot=new ScreenShotCapture(driver);
+		objScreenshot = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CU_009-To test whether Store location details are present on the page");
 		try {
-			WebElement nameField = driver.findElement(By.cssSelector("#content > div > div > div > div:nth-child(1) > address"));
-			if(nameField.getText().equals("Address 1")) {
-				test.log(LogStatus.PASS, "Test Passed-Store location details are visible");		
-			}
-			else  {
+			WebElement nameField = driver
+					.findElement(By.cssSelector("#content > div > div > div > div:nth-child(1) > address"));
+			if (nameField.getText().equals("Address 1")) {
+				test.log(LogStatus.PASS, "Test Passed-Store location details are visible");
+			} else {
 				test.log(LogStatus.FAIL, "Test Failed-Store location details are not visible ");
 			}
 		} catch (Exception e) {
@@ -261,22 +268,24 @@ public class ContactUsTest {
 		}
 	}
 
+	@Parameters("browser")
 	@BeforeMethod
-	public void beforeMethod(Method m) {
-		report = new ExtentReports("ExtentReports\\ContactUs\\" + m.getName() + "_" + timeStamp + ".html");
+	public void beforeMethod(Method m, String browser) {
 		test = report.startTest(m.getName());
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		initialize(browser);
 		driver.get(baseUrl);
-		driver.manage().window().maximize();
 	}
 
 	@AfterMethod
-	public void afterMethod(Method m) {
+	public void afterMethod(Method m) throws IOException {
 		report.endTest(test);
 		report.flush();
 		driver.quit();
 	}
 
+	@Parameters("browser")
+	@BeforeClass
+	public void beforeClass(String browser) {
+		report = new ExtentReports("ExtentReports\\ContactUs\\ContactUsTests_" + browser + "_" + timeStamp + ".html");
+	}
 }
