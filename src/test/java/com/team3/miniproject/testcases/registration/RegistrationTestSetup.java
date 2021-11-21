@@ -99,6 +99,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 			// Fill in registration data, but keep insufficient characters for password
 			rg_object.fillRegistrationForm(myData.get(1).get(0), myData.get(1).get(1), myData.get(1).get(2),
 					myData.get(1).get(3), myData.get(1).get(4), myData.get(1).get(5));
+			rg_object.checkPrivacyPolicy();
 			rg_object.clickContinueBtn();
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Warning is displayed and user is not allowed to procees");
@@ -139,6 +140,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 			// Fill in registration data, but keep lastName (mandatory) field empty
 			rg_object.fillRegistrationForm(myData.get(2).get(0), myData.get(2).get(1), myData.get(2).get(2),
 					myData.get(2).get(3), myData.get(2).get(4), myData.get(2).get(5));
+			rg_object.checkPrivacyPolicy();
 			rg_object.clickContinueBtn();
 			if (rg_object.getPageTitle().equals("Register Account")) {
 				test.log(LogStatus.PASS, "Test Passed- Title Matched");
@@ -171,6 +173,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 							+ "Test Failed- Title Mismatched");
 		}
 		rg_object.fillRegistrationForm("Deeksha", "123", "1.1@example.com", "123", "testing123", "testing123");
+		rg_object.checkPrivacyPolicy();
 		rg_object.clickContinueBtn();
 		if (rg_object.getPageTitle().equals("Your Account Has Been Created!")) {
 			test.log(LogStatus.PASS, "Test Passed- Title Matched");
