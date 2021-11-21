@@ -15,14 +15,14 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import com.team3.miniproject.base.TestBase;
+import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.sitepages.Header;
 import com.team3.miniproject.sitepages.SearchPage;
 import com.team3.miniproject.testcases.ddt.SearchData;
 
 import screenshot.ScreenShotCapture;
 
-public class SearchTest extends TestBase {
+public class SearchTest extends BrowserSetup {
 	Header h_object;
 	SearchPage sp_object;
 //	WebDriver driver;
