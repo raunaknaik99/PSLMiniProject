@@ -34,6 +34,7 @@ public class RegistrationData {
 		}
 		return userdata;
 	}
+}
 
 //	public static void main(String args[]) throws IOException {
 //		RegistrationData rd=new RegistrationData();
