@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<<<<<<< HEAD
-<suite name="Parallel test suite">
-  <test name="Firefox Test">
-  <parameter name="browser" value="Firefox"/>
-    <classes>
-      <class name="com.team3.miniproject.testcases.login.LoginTC_OC_001_to_007"/>
-    </classes>
-  </test>
-  <test name="Chrome Test">
-  <parameter name="browser" value="chrome"/>
-    <classes>
-      <class name="com.team3.miniproject.testcases.login.LoginTC_OC_001_to_007"/>
-=======
+
 <suite name="Tests" parallel="none">
   <test name="ChromeTest">
     <parameter name="browser" value="chrome"/>  
@@ -30,13 +18,6 @@
     <parameter name="browser" value="edge"/>
     <classes>
       <class name="com.team3.miniproject.testcases.search.SearchTest"/>
->>>>>>> 88f45b45468cceebd1338eeecda18ecadde6767b
-    </classes>
-  </test>
-    <test name="Internet Explorer Test">
-    <parameter name="browser" value="IE"/>
-    <classes>
-      <class name="com.team3.miniproject.testcases.login.LoginTC_OC_001_to_007"/>
     </classes>
   </test>
 </suite>

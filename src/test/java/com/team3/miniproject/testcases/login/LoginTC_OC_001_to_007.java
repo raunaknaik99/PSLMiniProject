@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
@@ -21,14 +22,15 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.sitepages.LoginPage;
 import com.team3.miniproject.testcases.ddt.ReadInputs;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+//import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
 
-public class LoginTC_OC_001_to_007 {
-	WebDriver driver;
+public class LoginTC_OC_001_to_007 extends BrowserSetup {
+//	WebDriver driver;
 	LoginPage login1;
 	ReadInputs reader = new ReadInputs();
 	String expectedTitle;
@@ -47,7 +49,6 @@ public class LoginTC_OC_001_to_007 {
 		s = new ScreenShotCapture(driver);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		// Reading emailId and password from excel sheet containing data
-		reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
 		for (reader.i = 1; reader.i < 6; reader.i++) {
 			String emailId = reader.getEmailId();
 			String password = reader.getPassword();
@@ -81,16 +82,13 @@ public class LoginTC_OC_001_to_007 {
 				if (actualTitle.equals(expectedTitle))
 					test.log(LogStatus.PASS, "Test Passed- Login Successful");
 				else
-<<<<<<< HEAD
-					test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Login\\testCase001_to_005" + timeStamp + ".PNG"))+ "Test Failed - Login Unsuccessful!");
-				
-=======
+
 					test.log(LogStatus.FAIL,
 							test.addScreenCapture(
 									s.captureScreenshot("\\Login\\testCase001_to_005" + timeStamp + ".PNG"))
 									+ "Test Failed - Login Unsuccessful!");
 				Assert.assertEquals(actualTitle, expectedTitle);
->>>>>>> cd65b6470912055987a2e97b04d552ac51ac5491
+
 			}
 
 		}
@@ -169,12 +167,14 @@ public class LoginTC_OC_001_to_007 {
 
 	@Parameters({"browser"})
 	@BeforeMethod
-	public void beforeMethod(Method m , String browser) {
-		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
-		report = new ExtentReports("ExtentReports\\Login\\" + m.getName() + "_" + timeStamp + ".html");
+	public void beforeMethod(Method m , String browser) throws IOException {
+		reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
+	//	timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+	//	report = new ExtentReports("ExtentReports\\Login\\" + m.getName() + "_" + timeStamp + ".html");
 		test = report.startTest(m.getName());
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+	//	WebDriverManager.chromedriver().setup();
+	//	driver = new ChromeDriver();
+		initialize(browser);
 		login1 = new LoginPage(driver);
 		login1.navigateToLogin();
 
@@ -185,5 +185,11 @@ public class LoginTC_OC_001_to_007 {
 		report.endTest(test);
 		report.flush();
 		login1.finish();
+	}
+	@Parameters("browser")
+	@BeforeClass
+	public void beforeClass(String browser) {
+		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+		report = new ExtentReports("ExtentReports\\Login\\LoginTests_" + browser + "_" + timeStamp + ".html");
 	}
 }

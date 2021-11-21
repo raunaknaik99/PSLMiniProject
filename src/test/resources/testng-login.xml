@@ -2,10 +2,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Tests" parallel="none">
-  <test name="EdgeTest">
-    <parameter name="browser" value="edge"/>
+    <test name="ChromeTest">
+    <parameter name="browser" value="chrome"/>  
     <classes>
-       <class name="com.team3.miniproject.testcases.login.LoginTC_OC_001_to_007"/>
-       </classes>
+      <class name="com.team3.miniproject.testcases.login.LoginTC_OC_001_to_007"/>
+    </classes>
   </test>
+    <test name="FireFoxTest">
+    <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="com.team3.miniproject.testcases.login.LoginTC_OC_001_to_007"/>
+    </classes>
+  </test> 
 </suite>
