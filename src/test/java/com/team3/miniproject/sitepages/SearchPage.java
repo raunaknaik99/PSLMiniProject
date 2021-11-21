@@ -54,7 +54,7 @@ public class SearchPage {
 	WebElement noResultsText;
 
 	@FindBy(css = "#content > div:nth-child(8) > div")
-	public List<WebElement> foundProducts;
+	List<WebElement> foundProducts;
 
 	@FindBy(css = "#content > div:nth-child(8) > div > div > div.image > a")
 	List<WebElement> foundProductsImgLinks;
@@ -69,7 +69,7 @@ public class SearchPage {
 	List<WebElement> foundProductsPrices;
 
 	@FindBy(css = "#content > div:nth-child(8) > div > div > div:nth-child(2) > div.button-group > button:nth-child(1)")
-	public List<WebElement> addToCartBtns;
+	List<WebElement> addToCartBtns;
 
 	@FindBy(css = "#content > div:nth-child(8) > div > div > div:nth-child(2) > div.button-group > button:nth-child(2)")
 	List<WebElement> addToWishlistBtns;

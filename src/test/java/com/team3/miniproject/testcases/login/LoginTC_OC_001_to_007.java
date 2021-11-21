@@ -34,9 +34,11 @@ public class LoginTC_OC_001_to_007 {
 	ScreenShotCapture s;
 
 	@Test
-	// TC_OC_LR_001 TO TC_OC_LR_005 - To test all the possible scenarios for Login with email-id and password
+	// TC_OC_LR_001 TO TC_OC_LR_005 - To test all the possible scenarios for Login
+	// with email-id and password
 	public void testCase001To005() throws IOException, InterruptedException {
-		test.log(LogStatus.INFO,"TC_OC_LR_001 to TC_OC_LR_005 - to test all the possible scenarios for Login with email-id and password");
+		test.log(LogStatus.INFO,
+				"TC_OC_LR_001 to TC_OC_LR_005 - to test all the possible scenarios for Login with email-id and password");
 		s = new ScreenShotCapture(driver);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		// Reading emailId and password from excel sheet containing data
@@ -55,8 +57,11 @@ public class LoginTC_OC_001_to_007 {
 				if (actualTitle.equals(expectedTitle)) {
 					test.log(LogStatus.PASS, "Test Passed- Warning appears");
 				} else {
-					test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Login\\testCase001_to_005" + timeStamp + ".PNG"))+"Test Failed - Warning does not appear!");
-					
+					test.log(LogStatus.FAIL,
+							test.addScreenCapture(
+									s.captureScreenshot("\\Login\\testCase001_to_005" + timeStamp + ".PNG"))
+									+ "Test Failed - Warning does not appear!");
+
 				}
 				Assert.assertEquals(actualTitle, expectedTitle);
 			}
@@ -71,17 +76,21 @@ public class LoginTC_OC_001_to_007 {
 				if (actualTitle.equals(expectedTitle))
 					test.log(LogStatus.PASS, "Test Passed- Login Successful");
 				else
-					test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Login\\testCase001_to_005" + timeStamp + ".PNG"))+ "Test Failed - Login Unsuccessful!");
+					test.log(LogStatus.FAIL,
+							test.addScreenCapture(
+									s.captureScreenshot("\\Login\\testCase001_to_005" + timeStamp + ".PNG"))
+									+ "Test Failed - Login Unsuccessful!");
 				Assert.assertEquals(actualTitle, expectedTitle);
 			}
 
-			
 		}
 	}
+
 //TC_OC_LR_006 - To verify the that Login page is inaccessible when user is logged in
 	@Test
 	public void testCase006() throws IOException {
-		test.log(LogStatus.INFO,"TC_OC_LR_006 - To verify the that Login page is inaccessible when user is logged in");
+		test.log(LogStatus.INFO, "TC_OC_LR_006 - To verify the that Login page is inaccessible when user is logged in");
+		reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
 		s = new ScreenShotCapture(driver);
 		reader.i = 5;
 		String emailId = reader.getEmailId();
@@ -101,9 +110,12 @@ public class LoginTC_OC_001_to_007 {
 	}
 
 	@Test
-	// TC_OC_LR_007 - To verify that Logged in user does not get logged out after clicking the back button on the browser
+	// TC_OC_LR_007 - To verify that Logged in user does not get logged out after
+	// clicking the back button on the browser
 	public void testCase007() throws IOException {
-		test.log(LogStatus.INFO,"TC_OC_LR_007 - To verify that Logged in user does not get logged out after clicking the back button on the browser");
+		test.log(LogStatus.INFO,
+				"TC_OC_LR_007 - To verify that Logged in user does not get logged out after clicking the back button on the browser");
+		reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
 		s = new ScreenShotCapture(driver);
 		reader.i = 5;
 		String emailId = reader.getEmailId();
@@ -121,10 +133,13 @@ public class LoginTC_OC_001_to_007 {
 					+ "Test Failed - Logged in user gets logged out after clicking the back button on the browser");
 		Assert.assertEquals(actualTitle, expectedTitle);
 	}
+
 	@Test
-	// TC_OC_LR_008 - To login with correct emailId and password, but the password is typed in wrong case
+	// TC_OC_LR_008 - To login with correct emailId and password, but the password
+	// is typed in wrong case
 	public void testCase008() throws IOException {
-		test.log(LogStatus.INFO,"TC_OC_LR_008 - To login with correct emailId and password, but the password is typed in wrong case");
+		test.log(LogStatus.INFO,
+				"TC_OC_LR_008 - To login with correct emailId and password, but the password is typed in wrong case");
 		s = new ScreenShotCapture(driver);
 		reader.i = 9;
 		String emailId = reader.getEmailId();
@@ -133,13 +148,13 @@ public class LoginTC_OC_001_to_007 {
 		actualTitle = login1.driver.getTitle();
 		expectedTitle = "My Account";
 		if (actualTitle.equals(expectedTitle))
-			test.log(LogStatus.PASS,"Test Passed - User is logged in! ");
+			test.log(LogStatus.PASS, "Test Passed - User is logged in! ");
 		else
-			test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Login\\testCase008" + timeStamp + ".PNG"))+ "Test Failed - User is not logged in!");
+			test.log(LogStatus.FAIL,
+					test.addScreenCapture(s.captureScreenshot("\\Login\\testCase008" + timeStamp + ".PNG"))
+							+ "Test Failed - User is not logged in!");
 		Assert.assertEquals(actualTitle, expectedTitle);
 	}
-	
-	
 
 	@BeforeMethod
 	public void beforeMethod(Method m) {

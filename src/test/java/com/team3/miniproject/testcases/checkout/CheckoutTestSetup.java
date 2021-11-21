@@ -339,7 +339,7 @@ public class CheckoutTestSetup {
 	}
 
 
-/*----------------------------------------------------------------*/
+/*---------------------------------------------------------------
 	@Test(enabled=true)
 	  public void testCase008() throws InterruptedException {
 		test.log(LogStatus.INFO, "TC_OC_CG_001 - to checkout as a guest user");
@@ -441,7 +441,9 @@ public class CheckoutTestSetup {
 		  }
 	  }
 
-	
+---------------------*/
+
+
   @BeforeMethod
   public void beforeMethod(Method m) {
 	  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());

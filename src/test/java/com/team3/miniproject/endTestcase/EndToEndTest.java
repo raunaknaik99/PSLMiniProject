@@ -45,7 +45,7 @@ public class EndToEndTest extends BrowserSetup{
 
 	ExtentReports report;
 	ExtentTest test;
-	
+
 	Cart objCart;
 	ContactUs objContactUs;
 	CheckoutPage objCheckout;
@@ -63,7 +63,7 @@ public class EndToEndTest extends BrowserSetup{
 	ScreenShotCapture objScreenshot;
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
-	
+
 	@Test
 	public void endTestOpenCart001() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "End Test Case - Tests the overall flow of the application.");
@@ -73,6 +73,7 @@ public class EndToEndTest extends BrowserSetup{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		
 		//objects for pages
+
 		objHeader = new Header(driver);
 		objRegistration = new RegistrationPage(driver);
 		objLoginPage = new LoginPage(driver);
@@ -81,15 +82,15 @@ public class EndToEndTest extends BrowserSetup{
 		objWishlist = new WishList(driver);
 		objCart = new Cart(driver);
 		objCheckout = new CheckoutPage(driver);
-		
-		//objects for DDT
+
+		// objects for DDT
 		objRegister = new RegistrationData();
 		objLogin = new LoginData();
-		
+
 		ArrayList<ArrayList<String>> myData = objRegister.userData();
 		ArrayList<ArrayList<String>> myLoginData = objLogin.loginData();
-		
-		//verify title
+
+		// verify title
 		test.log(LogStatus.INFO, "Title Verification:");
 		if(driver.getTitle().equals("Your Store")) {
 			test.log(LogStatus.PASS, "Title matched!");
@@ -121,6 +122,10 @@ public class EndToEndTest extends BrowserSetup{
 	  test.log(LogStatus.INFO, "Login Validation:");
 		if(driver.getTitle().equals("My Account")) {
 			test.log(LogStatus.PASS, "User has successfully logged in!");
+		} else {
+			test.log(LogStatus.FAIL,
+					objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.3_" + timeStamp + ".PNG")
+							+ "Login was not successful!");
 		}
 		else {
 			test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.3_" + timeStamp +".PNG")) + "Login was not successful!");
@@ -131,94 +136,104 @@ public class EndToEndTest extends BrowserSetup{
 	  test.log(LogStatus.INFO, "Navigation to HomePage Validation");
 		if(driver.getTitle().equals("Your Store")) {
 			test.log(LogStatus.PASS, "Succesfully navigated to the Home Page.");
+		} else {
+			test.log(LogStatus.FAIL,
+					objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.4_" + timeStamp + ".PNG")
+							+ "The user was not redirected to the Home Page.");
 		}
-		else {
-			test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.4_" + timeStamp +".PNG")) + "The user was not redirected to the Home Page.");
+
+		// search product
+		objHeader.enterSearchQuery("macbook");
+		objHeader.clickSearchBtn();
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Your Store")));
+		js.executeScript("window.scrollBy(0, 600);");
+
+		Thread.sleep(3000);
+
+		// add product to wishlist
+		objSearch.addToWishlist(0);
+
+		// product added to wishlist validation
+		test.log(LogStatus.INFO, "Validation for adding product to the Wishlist.");
+		if (driver.findElement(By.cssSelector("#product-search > div.alert.alert-success.alert-dismissible"))
+				.isDisplayed()) {
+			test.log(LogStatus.PASS, "Product was successfully added to the wishlist!");
+		} else {
+			test.log(LogStatus.FAIL,
+					objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.5_" + timeStamp + ".PNG")
+							+ "Product was not added to the wishlist.");
 		}
-	  
-	  //search product
-	  objHeader.enterSearchQuery("macbook");
-	  objHeader.clickSearchBtn();
-	  
-	  wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Your Store")));
-	  js.executeScript("window.scrollBy(0, 600);");
-	  
-	  Thread.sleep(3000);
-	  
-	  //add product to wishlist
-	  objSearch.addToWishlist(0);
-	  
-	  //product added to wishlist validation
-	  test.log(LogStatus.INFO, "Validation for adding product to the Wishlist.");
-	  if(driver.findElement(By.cssSelector("#product-search > div.alert.alert-success.alert-dismissible")).isDisplayed()) {
-		  test.log(LogStatus.PASS, "Product was successfully added to the wishlist!");
-	  }
-	  else {
-		  test.log(LogStatus.FAIL,  test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.5_" + timeStamp +".PNG")) + "Product was not added to the wishlist.");
-	  }
-	  
-	  //search for another product
-	  objHeader.enterSearchQuery("iphone");
-	  Thread.sleep(3000);
-	  objHeader.clickSearchBtn();
-	  
-	  //add product to cart
-	  objSearch.addToCart(0);
-	  
-	  //product added to cart validation
-	  test.log(LogStatus.INFO, "Validation for adding product to the Cart.");
-	  if(driver.findElement(By.cssSelector("#product-search > div.alert.alert-success.alert-dismissible")).isDisplayed()) {
-		  test.log(LogStatus.PASS, "Product was successfully added to the Cart!");
-	  }
-	  else {
-		  test.log(LogStatus.FAIL,  test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.6_"+ timeStamp +".PNG")) + "Product was not added to the Cart.");
-	  }
-	  
-	  Thread.sleep(2000);
-	  //navigate to wishlist
-	  objHeader.clickWishlistLink();
-	  Thread.sleep(3000);
-	  objWishlist.addcartmacMethod(); // adds item from wishlist to cart
-	  
-	  //Validation for adding product from wishlist to cart
-	  test.log(LogStatus.INFO, "Validation for adding product to the Cart from the wishlist.");
-	  if(driver.findElement(By.cssSelector("#account-wishlist > div.alert.alert-success.alert-dismissible")).isDisplayed()) {
-		  test.log(LogStatus.PASS, "Product was successfully added form the wishlist to the Cart!");
-	  }
-	  else {
-		  test.log(LogStatus.FAIL,  test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.7_" + timeStamp +".PNG")) + "Product was not added to the Cart.");
-	  }
-	  
-	  Thread.sleep(2000);
-	  objHeader.clickShoppingCartLink();
-	  Thread.sleep(3000);
-	  objCart.enterQuantity("3");
-	  objCart.updateQuantity();
-	  
-	  test.log(LogStatus.INFO, "Validation for updating quantity  of a product in the Cart.");
-	  if(driver.findElement(By.cssSelector("#checkout-cart > div.alert.alert-success.alert-dismissible")).isDisplayed()) {
-		  test.log(LogStatus.PASS, "Product was successfully added to the Cart!");
-	  }
-	  else {
-		  test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.8_" + timeStamp +".PNG")) + "Product was not added to the Cart.");
-	  }
-	  
-	  Thread.sleep(2000);
-	  //apply coupon
-	  objCart.clickCouponDropdown();
-	  Thread.sleep(2000);
-	  objCart.enterCouponCode("15Off"); // custom code for 15% discount
-	  Thread.sleep(2000);
-	  objCart.clickApplyCoupon();
-	  
-	  //validation for Apply coupon
-	  test.log(LogStatus.INFO, "Validation for applying coupons for the products in the cart.");
-	  if(driver.findElement(By.cssSelector("#checkout-cart > div.alert.alert-success.alert-dismissible")).isDisplayed()) {
-		  test.log(LogStatus.PASS, "Coupon was successfully applied!");
-	  }
-	  else {
-		  test.log(LogStatus.FAIL,  test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.9_" + timeStamp +".PNG")) + "Coupon was not applied!");
-	  }
+
+		// search for another product
+		objHeader.enterSearchQuery("iphone");
+		objHeader.clickSearchBtn();
+
+		// add product to cart
+		objSearch.addToCart(0);
+
+		// product added to cart validation
+		test.log(LogStatus.INFO, "Validation for adding product to the Cart.");
+		if (driver.findElement(By.cssSelector("#product-search > div.alert.alert-success.alert-dismissible"))
+				.isDisplayed()) {
+			test.log(LogStatus.PASS, "Product was successfully added to the Cart!");
+		} else {
+			test.log(LogStatus.FAIL,
+					objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.6_" + timeStamp + ".PNG")
+							+ "Product was not added to the Cart.");
+		}
+
+		Thread.sleep(2000);
+		// navigate to wishlist
+		objHeader.clickWishlistLink();
+		Thread.sleep(3000);
+		objWishlist.addcartmacMethod(); // adds item from wishlist to cart
+
+		// Validation for adding product from wishlist to cart
+		test.log(LogStatus.INFO, "Validation for adding product to the Cart from the wishlist.");
+		if (driver.findElement(By.cssSelector("#account-wishlist > div.alert.alert-success.alert-dismissible"))
+				.isDisplayed()) {
+			test.log(LogStatus.PASS, "Product was successfully added form the wishlist to the Cart!");
+		} else {
+			test.log(LogStatus.FAIL,
+					objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.7_" + timeStamp + ".PNG")
+							+ "Product was not added to the Cart.");
+		}
+
+		Thread.sleep(2000);
+		objHeader.clickShoppingCartLink();
+		Thread.sleep(3000);
+		objCart.enterQuantity("3");
+		objCart.updateQuantity();
+
+		test.log(LogStatus.INFO, "Validation for updating quantity  of a product in the Cart.");
+		if (driver.findElement(By.cssSelector("#checkout-cart > div.alert.alert-success.alert-dismissible"))
+				.isDisplayed()) {
+			test.log(LogStatus.PASS, "Product was successfully added to the Cart!");
+		} else {
+			test.log(LogStatus.FAIL,
+					objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.8_" + timeStamp + ".PNG")
+							+ "Product was not added to the Cart.");
+		}
+
+		Thread.sleep(2000);
+		// apply coupon
+		objCart.clickCouponDropdown();
+		Thread.sleep(2000);
+		objCart.enterCouponCode("15Off"); // custom code for 15% discount
+		Thread.sleep(2000);
+		objCart.clickApplyCoupon();
+
+		// validation for Apply coupon
+		test.log(LogStatus.INFO, "Validation for applying coupons for the products in the cart.");
+		if (driver.findElement(By.cssSelector("#checkout-cart > div.alert.alert-success.alert-dismissible"))
+				.isDisplayed()) {
+			test.log(LogStatus.PASS, "Coupon was successfully applied!");
+		} else {
+			test.log(LogStatus.FAIL,
+					objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.9_" + timeStamp + ".PNG")
+							+ "Coupon was not applied!");
+		}
 	  
 	  Thread.sleep(3000);
 	  
