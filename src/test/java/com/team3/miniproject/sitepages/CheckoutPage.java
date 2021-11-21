@@ -115,7 +115,7 @@ public class CheckoutPage {
 	@FindBy(id = "input-payment-zone")
 	WebElement stateField;
 	
-	@FindBy(className="btn btn-primary")
+	@FindBy(css ="#button-payment-address")
 	WebElement continueButton;
 	
 	@FindBy(css="#top-links > ul > li.dropdown > a > i")
