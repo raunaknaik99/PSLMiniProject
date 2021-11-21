@@ -40,7 +40,7 @@ public class SearchTest extends BrowserSetup {
 
 	// To test if page title is correct after searching
 	// Should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase001() throws InterruptedException, IOException {
 		try {
 			test.log(LogStatus.INFO, "TC_OC_SEARCH_001 - To verify the page title after a search is done");
@@ -67,7 +67,7 @@ public class SearchTest extends BrowserSetup {
 
 	// To test if search header is correct after a search
 	// Should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase002() throws InterruptedException, IOException {
 		try {
 			test.log(LogStatus.INFO,
@@ -95,7 +95,7 @@ public class SearchTest extends BrowserSetup {
 
 	// To test if No results found text is displayed when search gives no results
 	// should fail
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase003() throws InterruptedException, IOException {
 		try {
 			test.log(LogStatus.INFO,
@@ -122,7 +122,7 @@ public class SearchTest extends BrowserSetup {
 	}
 
 	// To test if search is done even when there is no search input
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase004() throws InterruptedException, IOException {
 		try {
 			test.log(LogStatus.INFO,
@@ -146,7 +146,7 @@ public class SearchTest extends BrowserSetup {
 
 	// To test if no products found when searching with an input having no results
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase005() throws InterruptedException, IOException {
 		try {
 			test.log(LogStatus.INFO,
@@ -173,7 +173,7 @@ public class SearchTest extends BrowserSetup {
 
 	// To test if search is successful when exact product name is search input
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase006() throws InterruptedException, IOException {
 		try {
 			test.log(LogStatus.INFO,
@@ -204,7 +204,7 @@ public class SearchTest extends BrowserSetup {
 
 	// To test if pressing enter key on search bar will initiate a search
 	// Should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase007() throws IOException {
 		try {
 			test.log(LogStatus.INFO,
@@ -232,7 +232,7 @@ public class SearchTest extends BrowserSetup {
 
 	// To test if found product details displayed after search are correct
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase008() throws InterruptedException, IOException {
 		try {
 			test.log(LogStatus.INFO,
@@ -284,7 +284,7 @@ public class SearchTest extends BrowserSetup {
 
 	// To test if search is case sensitive
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase009() throws IOException {
 		try {
 			test.log(LogStatus.INFO, "TC_OC_SEARCH_009 - To verify that searching is not case sensitive");
@@ -315,7 +315,7 @@ public class SearchTest extends BrowserSetup {
 
 	// To test if search is successful if query contains part of product name
 	// should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase010() throws IOException {
 		try {
 			test.log(LogStatus.INFO,
@@ -347,7 +347,7 @@ public class SearchTest extends BrowserSetup {
 
 	// To test if search is maintained when going to a product page and coming back
 	// Should pass
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase011() throws IOException {
 		try {
 			test.log(LogStatus.INFO,
@@ -377,7 +377,7 @@ public class SearchTest extends BrowserSetup {
 		}
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase012() throws IOException {
 		try {
 			test.log(LogStatus.INFO,

@@ -175,7 +175,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 		rg_object.fillRegistrationForm("Deeksha", "123", "1.1@example.com", "123", "testing123", "testing123");
 		rg_object.checkPrivacyPolicy();
 		rg_object.clickContinueBtn();
-		if (rg_object.getPageTitle().equals("Your Account Has Been Created!")) {
+		if (!rg_object.getPageTitle().equals("Your Account Has Been Created!")) {
 			test.log(LogStatus.PASS, "Test Passed- Title Matched");
 		} else {
 			test.log(LogStatus.FAIL,

@@ -14,10 +14,4 @@
       <class name="com.team3.miniproject.testcases.search.SearchTest"/>
     </classes>
   </test>  
-  <test name="EdgeTest">
-    <parameter name="browser" value="edge"/>
-    <classes>
-      <class name="com.team3.miniproject.testcases.search.SearchTest"/>
-    </classes>
-  </test>
 </suite>

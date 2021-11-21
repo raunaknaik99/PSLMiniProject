@@ -6,16 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -69,7 +63,7 @@ public class LoginTC_OC_001_to_007 extends BrowserSetup {
 									+ "Test Failed - Warning does not appear!");
 
 				}
-				
+
 			}
 			if (reader.i == 5) {
 				try {
@@ -98,7 +92,6 @@ public class LoginTC_OC_001_to_007 extends BrowserSetup {
 	@Test
 	public void testCase006() throws IOException {
 		test.log(LogStatus.INFO, "TC_OC_LR_006 - To verify the that Login page is inaccessible when user is logged in");
-		reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
 		s = new ScreenShotCapture(driver);
 		reader.i = 5;
 		String emailId = reader.getEmailId();
@@ -114,7 +107,7 @@ public class LoginTC_OC_001_to_007 extends BrowserSetup {
 			test.log(LogStatus.FAIL,
 					test.addScreenCapture(s.captureScreenshot("\\Login\\testCase006_" + timeStamp + ".PNG"))
 							+ "Test Failed - Logged in user can access login page.");
-		
+
 	}
 
 	@Test
@@ -123,7 +116,6 @@ public class LoginTC_OC_001_to_007 extends BrowserSetup {
 	public void testCase007() throws IOException {
 		test.log(LogStatus.INFO,
 				"TC_OC_LR_007 - To verify that Logged in user does not get logged out after clicking the back button on the browser");
-		reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
 		s = new ScreenShotCapture(driver);
 		reader.i = 5;
 		String emailId = reader.getEmailId();
@@ -139,7 +131,7 @@ public class LoginTC_OC_001_to_007 extends BrowserSetup {
 			test.log(LogStatus.FAIL, test
 					.addScreenCapture(s.captureScreenshot("\\Login\\testCase007_" + timeStamp + ".PNG"))
 					+ "Test Failed - Logged in user gets logged out after clicking the back button on the browser");
-		
+
 	}
 
 	@Test
@@ -159,21 +151,22 @@ public class LoginTC_OC_001_to_007 extends BrowserSetup {
 			test.log(LogStatus.PASS, "Test Passed - User is logged in! ");
 		else
 
-			test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Login\\testCase008" + timeStamp + ".PNG"))+ "Test Failed - User is not logged in!");
-		
+			test.log(LogStatus.FAIL,
+					test.addScreenCapture(s.captureScreenshot("\\Login\\testCase008" + timeStamp + ".PNG"))
+							+ "Test Failed - User is not logged in!");
+
 	}
-	
 
-
-	@Parameters({"browser"})
+	@Parameters({ "browser" })
 	@BeforeMethod
-	public void beforeMethod(Method m , String browser) throws IOException {
+	public void beforeMethod(Method m, String browser) throws IOException {
 		reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
-	//	timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
-	//	report = new ExtentReports("ExtentReports\\Login\\" + m.getName() + "_" + timeStamp + ".html");
+		// timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+		// report = new ExtentReports("ExtentReports\\Login\\" + m.getName() + "_" +
+		// timeStamp + ".html");
 		test = report.startTest(m.getName());
-	//	WebDriverManager.chromedriver().setup();
-	//	driver = new ChromeDriver();
+		// WebDriverManager.chromedriver().setup();
+		// driver = new ChromeDriver();
 		initialize(browser);
 		login1 = new LoginPage(driver);
 		login1.navigateToLogin();
@@ -186,6 +179,7 @@ public class LoginTC_OC_001_to_007 extends BrowserSetup {
 		report.flush();
 		login1.finish();
 	}
+
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browser) {

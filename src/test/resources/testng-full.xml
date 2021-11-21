@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="WishListTest6" parallel="none">
+  <test name="ChromeTest">
+    <parameter name="browser" value="chrome"/>  
+    <classes>
+      <class name="com.team3.miniproject.testcases.footer.FooterTestSetup"/>
+      <class name="com.team3.miniproject.testcases.login.LoginTC_OC_001_to_007"/>
+      <class name="com.team3.miniproject.testcases.login.LoginCssTestCases"/>
+      <class name="com.team3.miniproject.testcases.search.SearchTest"/>
+      <class name="com.team3.miniproject.testcases.wishlist.WishListTestCases"/>
+      <class name="com.team3.miniproject.testcases.wishlist.WishListFunctionality"/>
+      <class name="com.team3.miniproject.testcases.cart.CartFunctionality"/>
+      <class name="com.team3.miniproject.testcases.checkout.CheckoutTestSetup"/>
+      <class name="com.team3.miniproject.testcases.registration.RegistrationTestSetup"/>
+      <class name="com.team3.miniproject.endTestcase.EndToEndTest"/>
+    </classes>
+  </test>
+  <test name="FireFoxTest">
+    <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="com.team3.miniproject.testcases.footer.FooterTestSetup"/>
+      <class name="com.team3.miniproject.testcases.login.LoginTC_OC_001_to_007"/>
+      <class name="com.team3.miniproject.testcases.login.LoginCssTestCases"/>
+      <class name="com.team3.miniproject.testcases.search.SearchTest"/>
+      <class name="com.team3.miniproject.testcases.wishlist.WishListTestCases"/>
+      <class name="com.team3.miniproject.testcases.wishlist.WishListFunctionality"/>
+      <class name="com.team3.miniproject.testcases.cart.CartFunctionality"/>
+      <class name="com.team3.miniproject.testcases.checkout.CheckoutTestSetup"/>
+      <class name="com.team3.miniproject.testcases.registration.RegistrationTestSetup"/>
+      <class name="com.team3.miniproject.endTestcase.EndToEndTest"/>
+    </classes>
+  </test>   
+</suite>
