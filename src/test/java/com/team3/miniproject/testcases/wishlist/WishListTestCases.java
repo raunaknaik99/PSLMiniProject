@@ -13,20 +13,23 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.sitepages.WishList;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
 
-public class WishListTestCases {
+public class WishListTestCases extends BrowserSetup {
 	
-	WebDriver driver;
+	//WebDriver driver;
 	String baseUrl="http://localhost/opencartsite/index.php?route=common/home";
 	WishList wishListObject;
     ExtentTest test;
@@ -54,22 +57,23 @@ public class WishListTestCases {
 		  test.log(LogStatus.PASS, "Wish List Count is reflected correctly");
 	  }
 	  else {
-		  test.log(LogStatus.FAIL, "Wish List Count is not reflected correctly");
-		  s.captureScreenshot("\\WishList\\" + "testCase006_"+ timeStamp +".PNG");
-
+		  test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\WishList\\" + "testCase006_"+ timeStamp +".PNG"))
+				  +"Wish List Count is not reflected correctly");
 	  }}catch(Exception e) {
 		  test.log(LogStatus.INFO, e);
 	  }
   }
+  
+  @Parameters("browser")
   @BeforeMethod
-  public void beforeMethod(Method m) {
-	  report =new ExtentReports("ExtentReports\\Wish_List_Reports\\"+m.getName()+"_"+timeStamp+".html");
+  public void beforeMethod(Method m,String browser) {
 	  test=report.startTest(m.getName());
-	  WebDriverManager.chromedriver().setup();
-	  driver=new ChromeDriver();
-	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	  initialize(browser);
+	  //WebDriverManager.chromedriver().setup();
+	  //driver=new ChromeDriver();
+	  //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	  driver.get(baseUrl);
-	  driver.manage().window().maximize();
+	 // driver.manage().window().maximize();
   }
 
   @AfterMethod
@@ -77,6 +81,12 @@ public class WishListTestCases {
 	  report.endTest(test);
 	  report.flush();
 	  driver.quit();
+  }
+  
+  @Parameters("browser")
+  @BeforeClass
+  public void beforeClass(String browser) {
+	  report =new ExtentReports("ExtentReports\\Wish_List_Reports\\WishListTest6_"+browser+"_"+timeStamp+".html");
   }
 
 }

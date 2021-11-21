@@ -12,7 +12,7 @@ public class LoginPage {
 	public WebDriver driver;
 
 
-	String baseUrl = "http://localhost/miniproject";
+	String baseUrl = "http://localhost/opencartsite";
 	String expectedTitle = "Account Login";
 
 	public LoginPage(WebDriver driver) {
@@ -32,6 +32,10 @@ public class LoginPage {
 	WebElement loginButton;
 	@FindBy(linkText = "Logout")
 	WebElement chooseLogout;
+	@FindBy(linkText ="Forgotten Password")
+	WebElement forgotPass;
+	@FindBy(css = "input[value='Continue']")
+	WebElement continueBtn;
 
 	public void navigateToLogin() {
 
@@ -61,6 +65,14 @@ public class LoginPage {
 		chooseLogout.click();
 	}
 
+	public void forgotPassword() {
+		forgotPass.click();
+	}
+	
+	public void enterEmail(String user_name) {
+		usernameField.sendKeys(user_name);
+		continueBtn.click();
+	}
 	public void finish() throws InterruptedException {
 		Thread.sleep(5000);
 		driver.quit();
