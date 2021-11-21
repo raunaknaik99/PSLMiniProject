@@ -7,10 +7,15 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.ExtentReports;
@@ -139,10 +144,26 @@ public class LoginTC_OC_001_to_007 {
 		Assert.assertEquals(actualTitle, expectedTitle);
 	}
 	
-	
+//	@Parameters({ "Firefox" })
+//	@BeforeTest
+//	public void openBrowser(String browser) {
+//		try {
+//			if (browser.equalsIgnoreCase("Firefox")) {
+//				WebDriverManager.firefoxdriver().setup();
+//			} else if (browser.equalsIgnoreCase("chrome")) {
+//				WebDriverManager.chromedriver().setup();
+//			} else if (browser.equalsIgnoreCase("IE")) {
+//				WebDriverManager.iedriver().setup();
+//			}
+//		
+//		} catch (WebDriverException e) {
+//			System.out.println(e.getMessage());
+//		}
+//	}
 
+	@Parameters({"browser"})
 	@BeforeMethod
-	public void beforeMethod(Method m) {
+	public void beforeMethod(Method m , String browser) {
 		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 		report = new ExtentReports("ExtentReports\\Login\\" + m.getName() + "_" + timeStamp + ".html");
 		test = report.startTest(m.getName());

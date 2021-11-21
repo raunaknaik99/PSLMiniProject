@@ -54,7 +54,7 @@ public class CheckoutTestSetup {
 
 	//TC_OC_CE_001 - To implement the checkout functionality when the cart is empty
 
-	@Test(enabled= true,priority=1)
+	@Test(enabled= false,priority=1)
 	public void testCase1() throws InterruptedException, IOException {
 		
 		test.log(LogStatus.INFO, "TC_OC_CE_001-To implement the checkout functionality when the cart is empty");
@@ -81,7 +81,7 @@ public class CheckoutTestSetup {
 	}
 	//TC_OC_CF_001 - User clicks on checkout, but does not fill a mandatory field
 
-    @Test(enabled= true,priority=2)
+    @Test(enabled= false,priority=2)
 
 	public void testCase001() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "TC_OC_CF_001 - User clicks on checkout, but does not fill a mandatory field");
@@ -194,14 +194,6 @@ public class CheckoutTestSetup {
 		checkout.enterPaymentMethod(); 
 		checkout.agreeToTermsAndConditionsAndContinue();
 		checkout.confirmOrder();
-		//Switching to alert
-		//Alert alert1 = driver.switchTo().alert();
-		//	System.out.println(alert1.getText());
-		//Thread.sleep(2000);
-		//	alert1.accept();
-		//Thread.sleep(2000);
-		//	System.out.println("Alert Accepted");
-		//	checkout.confirmOrder();
 		Thread.sleep(5000);
 		Assert.assertEquals(driver.getTitle(), "Your order has been placed!");
 		if(driver.getTitle().equals("Your order has been placed!"))
@@ -351,7 +343,7 @@ public class CheckoutTestSetup {
 
 
 /*----------------------------------------------------------------*/
-	@Test(enabled=true)
+	@Test(enabled=false)
 	  public void testCase008() throws InterruptedException {
 		test.log(LogStatus.INFO, "TC_OC_CG_001 - to checkout as a guest user");
 		  
@@ -392,7 +384,7 @@ public class CheckoutTestSetup {
 		  }
 	  }
 	  
-	 @Test(enabled=true)
+	 @Test(enabled=false)
 	  public void testCase009() throws InterruptedException {
 		 test.log(LogStatus.INFO, "TC_OC_CG_002 - To checkout as Guest with Billing and Delivery addresses not being same.");
 		 checkout = new CheckoutPage(driver);
