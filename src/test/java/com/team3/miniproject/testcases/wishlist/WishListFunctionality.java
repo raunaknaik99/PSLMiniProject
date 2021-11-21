@@ -291,6 +291,7 @@ public class WishListFunctionality {
 				  test=report.startTest(m.getName());
 			          //WebDriverManager.chromedriver().setup();
 		                // driver = new ChromeDriver();
+				initialize(browser);
 		                driver.get("http://localhost/opencart/");
 			         //driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 			         //driver.manage().window().maximize();
