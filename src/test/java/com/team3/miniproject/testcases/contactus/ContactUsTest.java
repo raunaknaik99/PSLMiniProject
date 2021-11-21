@@ -20,6 +20,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.sitepages.ContactUs;
+import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.testcases.ddt.ContactUsData;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -27,7 +28,7 @@ import screenshot.ScreenShotCapture;
 
 public class ContactUsTest {
 
-	WebDriver driver;
+	//WebDriver driver;
 	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
 	ContactUs contactUsObject;
 	ExtentReports report;
@@ -261,22 +262,24 @@ public class ContactUsTest {
 		}
 	}
 
+	@Parameters("browser")
 	@BeforeMethod
-	public void beforeMethod(Method m) {
-		report = new ExtentReports("ExtentReports\\ContactUs\\" + m.getName() + "_" + timeStamp + ".html");
+	public void beforeMethod(Method m, String browser) {
 		test = report.startTest(m.getName());
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		initialize(browser);
 		driver.get(baseUrl);
-		driver.manage().window().maximize();
 	}
-
 	@AfterMethod
-	public void afterMethod(Method m) {
+	public void afterMethod(Method m) throws IOException {
 		report.endTest(test);
 		report.flush();
 		driver.quit();
 	}
 
+	@Parameters("browser")
+	@BeforeClass
+	public void beforeClass(String browser) {
+		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+		report = new ExtentReports("ExtentReports\\ContactUs\\" + m.getName() + "_" + timeStamp + ".html");
+	}
 }
