@@ -57,10 +57,6 @@ public class AppleCinema {
 	@FindBy(id="input-quantity")
 	WebElement quantity;
 	
-	//iframe for fb like btn
-	@FindBy(xpath = "//iframe[@title='fb:like Facebook Social Plugin']")
-	WebElement fbIframe;
-	
 	// twitter btn on apple cinema 
 	@FindBy(id="b")
 	WebElement tweetBtn;
@@ -204,8 +200,6 @@ public class AppleCinema {
 		driver.switchTo().frame("twitter-widget-0");
 		w.until(ExpectedConditions.presenceOfElementLocated(By.id("b")));
 		tweetBtn.click();
-		//ss=new ScreenShotCapture(driver);
-		//ss.captureScreenshot("TwitterWindow.png");
 		Thread.sleep(5000); //only to visualize the opening of new window
 	}
 }
