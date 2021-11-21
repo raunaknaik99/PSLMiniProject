@@ -5,15 +5,17 @@ import org.testng.annotations.Test;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.sitepages.CheckoutPage;
 import com.team3.miniproject.sitepages.LoginPage;
 import com.team3.miniproject.testcases.ddt.LoginData;
 import com.team3.miniproject.testcases.ddt.ReadInputs;
 import com.team3.miniproject.sitepages.HomePage;
-import io.github.bonigarcia.wdm.WebDriverManager;
+//import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -34,11 +36,12 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 //import sitepages.LoginPage;
 //import com.teasitepages.CheckoutPage;
+import org.testng.annotations.BeforeClass;
 
 
 
-public class CheckoutTestSetup {
-	WebDriver driver;
+public class CheckoutTestSetup extends BrowserSetup{
+//	WebDriver driver;
 	CheckoutPage checkout;
 	LoginPage login;
 
@@ -54,7 +57,7 @@ public class CheckoutTestSetup {
 
 	//TC_OC_CE_001 - To implement the checkout functionality when the cart is empty
 
-	@Test(enabled= true,priority=1)
+	@Test(enabled=true,priority=1)
 	public void testCase1() throws InterruptedException, IOException {
 		
 		test.log(LogStatus.INFO, "TC_OC_CE_001-To implement the checkout functionality when the cart is empty");
@@ -63,14 +66,14 @@ public class CheckoutTestSetup {
 		login.login("tester1@gmail.com", "tester123");
 		//Asserting that user is logged in
 		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true,"User is logged in!");
-		test.log(LogStatus.INFO, "User is logged in!");
+		test.log(LogStatus.PASS, "User is logged in!");
 		//Asserting that cart is empty
 		Assert.assertEquals(checkout.checkIfCartIsEmpty(),true,"Cart is Empty!");
-		test.log(LogStatus.INFO, "Cart is Empty!");
+		test.log(LogStatus.PASS, "Cart is Empty!");
 		checkout.checkout();
 		//Assert user is redirected to shopping cart page
 		Assert.assertEquals(driver.getTitle(), "Shopping Cart");
-		test.log(LogStatus.INFO, "User is redirected to Shopping cart Page");
+		test.log(LogStatus.PASS, "User is redirected to Shopping cart Page");
 		//Assert "Your shopping cart is empty" message is displayed 
 		Assert.assertEquals(driver.findElement(By.cssSelector("#content > p")).getText(),"Your shopping cart is empty!");
 		if(driver.findElement(By.cssSelector("#content > p")).getText().equals("Your shopping cart is empty!"))
@@ -81,7 +84,7 @@ public class CheckoutTestSetup {
 	}
 	//TC_OC_CF_001 - User clicks on checkout, but does not fill a mandatory field
 
-    @Test(enabled= true,priority=2)
+    @Test(enabled=true,priority=2)
 
 	public void testCase001() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "TC_OC_CF_001 - User clicks on checkout, but does not fill a mandatory field");
@@ -89,11 +92,13 @@ public class CheckoutTestSetup {
 		login.login("tester234@gmail.com", "tester234");
 		//Asserting that user is logged in 
 		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-		test.log(LogStatus.INFO, "Login Check passed - The user is logged in.");
+		test.log(LogStatus.PASS, "Login Check passed - The user is logged in.");
 		checkout.navigateToHomepage();
+		objHomePage.addProductToCart(1);
+		Thread.sleep(3000);
 		//Asserting that cart is not empty
 		Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
-		test.log(LogStatus.INFO, "Cart is not empty!");
+		test.log(LogStatus.PASS, "Cart is not empty!");
 		checkout.checkout();
 		//Assert "Your shopping cart is empty" message is displayed
 		checkout.enterNewBillingDetails(1);
@@ -119,7 +124,7 @@ public class CheckoutTestSetup {
 	}
 	//TC_OC_CF_002 - User clicks on checkout, but does not enter an alphanumeric postal code
 
-	@Test(enabled=false,priority=3)
+	@Test(enabled=true,priority=3)
 
 	public void testCase002() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "User clicks on checkout, but does not enter an alphanumeric postal code");
@@ -127,11 +132,13 @@ public class CheckoutTestSetup {
 		login.login("tester234@gmail.com", "tester234");
 		//Assert user is Logged in
 		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
-		test.log(LogStatus.INFO, "User is Logged in");
+		test.log(LogStatus.PASS, "User is Logged in");
 		checkout.navigateToHomepage();
+		objHomePage.addProductToCart(1);
+		Thread.sleep(3000);
 		//Assert cart is not empty
 		Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
-		test.log(LogStatus.INFO, "Cart is not empty");
+		test.log(LogStatus.PASS, "Cart is not empty");
 		checkout.checkout();
 		checkout.enterNewBillingDetails(2);
 		//Assert Warning is displayed
@@ -143,12 +150,12 @@ public class CheckoutTestSetup {
 		catch(Exception e) {	
 			test.log(LogStatus.FAIL, test.addScreenCapture(s.captureScreenshot("\\Checkout\\testCase002" + timeStamp + ".PNG"))+"Test Failed- Warning does not appear. User is allowed to proceed.");
 		}
-		Assert.assertEquals(driver.findElement(By.className("text-danger")).getText(), "Please enter a valid Postal Code!","Warning Appears!");
+		
 
 	}
 	//TC_OC_CF_003 - User clicks on checkout, enters all details uptil Payment method, but does not check 'Terms and Conditions
 
-	@Test(enabled= false,priority=4)
+	@Test(enabled=true,priority=4)
 
 	public void testCase003() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "User clicks on checkout, enters all details uptil Payment method, but does not check 'Terms and Conditions'");
@@ -156,9 +163,13 @@ public class CheckoutTestSetup {
 		login.login("tester234@gmail.com", "tester234");
 		//Asserting user is logged in
 		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+		test.log(LogStatus.PASS, "User is Logged in");
 		checkout.navigateToHomepage();
+		objHomePage.addProductToCart(1);
+		Thread.sleep(3000);
 		//Asserting cart is not empty
 		Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
+		test.log(LogStatus.PASS, "Cart is not empty");
 		checkout.checkout();
 		checkout.enterNewBillingDetails(2);
 		checkout.enterExistingDeliveryDetailsAndContinue();
@@ -166,7 +177,6 @@ public class CheckoutTestSetup {
 		checkout.enterPaymentMethod(); //Did not agree to Terms and Conditions
 		driver.findElement(By.id("button-payment-method")).click();
 		//Assert Warning is displayed
-		Assert.assertEquals(driver.findElement(By.cssSelector("[class='alert alert-danger alert-dismissible']")).getText().contains("Warning: You must agree to the Terms & Conditions!"),true);
 		if (driver.findElement(By.cssSelector("[class='alert alert-danger alert-dismissible']")).getText().contains("Warning: You must agree to the Terms & Conditions!"))
 			test.log(LogStatus.PASS, "Test Passed - Warning appears:You must agree to the Terms & Conditions! ");
 		else
@@ -174,9 +184,9 @@ public class CheckoutTestSetup {
 		//login.logout();
 	}
 
-	//TC_OC_CF_004 - User enters all details uptil Payment method, checks 'Terms and Conditions' and confirms order
+	//TC_OC_CF_004 - User enters all details up till Payment method, checks 'Terms and Conditions' and confirms order
 
-	@Test(enabled= false,priority=5)
+	@Test(enabled=true,priority=5)
 
 	public void testCase004() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "User enters all details uptil Payment method, checks 'Terms and Conditions' and confirms order");
@@ -184,9 +194,13 @@ public class CheckoutTestSetup {
 		login.login("tester234@gmail.com", "tester234");
 		//Asserting user is logged in
 		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+		test.log(LogStatus.PASS, "User is Logged in");
 		checkout.navigateToHomepage();
+		objHomePage.addProductToCart(1);
+		Thread.sleep(3000);
 		//Asserting cart is not empty
 		Assert.assertEquals(checkout.checkIfCartIsEmpty(),false);
+		test.log(LogStatus.PASS, "Cart is not empty");
 		checkout.checkout();
 		checkout.enterNewBillingDetails(2);
 		checkout.enterExistingDeliveryDetailsAndContinue();
@@ -194,14 +208,6 @@ public class CheckoutTestSetup {
 		checkout.enterPaymentMethod(); 
 		checkout.agreeToTermsAndConditionsAndContinue();
 		checkout.confirmOrder();
-		//Switching to alert
-		//Alert alert1 = driver.switchTo().alert();
-		//	System.out.println(alert1.getText());
-		//Thread.sleep(2000);
-		//	alert1.accept();
-		//Thread.sleep(2000);
-		//	System.out.println("Alert Accepted");
-		//	checkout.confirmOrder();
 		Thread.sleep(5000);
 		Assert.assertEquals(driver.getTitle(), "Your order has been placed!");
 		if(driver.getTitle().equals("Your order has been placed!"))
@@ -213,7 +219,7 @@ public class CheckoutTestSetup {
 
 
 	//TC_OC_CF_005
-	@Test(enabled= false)
+	@Test(enabled=true,priority=6)
 	public void testCase005() {
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_005-to test if the placeholders are present on all the input fields under billing details");
@@ -255,7 +261,7 @@ public class CheckoutTestSetup {
 
 
 	//TC_OC_CF_006
-	@Test(enabled= false)
+	@Test(enabled=true, priority=7)
 	public void testCase006() throws IOException {
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_006-To test if city field accepts less than 2 characters and we can proceed to step 3");
@@ -297,7 +303,7 @@ public class CheckoutTestSetup {
 	
 	//TC_OC_CF_007
 
-	@Test(enabled= false)
+	@Test(enabled=true, priority=8)
 
 	public void testCase007() throws InterruptedException, IOException {
 		s=new ScreenShotCapture(driver);
@@ -339,119 +345,118 @@ public class CheckoutTestSetup {
 	}
 
 
-/*---------------------------------------------------------------
-	@Test(enabled=true)
-	  public void testCase008() throws InterruptedException {
-		test.log(LogStatus.INFO, "TC_OC_CG_001 - to checkout as a guest user");
-		  
-		 checkout = new CheckoutPage(driver);
-		 checkout.guestClick();
-		  if(checkout.guestBtnSelected()) {
-			  test.log(LogStatus.INFO, "Guest Account is selected.");
-			  checkout.clickContinue();
-			  Thread.sleep(2000);
-			  checkout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
-			  checkout.selectCountryAndState("India","Maharashtra");
-			  JavascriptExecutor js = (JavascriptExecutor) driver;
-			  js.executeScript("window.scrollBy(0,500)", "");
-			  Thread.sleep(2000);
-			  
-			  driver.findElement(By.id("button-guest")).click();
-			  Thread.sleep(2000);
-			  driver.findElement(By.id("button-shipping-method")).click();
-			  Thread.sleep(2000);
-			  checkout.privacyCheckbox();
-			  driver.findElement(By.id("button-payment-method")).click();
-			  Thread.sleep(2000);
-			  checkout.confirmOrder();
-			  
-			  WebDriverWait wdw = new WebDriverWait(driver, 5);
-				  
-			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
-				  checkout.acceptAlert();
-				  checkout.confirmOrder();
-				  test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
-			  }else {
-				  test.log(LogStatus.FAIL, "The alert message about cart products is not displayed.");
-			  }
-			  Thread.sleep(3000);
-			  Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText(), "Your order has been placed!");
-		  }else {
-			  test.log(LogStatus.INFO, "Register Account is Selected.");
-		  }
-	  }
-	  
-	 @Test(enabled=true)
-	  public void testCase009() throws InterruptedException {
-		 test.log(LogStatus.INFO, "TC_OC_CG_002 - To checkout as Guest with Billing and Delivery addresses not being same.");
-		 checkout = new CheckoutPage(driver);
-		 checkout.guestClick();
-		 
-		 JavascriptExecutor js = (JavascriptExecutor) driver;
-		 
-		  if(checkout.guestBtnSelected()) {
-			  test.log(LogStatus.INFO, "Guest Account is selected.");
-			  checkout.clickContinue();
-			  Thread.sleep(2000);
-			  checkout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
-			  checkout.selectCountryAndState("India","Maharashtra");
-			  
-			  js.executeScript("window.scrollBy(0,500)", "");
-			  Thread.sleep(2000);
-			  
-			  //to uncheck the checkbox
-			  driver.findElement(By.name("shipping_address")).click();
-			  driver.findElement(By.id("button-guest")).click();
-			  Thread.sleep(2000);
-			  js.executeScript("window.scrollBy(0,-400)", "");
-			  
-			  Thread.sleep(3000);
-			  //delivery details
-			  checkout.fillDeliveryDetails("xyz","vtest","123address","nyc","585940");
-			  checkout.selectCountryAndStateAgain("United States", "Texas");
-			  Thread.sleep(2000);
-			  
-			  driver.findElement(By.id("button-guest-shipping")).click();
-			  Thread.sleep(2000);
-			  driver.findElement(By.id("button-shipping-method")).click();
-			  Thread.sleep(2000);
-			  checkout.privacyCheckbox();
-			  driver.findElement(By.id("button-payment-method")).click();
-			  Thread.sleep(2000);
-			  checkout.confirmOrder();
-			  
-			  WebDriverWait wdw = new WebDriverWait(driver, 5);
-			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
-				  checkout.acceptAlert();
-				  checkout.confirmOrder();
-				  test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
-			  }
-			  Thread.sleep(3000);
-			  
-			  if(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText() == "Your order has been placed!") {
-				  test.log(LogStatus.PASS, "The order is successfully placed!");
-			  }
-			  else {
-				  test.log(LogStatus.FAIL, "The order was not placed!");
-			  }
+///*----------------------------------------------------------------*/
+//	@Test(enabled=true)
+//	  public void testCase008() throws InterruptedException {
+//		test.log(LogStatus.INFO, "TC_OC_CG_001 - to checkout as a guest user");
+//		  
+//		 checkout = new CheckoutPage(driver);
+//		 checkout.guestClick();
+//		  if(checkout.guestBtnSelected()) {
+//			  test.log(LogStatus.INFO, "Guest Account is selected.");
+//			  checkout.clickContinue();
+//			  Thread.sleep(2000);
+//			  checkout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
+//			  checkout.selectCountryAndState("India","Maharashtra");
+//			  JavascriptExecutor js = (JavascriptExecutor) driver;
+//			  js.executeScript("window.scrollBy(0,500)", "");
+//			  Thread.sleep(2000);
+//			  
+//			  driver.findElement(By.id("button-guest")).click();
+//			  Thread.sleep(2000);
+//			  driver.findElement(By.id("button-shipping-method")).click();
+//			  Thread.sleep(2000);
+//			  checkout.privacyCheckbox();
+//			  driver.findElement(By.id("button-payment-method")).click();
+//			  Thread.sleep(2000);
+//			  checkout.confirmOrder();
+//			  
+//			  WebDriverWait wdw = new WebDriverWait(driver, 5);
+//				  
+//			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
+//				  checkout.acceptAlert();
+//				  checkout.confirmOrder();
+//				  test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
+//			  }else {
+//				  test.log(LogStatus.FAIL, "The alert message about cart products is not displayed.");
+//			  }
+//			  Thread.sleep(3000);
+//			  Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText(), "Your order has been placed!");
+//		  }else {
+//			  test.log(LogStatus.INFO, "Register Account is Selected.");
+//		  }
+//	  }
+//	  
+//	 @Test(enabled=true)
+//	  public void testCase009() throws InterruptedException {
+//		 test.log(LogStatus.INFO, "TC_OC_CG_002 - To checkout as Guest with Billing and Delivery addresses not being same.");
+//		 checkout = new CheckoutPage(driver);
+//		 checkout.guestClick();
+//		 
+//		 JavascriptExecutor js = (JavascriptExecutor) driver;
+//		 
+//		  if(checkout.guestBtnSelected()) {
+//			  test.log(LogStatus.INFO, "Guest Account is selected.");
+//			  checkout.clickContinue();
+//			  Thread.sleep(2000);
+//			  checkout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
+//			  checkout.selectCountryAndState("India","Maharashtra");
+//			  
+//			  js.executeScript("window.scrollBy(0,500)", "");
+//			  Thread.sleep(2000);
+//			  
+//			  //to uncheck the checkbox
+//			  driver.findElement(By.name("shipping_address")).click();
+//			  driver.findElement(By.id("button-guest")).click();
+//			  Thread.sleep(2000);
+//			  js.executeScript("window.scrollBy(0,-400)", "");
+//			  
+//			  Thread.sleep(3000);
+//			  //delivery details
+//			  checkout.fillDeliveryDetails("xyz","vtest","123address","nyc","585940");
+//			  checkout.selectCountryAndStateAgain("United States", "Texas");
+//			  Thread.sleep(2000);
+//			  
+//			  driver.findElement(By.id("button-guest-shipping")).click();
+//			  Thread.sleep(2000);
+//			  driver.findElement(By.id("button-shipping-method")).click();
+//			  Thread.sleep(2000);
+//			  checkout.privacyCheckbox();
+//			  driver.findElement(By.id("button-payment-method")).click();
+//			  Thread.sleep(2000);
+//			  checkout.confirmOrder();
+//			  
+//			  WebDriverWait wdw = new WebDriverWait(driver, 5);
+//			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
+//				  checkout.acceptAlert();
+//				  checkout.confirmOrder();
+//				  test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
+//			  }
+//			  Thread.sleep(3000);
+//			  
+//			  if(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText() == "Your order has been placed!") {
+//				  test.log(LogStatus.PASS, "The order is successfully placed!");
+//			  }
+//			  else {
+//				  test.log(LogStatus.FAIL, "The order was not placed!");
+//			  }
+//
+//		  }
+//		  else {
+//			  test.log(LogStatus.INFO, "Guest Account is selected.");
+//		  }
+//	  }
 
-		  }
-		  else {
-			  test.log(LogStatus.INFO, "Guest Account is selected.");
-		  }
-	  }
-
----------------------*/
-
-
+  @Parameters("browser")
   @BeforeMethod
-  public void beforeMethod(Method m) {
-	  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
-	  report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+"_"+timeStamp+".html");
+  public void beforeMethod(Method m , String browser) {
+	//  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+	//  report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+"_"+timeStamp+".html");
 	  test=report.startTest(m.getName());
-	  WebDriverManager.chromedriver().setup();
-	  driver = new ChromeDriver();
-	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	//  WebDriverManager.chromedriver().setup();
+	//  driver = new ChromeDriver();
+	//  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	  initialize(browser);
 	  login=new LoginPage(driver);
 	  checkout=new CheckoutPage(driver);
 	  login.navigateToLogin();	
@@ -466,7 +471,12 @@ public class CheckoutTestSetup {
 	  Thread.sleep(5000);
 	  checkout.closeBrowser();
   }
-	
+  @Parameters("browser")
+  @BeforeClass
+	public void beforeClass(String browser) {
+		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+		report = new ExtentReports("ExtentReports\\Checkout\\CheckoutTests_" + browser + "_" + timeStamp + ".html");
+	}
 
 
 }

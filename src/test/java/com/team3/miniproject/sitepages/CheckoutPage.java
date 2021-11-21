@@ -196,13 +196,16 @@ public class CheckoutPage {
 	}
 
 	public void enterExistingDeliveryDetailsAndContinue() {
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		wait.until(ExpectedConditions.elementToBeClickable(shippingAddressContinueButton));
 		js.executeScript("arguments[0].scrollIntoView();", existingShippingAddress);
 		existingShippingAddress.click();
 		shippingAddressContinueButton.click();
 	}
 
 	public void enterDeliveryMethodAndContinue() throws InterruptedException {
-		Thread.sleep(2000);
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		wait.until(ExpectedConditions.elementToBeClickable(shippingMethodContinueButton));
 		shippingMethodFlat.click();
 		shippingMethodContinueButton.click();
 	}
@@ -227,17 +230,22 @@ public class CheckoutPage {
 	}
 
 	public void enterPaymentMethod() throws InterruptedException {
-		Thread.sleep(2000);
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		wait.until(ExpectedConditions.elementToBeClickable(paymentMethod));
 		paymentMethod.click();
 	}
 
 	public void agreeToTermsAndConditionsAndContinue() {
-		Assert.assertEquals(termsAndConditions.getCssValue("color"), "rgba(35, 161, 209, 1)", "CSS Property matches!");
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		wait.until(ExpectedConditions.elementToBeClickable(agree));
+		wait.until(ExpectedConditions.elementToBeClickable(paymentMethodContinueButton));
 		agree.click();
 		paymentMethodContinueButton.click();
 	}
 
 	public void confirmOrder() throws InterruptedException {
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		wait.until(ExpectedConditions.elementToBeClickable(confirmButton));
 		confirmButton.click();
 		Thread.sleep(6000);
 		Alert alert = driver.switchTo().alert();
