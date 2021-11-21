@@ -69,7 +69,7 @@ public class LoginTestCases {
 		 s = new ScreenShotCapture(driver);
 			 
 		 login1.navigateToLogin();
-		  reader.readExcel("src\\sitepages", "loginDDT.xlsx", "Login");
+		  reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
 		  reader.i = 11;
 		  String emailId = reader.getEmailId();
 		  String password = reader.getPassword();
