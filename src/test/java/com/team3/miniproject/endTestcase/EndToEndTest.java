@@ -101,7 +101,7 @@ public class EndToEndTest extends BrowserSetup{
 		// click on registration link
 	  objHeader.selectFromMyAccountDropDown(0);
 	  
-	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(4).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
+	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(6).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
 	  objRegistration.checkPrivacyPolicy();
 	  objRegistration.clickContinueBtn();
 		
@@ -191,7 +191,7 @@ public class EndToEndTest extends BrowserSetup{
 		test.log(LogStatus.INFO, "Validation for adding product to the Cart from the wishlist.");
 		if (driver.findElement(By.cssSelector("#account-wishlist > div.alert.alert-success.alert-dismissible"))
 				.isDisplayed()) {
-			test.log(LogStatus.PASS, "Product was successfully added form the wishlist to the Cart!");
+			test.log(LogStatus.PASS, "Product was succesfully added from the wishlist to the Cart!");
 		} else {
 			test.log(LogStatus.FAIL,
 					objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.7_" + timeStamp + ".PNG")
