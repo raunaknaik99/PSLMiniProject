@@ -375,9 +375,9 @@ public class SearchTest extends BrowserSetup {
 
 	@Parameters("browser")
 	@BeforeMethod
-	public void beforeMethod(Method m) {
+	public void beforeMethod(Method m, String browser) {
 		test = report.startTest(m.getName());
-		initialize("chrome");
+		initialize(browser);
 		driver.get(baseUrl);
 	}
 
