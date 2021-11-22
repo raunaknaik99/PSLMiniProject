@@ -218,8 +218,7 @@ public class SearchTest extends BrowserSetup {
 			test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
 			h_object.enterSearchQuery(query);
 			h_object.pressEnterOnSearchBar();
-			Thread.sleep(1000);
-			if (sp_object.getPageTitle().equals("Search - " + query))
+			if (sp_object.verifyPageTitle("Search - " + query))
 				test.log(LogStatus.PASS, "Test Passed: Search page was reached");
 			else
 				test.log(LogStatus.FAIL,
