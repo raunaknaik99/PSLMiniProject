@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Header {
@@ -152,6 +153,18 @@ public class Header {
 		myAccountOptions.get(index).click();
 	}
 
+	public int numWishlistProducts() {
+		int num = Integer.parseInt(wishlistLink.getText().replaceAll("[^0-9]", ""));
+		return num;
+	}
+
+	public int numWishlistProducts(int expectedNum) {
+		wait = new WebDriverWait(driver, 5);
+		wait.until(ExpectedConditions.textToBePresentInElement(wishlistLink, "Wish List (" + expectedNum + ")"));
+		int num = Integer.parseInt(wishlistLink.getText().replaceAll("[^0-9]", ""));
+		return num;
+	}
+
 	public void clickWishlistLink() {
 		wishlistLink.click();
 	}
@@ -194,6 +207,10 @@ public class Header {
 
 	public String getEmptyCartText() {
 		return emptyCartText.getText();
+	}
+
+	public int numCartProducts() {
+		return productsInCart.size();
 	}
 
 	public void clickCartProductImg(int index) {

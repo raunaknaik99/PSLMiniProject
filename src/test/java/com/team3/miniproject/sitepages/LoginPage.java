@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
 	public WebDriver driver;
 
-
 	String baseUrl = "http://localhost/miniproject";
 	String expectedTitle = "Account Login";
 
@@ -33,8 +32,10 @@ public class LoginPage {
 	WebElement chooseLogout;
 	@FindBy(linkText = "Forgotten Password")
 	WebElement forgotPass;
-	@FindBy(css = "input[value='Continue']")
+	@FindBy(css = "#content > div > div:nth-child(2) > div > form > div:nth-child(2) > a")
 	WebElement continueBtn;
+	@FindBy(css = "#content > form > div > div.pull-right > input")
+	WebElement fpContinueBtn;
 
 	public void navigateToLogin() {
 
@@ -71,6 +72,11 @@ public class LoginPage {
 	public void enterEmail(String user_name) {
 		usernameField.sendKeys(user_name);
 		continueBtn.click();
+	}
+
+	public void fillForgotPass(String user_name) {
+		usernameField.sendKeys(user_name);
+		fpContinueBtn.click();
 	}
 
 	public void finish() throws InterruptedException {

@@ -36,7 +36,7 @@ public class FooterTestSetup extends BrowserSetup {
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 
 	// TC_OC_FL_001
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase001() {
 		s = new ScreenShotCapture(driver);
 		try {
@@ -56,7 +56,7 @@ public class FooterTestSetup extends BrowserSetup {
 	}
 
 	// TC_OC_FL_002
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase002() {
 		s = new ScreenShotCapture(driver);
 		try {
@@ -76,7 +76,7 @@ public class FooterTestSetup extends BrowserSetup {
 	}
 
 	// TC_OC_FL_003
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase003() {
 		s = new ScreenShotCapture(driver);
 		try {
@@ -98,7 +98,7 @@ public class FooterTestSetup extends BrowserSetup {
 	}
 
 	// TC_OC_FL_004
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase004() {
 		s = new ScreenShotCapture(driver);
 		try {
@@ -120,7 +120,7 @@ public class FooterTestSetup extends BrowserSetup {
 	}
 
 	// TC_OC_FL_005
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase005() {
 		s = new ScreenShotCapture(driver);
 		try {
@@ -142,7 +142,7 @@ public class FooterTestSetup extends BrowserSetup {
 	}
 
 	// TC_OC_FL_006
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase006() {
 		s = new ScreenShotCapture(driver);
 		try {
@@ -163,7 +163,7 @@ public class FooterTestSetup extends BrowserSetup {
 	}
 
 	// TC_OC_FL_007
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase007() {
 		s = new ScreenShotCapture(driver);
 		try {
@@ -184,7 +184,7 @@ public class FooterTestSetup extends BrowserSetup {
 	}
 
 	// TC_OC_FL_008
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase008() {
 		s = new ScreenShotCapture(driver);
 		try {
@@ -205,7 +205,7 @@ public class FooterTestSetup extends BrowserSetup {
 	}
 
 	// TC_OC_FL_009
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase009() {
 		s = new ScreenShotCapture(driver);
 		try {
@@ -227,7 +227,7 @@ public class FooterTestSetup extends BrowserSetup {
 	}
 
 	// TC_OC_FL_010
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void testCase010() {
 		s = new ScreenShotCapture(driver);
 		try {

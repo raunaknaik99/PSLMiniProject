@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -17,7 +18,9 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.base.BrowserSetup;
 import com.team3.miniproject.sitepages.Header;
+import com.team3.miniproject.sitepages.LoginPage;
 import com.team3.miniproject.sitepages.SearchPage;
+import com.team3.miniproject.testcases.ddt.ReadInputs;
 import com.team3.miniproject.testcases.ddt.SearchData;
 
 import screenshot.ScreenShotCapture;
@@ -25,6 +28,7 @@ import screenshot.ScreenShotCapture;
 public class SearchTest extends BrowserSetup {
 	Header h_object;
 	SearchPage sp_object;
+	LoginPage l_object;
 //	WebDriver driver;
 	String baseUrl = "http://localhost/opencartsite/";
 	ExtentReports report;
@@ -32,6 +36,7 @@ public class SearchTest extends BrowserSetup {
 	ScreenShotCapture s;
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 	SearchData rd = new SearchData();
+	ReadInputs reader = new ReadInputs();
 
 	// To test if page title is correct after searching
 	// Should pass
@@ -56,7 +61,7 @@ public class SearchTest extends BrowserSetup {
 						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase001_" + timeStamp + ".PNG"))
 								+ "Test Failed: The page title did not match");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 
@@ -84,7 +89,7 @@ public class SearchTest extends BrowserSetup {
 						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase002_" + timeStamp + ".PNG"))
 								+ "Test Failed: The search header is incorrect");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 
@@ -112,7 +117,7 @@ public class SearchTest extends BrowserSetup {
 						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase003_" + timeStamp + ".PNG"))
 								+ "Test Failed: \"No results found\" is not displayed");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 
@@ -126,7 +131,6 @@ public class SearchTest extends BrowserSetup {
 			sp_object = new SearchPage(driver);
 			h_object = new Header(driver);
 
-			ArrayList<ArrayList<String>> myData = rd.userData();
 			h_object.clickSearchBtn();
 
 			if (sp_object.getPageTitle().equals("Your Store"))
@@ -136,7 +140,7 @@ public class SearchTest extends BrowserSetup {
 						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase004_" + timeStamp + ".PNG"))
 								+ "Test Failed: A search was done");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 
@@ -163,7 +167,7 @@ public class SearchTest extends BrowserSetup {
 						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase005_" + timeStamp + ".PNG"))
 								+ "Test Failed: Unexpected results were found");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 
@@ -194,7 +198,7 @@ public class SearchTest extends BrowserSetup {
 						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase006_" + timeStamp + ".PNG"))
 								+ "Test Failed: More than one result was found");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 
@@ -214,15 +218,14 @@ public class SearchTest extends BrowserSetup {
 			test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
 			h_object.enterSearchQuery(query);
 			h_object.pressEnterOnSearchBar();
-
-			if (sp_object.getPageTitle().equals("Search - " + query))
+			if (sp_object.verifyPageTitle("Search - " + query))
 				test.log(LogStatus.PASS, "Test Passed: Search page was reached");
 			else
 				test.log(LogStatus.FAIL,
 						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase007_" + timeStamp + ".PNG"))
 								+ "Test Failed: Search page was not reached");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 
@@ -274,7 +277,7 @@ public class SearchTest extends BrowserSetup {
 			if (flag == 0)
 				test.log(LogStatus.PASS, "Test Passed: Displayed product details were accurate");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 
@@ -305,7 +308,7 @@ public class SearchTest extends BrowserSetup {
 						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase009_" + timeStamp + ".PNG"))
 								+ "Test Failed: More than 1 result was found");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 
@@ -337,7 +340,7 @@ public class SearchTest extends BrowserSetup {
 						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase010_" + timeStamp + ".PNG"))
 								+ "Test Failed: More than 4 results were found");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 
@@ -369,7 +372,78 @@ public class SearchTest extends BrowserSetup {
 						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase011_" + timeStamp + ".PNG"))
 								+ "Test Failed: Search results were not maintained on the page");
 		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
+			test.log(LogStatus.FAIL, e);
+		}
+	}
+
+	@Test(enabled = true)
+	public void testCase012() throws IOException {
+		try {
+			test.log(LogStatus.INFO,
+					"TC_OC_SEARCH_012 - To verify that the searched products can be added to cart from the search page");
+			s = new ScreenShotCapture(driver);
+			sp_object = new SearchPage(driver);
+			h_object = new Header(driver);
+
+			ArrayList<ArrayList<String>> myData = rd.userData();
+			String query = myData.get(1).get(0);
+			test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
+			h_object.enterSearchQuery(query);
+			h_object.clickSearchBtn();
+
+			sp_object.addToCart(0);
+
+			h_object.clickCartDropDown();
+			int numOfProductsInCart = h_object.numCartProducts();
+
+			if (numOfProductsInCart == 1)
+				test.log(LogStatus.PASS, "Test Passed: The product was successfully added to cart");
+			else
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase012_" + timeStamp + ".PNG"))
+								+ "The product failed to be added to cart");
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, e);
+		}
+	}
+
+	@Test(enabled = true)
+	public void testCase013() throws IOException {
+		try {
+			test.log(LogStatus.INFO,
+					"TC_OC_SEARCH_013 - To verify that the searched products can be added to wishlist from the search page");
+			s = new ScreenShotCapture(driver);
+			sp_object = new SearchPage(driver);
+			h_object = new Header(driver);
+			l_object = new LoginPage(driver);
+
+			h_object.selectFromMyAccountDropDown(1);
+			reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
+			reader.i = 5;
+			test.log(LogStatus.INFO, "Logging in");
+			l_object.login(reader.getEmailId(), reader.getPassword());
+
+			ArrayList<ArrayList<String>> myData = rd.userData();
+			String query = myData.get(1).get(0);
+			test.log(LogStatus.INFO, "Searching for \"" + query + "\"");
+			h_object.enterSearchQuery(query);
+			h_object.clickSearchBtn();
+
+			sp_object.addToWishlist(0);
+			int numProductsInWishlist = h_object.numWishlistProducts(1);
+			System.out.println(numProductsInWishlist);
+
+			if (numProductsInWishlist == 1)
+				test.log(LogStatus.PASS, "Test Passed: The product was successfully added to wishlist");
+			else {
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("window.scroll(0,0)");
+				test.log(LogStatus.FAIL,
+						test.addScreenCapture(s.captureScreenshot("\\Search\\testCase013_" + timeStamp + ".PNG"))
+								+ "The product failed to be added to wishlist");
+			}
+		} catch (Exception e) {
+			test.log(LogStatus.FAIL, e);
 		}
 	}
 

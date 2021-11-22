@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -96,6 +97,11 @@ public class SearchPage {
 	// Page Actions
 	public String getPageTitle() {
 		return driver.getTitle();
+	}
+
+	public boolean verifyPageTitle(String expectedTitle) {
+		wait = new WebDriverWait(driver, 5);
+		return wait.until(ExpectedConditions.titleContains(expectedTitle));
 	}
 
 	public String getSearchHeader() {

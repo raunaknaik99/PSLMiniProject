@@ -7,16 +7,10 @@
       <class name="com.team3.miniproject.testcases.registration.RegistrationTestSetup"/>
     </classes>
   </test>
-  <test name="FireFoxTest">
-    <parameter name="browser" value="firefox"/>
+   <test name="FireFoxTest">
+    <parameter name="browser" value="firefox"/>  
     <classes>
       <class name="com.team3.miniproject.testcases.registration.RegistrationTestSetup"/>
     </classes>
-  </test>  
-  <test name="EdgeTest">
-    <parameter name="browser" value="edge"/>
-    <classes>
-      <class name="com.team3.miniproject.testcases.registration.RegistrationTestSetup"/>
-    </classes>
-  </test>  
+  </test>
 </suite>
