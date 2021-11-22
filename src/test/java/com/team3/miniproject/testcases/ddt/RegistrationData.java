@@ -34,10 +34,10 @@ public class RegistrationData {
 		}
 		return userdata;
 	}
-}
 
 //	public static void main(String args[]) throws IOException {
 //		RegistrationData rd=new RegistrationData();
 //		ArrayList<ArrayList<String>> myData=rd.userData();
-//		System.out.println(myData);
+//		System.out.println(myData.get(1));
 //	}
+	}
