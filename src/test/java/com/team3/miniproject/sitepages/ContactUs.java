@@ -1,13 +1,17 @@
 package com.team3.miniproject.sitepages;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class ContactUs {
+import com.team3.miniproject.testcases.ddt.ContactUsData;
 
+public class ContactUs {
 	WebDriver driver;
 
 	// name field element
@@ -88,7 +92,11 @@ public class ContactUs {
 	}
 	
 /*-------------------------*/
-	public void loginForContactUs() {
+	public void loginForContactUs() throws IOException {
+		ContactUsData objContact  = new ContactUsData();
+		
+		ArrayList<ArrayList<String>> myContactData = objContact.contactUsData();
+		
 		//link text for My Account dropdown
 		  driver.findElement(By.linkText("My Account")).click();
 		  
@@ -96,10 +104,10 @@ public class ContactUs {
 		  driver.findElement(By.linkText("Login")).click();
 		  
 		  //id of email field of login page
-		  driver.findElement(By.id("input-email")).sendKeys("deekshavishwakarma@yahoo.com");
+		  driver.findElement(By.id("input-email")).sendKeys(myContactData.get(4).get(1));
 		  
 		  //id of password field
-		  driver.findElement(By.id("input-password")).sendKeys("deeksha");
+		  driver.findElement(By.id("input-password")).sendKeys(myContactData.get(4).get(2));
 		  
 		  //css of login button
 		  driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
