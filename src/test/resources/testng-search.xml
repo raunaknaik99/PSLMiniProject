@@ -5,13 +5,13 @@
   <test name="ChromeTest">
     <parameter name="browser" value="chrome"/>  
     <classes>
-      <class name="com.team3.miniproject.testcases.search.SearchTest"/>
+      <class name="com.team3.miniproject.testcases.search.SearchTestSetup"/>
     </classes>
   </test>
   <test name="FireFoxTest">
     <parameter name="browser" value="firefox"/>
     <classes>
-      <class name="com.team3.miniproject.testcases.search.SearchTest"/>
+      <class name="com.team3.miniproject.testcases.search.SearchTestSetup"/>
     </classes>
   </test>  
 </suite>

@@ -4,13 +4,13 @@
   <test name="ChromeTest">
     <parameter name="browser" value="chrome"/>  
     <classes>
-      <class name="com.team3.miniproject.testcases.contactus.ContactUsTest"/>
+      <class name="com.team3.miniproject.testcases.contactus.ContactUsTestSetup"/>
     </classes>
   </test>
   <test name="FireFoxTest">
     <parameter name="browser" value="firefox"/>
     <classes>
-      <class name="com.team3.miniproject.testcases.contactus.ContactUsTest"/>
+      <class name="com.team3.miniproject.testcases.contactus.ContactUsTestSetup"/>
     </classes>
   </test>  
 </suite>
