@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.team3.miniproject.testcases.ddt.ContactUsData;
 
-public class ContactUs {
+public class ContactUsPage {
 	WebDriver driver;
 
 	// name field element
@@ -42,7 +42,7 @@ public class ContactUs {
 	@FindBy(css="form.form-horizontal>fieldset>div:nth-of-type(3)>div>div")
 	WebElement enquiryWarning;
 
-	public ContactUs(WebDriver driver) {
+	public ContactUsPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}

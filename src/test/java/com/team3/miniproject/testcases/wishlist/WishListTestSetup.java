@@ -25,13 +25,14 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.base.BrowserSetup;
-import com.team3.miniproject.sitepages.WishList;
+import com.team3.miniproject.sitepages.WishListPage;
+import com.team3.miniproject.sitepages.WishListPage;
 
-public class WishListFunctionality extends BrowserSetup {
+public class WishListTestSetup extends BrowserSetup {
 
 	// WebDriver driver;
 	String baseUrl = "http://localhost/opencart";
-	WishList obj12;
+	WishListPage obj12;
 	ExtentTest test;
 	ExtentReports report;
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
@@ -40,7 +41,7 @@ public class WishListFunctionality extends BrowserSetup {
 	public void testCase001() throws InterruptedException, IOException {
 
 		test.log(LogStatus.INFO, "Check that user is able to add products  to wishlist");
-		obj12 = new WishList(driver);
+		obj12 = new WishListPage(driver);
 		obj12.loginbtnMethod(); // Account
 		obj12.loginbtn1Method();
 		File file = new File("src\\test\\resources\\loginDDT.xlsx");
@@ -75,7 +76,7 @@ public class WishListFunctionality extends BrowserSetup {
 	@Test(priority = 2) // Verify that added product is present on the wishlist page.
 	public void testCase002() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "Verify that added product is present on the wishlist page");
-		obj12 = new WishList(driver);
+		obj12 = new WishListPage(driver);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		obj12.loginbtnMethod();
@@ -110,7 +111,7 @@ public class WishListFunctionality extends BrowserSetup {
 	@Test(priority = 3) // Check that user is able to remove Product from wishlist.
 	public void testCase003() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "Check that user is able to remove Product from wishlist");
-		obj12 = new WishList(driver);
+		obj12 = new WishListPage(driver);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		obj12.loginbtnMethod();
 		obj12.loginbtn1Method();
@@ -145,7 +146,7 @@ public class WishListFunctionality extends BrowserSetup {
 	public void testCase004() throws InterruptedException, IOException {
 
 		test.log(LogStatus.INFO, "Check that user is able to add products to Cart form wishlist");
-		obj12 = new WishList(driver);
+		obj12 = new WishListPage(driver);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		obj12.loginbtnMethod();
 		obj12.loginbtn1Method();
@@ -191,7 +192,7 @@ public class WishListFunctionality extends BrowserSetup {
 	public void testCase005() throws InterruptedException, IOException {
 
 		test.log(LogStatus.INFO, "Check that user is able to add more than one products to wishlist");
-		obj12 = new WishList(driver);
+		obj12 = new WishListPage(driver);
 		obj12.loginbtnMethod();
 		obj12.loginbtn1Method();
 		File file = new File("src\\test\\resources\\loginDDT.xlsx");
@@ -249,7 +250,7 @@ public class WishListFunctionality extends BrowserSetup {
 
 		test.log(LogStatus.INFO,
 				"To check that trying to add a product to the wishlist while not logged in shows the correct warning message");
-		obj12 = new WishList(driver);
+		obj12 = new WishListPage(driver);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,5000)");

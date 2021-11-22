@@ -25,7 +25,7 @@ import com.team3.miniproject.testcases.ddt.SearchData;
 
 import screenshot.ScreenShotCapture;
 
-public class SearchTest extends BrowserSetup {
+public class SearchTestSetup extends BrowserSetup {
 	Header h_object;
 	SearchPage sp_object;
 	LoginPage l_object;

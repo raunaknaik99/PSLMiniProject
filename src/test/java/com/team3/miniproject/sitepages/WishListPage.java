@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
-	public class WishList {
+	public class WishListPage {
 		WebDriver driver;
 		JavascriptExecutor js;
 		 
@@ -64,7 +64,7 @@ import org.testng.annotations.Test;
 	 @FindBy(css = "div.alert.alert-success.alert-dismissible")
 		public WebElement successAlert;
 		
-	 public WishList(WebDriver driver) {
+	 public WishListPage(WebDriver driver) {
 		 this.driver = driver;
 		 js = (JavascriptExecutor) this.driver;
 		 PageFactory.initElements(driver, this);

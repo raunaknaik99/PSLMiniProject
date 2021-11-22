@@ -11,11 +11,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-public class Cart {
+public class CartPage {
 	WebDriver driver;
 	JavascriptExecutor js;
 	
-	public Cart(WebDriver driver) {
+	public CartPage(WebDriver driver) {
 		this.driver = driver;
 		js = (JavascriptExecutor) this.driver;
 		PageFactory.initElements(driver, this);

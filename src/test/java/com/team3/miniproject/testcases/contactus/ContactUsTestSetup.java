@@ -19,16 +19,16 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.base.BrowserSetup;
-import com.team3.miniproject.sitepages.ContactUs;
+import com.team3.miniproject.sitepages.ContactUsPage;
 import com.team3.miniproject.testcases.ddt.ContactUsData;
 
 import screenshot.ScreenShotCapture;
 
-public class ContactUsTest extends BrowserSetup {
+public class ContactUsTestSetup extends BrowserSetup {
 
 	// WebDriver driver;
 	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
-	ContactUs contactUsObject;
+	ContactUsPage contactUsObject;
 	ExtentReports report;
 	ExtentTest test;
 	ScreenShotCapture objScreenshot;
@@ -39,7 +39,7 @@ public class ContactUsTest extends BrowserSetup {
 	@Test(enabled = true)
 	public void testCase001() throws InterruptedException {
 		objScreenshot = new ScreenShotCapture(driver);
-		contactUsObject = new ContactUs(driver);
+		contactUsObject = new ContactUsPage(driver);
 		test.log(LogStatus.INFO,
 				"TC_OC_CU_001 - To test the functionality of contact us link by navigating to the page and entering valid details");
 
@@ -78,7 +78,7 @@ public class ContactUsTest extends BrowserSetup {
 	@Test(enabled = true)
 	public void testCase002() throws InterruptedException {
 		objScreenshot = new ScreenShotCapture(driver);
-		contactUsObject = new ContactUs(driver);
+		contactUsObject = new ContactUsPage(driver);
 		test.log(LogStatus.INFO,
 				"TC_OC_CU_002 - To test the functionality of contact us link by navigating to the page and changing the data of 'Your Name' and 'Email' field");
 
@@ -126,7 +126,7 @@ public class ContactUsTest extends BrowserSetup {
 
 		test.log(LogStatus.INFO, "TC_OC_CU_003 - To test whether the contact us form accepts an invalid email id");
 		try {
-			contactUsObject = new ContactUs(driver);
+			contactUsObject = new ContactUsPage(driver);
 			contactUsObject.enterName(myData.get(1).get(0));
 			contactUsObject.enterEmail(myData.get(1).get(1));
 			contactUsObject.enterEnquiry(myData.get(1).get(2));
@@ -161,7 +161,7 @@ public class ContactUsTest extends BrowserSetup {
 		test.log(LogStatus.INFO,
 				"TC_OC_CU_004 - To test whether the contact us form accepts less than 3 characters in 'Your Name' field");
 		try {
-			contactUsObject = new ContactUs(driver);
+			contactUsObject = new ContactUsPage(driver);
 			contactUsObject.enterName(myData.get(2).get(0));
 			contactUsObject.enterEmail(myData.get(2).get(1));
 			contactUsObject.enterEnquiry(myData.get(2).get(2));
@@ -196,7 +196,7 @@ public class ContactUsTest extends BrowserSetup {
 		test.log(LogStatus.INFO,
 				"TC_OC_CU_005 - To test whether the contact us form accepts less than 10 characters in the 'Enquiry' field");
 		try {
-			contactUsObject = new ContactUs(driver);
+			contactUsObject = new ContactUsPage(driver);
 			contactUsObject.enterName(myData.get(3).get(0));
 			contactUsObject.enterEmail(myData.get(3).get(1));
 			contactUsObject.enterEnquiry(myData.get(3).get(2));
@@ -230,7 +230,7 @@ public class ContactUsTest extends BrowserSetup {
 		test.log(LogStatus.INFO, "TC_OC_CU_006-To test whether contact us form works even when user is not signed in");
 		try {
 			ArrayList<ArrayList<String>> myData = contactdata.contactUsData();
-			contactUsObject = new ContactUs(driver);
+			contactUsObject = new ContactUsPage(driver);
 			// enter the details in the contact us form
 			contactUsObject.enterName(myData.get(0).get(0));
 			contactUsObject.enterEmail(myData.get(0).get(1));

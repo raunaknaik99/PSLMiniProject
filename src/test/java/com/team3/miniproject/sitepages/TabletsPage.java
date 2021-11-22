@@ -9,11 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 
 //import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
 
-public class Tablets {
+public class TabletsPage {
 	WebDriver driver;
 	JavascriptExecutor js;
 	
-	public Tablets(WebDriver driver) {
+	public TabletsPage(WebDriver driver) {
 		this.driver = driver;
 		js = (JavascriptExecutor) this.driver;
 		PageFactory.initElements(driver, this);
