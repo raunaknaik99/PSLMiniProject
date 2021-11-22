@@ -23,19 +23,20 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.base.BrowserSetup;
-import com.team3.miniproject.sitepages.Cart;
+import com.team3.miniproject.sitepages.CartPage;
 import com.team3.miniproject.sitepages.CheckoutPage;
-import com.team3.miniproject.sitepages.ContactUs;
+import com.team3.miniproject.sitepages.ContactUsPage;
 import com.team3.miniproject.sitepages.Footer;
 import com.team3.miniproject.sitepages.Header;
 import com.team3.miniproject.sitepages.HomePage;
 import com.team3.miniproject.sitepages.LoginPage;
 import com.team3.miniproject.sitepages.RegistrationPage;
 import com.team3.miniproject.sitepages.SearchPage;
-import com.team3.miniproject.sitepages.Tablets;
-import com.team3.miniproject.sitepages.WishList;
+import com.team3.miniproject.sitepages.TabletsPage;
+import com.team3.miniproject.sitepages.WishListPage;
 import com.team3.miniproject.testcases.ddt.LoginData;
 import com.team3.miniproject.testcases.ddt.RegistrationData;
+import com.team3.miniproject.testcases.ddt.SearchQueryData;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
@@ -46,8 +47,8 @@ public class EndToEndTest extends BrowserSetup{
 	ExtentReports report;
 	ExtentTest test;
 
-	Cart objCart;
-	ContactUs objContactUs;
+	CartPage objCart;
+	ContactUsPage objContactUs;
 	CheckoutPage objCheckout;
 	Footer objFooter;
 	Header objHeader;
@@ -55,10 +56,11 @@ public class EndToEndTest extends BrowserSetup{
 	LoginPage objLoginPage;
 	RegistrationPage objRegistration;
 	SearchPage objSearch;
-	Tablets objTablets;
-	WishList objWishlist;
+	TabletsPage objTablets;
+	WishListPage objWishlist;
 	RegistrationData objRegister;
 	LoginData objLogin;
+	SearchQueryData objSearchItem;
 
 	ScreenShotCapture objScreenshot;
 	JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -79,16 +81,18 @@ public class EndToEndTest extends BrowserSetup{
 		objLoginPage = new LoginPage(driver);
 		objSearch = new SearchPage(driver);
 		objFooter = new Footer(driver);
-		objWishlist = new WishList(driver);
-		objCart = new Cart(driver);
+		objWishlist = new WishListPage(driver);
+		objCart = new CartPage(driver);
 		objCheckout = new CheckoutPage(driver);
 
 		// objects for DDT
 		objRegister = new RegistrationData();
 		objLogin = new LoginData();
+		objSearchItem = new SearchQueryData();
 
 		ArrayList<ArrayList<String>> myData = objRegister.userData();
 		ArrayList<ArrayList<String>> myLoginData = objLogin.loginData();
+		ArrayList<ArrayList<String>> mySearchData = objSearchItem.searchBarData();
 
 		// verify title
 		test.log(LogStatus.INFO, "Title Verification:");
@@ -99,21 +103,23 @@ public class EndToEndTest extends BrowserSetup{
 			test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.1_" + timeStamp +".PNG")) + "Title did not match.");
 		}
 		// click on registration link
-	  objHeader.selectFromMyAccountDropDown(0);
-	  
-	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(5).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
-	  objRegistration.checkPrivacyPolicy();
-	  objRegistration.clickContinueBtn();
-		
-		test.log(LogStatus.INFO, "Registration Validation:");
-		if(driver.getTitle().equals("Your Account Has Been Created!")) {
-			test.log(LogStatus.PASS, "Registration successful!");
-		}
-		else {
-			test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.2_" + timeStamp +".PNG")) + "Registration is not successful.");
-		}
-	  //logout
-	  objHeader.selectFromMyAccountDropDown(4);
+
+//	  objHeader.selectFromMyAccountDropDown(0);
+//	  
+//	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(6).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
+//	  objRegistration.checkPrivacyPolicy();
+//	  objRegistration.clickContinueBtn();
+//		
+//		test.log(LogStatus.INFO, "Registration Validation:");
+//		if(driver.getTitle().equals("Your Account Has Been Created!")) {
+//			test.log(LogStatus.PASS, "Registration successful!");
+//		}
+//		else {
+//			test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\EndTestCase\\endTestCase001.2_" + timeStamp +".PNG")) + "Registration is not successful.");
+//		}
+//	  //logout
+//	  objHeader.selectFromMyAccountDropDown(4);
+
 	  
 	  //click on login
 	  objHeader.selectFromMyAccountDropDown(1);
@@ -141,7 +147,7 @@ public class EndToEndTest extends BrowserSetup{
 		}
 
 		// search product
-		objHeader.enterSearchQuery("macbook");
+		objHeader.enterSearchQuery(mySearchData.get(0).get(0));
 		objHeader.clickSearchBtn();
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Your Store")));
@@ -164,7 +170,8 @@ public class EndToEndTest extends BrowserSetup{
 		}
 
 		// search for another product
-		objHeader.enterSearchQuery("iphone");
+		Thread.sleep(4000);
+		objHeader.enterSearchQuery(mySearchData.get(1).get(0));
 		objHeader.clickSearchBtn();
 
 		// add product to cart
@@ -191,7 +198,7 @@ public class EndToEndTest extends BrowserSetup{
 		test.log(LogStatus.INFO, "Validation for adding product to the Cart from the wishlist.");
 		if (driver.findElement(By.cssSelector("#account-wishlist > div.alert.alert-success.alert-dismissible"))
 				.isDisplayed()) {
-			test.log(LogStatus.PASS, "Product was successfully added form the wishlist to the Cart!");
+			test.log(LogStatus.PASS, "Product was succesfully added from the wishlist to the Cart!");
 		} else {
 			test.log(LogStatus.FAIL,
 					objScreenshot.captureScreenshot("\\EndTestCase\\" + "endTestCase001.7_" + timeStamp + ".PNG")

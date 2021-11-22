@@ -35,6 +35,8 @@ public class LoginPage {
 	WebElement forgotPass;
 	@FindBy(css = "input[value='Continue']")
 	WebElement continueBtn;
+	@FindBy(css = "#content > form > div > div.pull-right > input")
+	WebElement fpContinueBtn;
 
 	public void navigateToLogin() {
 
@@ -71,6 +73,11 @@ public class LoginPage {
 	public void enterEmail(String user_name) {
 		usernameField.sendKeys(user_name);
 		continueBtn.click();
+	}
+	
+	public void fillForgotPass(String user_name) {
+		usernameField.sendKeys(user_name);
+		fpContinueBtn.click();
 	}
 
 	public void finish() throws InterruptedException {

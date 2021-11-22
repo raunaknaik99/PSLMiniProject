@@ -22,7 +22,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import com.team3.miniproject.base.BrowserSetup;
-import com.team3.miniproject.sitepages.WishList;
+import com.team3.miniproject.sitepages.WishListPage;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
@@ -31,7 +31,7 @@ public class WishListTestCases extends BrowserSetup {
 	
 	//WebDriver driver;
 	String baseUrl="http://localhost/opencartsite/index.php?route=common/home";
-	WishList wishListObject;
+	WishListPage wishListObject;
     ExtentTest test;
     ExtentReports report;
     ScreenShotCapture s;
@@ -44,7 +44,7 @@ public class WishListTestCases extends BrowserSetup {
 	  s= new ScreenShotCapture(driver);
 	  test.log(LogStatus.INFO, "TC_OC_WL_006-To check that the count of the number of products added to wishlist is reflected in the UI at the top of the Header");
 	  try {
-	  wishListObject=new WishList(driver);
+	  wishListObject=new WishListPage(driver);
       wishListObject.iphonewishlishbtnMethod();
       WebDriverWait w1=new WebDriverWait(driver, 10);
       w1.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[onclick=\"wishlist.add('40');\"]")));
