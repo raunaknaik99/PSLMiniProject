@@ -252,7 +252,6 @@ public class FooterTestSetup extends BrowserSetup {
 	public void testCase011() {
 		s = new ScreenShotCapture(driver);
 		try {
-			footerObject = new Footer(driver);
 			footerObject.getMyAccount();
 			if (driver.getTitle().equals("Account Login")) {
 				test.log(LogStatus.PASS, "Test Passed-Title Matched");
@@ -275,7 +274,6 @@ public class FooterTestSetup extends BrowserSetup {
 		loginreader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
 		try {
 			headerObject = new Header(driver);
-			footerObject = new Footer(driver);
 			loginObject = new LoginPage(driver);
 
 			headerObject.selectFromMyAccountDropDown(1);
