@@ -41,7 +41,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.ScreenShotCapture;
 
 public class EndToEndTest extends BrowserSetup{
-	String baseUrl = "http://localhost";
+	String baseUrl = "http://localhost/miniproject";
 
 	ExtentReports report;
 	ExtentTest test;
@@ -101,7 +101,7 @@ public class EndToEndTest extends BrowserSetup{
 		// click on registration link
 	  objHeader.selectFromMyAccountDropDown(0);
 	  
-	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(4).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
+	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(5).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
 	  objRegistration.checkPrivacyPolicy();
 	  objRegistration.clickContinueBtn();
 		

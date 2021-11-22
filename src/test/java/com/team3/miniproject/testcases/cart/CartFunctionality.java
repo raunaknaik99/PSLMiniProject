@@ -39,7 +39,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.*;
 
 public class CartFunctionality extends BrowserSetup{
-	String baseUrl = "http://localhost";
+	String baseUrl = "http://localhost/miniproject";
 	ExtentReports report;
 	static ExtentTest test;
 	

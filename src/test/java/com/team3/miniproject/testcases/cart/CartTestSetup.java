@@ -28,7 +28,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class CartTestSetup {
 	
 	WebDriver driver;
-	String baseUrl="http://localhost/opencartsite/";
+	String baseUrl="http://localhost/miniproject/";
 	AppleCinema hpc_object;
 	ExtentReports report;
 	ExtentTest test;
