@@ -163,6 +163,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 		s = new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO,
 				"TC_OC_REG_004-Registering by entering inappropriate data in input fields, selecting the privacy policy checkbox.");
+		ArrayList<ArrayList<String>> myData = rd.userData();
 		rg_object = new RegistrationPage(driver);
 		if (rg_object.getPageTitle().equals("Register Account")) {
 			test.log(LogStatus.PASS, "Test Passed- Title Matched");
@@ -172,7 +173,8 @@ public class RegistrationTestSetup extends BrowserSetup {
 							s.captureScreenshot("\\Registration\\" + "testCase004.1_" + timeStamp + ".PNG"))
 							+ "Test Failed- Title Mismatched");
 		}
-		rg_object.fillRegistrationForm("Deeksha", "123", "1.1@example.com", "123", "testing123", "testing123");
+		rg_object.fillRegistrationForm(myData.get(12).get(0), myData.get(12).get(1), myData.get(12).get(2),
+				myData.get(12).get(3), myData.get(12).get(4), myData.get(12).get(5));
 		rg_object.checkPrivacyPolicy();
 		rg_object.clickContinueBtn();
 		if (!rg_object.getPageTitle().equals("Your Account Has Been Created!")) {
