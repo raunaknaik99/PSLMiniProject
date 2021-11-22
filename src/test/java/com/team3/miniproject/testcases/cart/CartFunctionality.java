@@ -92,7 +92,7 @@ public class CartFunctionality extends BrowserSetup{
 //  TC_OC_CART_002
   @Test (priority = 2)
   public void testCase002() throws InterruptedException, AWTException, IOException {
-	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart with quantity less than the minimum required quantity.");
+	  test.log(LogStatus.INFO, "TC_OC_CART_006 - Adding a product with customizable features to the cart.");
 	  objScreenshot = new ScreenShotCapture(driver);
 	  WebDriverWait wait = new WebDriverWait(driver, 10);
 	  objHomePage = new HomePage(driver);
@@ -116,6 +116,7 @@ public class CartFunctionality extends BrowserSetup{
 	  appleCinemaObject.clickDropdown("4");
 	  
 	  appleCinemaObject.enterInTextArea(myData.get(0).get(1));
+	  appleCinemaObject.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt");
 	  
 	  if(appleCinemaObject.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
 		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
@@ -129,10 +130,11 @@ public class CartFunctionality extends BrowserSetup{
 	  Thread.sleep(2000);
 	  
 	  if(appleCinemaObject.checkSuccessAlert()) {
-		  test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006.2_"+ timeStamp +".PNG") + "The warning message about the minimum required quantity is not displayed."));
+		  test.log(LogStatus.PASS, "The product was added to the cart successfully!");
+		  
 	  }
 	  else {
-		  test.log(LogStatus.PASS, "The warning message about the minimum required quantity is displayed.");
+		  test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006.2_"+ timeStamp +".PNG") + "The warning message about the minimum required quantity is not displayed."));
 	  }
 	  
   }
@@ -194,7 +196,8 @@ public class CartFunctionality extends BrowserSetup{
 	  objHeader.removeItemFromCart(0);
 	  Thread.sleep(5000);
 	  
-	  if(objHeader.cartDropDown.getText() == "0 item(s) - £0.00") {
+	  objHeader.cartDropDown.click();
+	  if(driver.findElement(By.cssSelector("#cart > ul > li > p")).getText().equals("Your shopping cart is empty!")) {
 		  test.log(LogStatus.PASS, "The product was successfully removed from the cart.");
 	  }
 	  else {

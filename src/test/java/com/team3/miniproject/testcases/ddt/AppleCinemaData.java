@@ -13,7 +13,7 @@ public class AppleCinemaData {
 
 		FileInputStream fis = new FileInputStream("src\\test\\resources\\AppleCinemaData.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-		XSSFSheet sheet = workbook.getSheetAt(0);
+		XSSFSheet sheet = workbook.getSheet("Apple Cinema");
 		try {
 			for (int i = 0; i < 8; i++) {
 				cinemaData.add(new ArrayList());
