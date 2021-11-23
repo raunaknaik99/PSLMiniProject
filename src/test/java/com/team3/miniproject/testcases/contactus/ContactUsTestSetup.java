@@ -27,7 +27,7 @@ import screenshot.ScreenShotCapture;
 public class ContactUsTestSetup extends BrowserSetup {
 
 	// WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/index.php?route=information/contact";
+	String baseUrl = "http://localhost/miniproject/index.php?route=information/contact";
 	ContactUsPage contactUsObject;
 	ExtentReports report;
 	ExtentTest test;

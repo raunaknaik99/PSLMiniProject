@@ -40,7 +40,7 @@ import screenshot.*;
 
 
 public class CartTestSetup extends BrowserSetup{
-	String baseUrl = "http://localhost/opencartsite/";
+	String baseUrl = "http://localhost/miniproject/";
 
 	ExtentReports report;
 	static ExtentTest test;
