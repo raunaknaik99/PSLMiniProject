@@ -47,7 +47,6 @@ public class CheckoutTestSetup extends BrowserSetup{
 
 	HomePage objHomePage;
 	ReadInputs reader= new ReadInputs();
-
 	ExtentReports report;
 	ExtentTest test;
 	ScreenShotCapture s;
@@ -63,7 +62,8 @@ public class CheckoutTestSetup extends BrowserSetup{
 		test.log(LogStatus.INFO, "TC_OC_CE_001-To implement the checkout functionality when the cart is empty");
 		s = new ScreenShotCapture(driver);
 		Thread.sleep(5000);
-		login.login("tester1@gmail.com", "tester123");
+		reader.i = 5;
+		login.login(reader.getEmailId(), reader.getPassword());
 		//Asserting that user is logged in
 		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true,"User is logged in!");
 		test.log(LogStatus.PASS, "User is logged in!");
@@ -89,7 +89,8 @@ public class CheckoutTestSetup extends BrowserSetup{
 	public void testCase001() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "TC_OC_CF_001 - User clicks on checkout, but does not fill a mandatory field");
 		s = new ScreenShotCapture(driver);
-		login.login("tester234@gmail.com", "tester234");
+		reader.i = 12;
+		login.login(reader.getEmailId(), reader.getPassword());
 		//Asserting that user is logged in 
 		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		test.log(LogStatus.PASS, "Login Check passed - The user is logged in.");
@@ -129,7 +130,8 @@ public class CheckoutTestSetup extends BrowserSetup{
 	public void testCase002() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "User clicks on checkout, but does not enter an alphanumeric postal code");
 		s = new ScreenShotCapture(driver);
-		login.login("tester234@gmail.com", "tester234");
+		reader.i = 12;
+		login.login(reader.getEmailId(), reader.getPassword());
 		//Assert user is Logged in
 		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		test.log(LogStatus.PASS, "User is Logged in");
@@ -141,6 +143,7 @@ public class CheckoutTestSetup extends BrowserSetup{
 		test.log(LogStatus.PASS, "Cart is not empty");
 		checkout.checkout();
 		checkout.enterNewBillingDetails(2);
+		
 		//Assert Warning is displayed
 		
 		try {
@@ -160,7 +163,8 @@ public class CheckoutTestSetup extends BrowserSetup{
 	public void testCase003() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "User clicks on checkout, enters all details uptil Payment method, but does not check 'Terms and Conditions'");
 		s = new ScreenShotCapture(driver);
-		login.login("tester234@gmail.com", "tester234");
+		reader.i = 12;
+		login.login(reader.getEmailId(), reader.getPassword());
 		//Asserting user is logged in
 		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		test.log(LogStatus.PASS, "User is Logged in");
@@ -191,7 +195,8 @@ public class CheckoutTestSetup extends BrowserSetup{
 	public void testCase004() throws InterruptedException, IOException {
 		test.log(LogStatus.INFO, "User enters all details uptil Payment method, checks 'Terms and Conditions' and confirms order");
 		s = new ScreenShotCapture(driver);
-		login.login("tester234@gmail.com", "tester234");
+		reader.i = 12;
+		login.login(reader.getEmailId(), reader.getPassword());
 		//Asserting user is logged in
 		Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
 		test.log(LogStatus.PASS, "User is Logged in");
@@ -214,7 +219,7 @@ public class CheckoutTestSetup extends BrowserSetup{
 			test.log(LogStatus.PASS, "Test Passed - User is redirected to Checkout success page and message is displayed.");
 		else
 			test.log(LogStatus.FAIL,test.addScreenCapture(s.captureScreenshot("\\Checkout\\testCase004" + timeStamp + ".PNG"))+ "Test Failed - Checkout unsuccessful");
-		// login.logout();
+		
 	}
 
 
@@ -225,10 +230,12 @@ public class CheckoutTestSetup extends BrowserSetup{
 		test.log(LogStatus.INFO, "TC_OC_CF_005-to test if the placeholders are present on all the input fields under billing details");
 
 		try {
-			rd=new LoginData();
-			ArrayList<ArrayList<String>> myData = rd.loginData();
-			//System.out.println(myData);
-			login.login(myData.get(6).get(0), myData.get(6).get(1));
+//			rd=new LoginData();
+//			ArrayList<ArrayList<String>> myData = rd.loginData();
+//			//System.out.println(myData);
+//			login.login(myData.get(6).get(0), myData.get(6).get(1));
+			reader.i = 6;
+			login.login(reader.getEmailId(), reader.getPassword());
 			if(checkout.checkIfUserLoggedIn()) {
 				test.log(LogStatus.PASS,"Test Passed- user is logged in");
 			}
@@ -267,9 +274,11 @@ public class CheckoutTestSetup extends BrowserSetup{
 		test.log(LogStatus.INFO, "TC_OC_CF_006-To test if city field accepts less than 2 characters and we can proceed to step 3");
 
 		try {
-			rd=new LoginData();
-			ArrayList<ArrayList<String>> myData = rd.loginData();
-			login.login(myData.get(7).get(0), myData.get(7).get(1));
+//			rd=new LoginData();
+//			ArrayList<ArrayList<String>> myData = rd.loginData();
+//			login.login(myData.get(7).get(0), myData.get(7).get(1));
+			reader.i = 7;
+			login.login(reader.getEmailId(), reader.getPassword());
 			if(checkout.checkIfUserLoggedIn()) {
 				test.log(LogStatus.PASS,"Test Passed- user is logged in");
 			}
@@ -309,10 +318,12 @@ public class CheckoutTestSetup extends BrowserSetup{
 		s=new ScreenShotCapture(driver);
 		test.log(LogStatus.INFO, "TC_OC_CF_007-to test if lastname can be more than 32 characters");
 		try {
-			rd=new LoginData();
-			ArrayList<ArrayList<String>> myData = rd.loginData();
-			login.login(myData.get(8).get(0), myData.get(8).get(1));
+//			rd=new LoginData();
+//			ArrayList<ArrayList<String>> myData = rd.loginData();
+//			login.login(myData.get(8).get(0), myData.get(8).get(1));
 			//Assert.assertEquals(checkout.checkIfUserLoggedIn(), true);
+			reader.i = 8;
+			login.login(reader.getEmailId(), reader.getPassword());
 			if(checkout.checkIfUserLoggedIn()) {
 				test.log(LogStatus.PASS,"Test Passed- user is logged in");
 			}
@@ -345,111 +356,11 @@ public class CheckoutTestSetup extends BrowserSetup{
 	}
 
 
-///*----------------------------------------------------------------*/
-//	@Test(enabled=true)
-//	  public void testCase008() throws InterruptedException {
-//		test.log(LogStatus.INFO, "TC_OC_CG_001 - to checkout as a guest user");
-//		  
-//		 checkout = new CheckoutPage(driver);
-//		 checkout.guestClick();
-//		  if(checkout.guestBtnSelected()) {
-//			  test.log(LogStatus.INFO, "Guest Account is selected.");
-//			  checkout.clickContinue();
-//			  Thread.sleep(2000);
-//			  checkout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
-//			  checkout.selectCountryAndState("India","Maharashtra");
-//			  JavascriptExecutor js = (JavascriptExecutor) driver;
-//			  js.executeScript("window.scrollBy(0,500)", "");
-//			  Thread.sleep(2000);
-//			  
-//			  driver.findElement(By.id("button-guest")).click();
-//			  Thread.sleep(2000);
-//			  driver.findElement(By.id("button-shipping-method")).click();
-//			  Thread.sleep(2000);
-//			  checkout.privacyCheckbox();
-//			  driver.findElement(By.id("button-payment-method")).click();
-//			  Thread.sleep(2000);
-//			  checkout.confirmOrder();
-//			  
-//			  WebDriverWait wdw = new WebDriverWait(driver, 5);
-//				  
-//			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
-//				  checkout.acceptAlert();
-//				  checkout.confirmOrder();
-//				  test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
-//			  }else {
-//				  test.log(LogStatus.FAIL, "The alert message about cart products is not displayed.");
-//			  }
-//			  Thread.sleep(3000);
-//			  Assert.assertEquals(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText(), "Your order has been placed!");
-//		  }else {
-//			  test.log(LogStatus.INFO, "Register Account is Selected.");
-//		  }
-//	  }
-//	  
-//	 @Test(enabled=true)
-//	  public void testCase009() throws InterruptedException {
-//		 test.log(LogStatus.INFO, "TC_OC_CG_002 - To checkout as Guest with Billing and Delivery addresses not being same.");
-//		 checkout = new CheckoutPage(driver);
-//		 checkout.guestClick();
-//		 
-//		 JavascriptExecutor js = (JavascriptExecutor) driver;
-//		 
-//		  if(checkout.guestBtnSelected()) {
-//			  test.log(LogStatus.INFO, "Guest Account is selected.");
-//			  checkout.clickContinue();
-//			  Thread.sleep(2000);
-//			  checkout.fillBillingDetails("Deeksha","Vish","deeksha@demo.com","12345678","address123","Pune","403020");
-//			  checkout.selectCountryAndState("India","Maharashtra");
-//			  
-//			  js.executeScript("window.scrollBy(0,500)", "");
-//			  Thread.sleep(2000);
-//			  
-//			  //to uncheck the checkbox
-//			  driver.findElement(By.name("shipping_address")).click();
-//			  driver.findElement(By.id("button-guest")).click();
-//			  Thread.sleep(2000);
-//			  js.executeScript("window.scrollBy(0,-400)", "");
-//			  
-//			  Thread.sleep(3000);
-//			  //delivery details
-//			  checkout.fillDeliveryDetails("xyz","vtest","123address","nyc","585940");
-//			  checkout.selectCountryAndStateAgain("United States", "Texas");
-//			  Thread.sleep(2000);
-//			  
-//			  driver.findElement(By.id("button-guest-shipping")).click();
-//			  Thread.sleep(2000);
-//			  driver.findElement(By.id("button-shipping-method")).click();
-//			  Thread.sleep(2000);
-//			  checkout.privacyCheckbox();
-//			  driver.findElement(By.id("button-payment-method")).click();
-//			  Thread.sleep(2000);
-//			  checkout.confirmOrder();
-//			  
-//			  WebDriverWait wdw = new WebDriverWait(driver, 5);
-//			  if(wdw.until(ExpectedConditions.alertIsPresent())!=null) {
-//				  checkout.acceptAlert();
-//				  checkout.confirmOrder();
-//				  test.log(LogStatus.PASS, "The alert message about cart products is displayed.");
-//			  }
-//			  Thread.sleep(3000);
-//			  
-//			  if(driver.findElement(By.xpath("//*[@id=\"content\"]/h1")).getText() == "Your order has been placed!") {
-//				  test.log(LogStatus.PASS, "The order is successfully placed!");
-//			  }
-//			  else {
-//				  test.log(LogStatus.FAIL, "The order was not placed!");
-//			  }
-//
-//		  }
-//		  else {
-//			  test.log(LogStatus.INFO, "Guest Account is selected.");
-//		  }
-//	  }
 
   @Parameters("browser")
   @BeforeMethod
-  public void beforeMethod(Method m , String browser) {
+  public void beforeMethod(Method m , String browser) throws IOException {
+	  reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Login");
 	//  String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 	//  report =new ExtentReports("ExtentReports\\Checkout\\"+m.getName()+"_"+timeStamp+".html");
 	  test=report.startTest(m.getName());

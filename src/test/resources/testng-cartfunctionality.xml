@@ -4,13 +4,14 @@
   <test name="ChromeTest">
     <parameter name="browser" value="chrome"/>  
     <classes>
-      <class name="com.team3.miniproject.testcases.cart.CartFunctionality"/>
+      <class name="com.team3.miniproject.testcases.cart.CartTestSetup"/>
     </classes>
-  </test>
-  <test name="EdgeTest">
+ </test>
+<!--   <test name="EdgeTest">
     <parameter name="browser" value="edge"/>
     <classes>
-      <class name="com.team3.miniproject.testcases.cart.CartFunctionality"/>
+      <class name="com.team3.miniproject.testcases.cart.CartTestSetup"/>
     </classes>
-  </test>  
+  </test> 
+  --> 
 </suite>

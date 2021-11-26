@@ -35,88 +35,88 @@ public class ContactUsTestSetup extends BrowserSetup {
 	ContactUsData contactdata = new ContactUsData();
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 
-	/*------------------------------*/
-	@Test(enabled = true)
-	public void testCase001() throws InterruptedException {
-		objScreenshot = new ScreenShotCapture(driver);
-		contactUsObject = new ContactUsPage(driver);
-		test.log(LogStatus.INFO,
-				"TC_OC_CU_001 - To test the functionality of contact us link by navigating to the page and entering valid details");
-
-		try {
-			contactUsObject.loginForContactUs();
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("window.scrollBy(0,500)", "");
-			Thread.sleep(3000);
-
-			// link text to click on Contact Us link
-			driver.findElement(By.linkText("Contact Us")).click();
-			contactUsObject.enterEnquiry("This is the input for enquiry field");
-			Thread.sleep(3000);
-
-			// css of submit button of Contact Us Page---input[type=\"submit\"]
-			contactUsObject.clickSubmit();
-			Thread.sleep(3000);
-			contactUsObject.getPageTitle();
-
-			// link text to click Continue after navigating next to Contact Us page
-			driver.findElement(By.linkText("Continue"));
-			if (driver.getCurrentUrl()
-					.equals("http://localhost/opencartsite/index.php?route=information/contact/success")) {
-				test.log(LogStatus.PASS, "Test Passed: Contact us form was successfully submitted");
-			} else {
-				test.log(LogStatus.FAIL,
-						test.addScreenCapture(
-								objScreenshot.captureScreenshot("\\ContactUs\\testCase001" + timeStamp + ".PNG"))
-								+ "Test Failed- Contact us form failed to submit");
-			}
-		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
-		}
-	}
-
-	@Test(enabled = true)
-	public void testCase002() throws InterruptedException {
-		objScreenshot = new ScreenShotCapture(driver);
-		contactUsObject = new ContactUsPage(driver);
-		test.log(LogStatus.INFO,
-				"TC_OC_CU_002 - To test the functionality of contact us link by navigating to the page and changing the data of 'Your Name' and 'Email' field");
-
-		try {
-			contactUsObject.loginForContactUs();
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("window.scrollBy(0,500)", "");
-			Thread.sleep(3000);
-			driver.findElement(By.linkText("Contact Us")).click();
-
-			WebElement name = driver.findElement(By.id("input-name"));
-			name.clear();
-			name.sendKeys("Joe");
-
-			WebElement email_field = driver.findElement(By.id("input-email"));
-			email_field.clear();
-			email_field.sendKeys("joe@demo.com");
-
-			contactUsObject.enterEnquiry("This is the input for enquiry field");
-			Thread.sleep(3000);
-			contactUsObject.clickSubmit();
-			Thread.sleep(3000);
-			contactUsObject.getPageTitle();
-
-			// link Text to click Continue
-			driver.findElement(By.linkText("Continue"));
-			if (driver.getCurrentUrl().equals("http://localhost/opencartsite/index.php?route=information/contact")) {
-				test.log(LogStatus.PASS, "Test Passed: Contact us form was not submitted");
-			} else {
-				test.log(LogStatus.FAIL,
-						test.addScreenCapture(
-								objScreenshot.captureScreenshot("\\ContactUs\\testCase002" + timeStamp + ".PNG"))
-								+ "Test Failed- Contact us form was submitted");
-			}
-		} catch (Exception e) {
-			test.log(LogStatus.INFO, e);
-		}
-	}
+//	/*------------------------------*/
+//	@Test(enabled = true)
+//	public void testCase001() throws InterruptedException {
+//		objScreenshot = new ScreenShotCapture(driver);
+//		contactUsObject = new ContactUsPage(driver);
+//		test.log(LogStatus.INFO,
+//				"TC_OC_CU_001 - To test the functionality of contact us link by navigating to the page and entering valid details");
+//
+//		try {
+//			contactUsObject.loginForContactUs();
+//			JavascriptExecutor js = (JavascriptExecutor) driver;
+//			js.executeScript("window.scrollBy(0,500)", "");
+//			Thread.sleep(3000);
+//
+//			// link text to click on Contact Us link
+//			driver.findElement(By.linkText("Contact Us")).click();
+//			contactUsObject.enterEnquiry("This is the input for enquiry field");
+//			Thread.sleep(3000);
+//
+//			// css of submit button of Contact Us Page---input[type=\"submit\"]
+//			contactUsObject.clickSubmit();
+//			Thread.sleep(3000);
+//			contactUsObject.getPageTitle();
+//
+//			// link text to click Continue after navigating next to Contact Us page
+//			driver.findElement(By.linkText("Continue"));
+//			if (driver.getCurrentUrl()
+//					.equals("http://localhost/miniproject/index.php?route=information/contact/success")) {
+//				test.log(LogStatus.PASS, "Test Passed: Contact us form was successfully submitted");
+//			} else {
+//				test.log(LogStatus.FAIL,
+//						test.addScreenCapture(
+//								objScreenshot.captureScreenshot("\\ContactUs\\testCase001" + timeStamp + ".PNG"))
+//								+ "Test Failed- Contact us form failed to submit");
+//			}
+//		} catch (Exception e) {
+//			test.log(LogStatus.INFO, e);
+//		}
+//	}
+//
+//	@Test(enabled = true)
+//	public void testCase002() throws InterruptedException {
+//		objScreenshot = new ScreenShotCapture(driver);
+//		contactUsObject = new ContactUsPage(driver);
+//		test.log(LogStatus.INFO,
+//				"TC_OC_CU_002 - To test the functionality of contact us link by navigating to the page and changing the data of 'Your Name' and 'Email' field");
+//
+//		try {
+//			contactUsObject.loginForContactUs();
+//			JavascriptExecutor js = (JavascriptExecutor) driver;
+//			js.executeScript("window.scrollBy(0,500)", "");
+//			Thread.sleep(3000);
+//			driver.findElement(By.linkText("Contact Us")).click();
+//
+//			WebElement name = driver.findElement(By.id("input-name"));
+//			name.clear();
+//			name.sendKeys("Joe");
+//
+//			WebElement email_field = driver.findElement(By.id("input-email"));
+//			email_field.clear();
+//			email_field.sendKeys("joe@demo.com");
+//
+//			contactUsObject.enterEnquiry("This is the input for enquiry field");
+//			Thread.sleep(3000);
+//			contactUsObject.clickSubmit();
+//			Thread.sleep(3000);
+//			contactUsObject.getPageTitle();
+//
+//			// link Text to click Continue
+//			driver.findElement(By.linkText("Continue"));
+//			if (driver.getCurrentUrl().equals("http://localhost/miniproject/index.php?route=information/contact")) {
+//				test.log(LogStatus.PASS, "Test Passed: Contact us form was not submitted");
+//			} else {
+//				test.log(LogStatus.FAIL,
+//						test.addScreenCapture(
+//								objScreenshot.captureScreenshot("\\ContactUs\\testCase002" + timeStamp + ".PNG"))
+//								+ "Test Failed- Contact us form was submitted");
+//			}
+//		} catch (Exception e) {
+//			test.log(LogStatus.INFO, e);
+//		}
+//	}
 
 	/*-------------------------------*/
 	@Test(enabled = true)
@@ -131,7 +131,7 @@ public class ContactUsTestSetup extends BrowserSetup {
 			contactUsObject.enterEmail(myData.get(1).get(1));
 			contactUsObject.enterEnquiry(myData.get(1).get(2));
 			contactUsObject.clickSubmit();
-			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact";
+			String actualUrl = "http://localhost/miniproject/index.php?route=information/contact";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
 				test.log(LogStatus.PASS, "Test Passed - Contact us form was not submitted");
 			} else {
@@ -166,7 +166,7 @@ public class ContactUsTestSetup extends BrowserSetup {
 			contactUsObject.enterEmail(myData.get(2).get(1));
 			contactUsObject.enterEnquiry(myData.get(2).get(2));
 			contactUsObject.clickSubmit();
-			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact";
+			String actualUrl = "http://localhost/miniproject/index.php?route=information/contact";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
 				test.log(LogStatus.PASS, "Test Passed - Contact us form was not submitted");
 			} else {
@@ -201,7 +201,7 @@ public class ContactUsTestSetup extends BrowserSetup {
 			contactUsObject.enterEmail(myData.get(3).get(1));
 			contactUsObject.enterEnquiry(myData.get(3).get(2));
 			contactUsObject.clickSubmit();
-			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact";
+			String actualUrl = "http://localhost/miniproject/index.php?route=information/contact";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
 				test.log(LogStatus.PASS, "Test Passed - Contact us form was not submitted");
 			} else {
@@ -236,7 +236,7 @@ public class ContactUsTestSetup extends BrowserSetup {
 			contactUsObject.enterEmail(myData.get(0).get(1));
 			contactUsObject.enterEnquiry(myData.get(0).get(2));
 			contactUsObject.clickSubmit();
-			String actualUrl = "http://localhost/opencartsite/index.php?route=information/contact/success";
+			String actualUrl = "http://localhost/miniproject/index.php?route=information/contact/success";
 			if (driver.getCurrentUrl().equals(actualUrl)) {
 				test.log(LogStatus.PASS,
 						"Test Passed- User navigated to Success correct Url after submiting contact us form");

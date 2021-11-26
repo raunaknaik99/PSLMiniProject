@@ -25,7 +25,7 @@ import screenshot.ScreenShotCapture;
 public class FooterTestSetup extends BrowserSetup {
 
 	// WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/";
+	String baseUrl = "http://localhost/miniproject/";
 	Footer footerObject;
 	Header headerObject;
 	LoginPage loginObject;

@@ -35,6 +35,7 @@ import com.team3.miniproject.sitepages.SearchPage;
 import com.team3.miniproject.sitepages.TabletsPage;
 import com.team3.miniproject.sitepages.WishListPage;
 import com.team3.miniproject.testcases.ddt.LoginData;
+import com.team3.miniproject.testcases.ddt.ReadInputs;
 import com.team3.miniproject.testcases.ddt.RegistrationData;
 import com.team3.miniproject.testcases.ddt.SearchQueryData;
 
@@ -65,6 +66,7 @@ public class EndToEndTest extends BrowserSetup{
 	ScreenShotCapture objScreenshot;
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
+	ReadInputs reader = new ReadInputs();
 
 	@Test
 	public void endTestOpenCart001() throws InterruptedException, IOException {
@@ -89,7 +91,7 @@ public class EndToEndTest extends BrowserSetup{
 		objRegister = new RegistrationData();
 		objLogin = new LoginData();
 		objSearchItem = new SearchQueryData();
-
+//
 		ArrayList<ArrayList<String>> myData = objRegister.userData();
 		ArrayList<ArrayList<String>> myLoginData = objLogin.loginData();
 		ArrayList<ArrayList<String>> mySearchData = objSearchItem.searchBarData();
@@ -105,7 +107,7 @@ public class EndToEndTest extends BrowserSetup{
 		// click on registration link
 
 //	  objHeader.selectFromMyAccountDropDown(0);
-//	  
+//	 
 //	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(6).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
 //	  objRegistration.checkPrivacyPolicy();
 //	  objRegistration.clickContinueBtn();
@@ -123,7 +125,7 @@ public class EndToEndTest extends BrowserSetup{
 	  
 	  //click on login
 	  objHeader.selectFromMyAccountDropDown(1);
-	  objLoginPage.login(myLoginData.get(3).get(0), myLoginData.get(3).get(1));
+	  objLoginPage.login(myLoginData.get(5).get(0), myLoginData.get(5).get(1));
 	  
 	  test.log(LogStatus.INFO, "Login Validation:");
 		if(driver.getTitle().equals("My Account")) {
@@ -208,7 +210,8 @@ public class EndToEndTest extends BrowserSetup{
 		Thread.sleep(2000);
 		objHeader.clickShoppingCartLink();
 		Thread.sleep(3000);
-		objCart.enterQuantity("3");
+		reader.i=8;
+		objCart.enterQuantity((reader.getQuantity()));
 		objCart.updateQuantity();
 
 		test.log(LogStatus.INFO, "Validation for updating quantity  of a product in the Cart.");
@@ -225,7 +228,8 @@ public class EndToEndTest extends BrowserSetup{
 		// apply coupon
 		objCart.clickCouponDropdown();
 		Thread.sleep(2000);
-		objCart.enterCouponCode("15Off"); // custom code for 15% discount
+		reader.i=1;
+		objCart.enterCouponCode(reader.getCouponCode()); // custom code for 15% discount
 		Thread.sleep(2000);
 		objCart.clickApplyCoupon();
 
@@ -267,7 +271,8 @@ public class EndToEndTest extends BrowserSetup{
 	
   @Parameters("browser")
   @BeforeMethod
-  public void beforeMethod(Method m, String browser) {
+  public void beforeMethod(Method m, String browser) throws IOException {
+	  reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Coupon Codes and Quantity");
 	  test = report.startTest(m.getName());
 	  initialize(browser);
 	  driver.get(baseUrl);

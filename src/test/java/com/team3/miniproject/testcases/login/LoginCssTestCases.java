@@ -34,6 +34,7 @@ public class LoginCssTestCases extends BrowserSetup{
 	ExtentTest test;
 	String timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 
+
 	//TC_OC_LCSS_001
 	@Test
 	public void testCaseCss001() {
@@ -41,7 +42,7 @@ public class LoginCssTestCases extends BrowserSetup{
 		try {
 			login=new LoginPage(driver);
 			login.navigateToLogin();
-			String emailPlaceholder=driver.findElement(By.id("input-email")).getAttribute("placeholder");  
+			String emailPlaceholder=login.getEmailPlaceholder(); 
 			Assert.assertEquals("E-Mail Address", emailPlaceholder);
 			if(emailPlaceholder.equals("E-Mail Address")) {
 				test.log(LogStatus.PASS, "Test Passed- Placeholder Present");
@@ -63,7 +64,7 @@ public class LoginCssTestCases extends BrowserSetup{
 		try {
 			login=new LoginPage(driver);
 			login.navigateToLogin();
-			String passwordPlaceholder=driver.findElement(By.id("input-password")).getAttribute("placeholder");
+			String passwordPlaceholder=login.getPasswordPlaceholder();
 			Assert.assertEquals("Password", passwordPlaceholder);
 			if(passwordPlaceholder.equals("Password")) {
 				test.log(LogStatus.PASS, "Test Passed- Placeholder Present");
@@ -81,7 +82,9 @@ public class LoginCssTestCases extends BrowserSetup{
 	@BeforeMethod
 	public void beforeMethod(Method m,String browser) {
 		test=report.startTest(m.getName());
+		login=new LoginPage(driver);
 		initialize(browser);
+		
 		//WebDriverManager.chromedriver().setup();
 		//driver = new ChromeDriver();
 		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -98,6 +101,7 @@ public class LoginCssTestCases extends BrowserSetup{
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browser) {
+		timeStamp = new SimpleDateFormat("yyyy_MMM_dd_HH.mm.ss").format(new Date());
 		report =new ExtentReports("ExtentReports\\Login\\LoginCssTest_"+browser+"_"+timeStamp+".html");
 	}
 }

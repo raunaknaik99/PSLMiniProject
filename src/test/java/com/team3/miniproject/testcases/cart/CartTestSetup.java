@@ -34,6 +34,7 @@ import com.team3.miniproject.sitepages.Header;
 import com.team3.miniproject.sitepages.HomePage;
 import com.team3.miniproject.sitepages.TabletsPage;
 import com.team3.miniproject.testcases.ddt.AppleCinemaData;
+import com.team3.miniproject.testcases.ddt.ReadInputs;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.*;
@@ -56,6 +57,7 @@ public class CartTestSetup extends BrowserSetup{
 	ScreenShotCapture objScreenshot;
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	String timeStamp;
+	ReadInputs reader = new ReadInputs();
 	
 	// TC_OC_CART_001
   @Test(priority = 1)
@@ -127,7 +129,8 @@ public class CartTestSetup extends BrowserSetup{
 		  test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006.1_"+ timeStamp +".PNG") +"The driver did not switch to the alert."));
 	  }	
   	  Thread.sleep(2000);
-	  appleCinemaObject.enterQuantity("1");
+  	  reader.i=9;
+	  appleCinemaObject.enterQuantity(reader.getQuantity());
 	  appleCinemaObject.clickAddToCart(); 
 	  Thread.sleep(2000);
 	  
@@ -229,7 +232,8 @@ public class CartTestSetup extends BrowserSetup{
 	 qty.clear();
 	 Thread.sleep(2000);
 	 // Enter Quantity as 0
-	 qty.sendKeys("0");
+	 reader.i=10;
+	 qty.sendKeys(reader.getQuantity());
 	 Thread.sleep(1000);
 	 //Add to cart
 	 driver.findElement(By.id("button-cart")).click();
@@ -279,7 +283,8 @@ public class CartTestSetup extends BrowserSetup{
 		  
 	  }	
   	  Thread.sleep(2000);
-	  appleCinemaObject.enterQuantity("1");
+  	  reader.i=11;
+	  appleCinemaObject.enterQuantity(reader.getQuantity());
 	  appleCinemaObject.clickAddToCart(); 
 	  Thread.sleep(2000);
 	  
@@ -419,7 +424,8 @@ public class CartTestSetup extends BrowserSetup{
    }
   @Parameters("browser")
   @BeforeMethod
-  public void beforeMethod(Method m, String browser) {
+  public void beforeMethod(Method m, String browser) throws IOException {
+	  reader.readExcel("src\\test\\resources", "loginDDT.xlsx", "Coupon Codes and Quantity");
 	  test = report.startTest(m.getName());
 	  initialize(browser);
 	  driver.get(baseUrl);

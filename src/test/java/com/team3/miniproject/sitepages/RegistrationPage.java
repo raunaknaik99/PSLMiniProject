@@ -1,5 +1,6 @@
 package com.team3.miniproject.sitepages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -43,7 +44,7 @@ public class RegistrationPage {
 
 	// warning div element
 	@FindBy(css = "div[class='alert alert-danger alert-dismissible']")
-	WebElement warningDiv;
+	public WebElement warningDiv;
 
 	// confirm password warning(when confirm password is not same as password)
 	@FindBy(css = "form.form-horizontal>fieldset:nth-of-type(2)>div:nth-of-type(2)>div>div")
@@ -103,6 +104,7 @@ public class RegistrationPage {
 	// method verify warning visibility
 	public Boolean verifyWarningVisibility() {
 		return warningDiv.isDisplayed();
+		
 		// Assert.assertTrue(warningDiv.isDisplayed());
 	}
 

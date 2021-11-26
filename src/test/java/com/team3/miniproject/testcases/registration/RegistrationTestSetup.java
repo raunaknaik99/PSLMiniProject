@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -32,7 +33,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 	LoginPage lg_object;
 	Header h_object;
 //	WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/index.php?route=account/register";
+	String baseUrl = "http://localhost/miniproject/index.php?route=account/register";
 	RegistrationData rd = new RegistrationData();
 	ScreenShotCapture s;
 	ExtentReports report;
@@ -109,6 +110,8 @@ public class RegistrationTestSetup extends BrowserSetup {
 								s.captureScreenshot("\\Registration\\" + "testCase002.2_" + timeStamp + ".PNG"))
 								+ "Test Failed- User is able to proceed");
 			}
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].scrollIntoView(true)", rg_object.warningDiv);
 			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyWarningVisibility());
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
