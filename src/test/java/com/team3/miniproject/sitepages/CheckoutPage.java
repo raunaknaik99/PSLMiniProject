@@ -21,7 +21,7 @@ import com.team3.miniproject.testcases.ddt.ReadInputs;
 
 public class CheckoutPage {
 	public WebDriver driver;
-	String baseUrl="http://localhost/miniproject";
+	String baseUrl="http://localhost";
 	ReadInputs reader= new ReadInputs();
 	JavascriptExecutor js;
 
@@ -171,7 +171,6 @@ public class CheckoutPage {
 		
 		if(val==3 || val==4) {
 			System.out.println("entered if");
-			
 		}
 		else {
 			wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#collapse-payment-address > div > form > div:nth-child(3) > label > input[type=radio]")));

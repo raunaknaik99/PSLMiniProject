@@ -41,6 +41,7 @@ import screenshot.*;
 
 
 public class CartTestSetup extends BrowserSetup{
+
 	String baseUrl = "http://localhost/miniproject/";
 
 	ExtentReports report;

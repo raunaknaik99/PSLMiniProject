@@ -100,6 +100,7 @@ public class AppleCinema {
 		return we;
 	}
 	
+	
 	//click the apple cinema cart button on home page
 	public void clickAppleCinemaCart() {
 		appleCinemaCart.click();
