@@ -30,7 +30,7 @@ public class SearchTestSetup extends BrowserSetup {
 	SearchPage sp_object;
 	LoginPage l_object;
 //	WebDriver driver;
-	String baseUrl = "http://localhost/opencartsite/";
+	String baseUrl = "http://localhost/miniproject/";
 	ExtentReports report;
 	ExtentTest test;
 	ScreenShotCapture s;

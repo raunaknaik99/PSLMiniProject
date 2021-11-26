@@ -120,7 +120,7 @@ public class CartTestSetup extends BrowserSetup{
 	  appleCinemaObject.clickDropdown("4");
 	  
 	  appleCinemaObject.enterInTextArea(myData.get(0).get(1));
-	  appleCinemaObject.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt");
+
 	  
 	  if(appleCinemaObject.selectFileForUpload("D:\\Mini Project\\PSLMiniProject\\Resources\\test.txt")) {
 		  test.log(LogStatus.PASS, "The driver successfully switched to the alert and clicked OK.");
@@ -141,8 +141,10 @@ public class CartTestSetup extends BrowserSetup{
 	  else {
 		  test.log(LogStatus.FAIL, test.addScreenCapture(objScreenshot.captureScreenshot("\\AddToCart\\" + "testCase006.2_"+ timeStamp +".PNG") + "The warning message about the minimum required quantity is not displayed."));
 	  }
-	  
   }
+  
+	  
+  
   //TC_OC_CART_003
   @Test (priority = 3)
   public void testCase003() throws InterruptedException, IOException {
@@ -179,7 +181,7 @@ public class CartTestSetup extends BrowserSetup{
 	  
 }
   //TC_OC_CART_004
-  @Test (priority = 4)
+  @Test (priority = 4, enabled=false)
   public void testCase004() throws InterruptedException, IOException {
 	  test.log(LogStatus.INFO, "TC_OC_CART_004 - Removing a product from the cart.");
 	  objScreenshot = new ScreenShotCapture(driver);

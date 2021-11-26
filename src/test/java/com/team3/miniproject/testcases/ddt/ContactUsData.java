@@ -11,9 +11,9 @@ public class ContactUsData {
 	ReadData reader=new ReadData();
 
 	public ArrayList<ArrayList<String>> contactUsData() throws IOException {
-		reader.iValue=4;
+		reader.iValue=5;
 		reader.jValue=3;
-		reader.iSize=4;
+		reader.iSize=5;
 		reader.jSize=3;
 		ArrayList<ArrayList<String>> contactUsData=reader.userData("src\\test\\resources", "loginDDT.xlsx","Contact");
 		return(contactUsData);

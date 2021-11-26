@@ -45,7 +45,11 @@ public class RegistrationPage {
 	// warning div element
 	@FindBy(css = "div[class='alert alert-danger alert-dismissible']")
 	public WebElement warningDiv;
-
+	
+	// confirm password warning(when number of characters for password is not sufficient)
+	@FindBy(css = "#content > form > fieldset:nth-child(2) > div.form-group.required.has-error > div > div")
+	WebElement passWarning;
+	
 	// confirm password warning(when confirm password is not same as password)
 	@FindBy(css = "form.form-horizontal>fieldset:nth-of-type(2)>div:nth-of-type(2)>div>div")
 	WebElement confirmPasswordWarning;
@@ -126,5 +130,8 @@ public class RegistrationPage {
 	// method to return telephone warning visibility
 	public Boolean verifyTelephoneWarning() {
 		return telephoneWarning.isDisplayed();
+	}
+	public Boolean verifyPassWarning() {
+		return passWarning.isDisplayed();
 	}
 }

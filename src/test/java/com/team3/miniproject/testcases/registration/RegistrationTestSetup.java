@@ -110,9 +110,8 @@ public class RegistrationTestSetup extends BrowserSetup {
 								s.captureScreenshot("\\Registration\\" + "testCase002.2_" + timeStamp + ".PNG"))
 								+ "Test Failed- User is able to proceed");
 			}
-			JavascriptExecutor js = (JavascriptExecutor)driver;
-			js.executeScript("arguments[0].scrollIntoView(true)", rg_object.warningDiv);
-			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyWarningVisibility());
+		
+			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyPassWarning());
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
@@ -154,7 +153,7 @@ public class RegistrationTestSetup extends BrowserSetup {
 								+ "Test Failed- Title Mismatched");
 
 			}
-			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyWarningVisibility());
+			test.log(LogStatus.INFO, "Warning Status: " + rg_object.verifyLastNameWarning());
 		} catch (Exception e) {
 			test.log(LogStatus.INFO, e);
 		}
@@ -181,12 +180,12 @@ public class RegistrationTestSetup extends BrowserSetup {
 		rg_object.checkPrivacyPolicy();
 		rg_object.clickContinueBtn();
 		if (!rg_object.getPageTitle().equals("Your Account Has Been Created!")) {
-			test.log(LogStatus.PASS, "Test Passed- Title Matched");
+			test.log(LogStatus.FAIL, 
+			test.addScreenCapture(
+					s.captureScreenshot("\\Registration\\" + "testCase004.2_" + timeStamp + ".PNG"))
+					+ "Test Failed- Title Mismatched");
 		} else {
-			test.log(LogStatus.FAIL,
-					test.addScreenCapture(
-							s.captureScreenshot("\\Registration\\" + "testCase004.2_" + timeStamp + ".PNG"))
-							+ "Test Failed- Title Mismatched");
+			test.log(LogStatus.PASS,"Test Passed- Title Matched");
 
 		}
 	}
