@@ -105,7 +105,7 @@ public class EndToEndTest extends BrowserSetup{
 		// click on registration link
 //	  objHeader.selectFromMyAccountDropDown(0);
 //	  
-//	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(6).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
+//	  objRegistration.fillRegistrationForm(myData.get(0).get(0), myData.get(0).get(1), myData.get(0).get(2), myData.get(0).get(3), myData.get(0).get(4), myData.get(0).get(5));
 //	  objRegistration.checkPrivacyPolicy();
 //	  objRegistration.clickContinueBtn();
 //		
@@ -118,7 +118,7 @@ public class EndToEndTest extends BrowserSetup{
 //		}
 //	  //logout
 //	  objHeader.selectFromMyAccountDropDown(4);
-	  
+//	  
 	  //click on login
 	  objHeader.selectFromMyAccountDropDown(1);
 	  objLoginPage.login(myLoginData.get(3).get(0), myLoginData.get(3).get(1));

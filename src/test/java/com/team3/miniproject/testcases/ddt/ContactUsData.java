@@ -10,13 +10,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ContactUsData {
 
 	public ArrayList<ArrayList<String>> contactUsData() throws IOException {
-		ArrayList<ArrayList<String>> contactData = new ArrayList<ArrayList<String>>(4);
+		ArrayList<ArrayList<String>> contactData = new ArrayList<ArrayList<String>>(5);
 
 		FileInputStream fis = new FileInputStream("src\\test\\resources\\loginDDT.xlsx");
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 		XSSFSheet sheet = workbook.getSheet("Contact");
 		try {
-			for (int i = 0; i < 4; i++) {
+			for (int i = 0; i < 5; i++) {
 				contactData.add(new ArrayList());
 				ArrayList<String> icontactdata = new ArrayList<String>(3);
 				for (int j = 0; j < 3; j++) {

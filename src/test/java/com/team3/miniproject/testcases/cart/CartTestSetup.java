@@ -39,7 +39,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import screenshot.*;
 
 public class CartTestSetup extends BrowserSetup{
-	String baseUrl = "http://localhost/opencartsite/";
+	String baseUrl = "http://localhost";
 	ExtentReports report;
 	static ExtentTest test;
 	
