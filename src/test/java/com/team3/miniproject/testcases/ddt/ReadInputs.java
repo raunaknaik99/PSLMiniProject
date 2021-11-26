@@ -101,5 +101,26 @@ public class ReadInputs {
     	Row row = Sheet.getRow(i);
     	return(row.getCell(6).getStringCellValue());
     }
-    
+   public String getCouponCode() {
+    	
+    	Row row = Sheet.getRow(i);
+    	try {
+            Cell cell = row.getCell(0);
+            cellData = cell.getStringCellValue();
+        } catch (NullPointerException npe) {
+           cellData = "";
+        }
+    	return(cellData);
+    }
+   public String getQuantity() {
+   	
+   	Row row = Sheet.getRow(i);
+   	try {
+           Cell cell = row.getCell(0);
+           cellData = cell.getNumericCellValue()+"";
+       } catch (NullPointerException npe) {
+          cellData = "";
+       }
+   	return(cellData);
+   }
 }

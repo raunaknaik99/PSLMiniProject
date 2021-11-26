@@ -79,6 +79,14 @@ public class LoginPage {
 		usernameField.sendKeys(user_name);
 		fpContinueBtn.click();
 	}
+	public String getEmailPlaceholder() {
+		return(usernameField.getAttribute("placeholder"));
+		
+	}
+	public String getPasswordPlaceholder() {
+		return(passwordField.getAttribute("placeholder"));
+		
+	}
 
 	public void finish() throws InterruptedException {
 		Thread.sleep(5000);
